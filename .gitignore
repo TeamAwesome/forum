@@ -1,0 +1,10 @@
+build/
+lib/
+logs/
+
+*.DS_Store
+.idea
+*.iml
+*.log
+*.ipr
+*.iws

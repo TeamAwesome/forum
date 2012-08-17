@@ -1,0 +1,185 @@
+<?xml version="1.0" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+
+    <tlib-version>0.1</tlib-version>
+    <jsp-version>2.1</jsp-version>
+    <short-name>extended</short-name>
+    <uri>http://app.example.com/utils</uri>
+    <display-name>Common functions</display-name>
+
+    <!-- Commons Lang StringUtils functions -->
+    <function>
+        <name>capitalize</name>
+        <function-class>org.apache.commons.lang.StringUtils</function-class>
+        <function-signature>
+            java.lang.String capitalize(java.lang.String)
+        </function-signature>
+    </function>
+    <function>
+        <name>uncapitalize</name>
+        <function-class>org.apache.commons.lang.StringUtils</function-class>
+        <function-signature>
+            java.lang.String uncapitalize(java.lang.String)
+        </function-signature>
+    </function>
+    <function>
+        <name>lastIndexOf</name>
+        <function-class>org.apache.commons.lang.StringUtils</function-class>
+        <function-signature>
+            int lastIndexOf(java.lang.String, java.lang.String)
+        </function-signature>
+    </function>
+    <function>
+        <name>left</name>
+        <function-class>org.apache.commons.lang.StringUtils</function-class>
+        <function-signature>
+            java.lang.String left(java.lang.String, int)
+        </function-signature>
+    </function>
+    <function>
+        <name>mid</name>
+        <function-class>org.apache.commons.lang.StringUtils</function-class>
+        <function-signature>
+            java.lang.String mid(java.lang.String, int, int)
+        </function-signature>
+    </function>
+    <function>
+        <name>right</name>
+        <function-class>org.apache.commons.lang.StringUtils</function-class>
+        <function-signature>
+            java.lang.String right(java.lang.String, int)
+        </function-signature>
+    </function>
+    <function>
+        <name>repeat</name>
+        <function-class>org.apache.commons.lang.StringUtils</function-class>
+        <function-signature>
+            java.lang.String repeat(java.lang.String, int)
+        </function-signature>
+    </function>
+    <function>
+        <name>leftPad</name>
+        <function-class>org.apache.commons.lang.StringUtils</function-class>
+        <function-signature>
+            java.lang.String leftPad(java.lang.String, int, java.lang.String)
+        </function-signature>
+    </function>
+    <function>
+        <name>rightPad</name>
+        <function-class>org.apache.commons.lang.StringUtils</function-class>
+        <function-signature>
+            java.lang.String rightPad(java.lang.String, int, java.lang.String)
+        </function-signature>
+    </function>
+    <function>
+        <name>center</name>
+        <function-class>org.apache.commons.lang.StringUtils</function-class>
+        <function-signature>
+            java.lang.String center(java.lang.String, int, java.lang.String)
+        </function-signature>
+    </function>
+    <function>
+        <name>abbreviate</name>
+        <function-class>org.apache.commons.lang.StringUtils</function-class>
+        <function-signature>
+            java.lang.String abbreviate(java.lang.String, int)
+        </function-signature>
+    </function>
+    <function>
+        <name>uppercase</name>
+        <function-class>org.apache.commons.lang.StringUtils</function-class>
+        <function-signature>
+            java.lang.String upperCase(java.lang.String)
+        </function-signature>
+    </function>
+    <function>
+        <name>lowercase</name>
+        <function-class>org.apache.commons.lang.StringUtils</function-class>
+        <function-signature>
+            java.lang.String lowerCase(java.lang.String)
+        </function-signature>
+    </function>
+    <function>
+        <name>replace</name>
+        <function-class>org.apache.commons.lang.StringUtils</function-class>
+        <function-signature>
+            java.lang.String replace(java.lang.String,java.lang.String,java.lang.String)
+        </function-signature>
+    </function>
+
+    <!-- Random Strings -->
+    <function>
+        <name>random</name>
+        <function-class>org.apache.commons.lang.RandomStringUtils</function-class>
+        <function-signature>
+            java.lang.String randomAlphanumeric(int)
+        </function-signature>
+    </function>
+
+    <!-- Commons Strings functions -->
+    <function>
+        <name>capitalizeAllWords</name>
+        <function-class>au.com.bt.utils.Strings</function-class>
+        <function-signature>
+            java.lang.String captialize(java.lang.String)
+        </function-signature>
+    </function>
+    <function>
+        <name>split</name>
+        <function-class>au.com.bt.utils.Strings</function-class>
+        <function-signature>
+            java.util.List split(java.lang.String,int)
+        </function-signature>
+    </function>
+
+    <!-- java.lang.Math functions -->
+    <function>
+        <name>ceil</name>
+        <function-class>java.lang.Math</function-class>
+        <function-signature>
+            double ceil(double)
+        </function-signature>
+    </function>
+    <function>
+        <name>floor</name>
+        <function-class>java.lang.Math</function-class>
+        <function-signature>
+            double floor(double)
+        </function-signature>
+    </function>
+    <function>
+        <name>round</name>
+        <function-class>java.lang.Math</function-class>
+        <function-signature>
+            long round(double)
+        </function-signature>
+    </function>
+    <function>
+        <name>sqrt</name>
+        <function-class>java.lang.Math</function-class>
+        <function-signature>
+            double sqrt(double)
+        </function-signature>
+    </function>
+
+    <!-- java.lang.System -->
+    <function>
+        <name>env</name>
+        <function-class>java.lang.System</function-class>
+        <function-signature>
+            java.lang.String getenv(java.lang.String)
+        </function-signature>
+    </function>
+    <function>
+        <name>property</name>
+        <function-class>java.lang.System</function-class>
+        <function-signature>
+            java.lang.String getProperty(java.lang.String)
+        </function-signature>
+    </function>
+
+</taglib>
