@@ -1,4 +1,5 @@
-Spring Quickstart
+Forum Application
 =================
 
-A quick start to a working spring app.
+A forum similar to stack overflow.
+
