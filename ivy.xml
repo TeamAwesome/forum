@@ -19,19 +19,19 @@
 
         <dependency org="junit" name="junit" rev="4.8.1" transitive="false" conf="buildtime->*" />
         <dependency org="org.mockito" name="mockito-core" rev="1.8.4" transitive="false" conf="buildtime->*" />
-        <dependency org="org.springframework" name="org.springframework.test" rev="3.0.2.RELEASE" transitive="false" conf="buildtime->*" />
         <dependency org="javax.servlet" name="servlet-api" rev="2.5" transitive="false" conf="buildtime->*" />
         <dependency org="org.freemarker" name="freemarker" rev="2.3.16" transitive="false" conf="runtime->*" />
-        <dependency org="org.springframework" name="org.springframework.asm" rev="3.0.2.RELEASE" transitive="false" conf="runtime->*" />
-        <dependency org="org.springframework" name="org.springframework.beans" rev="3.0.2.RELEASE" transitive="false" conf="runtime->*" />
-        <dependency org="org.springframework" name="org.springframework.context" rev="3.0.2.RELEASE" transitive="false" conf="runtime->*" />
-        <dependency org="org.springframework" name="org.springframework.context.support" rev="3.0.2.RELEASE" transitive="false" conf="runtime->*" />
-        <dependency org="org.springframework" name="org.springframework.core" rev="3.0.2.RELEASE" transitive="false" conf="runtime->*" />
-        <dependency org="org.springframework" name="org.springframework.expression" rev="3.0.2.RELEASE" transitive="false" conf="runtime->*" />
-        <dependency org="org.springframework" name="org.springframework.jdbc" rev="3.0.2.RELEASE" transitive="false" conf="runtime->*" />
-        <dependency org="org.springframework" name="org.springframework.transaction" rev="3.0.2.RELEASE" transitive="false" conf="runtime->*" />
-        <dependency org="org.springframework" name="org.springframework.web" rev="3.0.2.RELEASE" transitive="false" conf="runtime->*" />
-        <dependency org="org.springframework" name="org.springframework.web.servlet" rev="3.0.2.RELEASE" transitive="false" conf="runtime->*" />
+        <dependency org="org.springframework" name="org.springframework.test" rev="3.1.1.RELEASE" transitive="false" conf="buildtime->*" />
+        <dependency org="org.springframework" name="org.springframework.asm" rev="3.1.1.RELEASE" transitive="false" conf="runtime->*" />
+        <dependency org="org.springframework" name="org.springframework.beans" rev="3.1.1.RELEASE" transitive="false" conf="runtime->*" />
+        <dependency org="org.springframework" name="org.springframework.context" rev="3.1.1.RELEASE" transitive="false" conf="runtime->*" />
+        <!--<dependency org="org.springframework" name="org.springframework.context.support" rev="3.1.1.RELEASE" transitive="false" conf="runtime->*" />-->
+        <dependency org="org.springframework" name="org.springframework.core" rev="3.1.1.RELEASE" transitive="false" conf="runtime->*" />
+        <dependency org="org.springframework" name="org.springframework.expression" rev="3.1.1.RELEASE" transitive="false" conf="runtime->*" />
+        <dependency org="org.springframework" name="org.springframework.jdbc" rev="3.1.1.RELEASE" transitive="false" conf="runtime->*" />
+        <dependency org="org.springframework" name="org.springframework.transaction" rev="3.1.1.RELEASE" transitive="false" conf="runtime->*" />
+        <dependency org="org.springframework" name="org.springframework.web" rev="3.1.1.RELEASE" transitive="false" conf="runtime->*" />
+        <dependency org="org.springframework" name="org.springframework.web.servlet" rev="3.1.1.RELEASE" transitive="false" conf="runtime->*" />
         <dependency org="org.slf4j" name="jcl-over-slf4j" rev="1.6.1" transitive="false" conf="runtime->*" />
         <dependency org="org.slf4j" name="slf4j-api" rev="1.6.1" transitive="false" conf="runtime->*" />
         <dependency org="org.slf4j" name="slf4j-jcl" rev="1.6.1" transitive="false" conf="runtime->*" />
