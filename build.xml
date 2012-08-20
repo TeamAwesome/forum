@@ -158,6 +158,10 @@
         </war>
     </target>
 
+    <target name="deploy" depends="make-war">
+        <copy file="${dist.dir}/${ant.project.name}.war" todir="/opt/apache-tomcat-7.0.29/webapps"></copy>
+    </target>
+
     <target name="make-zip" depends="make-war">
         <mkdir dir="${dist.dir}"/>
         <zip destfile="${dist.dir}/${ant.project.name}.zip">
