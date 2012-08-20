@@ -47,17 +47,12 @@
         <attribute name="classpath"/>
         <sequential>
             <mkdir dir="${test.report.dir}"/>
-            <junit fork="yes" forkmode="once" failureproperty="unit.tests.failed" printsummary="yes">
+            <junit fork="yes" forkmode="once" failureproperty="unit.tests.failed" printsummary="yes" haltonfailure="on">
                 <classpath refid="@{classpath}" />
                 <formatter type="xml"/>
-                <batchtest if="testcase" todir="${test.report.dir}">
+                <batchtest todir="${test.report.dir}">
                     <fileset dir="@{testdir}/java">
                         <include name="**/*.java"/>
-                    </fileset>
-                </batchtest>
-                <batchtest unless="testcase" todir="${test.report.dir}">
-                    <fileset dir="@{testdir}/java">
-                        <include name="**/*Tests.java"/>
                     </fileset>
                 </batchtest>
             </junit>
