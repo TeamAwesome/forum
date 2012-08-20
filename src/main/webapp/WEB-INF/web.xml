@@ -16,6 +16,11 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>js</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
@@ -24,6 +29,10 @@
     <servlet-mapping>
         <servlet-name>static</servlet-name>
         <url-pattern>/static/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>js</servlet-name>
+        <url-pattern>/javascript/*</url-pattern>
     </servlet-mapping>
 
     <context-param>
