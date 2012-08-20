@@ -25,6 +25,14 @@ public class ExampleController {
         return new ModelAndView("viewName");
     }
 
+    @RequestMapping(value = "/join", method = RequestMethod.GET)
+    public ModelAndView join() {
+
+        ModelAndView mv = new ModelAndView("join");
+        mv.addObject("thing", null);
+        return mv;
+    }
+
     @RequestMapping(value = "/display", method = RequestMethod.GET)
     public ModelAndView display() {
 
