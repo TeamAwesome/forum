@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ExampleController {
 
+
     private ExampleService exampleService;
 
     @Autowired
@@ -23,14 +24,6 @@ public class ExampleController {
     public ModelAndView setup(@PathVariable("entityId") String entityId) {
 
         return new ModelAndView("viewName");
-    }
-
-    @RequestMapping(value = "/join", method = RequestMethod.GET)
-    public ModelAndView join() {
-
-        ModelAndView mv = new ModelAndView("join");
-        mv.addObject("thing", null);
-        return mv;
     }
 
     @RequestMapping(value = "/display", method = RequestMethod.GET)
