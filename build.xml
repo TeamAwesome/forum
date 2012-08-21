@@ -11,9 +11,11 @@
     <property name="report.dir" location="${build.dir}/report"/>
     <property name="dist.dir" location="${build.dir}/dist"/>
 
-    <property name="build.instrumented.dir" value="build/instrumented-classes"/>
-
     <property name="test.report.dir" location="${report.dir}/test"/>
+
+    <!-- Cobertura -->
+    <property name="build.instrumented.dir" value="${build.dir}/instrumented-classes"/>
+    <property name="coberturaReports.dir" value="${build.dir}/coberturaReports"/>
 
     <path id="common-classpath">
         <pathelement location="${unit.test.dir}/resources"/>
@@ -29,6 +31,7 @@
         <path refid="common-classpath"/>
     </path>
 
+    <!-- Cobertura -->
     <path id="cobertura-classpath">
         <pathelement location="${unit.test.dir}/resources"/>
         <pathelement location="${src.dir}/resources"/>
@@ -48,7 +51,7 @@
             <jar jarfile="${compile.dir}/@{jarfile}" basedir="${compile.dir}/classes">
                 <fileset dir="@{srcdir}/java" excludes="**/*.java"/>
             </jar>
-            <!--<delete dir="${compile.dir}/classes"/>-->
+            <delete dir="${compile.dir}/classes"/>
         </sequential>
     </macrodef>
 
@@ -58,7 +61,11 @@
         <sequential>
             <mkdir dir="${test.report.dir}"/>
             <junit fork="yes" forkmode="once" failureproperty="unit.tests.failed" printsummary="yes" haltonfailure="on">
-                <classpath location="${build.instrumented.dir}" />
+                <classpath>
+                    <fileset dir="${build.instrumented.dir}">
+                        <include name="*.jar" />
+                    </fileset>
+                </classpath>
                 <classpath refid="@{classpath}" />
                 <formatter type="xml"/>
                 <batchtest todir="${test.report.dir}">
@@ -194,52 +201,41 @@
 
 
     <!--target for cobertura-->
-    <taskdef resource="tasks.properties" classpathref="cobertura-classpath"/>
+    <taskdef resource="tasks.properties" classpathref="cobertura-classpath" />
 
-    <property name="reports.html.dir" value="reports/html"/>
-    <target name="init">
+    <target name="run-coverage-rate" depends="check-cobertura, report-cobertura"
+            description="Calculate the percentage of code accessed by tests." />
+
+    <target name="init-cobertura" depends="clean-cobertura">
         <mkdir dir="${build.instrumented.dir}"/>
-        <mkdir dir="${reports.html.dir}"/>
+        <mkdir dir="${coberturaReports.dir}"/>
     </target>
 
-    <target name="compile">
-        <mkdir dir="${compile.dir}/classes"/>
-        <javac srcdir="${src.dir}/java" destdir="${compile.dir}/classes" classpathref="system-classpath"
-               includeantruntime="no" debug="yes"/>
-    </target>
-
-    <target name="instrument" depends="init,compile">
-        <delete quiet="false" failonerror="false">
-            <fileset dir="${build.instrumented.dir}"/>
-        </delete>
-        <delete file="cobertura.ser"/>
-
+    <target name="instrument-cobertura" depends="init-cobertura, make-jars">
         <cobertura-instrument todir="${build.instrumented.dir}">
             <ignore regex="org.apache.log4j.*"/>
 
-            <fileset dir="${compile.dir}/classes">
-                <include name="**/*.class"/>
-                <exclude name="**/*Test.class"/>
+            <fileset dir="${compile.dir}">
+                <include name="*.jar" />
+                <exclude name="*-tests.jar" />
             </fileset>
         </cobertura-instrument>
     </target>
 
-    <target name="check" depends="instrument, run-tests">
-        <cobertura-check branchrate="0" totalbranchrate="0" totallinerate="0">
+    <target name="check-cobertura" depends="instrument-cobertura, run-tests">
+        <cobertura-check branchrate="40" totalbranchrate="40" totallinerate="40">
         </cobertura-check>
     </target>
 
-    <target name="report-html" depends="check">
-        <cobertura-report destdir="${reports.html.dir}" srcdir="${src.dir}/java" />
+    <target name="report-cobertura">
+        <cobertura-report destdir="${coberturaReports.dir}" srcdir="${src.dir}/java" />
     </target>
 
     <target name="clean-cobertura">
-        <delete dir="${compile.dir}/classes"/>
         <delete dir="${build.instrumented.dir}"/>
-        <delete file="cobertura.ser"/>
-        <delete dir="reports"/>
+        <delete dir="${coberturaReports.dir}"/>
     </target>
 
-    <!-- target for cobertura -->
+    <!-- end of target for cobertura -->
 
 </project>
