@@ -16,16 +16,23 @@
     <property name="compile.dir" location="${build.dir}/compile"/>
     <property name="report.dir" location="${build.dir}/report"/>
     <property name="dist.dir" location="${build.dir}/dist"/>
+    <property name="bootstrap.ant.jar.dir" location="${basedir}/bootstrap/ant"/>
     <property name="buildtime.jar.dir" location="${basedir}/lib/buildtime/jar"/>
     <property name="runtime.jar.dir" location="${basedir}/lib/runtime/jar"/>
+    <property name="jetty.jar.dir" location="${basedir}/lib/jetty/jar"/>
 
     <property name="test.report.dir" location="${report.dir}/test"/>
     <property name="data.dir" location="${basedir}/data"/>
 
-    <import file="dbbuild.xml"/>
     <!-- Cobertura -->
     <property name="build.instrumented.dir" value="${build.dir}/instrumented-classes"/>
     <property name="coberturaReports.dir" value="${build.dir}/coberturaReports"/>
+
+    <mkdir dir="${buildtime.jar.dir}"/>
+    <mkdir dir="${runtime.jar.dir}"/>
+    <mkdir dir="${jetty.jar.dir}"/>
+
+    <import file="dbbuild.xml"/>
 
     <path id="common-classpath">
         <pathelement location="${unit.test.dir}/resources"/>
@@ -34,7 +41,7 @@
         <fileset dir="${compile.dir}"/>
         <fileset dir="${runtime.jar.dir}"/>
         <fileset dir="${buildtime.jar.dir}"/>
-        <fileset dir="lib/jetty/jar" excludes="ant-*.jar"/>
+        <fileset dir="${jetty.jar.dir}" excludes="ant-*.jar"/>
     </path>
 
     <path id="system-classpath">
@@ -46,8 +53,8 @@
         <pathelement location="${unit.test.dir}/resources"/>
         <pathelement location="${src.dir}/resources"/>
         <pathelement location="${src.dir}/deployment/env/dev"/>
-        <fileset dir="lib/buildtime/jar" />
-        <fileset dir="lib/jetty/jar" excludes="ant-*.jar"/>
+        <fileset dir="${buildtime.jar.dir}" />
+        <fileset dir="${jetty.jar.dir}" excludes="ant-*.jar"/>
     </path>
 
     <macrodef name="make-jar">
@@ -91,11 +98,11 @@
     </macrodef>
 
     <taskdef resource="org/apache/ivy/ant/antlib.xml">
-        <classpath location="bootstrap/ant/ivy-2.1.0.jar"/>
+        <classpath location="${bootstrap.ant.jar.dir}/ivy-2.1.0.jar"/>
     </taskdef>
 
     <taskdef resource="net/sf/antcontrib/antlib.xml">
-        <classpath location="bootstrap/ant/ant-contrib-1.0b3.jar"/>
+        <classpath location="${bootstrap.ant.jar.dir}/ant-contrib-1.0b3.jar"/>
     </taskdef>
 
     <target name="fetch-libs" description="Fetch third-party libraries using ivy.">
@@ -236,20 +243,17 @@
 
     <target name="check-cobertura" depends="instrument-cobertura, run-tests">
         <cobertura-check datafile="${build.instrumented.dir}/cobertura.ser"
-                         branchrate="0" totalbranchrate="0" totallinerate="0">
-        </cobertura-check>
+                         branchrate="0" totalbranchrate="0" totallinerate="0"/>
     </target>
 
     <target name="report-cobertura">
         <cobertura-report datafile="${build.instrumented.dir}/cobertura.ser"
                           destdir="${coberturaReports.dir}" srcdir="${src.dir}/java" />
-
     </target>
 
     <target name="clean-cobertura">
         <delete dir="${build.instrumented.dir}"/>
         <delete dir="${coberturaReports.dir}"/>
     </target>
-
     <!-- end of target for cobertura -->
 </project>

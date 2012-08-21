@@ -2,7 +2,7 @@
 <project basedir=".">
     <path id="dbdeploy.classpath">
         <!-- include the dbdeploy-ant jar -->
-        <fileset dir="${buildtime.jar.dir}">
+        <fileset dir="${bootstrap.ant.jar.dir}">
             <include name="dbdeploy-ant-*.jar"/>
         </fileset>
 
