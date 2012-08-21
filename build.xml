@@ -227,13 +227,14 @@
 
     <target name="check-cobertura" depends="instrument-cobertura, run-tests">
         <cobertura-check datafile="${build.instrumented.dir}/cobertura.ser"
-                         branchrate="40" totalbranchrate="40" totallinerate="40">
+                         branchrate="0" totalbranchrate="0" totallinerate="0">
         </cobertura-check>
     </target>
 
     <target name="report-cobertura">
         <cobertura-report datafile="${build.instrumented.dir}/cobertura.ser"
                           destdir="${coberturaReports.dir}" srcdir="${src.dir}/java" />
+
     </target>
 
     <target name="clean-cobertura">
