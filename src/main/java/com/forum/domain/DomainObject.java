@@ -1,4 +1,4 @@
-package com.forum.app.domain;
+package com.forum.domain;
 
 public class DomainObject {
 

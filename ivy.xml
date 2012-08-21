@@ -33,8 +33,8 @@
         <dependency org="org.springframework" name="org.springframework.web" rev="3.1.1.RELEASE" transitive="false" conf="runtime->*" />
         <dependency org="org.springframework" name="org.springframework.web.servlet" rev="3.1.1.RELEASE" transitive="false" conf="runtime->*" />
         <dependency org="commons-lang" name="commons-lang" rev="2.4" transitive="false" conf="buildtime,runtime->*" />
-        <dependency org="commons-dbcp" name="commons-dbcp" rev="1.3" transitive="false" conf="buildtime->*" />
-        <dependency org="commons-pool" name="commons-pool" rev="1.5" transitive="false" conf="buildtime->*" />
+        <dependency org="commons-dbcp" name="commons-dbcp" rev="1.3" transitive="false" conf="buildtime,runtime->*" />
+        <dependency org="commons-pool" name="commons-pool" rev="1.5" transitive="false" conf="buildtime,runtime->*" />
         <dependency org="org.seleniumhq.selenium" name="selenium-java" rev="2.24.1" transitive="false" conf="buildtime->*" />
         <dependency org="org.seleniumhq.selenium" name="selenium-firefox-driver" rev="2.24.1" transitive="false" conf="buildtime->*" />
         <dependency org="org.seleniumhq.selenium" name="selenium-api" rev="2.24.1" transitive="false" conf="buildtime->*" />
@@ -42,9 +42,9 @@
         <dependency org="org.seleniumhq.selenium" name="selenium-server" rev="2.24.1" transitive="false" conf="buildtime->*" />
         <dependency org="org.seleniumhq.selenium" name="selenium-remote-driver" rev="2.24.1" transitive="false" conf="buildtime->*" />
         <dependency org="org.seleniumhq.selenium" name="selenium-parent" rev="2.24.1"/>
+        <dependency org="com.h2database" name="h2" rev="1.2.143"/>
 
-
-        <dependency org="commons-logging" name="commons-logging" rev="1.1.1" transitive="false" conf="buildtime->*" />
+        <dependency org="commons-logging" name="commons-logging" rev="1.1.1" transitive="false" conf="buildtime,runtime->*" />
         <dependency org="net.sourceforge.htmlunit" name="htmlunit" rev="2.10" transitive="false" conf="buildtime->*" />
         <dependency org="net.sourceforge.htmlunit" name="htmlunit-core-js" rev="2.10" transitive="false" conf="buildtime->*" />
         <dependency org="commons-io" name="commons-io" rev="2.4" transitive="false" conf="buildtime->*" />
@@ -61,7 +61,8 @@
         <dependency org="org.apache.commons" name="commons-lang3" rev="3.1" transitive="false" conf="buildtime->*" />
         <dependency org="commons-collections" name="commons-collections" rev="3.2.1" transitive="false" conf="buildtime->*" />
         <dependency org="org.apache.httpcomponents" name="httpcore" rev="4.2.1" transitive="false" conf="buildtime->*" />
-
         <dependency org="net.sourceforge.htmlunit" name="htmlunit" rev="2.10" transitive="false" conf="buildtime->*"/>
+        <dependency org="mysql" name="mysql-connector-java" rev="5.1.6" transitive="false" conf="buildtime,runtime->*"/>
+        <dependency org="net.sourceforge.cobertura" name="cobertura" rev="1.9.4.1" conf="buildtime->*"/>
     </dependencies>
 </ivy-module>
