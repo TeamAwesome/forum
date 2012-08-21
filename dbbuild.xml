@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<project basedir=".">
+    <path id="dbdeploy.classpath">
+        <!-- include the dbdeploy-ant jar -->
+        <fileset dir="${buildtime.jar.dir}">
+            <include name="dbdeploy-ant-*.jar"/>
+        </fileset>
+
+        <!-- the dbdeploy task also needs the database driver jar on the classpath -->
+        <path refid="db.classpath"/>
+    </path>
+
+    <path id="db.classpath">
+        <fileset dir="${buildtime.jar.dir}">
+            <include name="hsqldb*.jar"/>
+            <include name="*mysql*.jar"/>
+        </fileset>
+    </path>
+
+    <taskdef name="dbdeploy" classname="com.dbdeploy.AntTarget" classpathref="dbdeploy.classpath"/>
+
+    <target name="db.migrate" depends="db.print.info, db.clean, db.update" description="Migrates the DB Schema"/>
+
+    <target name="db.clean" depends="db.print.info, db.recreate, db.create-changelog-table"/>
+
+    <target name="db.create-changelog-table">
+        <sql driver="${db.driver}" url="${db.url}"
+             userid="${db.username}" password="${db.password}" classpathref="db.classpath">
+            <fileset file="${basedir}/scripts/sql/dbdeploy/createSchemaVersionTable.${db.dbms}.sql"/>
+        </sql>
+    </target>
+
+    <target name="db.recreate">
+        <delete dir="${data.dir}"/>
+        <mkdir dir="${data.dir}"/>
+    </target>
+
+    <target name="db.print.info">
+        <echo message="------------------------------------------"/>
+        <echo message="DB URL : ${db.url}"/>
+        <echo message="DB Username : ${db.username}"/>
+        <echo message="DB Password : ${db.password}"/>
+        <echo message="DB DBMS : ${db.dbms}"/>
+        <echo message="------------------------------------------"/>
+    </target>
+
+    <target name="db.update" depends="db.print.info" description="generate a sql upgrade script and update schema">
+
+        <!-- use dbdeploy to generate the change script -->
+        <dbdeploy driver="${db.driver}" url="${db.url}"
+                  userid="${db.username}"
+                  password="${db.password}"
+                  dir="${basedir}/scripts/sql"
+                  outputfile="${build.dir}/output.sql"
+                  undoOutputfile="${build.dir}/undo.sql"
+                  dbms="${db.dbms}"
+                />
+
+        <!-- now apply the changescript to the database -->
+        <sql driver="${db.driver}" url="${db.url}"
+             userid="${db.username}" password="${db.password}" classpathref="db.classpath">
+            <fileset file="${build.dir}/output.sql"/>
+        </sql>
+    </target>
+
+    <target name="db.recreate.mysql.db">
+        <exec executable="mysqladmin" failonerror="false">
+            <arg value="--force"/>
+            <arg value="--user=${db.username}"/>
+            <arg value="--password=${db.password}"/>
+            <arg value="DROP"/>
+            <arg value="forum"/>
+        </exec>
+        <exec executable="mysqladmin" failonerror="true">
+            <arg value="--user=${db.username}"/>
+            <arg value="--password=${db.password}"/>
+            <arg value="CREATE"/>
+            <arg value="forum"/>
+        </exec>
+        <echo message='Database "forum" created.'/>
+    </target>
+</project>
