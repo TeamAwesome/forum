@@ -61,6 +61,8 @@
         <sequential>
             <mkdir dir="${test.report.dir}"/>
             <junit fork="yes" forkmode="once" failureproperty="unit.tests.failed" printsummary="yes" haltonfailure="on">
+                <sysproperty key="net.sourceforge.cobertura.datafile"
+                             file="${build.instrumented.dir}/cobertura.ser" />
                 <classpath>
                     <fileset dir="${build.instrumented.dir}">
                         <include name="*.jar" />
@@ -212,7 +214,8 @@
     </target>
 
     <target name="instrument-cobertura" depends="init-cobertura, make-jars">
-        <cobertura-instrument todir="${build.instrumented.dir}">
+        <cobertura-instrument todir="${build.instrumented.dir}"
+                     datafile="${build.instrumented.dir}/cobertura.ser">
             <ignore regex="org.apache.log4j.*"/>
 
             <fileset dir="${compile.dir}">
@@ -223,12 +226,14 @@
     </target>
 
     <target name="check-cobertura" depends="instrument-cobertura, run-tests">
-        <cobertura-check branchrate="40" totalbranchrate="40" totallinerate="40">
+        <cobertura-check datafile="${build.instrumented.dir}/cobertura.ser"
+                         branchrate="40" totalbranchrate="40" totallinerate="40">
         </cobertura-check>
     </target>
 
     <target name="report-cobertura">
-        <cobertura-report destdir="${coberturaReports.dir}" srcdir="${src.dir}/java" />
+        <cobertura-report datafile="${build.instrumented.dir}/cobertura.ser"
+                          destdir="${coberturaReports.dir}" srcdir="${src.dir}/java" />
     </target>
 
     <target name="clean-cobertura">
