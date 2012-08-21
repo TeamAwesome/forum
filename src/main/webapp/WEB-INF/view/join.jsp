@@ -9,9 +9,9 @@
     <span>Join us!</span>
 </div>
 
-<form>
+<form action="./showprofile" method="post" >
 <div class="username">
-    <span>Username:</span> <input type="text" class="username" />
+    <span>Username:</span> <input type="text" name="username" />
 </div>
 
 <div class="password">
@@ -23,7 +23,7 @@
 </div>
 
 <div class="name">
-    <span>Name:</span> <input type="text" class="name" />
+    <span>Name:</span> <input type="text" name="name" />
 </div>
 
 <div class="emailAddress">

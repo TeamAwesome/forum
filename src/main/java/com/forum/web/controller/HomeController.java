@@ -11,4 +11,6 @@ public class HomeController {
     public ModelAndView activityView() {
         return new ModelAndView("home");
     }
+
+
 }
