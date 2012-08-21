@@ -46,6 +46,7 @@
         <attribute name="classpath"/>
         <sequential>
             <mkdir dir="${compile.dir}/classes"/>
+            <mkdir dir="${build.instrumented.dir}"/>
             <javac srcdir="@{srcdir}/java" destdir="${compile.dir}/classes" classpathref="@{classpath}"
                    includeantruntime="no" debug="yes"/>
             <jar jarfile="${compile.dir}/@{jarfile}" basedir="${compile.dir}/classes">
@@ -209,7 +210,6 @@
             description="Calculate the percentage of code accessed by tests." />
 
     <target name="init-cobertura" depends="clean-cobertura">
-        <mkdir dir="${build.instrumented.dir}"/>
         <mkdir dir="${coberturaReports.dir}"/>
     </target>
 
