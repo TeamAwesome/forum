@@ -12,11 +12,13 @@
      <script type="text/javascript">
 
             function testFunction(){
-               if($("#username").val() != ""){
-               alert("username is not empty")
+               if($("#username").val() == ""){
+                 $("usernameError").html("Please enter username");
+
                }
+
                else {
-               alert("username is empty")
+               $("#showProfile").submit();
                }
             }
      </script>
@@ -28,13 +30,13 @@
     <span>Join us!</span>
 </div>
 
-<form name="showProfile" action="./showprofile" method="post" >
+<form id="showProfile" action="./showprofile" method="post" >
 
 <div name="validationMessage"></div>
 
-<usernameError></usernameError>
+<font color="red"><usernameError></usernameError></font>
 <div class="username">
-    <span>Username:</span> <input type="text" id="username" />
+    <span>Username:</span> <input type="text" name="username" id="username" />
 </div>
 
 
@@ -349,10 +351,10 @@
 
 By submitting this form, you are agreeing to our <a href="/">Terms and Conditions</a>.
 
-<button onclick="testFunction()">sign up blah</button>
+
 </form>
 
-
+<button onclick="testFunction()">sign up blah</button>
 
 
 
