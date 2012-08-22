@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project basedir=".">
+<project name="dbbuild" basedir=".">
     <path id="dbdeploy.classpath">
         <!-- include the dbdeploy-ant jar -->
         <fileset dir="${bootstrap.ant.jar.dir}">
@@ -51,7 +51,7 @@
                   userid="${db.username}"
                   password="${db.password}"
                   dir="${basedir}/scripts/sql"
-                  outputfile="${build.dir}/output.sql"
+                  outputfile="${build.dir}/forward.sql"
                   undoOutputfile="${build.dir}/undo.sql"
                   dbms="${db.dbms}"
                 />
@@ -59,7 +59,17 @@
         <!-- now apply the changescript to the database -->
         <sql driver="${db.driver}" url="${db.url}"
              userid="${db.username}" password="${db.password}" classpathref="db.classpath">
-            <fileset file="${build.dir}/output.sql"/>
+            <fileset file="${build.dir}/forward.sql"/>
+        </sql>
+        <!-- now apply the changescript to the database -->
+        <sql driver="${db.driver}" url="${db.url}"
+             userid="${db.username}" password="${db.password}" classpathref="db.classpath">
+            <fileset file="${build.dir}/undo.sql"/>
+        </sql>
+        <!-- now apply the changescript to the database -->
+        <sql driver="${db.driver}" url="${db.url}"
+             userid="${db.username}" password="${db.password}" classpathref="db.classpath">
+            <fileset file="${build.dir}/forward.sql"/>
         </sql>
     </target>
 
