@@ -53,7 +53,7 @@
         <pathelement location="${unit.test.dir}/resources"/>
         <pathelement location="${src.dir}/resources"/>
         <pathelement location="${src.dir}/deployment/env/dev"/>
-        <fileset dir="${buildtime.jar.dir}" />
+        <fileset dir="${buildtime.jar.dir}"/>
         <fileset dir="${jetty.jar.dir}" excludes="ant-*.jar"/>
     </path>
 
@@ -81,13 +81,13 @@
             <mkdir dir="${test.report.dir}"/>
             <junit fork="yes" forkmode="once" failureproperty="unit.tests.failed" printsummary="yes" haltonfailure="on">
                 <sysproperty key="net.sourceforge.cobertura.datafile"
-                             file="${build.instrumented.dir}/cobertura.ser" />
+                             file="${build.instrumented.dir}/cobertura.ser"/>
                 <classpath>
                     <fileset dir="${build.instrumented.dir}">
-                        <include name="*.jar" />
+                        <include name="*.jar"/>
                     </fileset>
                 </classpath>
-                <classpath refid="@{classpath}" />
+                <classpath refid="@{classpath}"/>
                 <formatter type="xml"/>
                 <batchtest todir="${test.report.dir}">
                     <fileset dir="@{testdir}/java">
@@ -211,10 +211,13 @@
     </target>
 
     <!--target for cobertura-->
-    <taskdef resource="tasks.properties" classpathref="cobertura-classpath" />
+    <taskdef resource="tasks.properties" classpathref="cobertura-classpath"/>
 
-    <target name="run-coverage-rate" depends="check-cobertura, report-cobertura"
-            description="Calculate the percentage of code accessed by tests." />
+    <target name="coverage" depends="instrument-cobertura, run-unit-tests, run-integration-tests, report-cobertura"
+            description="Calculate the percentage of code accessed by tests.">
+        <cobertura-check datafile="${build.instrumented.dir}/cobertura.ser"
+                         branchrate="49" totalbranchrate="49" totallinerate="48"/>
+    </target>
 
     <target name="init-cobertura" depends="clean-cobertura">
         <mkdir dir="${coberturaReports.dir}"/>
@@ -222,24 +225,19 @@
 
     <target name="instrument-cobertura" depends="init-cobertura, make-jars">
         <cobertura-instrument todir="${build.instrumented.dir}"
-                     datafile="${build.instrumented.dir}/cobertura.ser">
+                              datafile="${build.instrumented.dir}/cobertura.ser">
             <ignore regex="org.apache.log4j.*"/>
 
             <fileset dir="${compile.dir}">
-                <include name="*.jar" />
-                <exclude name="*-tests.jar" />
+                <include name="*.jar"/>
+                <exclude name="*-tests.jar"/>
             </fileset>
         </cobertura-instrument>
     </target>
 
-    <target name="check-cobertura" depends="instrument-cobertura, run-tests">
-        <cobertura-check datafile="${build.instrumented.dir}/cobertura.ser"
-                         branchrate="0" totalbranchrate="0" totallinerate="0"/>
-    </target>
-
     <target name="report-cobertura">
         <cobertura-report datafile="${build.instrumented.dir}/cobertura.ser"
-                          destdir="${coberturaReports.dir}" srcdir="${src.dir}/java" />
+                          destdir="${coberturaReports.dir}" srcdir="${src.dir}/java"/>
     </target>
 
     <target name="clean-cobertura">
