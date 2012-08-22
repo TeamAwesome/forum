@@ -192,10 +192,6 @@
         </war>
     </target>
 
-    <target name="deploy" depends="make-war">
-        <copy file="${dist.dir}/${ant.project.name}.war" todir="/usr/share/tomcat6/webapps"></copy>
-    </target>
-
     <target name="make-zip" depends="make-war">
         <mkdir dir="${dist.dir}"/>
         <zip destfile="${dist.dir}/${ant.project.name}.zip">
