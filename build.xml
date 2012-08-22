@@ -179,14 +179,8 @@
             <fileset dir="${src.dir}/webapp">
                 <exclude name="**/applicationContext-properties.xml"/>
                 <exclude name="**/web.xml"/>
-                <exclude name="static/"/>
                 <exclude name="src/"/>
             </fileset>
-            <zipfileset prefix="${build.number}" dir="${dist.dir}/webapp"/>
-            <zipfileset prefix="${build.number}" dir="${src.dir}/webapp">
-                <exclude name="static/js/page/**/*.js"/>
-                <include name="static/"/>
-            </zipfileset>
             <lib dir="${compile.dir}" excludes="*-tests.jar"/>
             <lib dir="lib/runtime/jar"/>
         </war>
