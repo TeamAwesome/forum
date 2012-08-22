@@ -4,25 +4,18 @@
 
 <head>
     <title>Join us</title>
-        <link rel="stylesheet" type="text/css" href="../static/CLEditor1_3_0/jquery.cleditor.css" />
-            <script type="text/javascript" src="/app/static/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/app/static/CLEditor1_3_0/jquery.cleditor.css" />
+            <script type="text/javascript" src="/app/static/jsquery/jquery.min.js"></script>
             <script type="text/javascript" src="/app/static/CLEditor1_3_0/jquery.cleditor.js"></script>
             <script type="text/javascript" src="/app/static/CLEditor1_3_0/jquery.cleditor.min.js"></script>
 
      <script type="text/javascript">
 
             function testFunction(){
-               if($("#username").val() == ""){
+
+               if($("#username").val() === ""){
                  $("usernameError").html("Please enter username");
                }
-
-               else  if($("#username").val() == ""){
-                                     $("usernameError").html("Please enter username");
-                                   }
-
-                else  if($("#password").val().length()< 8){
-                                      $("passwordLengthError").html("INVALID PASSWORD!!! MINIMUM 8 CHARACTERS");
-                                    }
 
                else {
                $("#showProfile").submit();
@@ -46,13 +39,13 @@
     <span>Username:</span> <input type="text" name="username" id="username" />
 </div>
 
-
+<font color="red"><passwordLengthError></passwordLengthError></font>
 <div class="password">
-    <span>Password:</span> <input type="password" name="password" />
+    <span>Password:</span> <input type="password" name="password" id="password" />
 </div>
 
 <div class="confirmPassword">
-    <span>Confirm Password:</span> <input type="password" name="confirmPassword" />
+    <span>Confirm Password:</span> <input type="password" name="confirmPassword" id="confirmPassword" />
 </div>
 
 <div class="name">
@@ -360,8 +353,8 @@ By submitting this form, you are agreeing to our <a name="tos" href="<c:url valu
 
 
 </form>
-
-<button onclick="testFunction()">sign up blah</button>
+ <br><br>
+<button onclick="testFunction()">sign up</button>
 
 
 
