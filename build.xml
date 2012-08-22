@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
-<project name="app" default="build" basedir=".">
+<project name="forum" default="build" basedir=".">
+    <property name="env.name" value="dev"/>
+    <echo message="----------------------------------------------------------------"/>
+    <echo message="Loading build.properties for the environment ${env.name}"/>
+    <echo message="----------------------------------------------------------------"/>
+
+    <loadproperties srcFile="${basedir}/buildprofiles/${env.name}/build.properties"/>
 
     <property name="src.dir" location="src/main"/>
     <property name="unit.test.dir" location="src/unit-tests"/>
@@ -10,21 +16,45 @@
     <property name="compile.dir" location="${build.dir}/compile"/>
     <property name="report.dir" location="${build.dir}/report"/>
     <property name="dist.dir" location="${build.dir}/dist"/>
+    <property name="bootstrap.ant.jar.dir" location="${basedir}/bootstrap/ant"/>
+    <property name="buildtime.jar.dir" location="${basedir}/lib/buildtime/jar"/>
+    <property name="runtime.jar.dir" location="${basedir}/lib/runtime/jar"/>
+    <property name="jetty.jar.dir" location="${basedir}/lib/jetty/jar"/>
 
     <property name="test.report.dir" location="${report.dir}/test"/>
+    <property name="data.dir" location="${basedir}/data"/>
+
+    <!-- Cobertura -->
+    <property name="build.instrumented.dir" value="${build.dir}/instrumented-classes"/>
+    <property name="coberturaReports.dir" value="${build.dir}/coberturaReports"/>
+
+    <mkdir dir="${buildtime.jar.dir}"/>
+    <mkdir dir="${runtime.jar.dir}"/>
+    <mkdir dir="${jetty.jar.dir}"/>
+
+    <import file="dbbuild.xml"/>
 
     <path id="common-classpath">
         <pathelement location="${unit.test.dir}/resources"/>
         <pathelement location="${src.dir}/resources"/>
         <pathelement location="${src.dir}/deployment/env/dev"/>
         <fileset dir="${compile.dir}"/>
-        <fileset dir="lib/runtime/jar"/>
-        <fileset dir="lib/buildtime/jar" />
-        <fileset dir="lib/jetty/jar" excludes="ant-*.jar"/>
+        <fileset dir="${runtime.jar.dir}"/>
+        <fileset dir="${buildtime.jar.dir}"/>
+        <fileset dir="${jetty.jar.dir}" excludes="ant-*.jar"/>
     </path>
 
     <path id="system-classpath">
         <path refid="common-classpath"/>
+    </path>
+
+    <!-- Cobertura -->
+    <path id="cobertura-classpath">
+        <pathelement location="${unit.test.dir}/resources"/>
+        <pathelement location="${src.dir}/resources"/>
+        <pathelement location="${src.dir}/deployment/env/dev"/>
+        <fileset dir="${buildtime.jar.dir}" />
+        <fileset dir="${jetty.jar.dir}" excludes="ant-*.jar"/>
     </path>
 
     <macrodef name="make-jar">
@@ -33,6 +63,7 @@
         <attribute name="classpath"/>
         <sequential>
             <mkdir dir="${compile.dir}/classes"/>
+            <mkdir dir="${build.instrumented.dir}"/>
             <javac srcdir="@{srcdir}/java" destdir="${compile.dir}/classes" classpathref="@{classpath}"
                    includeantruntime="no" debug="yes"/>
             <jar jarfile="${compile.dir}/@{jarfile}" basedir="${compile.dir}/classes">
@@ -48,6 +79,13 @@
         <sequential>
             <mkdir dir="${test.report.dir}"/>
             <junit fork="yes" forkmode="once" failureproperty="unit.tests.failed" printsummary="yes" haltonfailure="on">
+                <sysproperty key="net.sourceforge.cobertura.datafile"
+                             file="${build.instrumented.dir}/cobertura.ser" />
+                <classpath>
+                    <fileset dir="${build.instrumented.dir}">
+                        <include name="*.jar" />
+                    </fileset>
+                </classpath>
                 <classpath refid="@{classpath}" />
                 <formatter type="xml"/>
                 <batchtest todir="${test.report.dir}">
@@ -60,11 +98,11 @@
     </macrodef>
 
     <taskdef resource="org/apache/ivy/ant/antlib.xml">
-        <classpath location="bootstrap/ant/ivy-2.1.0.jar"/>
+        <classpath location="${bootstrap.ant.jar.dir}/ivy-2.1.0.jar"/>
     </taskdef>
 
     <taskdef resource="net/sf/antcontrib/antlib.xml">
-        <classpath location="bootstrap/ant/ant-contrib-1.0b3.jar"/>
+        <classpath location="${bootstrap.ant.jar.dir}/ant-contrib-1.0b3.jar"/>
     </taskdef>
 
     <target name="fetch-libs" description="Fetch third-party libraries using ivy.">
@@ -181,4 +219,41 @@
         <input message="Build number?" addproperty="build.number"/>
     </target>
 
+    <!--target for cobertura-->
+    <taskdef resource="tasks.properties" classpathref="cobertura-classpath" />
+
+    <target name="run-coverage-rate" depends="check-cobertura, report-cobertura"
+            description="Calculate the percentage of code accessed by tests." />
+
+    <target name="init-cobertura" depends="clean-cobertura">
+        <mkdir dir="${coberturaReports.dir}"/>
+    </target>
+
+    <target name="instrument-cobertura" depends="init-cobertura, make-jars">
+        <cobertura-instrument todir="${build.instrumented.dir}"
+                     datafile="${build.instrumented.dir}/cobertura.ser">
+            <ignore regex="org.apache.log4j.*"/>
+
+            <fileset dir="${compile.dir}">
+                <include name="*.jar" />
+                <exclude name="*-tests.jar" />
+            </fileset>
+        </cobertura-instrument>
+    </target>
+
+    <target name="check-cobertura" depends="instrument-cobertura, run-tests">
+        <cobertura-check datafile="${build.instrumented.dir}/cobertura.ser"
+                         branchrate="0" totalbranchrate="0" totallinerate="0"/>
+    </target>
+
+    <target name="report-cobertura">
+        <cobertura-report datafile="${build.instrumented.dir}/cobertura.ser"
+                          destdir="${coberturaReports.dir}" srcdir="${src.dir}/java" />
+    </target>
+
+    <target name="clean-cobertura">
+        <delete dir="${build.instrumented.dir}"/>
+        <delete dir="${coberturaReports.dir}"/>
+    </target>
+    <!-- end of target for cobertura -->
 </project>

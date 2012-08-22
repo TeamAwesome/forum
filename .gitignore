@@ -2,6 +2,7 @@ build/
 lib/
 logs/
 out/
+data/
 
 *.DS_Store
 .idea
