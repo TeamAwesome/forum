@@ -21,6 +21,7 @@
         <dependency org="org.mockito" name="mockito-core" rev="1.8.4" transitive="false" conf="buildtime->*" />
         <dependency org="org.objenesis" name="objenesis-tck" rev="1.2" transitive="false" conf="buildtime->*" />
         <dependency org="javax.servlet" name="servlet-api" rev="2.5" transitive="false" conf="buildtime->*" />
+        <dependency org="javax.servlet" name="jstl" rev="1.2" transitive="false" conf="runtime->*" />
         <dependency org="org.freemarker" name="freemarker" rev="2.3.16" transitive="false" conf="runtime->*" />
         <dependency org="org.springframework" name="org.springframework.test" rev="3.1.1.RELEASE" transitive="false" conf="buildtime->*" />
         <dependency org="org.springframework" name="org.springframework.asm" rev="3.1.1.RELEASE" transitive="false" conf="runtime->*" />
