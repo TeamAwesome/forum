@@ -14,8 +14,15 @@
             function testFunction(){
                if($("#username").val() == ""){
                  $("usernameError").html("Please enter username");
-
                }
+
+               else  if($("#username").val() == ""){
+                                     $("usernameError").html("Please enter username");
+                                   }
+
+                else  if($("#password").val().length()< 8){
+                                      $("passwordLengthError").html("INVALID PASSWORD!!! MINIMUM 8 CHARACTERS");
+                                    }
 
                else {
                $("#showProfile").submit();
