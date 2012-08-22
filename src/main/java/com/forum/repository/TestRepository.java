@@ -12,14 +12,12 @@ import javax.sql.DataSource;
 @Repository
 public class TestRepository {
 
-    @Autowired
-    @Qualifier("dataSource")
-    BasicDataSource dataSource;
+
 
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public TestRepository() {
+    public TestRepository(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
