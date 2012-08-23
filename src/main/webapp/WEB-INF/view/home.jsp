@@ -12,12 +12,8 @@
     <script src="<c:url value="/static/javascript/shareToSocialMedia.js"/>"></script>
 </head>
 <body class="home">
-<div class="topButtons">
-    <FORM>
-        <INPUT TYPE="button" onClick="parent.location='login.jsp'" Value="Log In">
-        <INPUT TYPE="button" onClick="parent.location='join.jsp'" Value="Join">
-    </FORM>
-</div>
+<%@ include file="registerHeader.jsp" %>
+
 <div class="title">
     <span><h1>The Forum</h1></span>
 </div>
@@ -29,7 +25,7 @@
          </br>
          <c:out value="${question.description}" />
          </br>
-         <c:out value="${question.userId}" />
+         <c:out value="${question.user}" />
         </p>
     </c:forEach>
 </div>
