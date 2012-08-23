@@ -137,7 +137,7 @@
         <unit-test testdir="${unit.test.dir}" classpath="common-classpath"/>
     </target>
 
-    <target name="run-integration-tests" depends="make-jars">
+    <target name="run-integration-tests" depends="make-jars, db.clean, db.update, insert-test-data">
         <unit-test testdir="${integration.test.dir}" classpath="common-classpath"/>
     </target>
 

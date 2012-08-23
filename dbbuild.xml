@@ -35,6 +35,22 @@
              userid="${db.username}" password="${db.password}" classpathref="db.classpath">
             <fileset file="${basedir}/scripts/sql/dbdeploy/recreateDatabase.${db.dbms}.sql"/>
         </sql>
+<!--=======-->
+        <!--<echo message="Recreating database for ${db.dbms}" />-->
+        <!--<if>-->
+            <!--<equals arg1="${db.dbms}" arg2="hsql"/>-->
+            <!--<then>-->
+                <!--<antcall target="db.recreate.hsql"/>-->
+            <!--</then>-->
+            <!--<else>-->
+                <!--<antcall target="db.recreate.mysql"/>-->
+            <!--</else>-->
+        <!--</if>-->
+    </target>
+
+    <target name="db.recreate.hsql">
+        <delete dir="${data.dir}"/>
+        <mkdir dir="${data.dir}"/>
     </target>
 
     <target name="db.print.info">
@@ -75,7 +91,7 @@
         </sql>
     </target>
 
-    <target name="db.recreate.mysql.db">
+    <target name="db.recreate.mysql">
         <exec executable="mysqladmin" failonerror="false">
             <arg value="--force"/>
             <arg value="--user=${db.username}"/>
@@ -90,5 +106,12 @@
             <arg value="forum"/>
         </exec>
         <echo message='Database "forum" created.'/>
+    </target>
+
+    <target name="insert-test-data">
+        <sql driver="${db.driver}" url="${db.url}"
+             userid="${db.username}" password="${db.password}" classpathref="db.classpath">
+            <fileset file="./scripts/sql/testdata/integration_test_data.sql"/>
+        </sql>
     </target>
 </project>
