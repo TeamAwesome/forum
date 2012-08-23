@@ -14,7 +14,6 @@
               <script src="<c:url value="/static/javascript/container_core-min.js"/>"></script>
               <!-- Source file for Rich Text Editor-->
               <script src="<c:url value="/static/javascript/simpleeditor-min.js"/>"></script>
-              <script src="<c:url value="/static/javascript/postQuestionValidator.js"/>"></script>
 
 </head>
 <body class="yui-skin-sam">
@@ -36,4 +35,6 @@
 </form>
 
 </body>
+<script src="<c:url value="/static/javascript/postQuestionValidator.js"/>"></script>
+
 </html>

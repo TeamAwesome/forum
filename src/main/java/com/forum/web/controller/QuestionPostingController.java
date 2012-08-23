@@ -20,7 +20,7 @@ public class QuestionPostingController {
 
         ModelAndView modelAndView = new ModelAndView("showPostedQuestion");
         modelAndView.addObject("questionTitle",params.get("questionTitle"));
-        modelAndView.addObject("questionDescription",params.get("questionDescription"));
+        modelAndView.addObject("questionDescription",params.get("editor"));
         return modelAndView;
     }
 }
