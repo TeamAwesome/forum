@@ -38,8 +38,8 @@ myEditor.subscribe('editorKeyDown',track);
 
 $('#questionTitle').keyup(function() {
             var validator = new Validation();
-            var titleValidationMessage = validator.checkTitle($("#questionTitle").val());
-            //if(validator.characterNumber(titleValidationMessage)>100)this.val(this.val().substr(0,100));
+            var titleValidationMessage = validator.checkIfTitleIsEmpty($("#questionTitle").val());
+            var titleValidationMessage = validator.checkNumberOfRemainingCharactersInTheTitle($("#questionTitle").val());
             $("#titleValidationMessage").text(titleValidationMessage);
         });
 
@@ -48,6 +48,7 @@ $('#submitButton').click(function(){
             var title = $("#questionTitle").val();
             //alert("submit");
             var description = track();
+
             if(validator.checkTitleAndDescription(title, description)){
                   $("#questionForm").submit();
             } else{
