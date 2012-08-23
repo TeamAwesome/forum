@@ -38,6 +38,14 @@ public class QuestionController {
         ModelAndView modelAndView = new ModelAndView("questionDetail");
         modelAndView.addObject("questionTitle", question.getTitle());
         modelAndView.addObject("questionDescription", question.getDescription());
+        modelAndView.addObject("userID", question.getUserId());
+        modelAndView.addObject("createdAt", question.getCreatedAt());
+        modelAndView.addObject("likes", question.getLikes());
+        modelAndView.addObject("dislikes", question.getDislikes());
+        modelAndView.addObject("views", question.getViews());
+        modelAndView.addObject("flags", question.getFlags());
+
+
         return modelAndView;
     }
 }

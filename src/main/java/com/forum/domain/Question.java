@@ -29,4 +29,20 @@ public class Question {
     public int getUserId() {
         return userId;
     }
+
+    public int getLikes() {
+        return 0;
+    }
+
+    public int getDislikes() {
+        return 0;
+    }
+
+    public int getViews() {
+        return 0;
+    }
+
+    public int getFlags() {
+        return 0;
+    }
 }
