@@ -32,10 +32,10 @@ public class JoinTest {
         assertThat(webDriver.getCurrentUrl(), is("http://10.10.5.107:8080/forum/join"));
     }
 
-    @Test
-    public void shouldVisitTermsPage() {
-        WebElement tosLink = webDriver.findElement(By.name("tos"));
-        tosLink.click();
-        assertThat(webDriver.getCurrentUrl(), is("http://10.10.5.107:8080/forum/terms"));
-    }
+//    @Test
+//    public void shouldVisitTermsPage() {
+//        WebElement tosLink = webDriver.findElement(By.name("tos"));
+//        tosLink.click();
+//        assertThat(webDriver.getCurrentUrl(), is("http://10.10.5.107:8080/forum/terms"));
+//    }
 }
