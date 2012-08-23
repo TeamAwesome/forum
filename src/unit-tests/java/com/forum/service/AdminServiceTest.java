@@ -1,9 +1,7 @@
 package com.forum.service;
 
-import com.forum.domain.Customer;
 import com.forum.domain.Question;
 import com.forum.repository.AdminRepository;
-import com.forum.repository.CustomerRepository;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -20,7 +18,7 @@ public class AdminServiceTest {
         AdminRepository adminRepository = mock(AdminRepository.class);
 
         List<Question> questions = new ArrayList<Question>();
-        questions.add(new Question("test","test","test","test"));
+        questions.add(new Question("test","test",1,"test"));
         when(adminRepository.getAllQuestions()).thenReturn(questions);
 
         AdminService adminService = new AdminService(adminRepository);

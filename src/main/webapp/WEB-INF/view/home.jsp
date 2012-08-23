@@ -25,12 +25,11 @@
     <c:forEach items="${questions}" var="question">
         <p>
          <c:out value="${question.title}"/>
-         <c:out value="${question.date}" />
-         <c:out value="${question.time}" />
+         <c:out value="${question.createdAt}" />
          </br>
          <c:out value="${question.description}" />
          </br>
-         <c:out value="${question.user}" />
+         <c:out value="${question.userId}" />
         </p>
     </c:forEach>
 </div>

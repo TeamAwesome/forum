@@ -2,14 +2,14 @@ package com.forum.domain;
 
 public class Question {
     private String title;
-    private String dateTime;
+    private String createdAt;
     private String description;
-    private String user;
+    private int userId;
 
-    public  Question(String title,String description,String user,String dateTime ){
+    public Question(String title,String description,int userId,String createdAt){
         this.title=title;
-        this.user=user;
-        this.dateTime=dateTime;
+        this.userId=userId;
+        this.createdAt = createdAt;
         this.description=description;
     }
 
@@ -17,24 +17,16 @@ public class Question {
         return title;
     }
 
-    public String getDateTime() {
-        return dateTime;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public void setTitle(String title) {
-
-        this.title = title;
-    }
 
     public String getDescription() {
         return description;
     }
 
-    public String getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 }
