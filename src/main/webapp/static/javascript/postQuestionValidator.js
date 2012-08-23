@@ -31,8 +31,13 @@
 
         //alert(text);
         var remainingChars = (maxLimit-text.length);
-        $("#descriptionValidationMessage").text(remainingChars+" Characters Remaining");
-            return text;
+        if(remainingChars < 500){
+            $("#descriptionNumberRemainingMessage").text(remainingChars+" Characters Remaining");
+        }else{
+            $("#descriptionValidationMessage").text("");
+        }
+
+        return text;
     }
 
     myEditor.subscribe('editorKeyPress',track);
@@ -40,13 +45,14 @@
     myEditor.subscribe('editorKeyDown',track);
 
     $('#questionTitle').keyup(function() {
+        var title = $("#questionTitle").val();
         var validator = new Validation();
-
-        var titleValidationMessage = validator.checkIfTitleIsEmpty($("#questionTitle").val());
         var titleNumberRemainingMessage = validator.checkNumberOfRemainingCharactersInTheTitle($("#questionTitle").val());
-
-        $("#titleValidationMessage").text(titleValidationMessage);
         $("#titleNumberRemainingMessage").text(titleNumberRemainingMessage);
+
+        if(validator.checkTitle(title)){
+            $("#titleValidationMessage").text("");
+        }
     });
 
     $('#submitButton').click(function(){
