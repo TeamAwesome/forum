@@ -1,6 +1,10 @@
 package com.forum.web.controller;
 
+import com.forum.domain.Question;
+import com.forum.service.QuestionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,7 +13,11 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 
 @Controller
-public class QuestionPostingController {
+public class QuestionController {
+
+    @Autowired
+    private QuestionService questionService;
+
     @RequestMapping(value = "/postQuestion", method = RequestMethod.GET)
     public ModelAndView postQuestion() {
         return new ModelAndView("postQuestion");
@@ -21,6 +29,15 @@ public class QuestionPostingController {
         ModelAndView modelAndView = new ModelAndView("showPostedQuestion");
         modelAndView.addObject("questionTitle",params.get("questionTitle"));
         modelAndView.addObject("questionDescription",params.get("editor"));
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/question/view/{questionId}", method = RequestMethod.GET)
+    public ModelAndView viewQuestionDetail(@PathVariable Integer questionId) {
+        Question question = questionService.getById(questionId);
+        ModelAndView modelAndView = new ModelAndView("questionDetail");
+        modelAndView.addObject("questionTitle", question.getTitle());
+        modelAndView.addObject("questionDescription", question.getDescription());
         return modelAndView;
     }
 }

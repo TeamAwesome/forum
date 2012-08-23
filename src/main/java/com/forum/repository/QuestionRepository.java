@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
@@ -13,12 +14,18 @@ public class QuestionRepository {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public QuestionRepository(JdbcTemplate template) {
-        this.jdbcTemplate = template;
+    public QuestionRepository(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     public List<Question> latestQuestion(int number) {
         QuestionRowMapper rowMapper = new QuestionRowMapper();
         return jdbcTemplate.query("SELECT * FROM QUESTION ORDER BY CREATED_AT DESC LIMIT ?", new Object[]{number}, rowMapper);
+    }
+
+    public Question getById(Integer questionId) {
+        QuestionRowMapper rowMapper = new QuestionRowMapper();
+        return (Question) jdbcTemplate.queryForObject("SELECT * FROM QUESTION WHERE ID = ?", new Object[]{questionId}, rowMapper);
+
     }
 }

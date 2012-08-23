@@ -26,4 +26,8 @@ public class QuestionService {
     public List<Question> latestQuestion() {
         return questionRepository.latestQuestion(10);
     }
+
+    public Question getById(Integer questionId) {
+        return questionRepository.getById(questionId);
+    }
 }
