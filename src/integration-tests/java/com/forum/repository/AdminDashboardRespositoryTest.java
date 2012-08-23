@@ -1,11 +1,14 @@
 package com.forum.repository;
 
+import com.forum.domain.Question;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
 import javax.sql.DataSource;
+
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -16,16 +19,9 @@ public class AdminDashboardRespositoryTest extends AbstractTransactionalJUnit4Sp
     private DataSource dataSource;
 
     @Test
-    public void shouldGetNumberOfQuestionsInDatabase(){
+    public void shouldGetAllQuestions(){
         AdminRepository repository = new AdminRepository(dataSource);
-        int numberOfQuestions = repository.getTotalNumberOfQuestions();
-        assertThat(numberOfQuestions, is(1));
-    }
-
-    @Test
-    public void shouldGetNumberOfAnswersInDatabase(){
-        AdminRepository repository = new AdminRepository(dataSource);
-        int numberOfAnswers = repository.getTotalNumberOfAnswers();
-        assertThat(numberOfAnswers, is(1));
+        List<Question> Questions=repository.getAllQuestions();
+        assertThat(Questions.size(),is(1));
     }
 }

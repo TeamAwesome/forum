@@ -9,7 +9,7 @@ public class QuestionTest {
 
     @Test
     public void shouldCreateNewQuestion(){
-        Question question = new Question("Question Title", "Question Description");
+        Question question = new Question("Question Title", "Question Description", "User", "DateTime");
         assertThat(question.getTitle(), is("Question Title"));
     }
 }

@@ -1,5 +1,6 @@
 package com.forum.repository;
 
+import com.forum.domain.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -15,12 +16,8 @@ public class AdminRepository {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public int getTotalNumberOfQuestions()
-    {
-        return 1;
-    }
 
-    public int getTotalNumberOfAnswers() {
-        return 1;
+    public List<Question> getAllQuestions() {
+        return jdbcTemplate.query("SELECT * FROM QUESTION", new QuestionRowMapper());
     }
 }
