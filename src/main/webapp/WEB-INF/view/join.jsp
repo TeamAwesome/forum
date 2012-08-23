@@ -349,7 +349,7 @@
      <input type="checkbox" name="privacySettings" value="privacy" /> Privacy Settings
 </div>
 
-By submitting this form, you are agreeing to our <a id="tos" href="<c:url value="/terms"/>">Terms and Conditions</a>.
+By submitting this form, you are agreeing to our <a name="tos" href="<c:url value="/terms"/>">Terms and Conditions</a>.
 
 
 </form>
