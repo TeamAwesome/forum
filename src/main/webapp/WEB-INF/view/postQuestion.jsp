@@ -23,15 +23,16 @@
 <form id="questionForm" action="<c:url value="/showPostedQuestion"/>" method="post">
     <div class="questionTitle">
         <label class="formLabels"> Title: </label> <input type="text" name="questionTitle" id="questionTitle" maxlength="100"/>
-        <div id="titleValidationMessage"></div>
+        <p id="titleValidationMessage"></p>
     </div>
     <div class="questionDescription" >
         <label class="formLabels"> Description: </label></br>
         <textarea id="editor" name="editor" rows="20" cols="75" maxlenght="500"></textarea>
         <div id="descriptionValidationMessage"></div>
     </div>
+    <div id="descriptionValidationMessage"></div>
     <input type="button" value="Submit"  id="submitButton"/>
-    <div id="validationMessage"></div>
+
 </form>
 
 </body>

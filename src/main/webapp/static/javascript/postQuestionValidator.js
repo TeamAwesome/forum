@@ -49,11 +49,16 @@ $('#submitButton').click(function(){
             //alert("submit");
             var description = track();
 
-            if(validator.checkTitleAndDescription(title, description)){
+            if(validator.checkTitle(title) && validator.checkDescription(description)){
                   $("#questionForm").submit();
-            } else{
-                  $("#validationMessage").text("Title or description is empty or too more characters.");
-                 }
+            } else if(!validator.checkTitle(title) && !validator.checkDescription(description)){
+                  $("#titleValidationMessage").text("A Question must have a title.");
+                  $("#descriptionValidationMessage").text("A Question must have a description.");
+            } else if(!validator.checkTitle(title)){
+                  $("#titleValidationMessage").text("A Question must have a title.");
+            } else {
+                   $("#descriptionValidationMessage").text("A Question must have a description.");
+            }
             });
 $("#titleValidationMessage").text("100 Characters Remaining");
 $("#descriptionValidationMessage").text("500 Characters Remaining");

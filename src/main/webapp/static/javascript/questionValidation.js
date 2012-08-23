@@ -5,7 +5,7 @@ function Validation()
 
     this.checkIfTitleIsEmpty = function(title){
             var remaining = countRemainingCharacters(title, 100);
-            if(remaining == 0){
+            if(remaining == 100){
                   return "The Title should not be empty.";
             }
             return "";
@@ -41,23 +41,17 @@ function Validation()
     }
 
 
-    this.checkDescription = function(description){
-        var remaining = countRemainingCharacters(description, 500);
-        if( remaining == number)
-              return "ATTENTION!  Description is empty.";
-        if(remaining < 0)
-            return "ATTENTION!  500 Characters only.";
-        if(remaining > 0 && remaining <= 500 )
-            return remaining.toString()+" Characters Remaining";
-        return "ATTENTION!  Description is empty.";
-   }
-
-   this.checkTitleAndDescription = function(title, description){
-       if(characterNumber(title)>0 && characterNumber(title)<=100
-                && characterNumber(description)>0 && characterNumber(description)<=500)
+   this.checkDescription = function(description){
+       if(characterNumber(description)>0 && characterNumber(description)<=500)
             return true;
        return false;
    }
+
+    this.checkTitle = function(title){
+          if(characterNumber(title)>0 && characterNumber(title)<=100)
+               return true;
+          return false;
+      }
 
     var characterNumber = function(content){
         return content.length;
