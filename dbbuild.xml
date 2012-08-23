@@ -31,21 +31,16 @@
     </target>
 
     <target name="db.recreate">
-        <sql driver="${db.driver}" url="${db.url}"
-             userid="${db.username}" password="${db.password}" classpathref="db.classpath">
-            <fileset file="${basedir}/scripts/sql/dbdeploy/recreateDatabase.${db.dbms}.sql"/>
-        </sql>
-<!--=======-->
-        <!--<echo message="Recreating database for ${db.dbms}" />-->
-        <!--<if>-->
-            <!--<equals arg1="${db.dbms}" arg2="hsql"/>-->
-            <!--<then>-->
-                <!--<antcall target="db.recreate.hsql"/>-->
-            <!--</then>-->
-            <!--<else>-->
-                <!--<antcall target="db.recreate.mysql"/>-->
-            <!--</else>-->
-        <!--</if>-->
+        <echo message="Recreating database for ${db.dbms}" />
+        <if>
+            <equals arg1="${db.dbms}" arg2="hsql"/>
+            <then>
+                <antcall target="db.recreate.hsql"/>
+            </then>
+            <else>
+                <antcall target="db.recreate.mysql"/>
+            </else>
+        </if>
     </target>
 
     <target name="db.recreate.hsql">
