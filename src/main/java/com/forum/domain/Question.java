@@ -21,6 +21,15 @@ public class Question {
         return dateTime;
     }
 
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public void setTitle(String title) {
+
+        this.title = title;
+    }
+
     public String getDescription() {
         return description;
     }

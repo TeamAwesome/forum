@@ -1,5 +1,5 @@
 CREATE TABLE CUSTOMERS(
-   ID   INT              NOT NULL,
+   ID   INT              NOT NULL AUTO_INCREMENT,
    FIRST_NAME VARCHAR (40)     NOT NULL,
    LAST_NAME VARCHAR (40)     NOT NULL,
    AGE  INT              NOT NULL,

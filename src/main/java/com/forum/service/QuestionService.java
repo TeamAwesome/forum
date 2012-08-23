@@ -1,6 +1,6 @@
 package com.forum.service;
 
-import com.forum.domain.Question1;
+import com.forum.domain.Question;
 import com.forum.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +18,12 @@ public class QuestionService {
     }
 
     @Transactional
-    public List<Question1> latestQuestion(int number) {
+    public List<Question> latestQuestion(int number) {
         return questionRepository.latestQuestion(number);
     }
 
     @Transactional
-    public List<Question1> latestQuestion() {
+    public List<Question> latestQuestion() {
         return questionRepository.latestQuestion(10);
     }
 }

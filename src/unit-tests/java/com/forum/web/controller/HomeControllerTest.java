@@ -1,6 +1,7 @@
 package com.forum.web.controller;
 
-import com.forum.domain.Question1;
+import com.forum.domain.Question;
+
 import com.forum.service.QuestionService;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,13 +18,13 @@ public class HomeControllerTest {
     @Test
     public void shouldDefaultToHomePage(){
         QuestionService questionService = mock(QuestionService.class);
-        List<Question1> questionList = new ArrayList<Question1>();
+
+        List<Question> questionList = new ArrayList<Question>();
         when(questionService.latestQuestion()).thenReturn(questionList);
 
         HomeController homeController = new HomeController(questionService);
         ModelAndView activityModelAndView = homeController.activityView();
         assertThat(activityModelAndView.getViewName(), is("home"));
-        assertThat((List<Question1>) activityModelAndView.getModel().get("questions"), is(questionList));
-
+        assertThat((List<Question>) activityModelAndView.getModel().get("questions"), is(questionList));
     }
 }
