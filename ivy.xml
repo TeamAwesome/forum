@@ -44,10 +44,7 @@
         <dependency org="org.seleniumhq.selenium" name="selenium-server" rev="2.24.1" transitive="false" conf="buildtime->*" />
         <dependency org="org.seleniumhq.selenium" name="selenium-remote-driver" rev="2.24.1" transitive="false" conf="buildtime->*" />
         <dependency org="org.seleniumhq.selenium" name="selenium-parent" rev="2.24.1"/>
-        <dependency org="com.google.guava" name="guava" rev="r05"/>
-        <dependency org="org.json" name="json" rev="20090211"/>
-        <dependency org="org.apache.commons" name="commons-exec" rev="1.1" />
-        <dependency org="com.h2database" name="h2" rev="1.2.143"/>
+
 
         <dependency org="commons-logging" name="commons-logging" rev="1.1.1" transitive="false" conf="buildtime,runtime->*" />
         <dependency org="net.sourceforge.htmlunit" name="htmlunit" rev="2.10" transitive="false" conf="buildtime->*" />
