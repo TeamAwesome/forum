@@ -12,5 +12,6 @@
         ${questionDescription}
     </div>
 </div>
+<button name = "returnToHomePage" type = "button">Return to HomePage</button>
 </body>
 </html>
