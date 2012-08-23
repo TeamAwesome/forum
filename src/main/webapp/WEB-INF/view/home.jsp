@@ -2,12 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <title>Welcome</title>
-    <meta property="og:title" content="The Forum" />
-    <meta property="og:type" content="city" />
-    <meta property="og:url" content="http://localhost:8080/app/" />
-    <meta property="og:image" content="" />
-    <meta property="og:site_name" content="The Forum" />
-    <meta property="fb:app_id" content="126401650838612" />
     <script src='http://connect.facebook.net/en_US/all.js'></script>
     <script src="<c:url value="/static/javascript/shareToSocialMedia.js"/>"></script>
 </head>
@@ -20,12 +14,15 @@
 <div class="activityWall" style="width:500px; height:750px; border:1px solid black;">
     <c:forEach items="${questions}" var="question">
         <p>
+         <a href="<c:url value="/question/view/${question.id}"/>" >
          <c:out value="${question.title}"/>
+         </a>
          <c:out value="${question.createdAt}" />
          </br>
          <c:out value="${question.description}" />
          </br>
-         <c:out value="${question.user}" />
+         <c:out value="${question.userId}" />
+
         </p>
     </c:forEach>
 </div>

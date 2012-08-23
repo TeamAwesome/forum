@@ -1,12 +1,14 @@
 package com.forum.domain;
 
 public class Question {
+    private int id;
     private String title;
     private String createdAt;
     private String description;
     private int userId;
 
-    public Question(String title,String description,int userId,String createdAt){
+    public Question(int id, String title,String description,int userId,String createdAt){
+        this.id = id;
         this.title=title;
         this.userId=userId;
         this.createdAt = createdAt;
@@ -44,5 +46,9 @@ public class Question {
 
     public int getFlags() {
         return 0;
+    }
+
+    public int getId() {
+        return id;
     }
 }
