@@ -31,8 +31,10 @@
     </target>
 
     <target name="db.recreate">
-        <delete dir="${data.dir}"/>
-        <mkdir dir="${data.dir}"/>
+        <sql driver="${db.driver}" url="${db.url}"
+             userid="${db.username}" password="${db.password}" classpathref="db.classpath">
+            <fileset file="${basedir}/scripts/sql/dbdeploy/recreateDatabase.${db.dbms}.sql"/>
+        </sql>
     </target>
 
     <target name="db.print.info">
