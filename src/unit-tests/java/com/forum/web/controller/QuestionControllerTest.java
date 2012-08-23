@@ -28,14 +28,4 @@ public class QuestionControllerTest {
         assertThat(questionPageModelAndView.getViewName() ,is("postQuestion"));
     }
 
-    @Test
-    public void shouldDisplayPostedQuestion(){
-        Map<String,String> mockedMap = mock(Map.class);
-        when(mockedMap.get("questionTitle")).thenReturn("Title");
-        when(mockedMap.get("editor")).thenReturn("Description");
-        ModelAndView questionModelAndView = questionController.showPostedQuestion(mockedMap);
-        String questionTitle = questionModelAndView.getModelMap().get("questionTitle").toString();
-
-        assertThat(questionTitle, is("Title"));
-    }
 }
