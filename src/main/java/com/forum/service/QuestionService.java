@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class QuestionService {
@@ -29,5 +30,9 @@ public class QuestionService {
 
     public Question getById(Integer questionId) {
         return questionRepository.getById(questionId);
+    }
+
+    public boolean saveQuestion(Map<String, String> params) {
+        return questionRepository.saveQuestion(params);
     }
 }

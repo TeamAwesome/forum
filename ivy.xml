@@ -70,5 +70,7 @@
         <!--<dependency org="com.dbdeploy" name="dbdeploy-ant" rev="3.0M3" transitive="false" conf="buildtime->*" />-->
         <dependency org="mysql" name="mysql-connector-java" rev="5.1.6" transitive="false" conf="buildtime,runtime->*"/>
         <dependency org="net.sourceforge.cobertura" name="cobertura" rev="1.9.4.1" conf="buildtime->*"/>
+
+        <dependency org="org.objenesis" name="objenesis" rev="1.0" />
     </dependencies>
 </ivy-module>
