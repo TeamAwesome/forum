@@ -14,16 +14,16 @@ import static org.mockito.Mockito.when;
 
 public class QuestionControllerTest {
 
-    private QuestionPostingController questionPostingController;
+    private QuestionController questionController;
 
     @Before
     public void setup(){
-        this.questionPostingController = new QuestionPostingController();
+        this.questionController = new QuestionController(null);
     }
 
     @Test
     public void shouldShowPostQuestionPage(){
-        ModelAndView questionPageModelAndView = questionPostingController.postQuestion();
+        ModelAndView questionPageModelAndView = questionController.postQuestion();
 
         assertThat(questionPageModelAndView.getViewName() ,is("postQuestion"));
     }
@@ -33,7 +33,7 @@ public class QuestionControllerTest {
         Map<String,String> mockedMap = mock(Map.class);
         when(mockedMap.get("questionTitle")).thenReturn("Title");
         when(mockedMap.get("editor")).thenReturn("Description");
-        ModelAndView questionModelAndView = questionPostingController.showPostedQuestion(mockedMap);
+        ModelAndView questionModelAndView = questionController.showPostedQuestion(mockedMap);
         String questionTitle = questionModelAndView.getModelMap().get("questionTitle").toString();
 
         assertThat(questionTitle, is("Title"));

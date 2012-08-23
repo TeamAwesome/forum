@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class QuestionRepository {
@@ -27,5 +28,9 @@ public class QuestionRepository {
         QuestionRowMapper rowMapper = new QuestionRowMapper();
         return (Question) jdbcTemplate.queryForObject("SELECT * FROM QUESTION WHERE ID = ?", new Object[]{questionId}, rowMapper);
 
+    }
+
+    public boolean saveQuestion(Map<String, String> params) {
+        return false;
     }
 }
