@@ -4,6 +4,9 @@
     <title>Welcome</title>
     <script src='http://connect.facebook.net/en_US/all.js'></script>
     <script src="<c:url value="/static/javascript/shareToSocialMedia.js"/>"></script>
+    <script src="<c:url value="/static/jsquery/jquery.js"/>"></script>
+    <script src="<c:url value="/static/javascript/knockout-2.1.0.js"/>"></script>
+
 </head>
 <body class="home">
 <%@ include file="registerHeader.jsp" %>
@@ -11,22 +14,21 @@
 <div class="title">
     <span><h1>The Forum</h1></span>
 </div>
-<div class="activityWall" style="width:500px; height:750px; border:1px solid black;">
-    <c:forEach items="${questions}" var="question">
-        <p>
-         <a href="<c:url value="/question/view/${question.id}"/>" >
-             <c:out value="${question.title}"/>
-         </a>
-             <c:out value="${question.createdAt}" />
-         </br>
-             <c:out value="${question.description}" />
-         </br>
-             <c:out value="${question.userId}" />
 
-        </p>
-    </c:forEach>
+<div class ="activityWall" style="width:500px; border:1px solid black;">
+    <p data-bind="foreach: questions">
+        <span data-bind="text: title" > </span>
+        <span data-bind="text: createdAt"> </span>
+        <br />
+        <span data-bind="text: description"> </span>
+        <br />
+        <span data-bind="text: userId"> </span>
+        <br /><br />
+    </p>
+    <button data-bind="click: loadMoreQuestion">more..</button>
+    <script src="<c:url value="/static/javascript/moreQuestionsLoader.js"/>"></script>
+    <br /><br />
 </div>
-
     <div id='fb-root'></div>
     <p id='msg'></p>
 

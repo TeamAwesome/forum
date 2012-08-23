@@ -33,4 +33,11 @@ public class QuestionRepository {
     public boolean saveQuestion(Map<String, String> params) {
         return false;
     }
+
+    public List<Question> latestQuestion(int pageNum, int pageSize) {
+        int pageStart = (pageNum-1)*pageSize;
+        QuestionRowMapper rowMapper = new QuestionRowMapper();
+        return jdbcTemplate.query("SELECT * FROM QUESTION ORDER BY CREATED_AT DESC LIMIT ?,?",
+                new Object[]{pageStart, pageSize}, rowMapper);
+    }
 }

@@ -72,5 +72,7 @@
         <dependency org="net.sourceforge.cobertura" name="cobertura" rev="1.9.4.1" conf="buildtime->*"/>
 
         <dependency org="org.objenesis" name="objenesis" rev="1.0" />
+        <dependency org="com.google.code.gson" name="gson" rev="2.2.2" transitive="false" conf="buildtime,runtime->*"/>
+
     </dependencies>
 </ivy-module>
