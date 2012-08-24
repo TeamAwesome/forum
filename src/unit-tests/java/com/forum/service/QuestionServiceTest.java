@@ -1,7 +1,6 @@
 package com.forum.service;
 
 import com.forum.repository.QuestionRepository;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -20,12 +19,12 @@ public class QuestionServiceTest {
     public void shouldSaveQuestionToRepository(){
         Map<String,String> params = new HashMap<String,String>();
         QuestionRepository mockQuestionRepository = mock(QuestionRepository.class);
-        when(mockQuestionRepository.saveQuestion(params)).thenReturn(true);
+        when(mockQuestionRepository.createQuestion(params)).thenReturn(true);
         questionService = new QuestionService(mockQuestionRepository);
 
 
 
-        boolean hasBeenSaved = questionService.saveQuestion(params);
+        boolean hasBeenSaved = questionService.createQuestion(params);
 
         assertThat(hasBeenSaved, is(true));
     }

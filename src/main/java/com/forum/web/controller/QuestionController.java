@@ -30,10 +30,10 @@ public class QuestionController {
 
     @RequestMapping(value = "/showPostedQuestion", method = RequestMethod.POST)
     public ModelAndView showPostedQuestion(@RequestParam Map<String, String> params){
-        questionService.saveQuestion(params);
+        questionService.createQuestion(params);
         ModelAndView modelAndView = new ModelAndView("showPostedQuestion");
-        modelAndView.addObject("questionTitle",params.get("questionTitle"));
-        modelAndView.addObject("questionDescription",params.get("editor"));
+        modelAndView.addObject("questionTitle",params.get("title"));
+        modelAndView.addObject("questionDescription",params.get("description"));
         return modelAndView;
     }
 

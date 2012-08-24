@@ -32,8 +32,8 @@ public class QuestionService {
         return questionRepository.getById(questionId);
     }
 
-    public boolean saveQuestion(Map<String, String> params) {
-        return questionRepository.saveQuestion(params);
+    public boolean createQuestion(Map<String, String> params) {
+        return questionRepository.createQuestion(params);
 
     }
 
