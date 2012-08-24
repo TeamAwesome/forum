@@ -15,13 +15,13 @@
     <c:forEach items="${questions}" var="question">
         <p>
          <a href="<c:url value="/question/view/${question.id}"/>" >
-         <c:out value="${question.title}"/>
+             <c:out value="${question.title}"/>
          </a>
-         <c:out value="${question.createdAt}" />
+             <c:out value="${question.createdAt}" />
          </br>
-         <c:out value="${question.description}" />
+             <c:out value="${question.description}" />
          </br>
-         <c:out value="${question.userId}" />
+             <c:out value="${question.userId}" />
 
         </p>
     </c:forEach>
