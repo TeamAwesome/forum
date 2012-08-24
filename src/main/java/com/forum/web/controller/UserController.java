@@ -15,8 +15,6 @@ public class UserController {
     public ModelAndView registerView() {
         return new ModelAndView("join");
     }
-
-<<<<<<< HEAD
     @RequestMapping(value ="./joinerror", method = RequestMethod.GET)
     public ModelAndView retryJoin(@RequestParam Map<String, String> params){
         ModelAndView modelAndView = new ModelAndView("join");
@@ -36,9 +34,6 @@ public class UserController {
 //            retryJoin(params);
 //        }
 //    }
-
-=======
->>>>>>> 2f97a8c1d0ff48dfc988f8bcc3483f5a93f396a7
 
     @RequestMapping(value = "/showprofile", method = RequestMethod.POST)
     public ModelAndView showProfile(@RequestParam Map<String, String> params){
