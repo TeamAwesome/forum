@@ -9,55 +9,6 @@
 <script language="javascript" type="text/javascript" src="/app/static/jsquery/jqplot.canvasTextRenderer.min.js"></script>
 <script language="javascript" type="text/javascript" src="/app/static/javascript/graphsForAdminDashboard.js"></script>
 
-<<<<<<< HEAD
- <script type= "text/javascript">
-    function Chart() {
-        this.
-        this.plot = function(data) {
-
-        }
-    }
-     $(document).ready(function(){
-
-     $("#chartdiv").jqplot('chartdiv',  [[[80, 10],[50,5]]],{title: 'Number of Questions',axesDefaults: {
-                                                                                      tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
-                                                                                       tickOptions: {
-                                                                                         angle: -60,
-                                                                                         fontSize: '10pt'
-                                                                                       }
-                                                                                      },axes: {
-                                                                                           xaxis: {
-                                                                                             renderer: $.jqplot.CategoryAxisRenderer,
-                                                                                              min:'0',
-                                                                                              max:'100'
-                                                                                           },
-                                                                                      yaxis: {
-                                                                                           renderer: $.jqplot.CategoryAxisRenderer,
-                                                                                            min:'0',
-                                                                                            max:'12'
-                                                                                         }
-                                                                                       }} );
-     $("#chartdiv2").jqplot('chartdiv2', [[[80, 10],[50,5],[70,10]]],{title: 'Number of Questions',axesDefaults: {
-                                                                                       tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
-                                                                                       tickOptions: {
-                                                                                       angle: -60,
-                                                                                       fontSize: '10pt'
-                                                                                       }
-                                                                                        },axes: {
-                                                                                         xaxis: {
-                                                                                         renderer: $.jqplot.CategoryAxisRenderer,
-                                                                                          min:'0',
-                                                                                           max:'100'
-                                                                                           },
-                                                                                           yaxis: {
-                                                                                          renderer: $.jqplot.CategoryAxisRenderer,
-                                                                                           min:'0',
-                                                                                          max:'12'
-                                                                                         }
-                                                                                        }});
-                                                                                      });
- </script>
-=======
  <script>
      function plot(input){
          $('#chartdiv div').html('');
@@ -65,7 +16,6 @@
          plotGraphs.setQuestionsGraphFor3Months(20,30,40,input.options[input.selectedIndex].value);
          plotGraphs.plot();
       }
->>>>>>> 2f97a8c1d0ff48dfc988f8bcc3483f5a93f396a7
 
  </script>
     <title>Welcome</title>
