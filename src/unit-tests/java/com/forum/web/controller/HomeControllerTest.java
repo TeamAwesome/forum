@@ -25,6 +25,5 @@ public class HomeControllerTest {
         HomeController homeController = new HomeController(questionService);
         ModelAndView activityModelAndView = homeController.activityView();
         assertThat(activityModelAndView.getViewName(), is("home"));
-        assertThat((List<Question>) activityModelAndView.getModel().get("questions"), is(questionList));
     }
 }
