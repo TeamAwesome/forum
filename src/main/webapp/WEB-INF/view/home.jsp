@@ -17,7 +17,9 @@
 
 <div class ="activityWall" style="width:500px; border:1px solid black;">
     <p data-bind="foreach: questions">
+     <a data-bind="attr: {href: url }">
         <span data-bind="text: title" > </span>
+     </a>
         <span data-bind="text: createdAt"> </span>
         <br />
         <span data-bind="text: description"> </span>

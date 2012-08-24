@@ -7,6 +7,7 @@ function Question(id, title, createdAt, description, userId) {
     self.createdAt = createdAt;
     self.description = description;
     self.userId = userId;
+    self.url = window.location.href + "/question/view/"+id;
 }
 
 function QuestionsViewModel() {
