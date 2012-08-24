@@ -25,7 +25,7 @@ public class UserController {
 
         User user = new User(params.get("username"), params.get("password"), params.get("name"),
                 params.get("email"), params.get("phoneNumber"), params.get("country"),
-                params.get("gender"), params.get("age"));
+                params.get("gender"), Integer.parseInt(params.get("age")));
 
         ModelAndView modelAndView = new ModelAndView("showprofile");
         modelAndView.addObject("username",user.getUsername());
