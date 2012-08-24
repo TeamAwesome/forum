@@ -40,12 +40,7 @@
             <div class="questionDescription" >
                 <label class="formLabels"> Description: </label></br>
                 <textarea id="editor" name="editor" rows="20" cols="75" maxlength="500"></textarea>
-                <p>
-                    <span id="descriptionValidationMessage" style="color:red"></span>
-                </p>
-                <p>
-                    <span id="descriptionNumberRemainingMessage"></span>
-                </p>
+                <div id="descriptionValidationMessage" style="color:red"></div>
             </div>
 
             <div id="descriptionValidationMessage"></div>
