@@ -21,10 +21,9 @@ public class UserControllerTest {
         //When
         ModelAndView activityModelAndView = userController.registerView();
 
-        //Then
-        assertThat(activityModelAndView.getViewName(), is("join"));
-    }
-
+    //Then
+    assertThat(activityModelAndView.getViewName(), is("join"));
+}
 
     @Test
     public void shouldNotAllowPasswordUnder8Characters(){
@@ -68,10 +67,5 @@ public class UserControllerTest {
 //        assertThat(testUsername, is("Tester"));
 //
 //    }
-
-
-
-
-
 
 }

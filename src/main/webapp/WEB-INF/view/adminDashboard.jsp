@@ -9,6 +9,12 @@
 <script language="javascript" type="text/javascript" src="/app/static/jsquery/jqplot.canvasTextRenderer.min.js"></script>
 
  <script type= "text/javascript">
+    function Chart() {
+        this.
+        this.plot = function(data) {
+
+        }
+    }
      $(document).ready(function(){
 
      $("#chartdiv").jqplot('chartdiv',  [[[80, 10],[50,5]]],{title: 'Number of Questions',axesDefaults: {
@@ -55,14 +61,10 @@
 <body class="admin">
 <div class="title">
 
-
     <span>Welcome to the Admin Dashboard</span>
     <span align="centre"> <input type="submit"  name="View-flagged-users" value="View flagged users">
     <input type="submit"  name="Logout" value="Logout">
-
     </span>
-
-
     <span><br> <br>
     FILTER:
     <select>

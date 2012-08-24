@@ -1,6 +1,4 @@
 package com.forum.web.controller;
-
-
 import com.forum.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +11,6 @@ import java.util.Map;
 @Controller
 public class UserController {
 
-
     @RequestMapping("/join")
     public ModelAndView registerView() {
         return new ModelAndView("join");
@@ -21,7 +18,6 @@ public class UserController {
 
     @RequestMapping(value ="./joinerror", method = RequestMethod.GET)
     public ModelAndView retryJoin(@RequestParam Map<String, String> params){
-
         ModelAndView modelAndView = new ModelAndView("join");
         modelAndView.addObject("passwordError","The password is not valid.");
         return modelAndView;
@@ -54,7 +50,6 @@ public class UserController {
         return modelAndView;
 
     }
-
     public Boolean validatePasswordLength(String password) {
         if(password.length() < 8)
             return false;
