@@ -24,7 +24,7 @@
         <br />
         <span data-bind="text: description"> </span>
         <br />
-        <span data-bind="text: userId"> </span>
+        <span data-bind="text: username"> </span>
         <br /><br />
     </p>
     <button data-bind="click: loadMoreQuestion">more..</button>

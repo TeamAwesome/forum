@@ -20,8 +20,8 @@ public class AdminDashboardRespositoryTest extends AbstractTransactionalJUnit4Sp
 
     @Test
     public void shouldGetAllQuestions(){
-        AdminRepository repository = new AdminRepository(dataSource);
-        List<Question> Questions=repository.getAllQuestions();
-        assertThat(Questions.size(),is(25));
+        QuestionRepository repository = new QuestionRepository(dataSource);
+        List<Question> Questions=repository.latestQuestion(1,20);
+        assertThat(Questions.size(),is(20));
     }
 }

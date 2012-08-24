@@ -18,16 +18,6 @@ public class QuestionService {
         this.questionRepository = questionRepository;
     }
 
-    @Transactional
-    public List<Question> latestQuestion(int number) {
-        return questionRepository.latestQuestion(number);
-    }
-
-    @Transactional
-    public List<Question> latestQuestion() {
-        return questionRepository.latestQuestion(10);
-    }
-
     public Question getById(Integer questionId) {
         return questionRepository.getById(questionId);
     }

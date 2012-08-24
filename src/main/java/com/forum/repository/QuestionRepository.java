@@ -19,14 +19,11 @@ public class QuestionRepository {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public List<Question> latestQuestion(int number) {
-        QuestionRowMapper rowMapper = new QuestionRowMapper();
-        return jdbcTemplate.query("SELECT * FROM QUESTION ORDER BY CREATED_AT DESC LIMIT ?", new Object[]{number}, rowMapper);
-    }
-
     public Question getById(Integer questionId) {
         QuestionRowMapper rowMapper = new QuestionRowMapper();
-        return (Question) jdbcTemplate.queryForObject("SELECT * FROM QUESTION WHERE ID = ?", new Object[]{questionId}, rowMapper);
+        String query = "SELECT Q.ID AS QUESTION_ID, Q.TITLE, Q.DESCRIPTION, " +
+                "Q.CREATED_AT, U.* FROM QUESTION Q JOIN USER U WHERE Q.USER_ID=U.ID AND Q.ID = ?";
+        return (Question) jdbcTemplate.queryForObject(query, new Object[]{questionId}, rowMapper);
 
     }
 
@@ -37,9 +34,12 @@ public class QuestionRepository {
     }
 
     public List<Question> latestQuestion(int pageNum, int pageSize) {
-        int pageStart = (pageNum-1)*pageSize;
+        int pageStart = (pageNum - 1) * pageSize;
         QuestionRowMapper rowMapper = new QuestionRowMapper();
-        return jdbcTemplate.query("SELECT * FROM QUESTION ORDER BY CREATED_AT DESC LIMIT ?,?",
+        String query = "SELECT Q.ID AS QUESTION_ID, Q.TITLE, Q.DESCRIPTION, "
+                + "Q.CREATED_AT, U.* FROM QUESTION Q JOIN USER U WHERE Q.USER_ID=U.ID "
+                + "ORDER BY Q.CREATED_AT DESC LIMIT ?,?";
+        return jdbcTemplate.query(query,
                 new Object[]{pageStart, pageSize}, rowMapper);
     }
 }

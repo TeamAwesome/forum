@@ -10,7 +10,7 @@
 
         <p><label class="questionDetail" name="title"> Title: </label>${questionTitle}  </p>
         <p><label class="questionDetail" name="description"> Description: </label>${questionDescription} </p>
-        <p><label class="questionDetail" name="user"> User: </label> ${userID} </p>
+        <p><label class="questionDetail" name="user"> User: </label> ${username} </p>
         <p><label class="questionDetail" name="postedOn"> Posted on: </label>${createdAt}</p>
 
         <p>
