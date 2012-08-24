@@ -24,4 +24,6 @@ public class AdminController {
         modelAndView.addObject("month",params.get("month.value"));
         return modelAndView;
     }
+
+
 }
