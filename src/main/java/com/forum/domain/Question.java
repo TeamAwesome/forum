@@ -25,7 +25,6 @@ public class Question implements Serializable {
         return createdAt;
     }
 
-
     public String getDescription() {
         return description;
     }
