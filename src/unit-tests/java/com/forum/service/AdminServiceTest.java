@@ -18,7 +18,7 @@ public class AdminServiceTest {
         AdminRepository adminRepository = mock(AdminRepository.class);
 
         List<Question> questions = new ArrayList<Question>();
-        questions.add(new Question("test","test",1,"test"));
+        questions.add(new Question(1, "test","test",1,"test"));
         when(adminRepository.getAllQuestions()).thenReturn(questions);
 
         AdminService adminService = new AdminService(adminRepository);

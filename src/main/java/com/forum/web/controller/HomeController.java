@@ -1,32 +1,45 @@
 package com.forum.web.controller;
 
+import com.forum.domain.Question;
 import com.forum.service.QuestionService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HomeController {
 
     private QuestionService questionService;
+    private Gson gson;
 
     @Autowired
-    public HomeController(QuestionService questionService){
+    public HomeController(QuestionService questionService) {
+        gson = new Gson();
+
         this.questionService = questionService;
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @ResponseBody
+    public String loadMoreQuestions(@RequestParam String pageNum,
+                                    @RequestParam String pageSize,
+                                    HttpServletResponse response) {
+        List<Question> questionList = questionService.latestQuestion(pageNum, pageSize);
+        String result = gson.toJson(questionList);
+        return result;
     }
 
     @RequestMapping("/")
     public ModelAndView activityView() {
         ModelAndView homeModelAndView = new ModelAndView("home");
-        homeModelAndView.addObject("questions", questionService.latestQuestion(10));
         return homeModelAndView;
     }
-//
-//    List<Question> getQuestions(DataSource dataSource) {
-//        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-//        QuestionRowMapper rowMapper = new QuestionRowMapper();
-//        questions = jdbcTemplate.query("select * from question1 order by date desc, time desc limit 10", rowMapper);
-//        return questions;
-//    }
 }

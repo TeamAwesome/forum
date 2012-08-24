@@ -12,14 +12,7 @@ function postToFeed() {
       description: 'Seek and share answers about Bangalore.'
     };
 
-    function callback(response) {
-     if (response && response.post_id) {
-           alert('Post was published.');
-         } else {
-           alert('Post was not published.');
-         }
-    }
-    FB.ui(obj, callback);
+    FB.ui(obj);
 }
 
 !function(d,s,id){
@@ -29,6 +22,8 @@ function postToFeed() {
         js.id=id;
         js.src="//platform.twitter.com/widgets.js";
         fjs.parentNode.insertBefore(js,fjs);
-        }
     }
+}
 (document,"script","twitter-wjs");
+
+
