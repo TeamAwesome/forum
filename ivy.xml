@@ -73,5 +73,7 @@
         <dependency org="org.objenesis" name="objenesis" rev="1.0" />
         <dependency org="com.google.code.gson" name="gson" rev="2.2.2" transitive="false" conf="buildtime,runtime->*"/>
 
+        <dependency org="org.hibernate" name="hibernate-validator" rev="4.1.0.Final" />
+
     </dependencies>
 </ivy-module>
