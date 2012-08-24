@@ -34,9 +34,10 @@
     <div id='fb-root'></div>
     <p id='msg'></p>
 
-<p style="cursor:hand"><a onclick='postToFeed(); return false;'><img src="<c:url value="static/CLEditor1_3_0/images/facebookShare.jpg"/>" alt="Facebook" class="Facebook Icon" height="50" width="50"></a></p>
+<p>
+    <a onclick='postToFeed(); return false;'><img style="cursor:hand" src="<c:url value="static/CLEditor1_3_0/images/facebookShare.jpg"/>" alt="Facebook" class="Facebook Icon" height="50" width="50"></a>
 
-<p><a href="https://twitter.com/share" class="twitter-share-button" data-text="Visit the forum for info on Bangalore -&gt; http://localhost:8080/app" data-size="large" data-count="none">Tweet</a></p>
+</p>
 
 </body>
 </html>
