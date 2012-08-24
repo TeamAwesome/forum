@@ -30,10 +30,10 @@ public class QuestionRepository {
 
     }
 
-    public boolean createQuestion(Map<String, String> params) {
-        jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT) VALUES (?, ?, ?)",
-                new Object[]{params.get("questionTitle"), params.get("questionDescription"), "2038-01-19 03:14:07"});
-        return true;
+    public int createQuestion(Map<String, String> params) {
+        return jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
+                new Object[]{params.get("questionTitle"), params.get("questionDescription"), "2038-01-19 03:14:07", 26});
+//        return true;
     }
 
     public List<Question> latestQuestion(int pageNum, int pageSize) {

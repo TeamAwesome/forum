@@ -32,7 +32,7 @@ public class QuestionService {
         return questionRepository.getById(questionId);
     }
 
-    public boolean createQuestion(Map<String, String> params) {
+    public int createQuestion(Map<String, String> params) {
         return questionRepository.createQuestion(params);
 
     }

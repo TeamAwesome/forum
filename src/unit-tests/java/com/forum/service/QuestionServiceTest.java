@@ -19,13 +19,11 @@ public class QuestionServiceTest {
     public void shouldSaveQuestionToRepository(){
         Map<String,String> params = new HashMap<String,String>();
         QuestionRepository mockQuestionRepository = mock(QuestionRepository.class);
-        when(mockQuestionRepository.createQuestion(params)).thenReturn(true);
+        when(mockQuestionRepository.createQuestion(params)).thenReturn(1);
         questionService = new QuestionService(mockQuestionRepository);
 
+        int questionUpdatedNumber = questionService.createQuestion(params);
 
-
-        boolean hasBeenSaved = questionService.createQuestion(params);
-
-        assertThat(hasBeenSaved, is(true));
+        assertThat(questionUpdatedNumber, is(1));
     }
 }
