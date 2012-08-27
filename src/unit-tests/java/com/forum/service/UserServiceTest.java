@@ -15,7 +15,7 @@ public class UserServiceTest {
     public void shouldGetUserById(){
         UserRepository userRepository = mock(UserRepository.class);
 
-        User user = new User(12, "pass", "Tom Tom", "tom@tom.com", "1234567",
+        User user = new User("Tom", "pass", "Tom Tom", "tom@tom.com", "1234567",
                             "Moon", "He doesn't know", 200);
 
         when(userRepository.getById(1)).thenReturn(user);

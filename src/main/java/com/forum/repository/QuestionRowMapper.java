@@ -15,7 +15,7 @@ public class QuestionRowMapper implements RowMapper {
 
 
         User user = new User(
-                resultSet.getInt("ID"),
+                resultSet.getString("USERNAME"),
                 resultSet.getString("PASSWORD"),
                 resultSet.getString("NAME"),
                 resultSet.getString("EMAIL_ADDRESS"),

@@ -1,10 +1,20 @@
 package com.forum.domain;
 
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class User {
+
+    @NotEmpty
+    private String username;
+
+    @NotEmpty
     private String password;
+
     private String name;
     private String email;
     private String phoneNumber;
@@ -14,11 +24,10 @@ public class User {
     private List<String> interests;
     private List<String> knowledge;
     private Boolean privacy;
-    private int id;
 
-    public User(int id, String password, String name, String email, String phoneNumber,
-                String country, String gender, int age) {
-        this.id = id;
+    public User(String username, String password, String name, String email, String phoneNumber,
+                             String country, String gender, int age) {
+        this.username = username;
         this.password = password;
         this.name = name;
         this.email = email;
@@ -31,12 +40,25 @@ public class User {
         this.privacy = privacy;
     }
 
-    public User(int id) {
-        this.id = id;
+    public User() {
     }
 
-    public int getUserId() {
-        return id;
+
+    public List<String> getInterests() {
+        return interests;
+    }
+
+    public List<String> getKnowledge() {
+        return knowledge;
+    }
+
+    public Boolean getPrivacy() {
+        return privacy;
+    }
+
+    public String getUsername() {
+
+        return username;
     }
 
     public String getPassword() {
@@ -51,8 +73,53 @@ public class User {
         return email;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setInterests(List<String> interests) {
+        this.interests = interests;
+    }
+
+    public void setKnowledge(List<String> knowledge) {
+        this.knowledge = knowledge;
+    }
+
+    public void setPrivacy(Boolean privacy) {
+        this.privacy = privacy;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
+
     }
 
     public String getCountry() {

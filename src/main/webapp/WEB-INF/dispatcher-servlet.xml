@@ -21,7 +21,12 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!--<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">-->
+
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="/WEB-INF/messages">
+    </property></bean>
+
+        <!--<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">-->
     <!--<property name="templateLoaderPath" value="/WEB-INF/freemarker/"/>-->
     <!--</bean>-->
 
