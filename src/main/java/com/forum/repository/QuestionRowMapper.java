@@ -24,7 +24,7 @@ public class QuestionRowMapper implements RowMapper {
                 resultSet.getString("GENDER"),
                 resultSet.getInt("AGE"));
 
-        Question question = new Question(resultSet.getInt("ID"),
+        Question question = new Question(resultSet.getInt("QUESTION_ID"),
                 resultSet.getString("TITLE"),
                 resultSet.getString("DESCRIPTION"),
                 user,
