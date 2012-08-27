@@ -5,6 +5,7 @@ import com.forum.domain.User;
 import com.forum.repository.AdminRepository;
 import org.junit.Test;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class AdminServiceTest {
         User user = new User(1, "pass", "Tom Tom", "tom@tom.com", "1234567",
                 "Moon", "He doesn't know", 200);
 
-        questions.add(new Question(1, "test","test", user,"2012-08-23 07:08:04"));
+        questions.add(new Question(1, "test","test",user, new Timestamp(1234567890)));
         when(adminRepository.getAllQuestions()).thenReturn(questions);
 
         AdminService adminService = new AdminService(adminRepository);
