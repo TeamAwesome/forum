@@ -53,25 +53,34 @@ $('#questionTitle').keyup(function() {
             var titleValidationMessage = validator.checkNumberOfRemainingCharactersInTheTitle($("#questionTitle").val());
             $("#titleValidationMessage").text(titleValidationMessage);
             }
+            else
+            {
+            onSubmit=false;
+            handleSubmit();
+            }
+
         });
 
 function handleSubmit(e){
      var validator = new Validation();
      var title = $("#questionTitle").val();
-     //alert("submit");
      var description = track();
 
      if(validator.checkTitle(title) && validator.checkDescription(description)){
+
            submitSuccess = true;
            $("#questionForm").submit();
-     } else if(!validator.checkTitle(title) && !validator.checkDescription(description)){
-           $("#titleValidationMessage").text("A Question must have a title.");
-           //$("#descriptionValidationMessage").text("A Question must have a description.");
-     } else if(!validator.checkTitle(title)){
-           $("#titleValidationMessage").text("A Question must have a title.");
-     } else {
-            //$("#descriptionValidationMessage").text("A Question must have a description ");
      }
+     else{
+     if(!validator.checkTitle(title)){
+
+           $("#titleValidationMessage").text("A Question must have a title.");
+     }
+     if(!validator.checkDescription(description)){
+            $("#descriptionValidationMessage").text("A Question must have a description ");
+     }
+     }
+     return submitSuccess;
      }
 
 
@@ -79,6 +88,8 @@ $('#questionForm').bind('submit',function (event){
     if(!submitSuccess){
     onSubmit =true;
     event.preventDefault();
+    //onSubmit =
     handleSubmit();
+
     }
 });
