@@ -33,7 +33,7 @@ public class QuestionRepository {
         Timestamp timestamp = new Timestamp(date.getTime());
 
         return jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
-                new Object[]{params.get("questionTitle"), params.get("editor"), timestamp.toString(), 26});
+                new Object[]{params.get("questionTitle"), params.get("editor"), timestamp.toString(), 1});
 //        return true;
     }
 
