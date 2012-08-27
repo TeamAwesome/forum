@@ -3,17 +3,14 @@
 <head>
     <title>Forum - Your Question</title>
     <style type="text/css">
-    #header {
-        width:980px;
-    }
+
 
     #wrap {
-        width:100%;
+        width:70%;
         margin:0 auto;
         max-width: 1260px;
         min-width: 780px;
         background: #fff;
-
     }
 
     #left
@@ -25,10 +22,8 @@
 
     #right
     {
-        padding: 10px 0;
         float:right;
         width:40%;
-
     }
     </style>
 
@@ -36,10 +31,10 @@
 <body class="question">
 
 <div id ="wrap">
-    <div id = "header"> </div>
+
     <div id="left">
         <h2>${questionTitle}</h2>
-        <div style="width:30%; float:left; clear:both"><p><textarea rows="15" cols="45" readonly="readonly">${questionDescription} </textarea></p>
+        <p><textarea rows="15" cols="45" readonly="readonly">${questionDescription} </textarea></p>
         <button name="like">Like</button>
         <button name="dislike">Dislike</button>
         <button name="flag">Flag</button>
