@@ -31,7 +31,11 @@ var track = function(){
     var text = html.replace(stripHTML, '');
     //alert(text);
     var remainingChars = (maxLimit-text.length);
+    if(remainingChars<0)
+    $("#descriptionValidationMessage").text("Description should be less than 500 Character.");
+    else
     $("#descriptionValidationMessage").text(remainingChars+" Characters Remaining");
+
     return text;
     }
 myEditor.subscribe('editorKeyPress',track);
@@ -62,11 +66,11 @@ function handleSubmit(e){
            $("#questionForm").submit();
      } else if(!validator.checkTitle(title) && !validator.checkDescription(description)){
            $("#titleValidationMessage").text("A Question must have a title.");
-           $("#descriptionValidationMessage").text("A Question must have a description.");
+           //$("#descriptionValidationMessage").text("A Question must have a description.");
      } else if(!validator.checkTitle(title)){
            $("#titleValidationMessage").text("A Question must have a title.");
      } else {
-            $("#descriptionValidationMessage").text("A Question must have a description.");
+            //$("#descriptionValidationMessage").text("A Question must have a description ");
      }
      }
 
