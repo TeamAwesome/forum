@@ -15,7 +15,7 @@ public class QuestionRowMapper implements RowMapper {
 
 
         User user = new User(
-                resultSet.getString("USERNAME"),
+                resultSet.getInt("ID"),
                 resultSet.getString("PASSWORD"),
                 resultSet.getString("NAME"),
                 resultSet.getString("EMAIL_ADDRESS"),
@@ -24,10 +24,10 @@ public class QuestionRowMapper implements RowMapper {
                 resultSet.getString("GENDER"),
                 resultSet.getInt("AGE"));
 
-        Question question = new Question(resultSet.getInt("QUESTION_ID"),
+        Question question = new Question(resultSet.getInt("ID"),
                 resultSet.getString("TITLE"),
                 resultSet.getString("DESCRIPTION"),
-                resultSet.getInt("USER_ID"),
+                user,
                 resultSet.getString("CREATED_AT"));
         return question;
     }

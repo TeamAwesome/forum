@@ -17,7 +17,7 @@ public class QuestionRowMapperTest {
     public void shouldMapQuestionFrommResultSet() throws SQLException {
         QuestionRowMapper questionRowMapper = new QuestionRowMapper();
         ResultSet resultSetMock = mock(ResultSet.class);
-        when(resultSetMock.getInt("QUESTION_ID")).thenReturn(1);
+        when(resultSetMock.getInt("ID")).thenReturn(1);
         when(resultSetMock.getString("TITLE")).thenReturn("title");
         when(resultSetMock.getString("DESCRIPTION")).thenReturn("description");
 

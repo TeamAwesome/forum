@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class UserRowMapper implements RowMapper {
     @Override
     public User mapRow(ResultSet resultSet, int row) throws SQLException {
-        return new User(resultSet.getString("USERNAME"),
+        return new User(resultSet.getInt("ID"),
                         resultSet.getString("PASSWORD"),
                         resultSet.getString("NAME"),
                         resultSet.getString("EMAIL_ADDRESS"),

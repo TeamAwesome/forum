@@ -23,12 +23,12 @@ public class UserController {
     @RequestMapping(value = "/showprofile", method = RequestMethod.POST)
     public ModelAndView showProfile(@RequestParam Map<String, String> params){
 
-        User user = new User(params.get("username"), params.get("password"), params.get("name"),
+        User user = new User(Integer.parseInt(params.get("id")), params.get("password"), params.get("name"),
                 params.get("email"), params.get("phoneNumber"), params.get("country"),
                 params.get("gender"), Integer.parseInt(params.get("age")));
 
         ModelAndView modelAndView = new ModelAndView("showprofile");
-        modelAndView.addObject("username",user.getUsername());
+        modelAndView.addObject("userId",user.getUserId());
         modelAndView.addObject("name", params.get("name"));
         return modelAndView;
 

@@ -19,10 +19,10 @@ public class AdminServiceTest {
         AdminRepository adminRepository = mock(AdminRepository.class);
 
         List<Question> questions = new ArrayList<Question>();
-        User user = new User("tom", "pass", "Tom Tom", "tom@tom.com", "1234567",
+        User user = new User(1, "pass", "Tom Tom", "tom@tom.com", "1234567",
                 "Moon", "He doesn't know", 200);
 
-        questions.add(new Question(1, "test","test",12,"2012-08-23 07:08:04"));
+        questions.add(new Question(1, "test","test", user,"2012-08-23 07:08:04"));
         when(adminRepository.getAllQuestions()).thenReturn(questions);
 
         AdminService adminService = new AdminService(adminRepository);

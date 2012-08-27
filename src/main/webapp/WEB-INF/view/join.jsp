@@ -37,7 +37,7 @@
 
 <font color="red"><usernameError></usernameError></font>
 <div class="username">
-    <span>Username:</span> <input type="text" name="username" id="username" />
+    <span>UserId:</span> <input type="text" name="username" id="username" />
 </div>
 
 <font color="red"><passwordLengthError></passwordLengthError></font>

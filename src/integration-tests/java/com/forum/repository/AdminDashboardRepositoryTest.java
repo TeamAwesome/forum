@@ -14,7 +14,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
-public class AdminDashboardRespositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
+public class AdminDashboardRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
     @Autowired
     private DataSource dataSource;
 

@@ -14,11 +14,11 @@ public class User {
     private List<String> interests;
     private List<String> knowledge;
     private Boolean privacy;
-    private String username;
+    private int id;
 
-    public User(String username, String password, String name, String email, String phoneNumber,
+    public User(int id, String password, String name, String email, String phoneNumber,
                 String country, String gender, int age) {
-        this.username = username;
+        this.id = id;
         this.password = password;
         this.name = name;
         this.email = email;
@@ -31,12 +31,12 @@ public class User {
         this.privacy = privacy;
     }
 
-    public User(String username) {
-        this.username = username;
+    public User(int id) {
+        this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public int getUserId() {
+        return id;
     }
 
     public String getPassword() {
