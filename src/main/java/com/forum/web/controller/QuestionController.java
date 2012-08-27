@@ -43,7 +43,7 @@ public class QuestionController {
         ModelAndView modelAndView = new ModelAndView("questionDetail");
         modelAndView.addObject("questionTitle", question.getTitle());
         modelAndView.addObject("questionDescription", question.getDescription());
-        modelAndView.addObject("username", question.getUser().getUsername());
+        modelAndView.addObject("userID", question.getUserId());
         modelAndView.addObject("createdAt", question.getCreatedAt());
         modelAndView.addObject("likes", question.getLikes());
         modelAndView.addObject("dislikes", question.getDislikes());

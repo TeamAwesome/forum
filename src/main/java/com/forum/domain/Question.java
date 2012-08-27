@@ -7,12 +7,12 @@ public class Question implements Serializable {
     private String title;
     private String createdAt;
     private String description;
-    private User user;
+    private int userId;
 
-    public Question(int id, String title,String description, User user,String createdAt){
+    public Question(int id, String title,String description,int userId,String createdAt){
         this.id = id;
         this.title=title;
-        this.user= user;
+        this.userId=userId;
         this.createdAt = createdAt;
         this.description=description;
     }
@@ -29,8 +29,8 @@ public class Question implements Serializable {
         return description;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
     public int getLikes() {

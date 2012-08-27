@@ -27,7 +27,7 @@ public class QuestionRowMapper implements RowMapper {
         Question question = new Question(resultSet.getInt("QUESTION_ID"),
                 resultSet.getString("TITLE"),
                 resultSet.getString("DESCRIPTION"),
-                user,
+                resultSet.getInt("USER_ID"),
                 resultSet.getString("CREATED_AT"));
         return question;
     }

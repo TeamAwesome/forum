@@ -22,7 +22,7 @@ public class AdminServiceTest {
         User user = new User("tom", "pass", "Tom Tom", "tom@tom.com", "1234567",
                 "Moon", "He doesn't know", 200);
 
-        questions.add(new Question(1, "test","test",user,"test"));
+        questions.add(new Question(1, "test","test",12,"2012-08-23 07:08:04"));
         when(adminRepository.getAllQuestions()).thenReturn(questions);
 
         AdminService adminService = new AdminService(adminRepository);
