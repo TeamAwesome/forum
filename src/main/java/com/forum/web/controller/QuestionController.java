@@ -41,7 +41,7 @@ public class QuestionController {
     @RequestMapping(value = "/question/view/{questionId}", method = RequestMethod.GET)
     public ModelAndView viewQuestionDetail(@PathVariable Integer questionId) {
         Question question = questionService.getById(questionId);
-        ModelAndView modelAndView = new ModelAndView("questiondetail");
+        ModelAndView modelAndView = new ModelAndView("questionDetail");
         modelAndView.addObject("questionTitle", question.getTitle());
         modelAndView.addObject("questionDescription", question.getDescription());
         modelAndView.addObject("username", question.getUser().getName());
