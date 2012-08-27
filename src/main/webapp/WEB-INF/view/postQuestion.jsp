@@ -14,6 +14,9 @@
               <script src="<c:url value="/static/javascript/container_core-min.js"/>"></script>
               <!-- Source file for Rich Text Editor-->
               <script src="<c:url value="/static/javascript/simpleeditor-min.js"/>"></script>
+<style type="text/css">
+.validationMessage { color: red; }
+</style>
 
 </head>
 <body class="yui-skin-sam">
@@ -23,12 +26,12 @@
 <form id="questionForm" action="<c:url value="/showPostedQuestion"/>" method="post">
     <div class="questionTitle">
         <label class="formLabels"> Title: </label> <input type="text" name="questionTitle" id="questionTitle" maxlength="100"/>
-        <p id="titleValidationMessage"></p>
+        <div class="validationMessage" id="titleValidationMessage"></div>
     </div>
     <div class="questionDescription" >
         <label class="formLabels"> Description: </label></br>
         <textarea id="editor" name="editor" rows="20" cols="75" maxlength="500"></textarea>
-        <div id="descriptionValidationMessage"></div>
+        <div class="validationMessage" id="descriptionValidationMessage"></div>
     </div>
     <div id="descriptionValidationMessage"></div>
     <input type="button" value="Submit"  id="submitButton"/>

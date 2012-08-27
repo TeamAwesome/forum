@@ -22,9 +22,9 @@
      </a>
         <span data-bind="text: createdAt"> </span>
         <br />
-        <span data-bind="text: description"> </span>
+        <span data-bind="html: description"> </span>
         <br />
-        <span data-bind="text: username"> </span>
+        <span data-bind="text: userId"> </span>
         <br /><br />
     </p>
     <button data-bind="click: loadMoreQuestion">more..</button>

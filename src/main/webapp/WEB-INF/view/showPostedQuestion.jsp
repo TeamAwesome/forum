@@ -12,6 +12,6 @@
         ${questionDescription}
     </div>
 </div>
-<button name = "returnToHomePage" type = "button">Return to HomePage</button>
+<a id="returnHome" href="<c:url value="/"/>"> Home</a>
 </body>
 </html>

@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +29,11 @@ public class QuestionRepository {
     }
 
     public int createQuestion(Map<String, String> params) {
+        java.util.Date date= new java.util.Date();
+        Timestamp timestamp = new Timestamp(date.getTime());
+
         return jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
-                new Object[]{params.get("questionTitle"), params.get("questionDescription"), "2038-01-19 03:14:07", 26});
+                new Object[]{params.get("questionTitle"), params.get("editor"), timestamp.toString(), 26});
 //        return true;
     }
 

@@ -32,15 +32,15 @@ public class QuestionController {
     public ModelAndView showPostedQuestion(@RequestParam Map<String, String> params){
         questionService.createQuestion(params);
         ModelAndView modelAndView = new ModelAndView("showPostedQuestion");
-        modelAndView.addObject("questionTitle",params.get("title"));
-        modelAndView.addObject("questionDescription",params.get("description"));
+        modelAndView.addObject("questionTitle",params.get("questionTitle"));
+        modelAndView.addObject("questionDescription",params.get("editor"));
         return modelAndView;
     }
 
     @RequestMapping(value = "/question/view/{questionId}", method = RequestMethod.GET)
     public ModelAndView viewQuestionDetail(@PathVariable Integer questionId) {
         Question question = questionService.getById(questionId);
-        ModelAndView modelAndView = new ModelAndView("questionDetail");
+        ModelAndView modelAndView = new ModelAndView("questiondetail");
         modelAndView.addObject("questionTitle", question.getTitle());
         modelAndView.addObject("questionDescription", question.getDescription());
         modelAndView.addObject("user", question.getUser());
