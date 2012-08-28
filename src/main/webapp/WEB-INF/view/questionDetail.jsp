@@ -66,6 +66,8 @@
 </head>
 <body class="question">
 
+<a href="<c:url value="/"/>">Home</a>
+
 <div id ="wrap">
 
     <div id="left">
