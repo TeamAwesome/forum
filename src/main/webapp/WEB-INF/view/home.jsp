@@ -37,16 +37,19 @@
 
                       <p id="QuestionParagraph" data-bind="foreach: questions">
                       <table>
-                      <tr><td width=100px><i>Created on:<br>
-                      <span id="questionCreatedAt" data-bind="text: createdAt"> </span>
+                      <tr><td width=100px>
+                      <br><font color="brown">Status</font>
                       <br>0 likes
-                      <br>0 Flags</i></td>
+                      <br>0 Flags</td>
                       <td width=400px><a data-bind="attr: {href: url }"><i><b>
                       <span id="questionTitle" data-bind="text: title"> </span></i></b>
                       </a>
                       &nbsp;-&nbsp;
                       <br />
-                     <span id="questionDescription" data-bind="html: description" >  </span>
+                     <span id="questionDescription" data-bind="html: description"
+                      style='width: 500px; height: 1em; overflow: hidden; display: inline-block'> </span>...
+                      <br><i><font color="brown">Created on:</font></i><br>
+                                            <span id="questionCreatedAt" data-bind="text: createdAt"> </span>
                       </td>
 
                       <td>
