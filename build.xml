@@ -6,7 +6,6 @@
     <property name="integration.test.dir" location="src/integration-tests"/>
     <property name="system.test.dir" location="src/system-tests"/>
 
-    <property name="build.dir" location="build"/>
     <property name="compile.dir" location="${build.dir}/compile"/>
     <property name="report.dir" location="${build.dir}/report"/>
     <property name="dist.dir" location="${build.dir}/dist"/>
