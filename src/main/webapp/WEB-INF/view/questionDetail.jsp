@@ -24,7 +24,7 @@
     {
         float:right;
         width:40%;
-        position: absolute;
+        position: relative;
         top : 20%;
         right: 10%;
     }
@@ -92,10 +92,11 @@
         &nbsp<label class="questionDetail" id = "posted_at" name="postedOn">At: </label>${timeCreatedAt}</p>
         <p>
           <div id = "status">
-          <label class="questionDetail" name="likes">  (${likes})likes </label>
-          <label class="questionDetail" name="dislikes">  (${dislikes})dislikes </label>
-          <label class="questionDetail" name="views">  (${views})views </label>
-          <label class="questionDetail" name="flags">  (${flags})flags </label>
+          <label class="questionDetail" name="likes">  (${likes})Likes </label>
+          <label class="questionDetail" name="dislikes">  (${dislikes})Dislikes </label>
+          <label class="questionDetail" name="views">  (${views})Views </label>
+          <label class="questionDetail" name="responses">  (${responses})Responses </label>
+          <label class="questionDetail" name="flags">  (${flags})Flags </label>
           </div>
         </p>
       </div>

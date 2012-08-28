@@ -64,4 +64,8 @@ public class Question implements Serializable {
     public int getId() {
         return id;
     }
+
+    public int getResponses() {
+        return 0;
+    }
 }
