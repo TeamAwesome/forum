@@ -30,12 +30,11 @@
     </div>
     <div class="questionDescription" >
         <label class="formLabels"> Description: </label></br>
-        <textarea id="editor" name="editor" rows="20" cols="75" maxlength="500"></textarea>
+        <textarea id="descriptionEditor" name="questionDescription" rows="20" cols="75" maxlength="500"></textarea>
         <div class="validationMessage" id="descriptionValidationMessage"></div>
     </div>
     <div id="descriptionValidationMessage"></div>
-    <input type="button" value="Submit"  id="submitButton"/>
-
+    <input type="submit" value="Submit" id="submitButton"/>
 </form>
 
 </body>

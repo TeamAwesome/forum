@@ -34,7 +34,7 @@ public class QuestionController {
         questionService.createQuestion(params);
         ModelAndView modelAndView = new ModelAndView("showPostedQuestion");
         modelAndView.addObject("questionTitle",params.get("questionTitle"));
-        modelAndView.addObject("questionDescription",params.get("editor"));
+        modelAndView.addObject("questionDescription",params.get("questionDescription"));
         return modelAndView;
     }
 
