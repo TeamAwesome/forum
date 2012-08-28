@@ -75,31 +75,30 @@
       <div id="questionDescription" >
             <p>${questionDescription}</p>
       </div>
-       <div id = "review">
-        <button name="like">Like</button>
-        <button name="dislike">Dislike</button>
-        <button name="flag">Flag</button>
-        <p><label class="questionDetail" name="tags"> Tags:</label> ${questionTags} </p>
-        <p><label>Your Reply: </label></p>
+        <div id = "review">
+            <button name="like">Like</button>
+            <button name="dislike">Dislike</button>
+            <button name="flag">Flag</button>
+            <p><label class="questionDetail" name="tags"> Tags:</label> ${questionTags} </p>
+            <p><label>Your Reply: </label></p>
+            <textarea id="replyTextarea" cols="50" rows="14" ></textarea>
+            <p><button name="submitReply">Submit</button><p>
+        </div>
+      </div>
 
-        <textarea id="replyTextarea" cols="50" rows="14" ></textarea>
-        <p><button name="submitReply">Submit</button><p>
-       </div>
-    </div>
-
-     <div id="right">
+      <div id="right">
         <p><label class="questionDetail" id = "posted_by" name="user" > Posted by </label> ${username} </p>
         <p><label class="questionDetail" id = "posted_on" name="postedOn">On: </label>${dateCreatedAt}
         &nbsp<label class="questionDetail" id = "posted_at" name="postedOn">At: </label>${timeCreatedAt}</p>
         <p>
-        <div id = "status">
-        <label class="questionDetail" name="likes">  (${likes})likes </label>
-        <label class="questionDetail" name="dislikes">  (${dislikes})dislikes </label>
-        <label class="questionDetail" name="views">  (${views})views </label>
-        <label class="questionDetail" name="flags">  (${flags})flags </label>
-        </div>
+          <div id = "status">
+          <label class="questionDetail" name="likes">  (${likes})likes </label>
+          <label class="questionDetail" name="dislikes">  (${dislikes})dislikes </label>
+          <label class="questionDetail" name="views">  (${views})views </label>
+          <label class="questionDetail" name="flags">  (${flags})flags </label>
+          </div>
         </p>
-     </div>
+      </div>
 
 </div>
 </body>
