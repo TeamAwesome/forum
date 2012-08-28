@@ -27,7 +27,7 @@ public class QuestionControllerTest {
         QuestionService mockedQuestionService = mock(QuestionService.class);
         Map<String, String> params = new HashMap<String, String>();
         params.put("questionTitle", "Question Title");
-        params.put("editor", "Question Description");
+        params.put("questionDescription", "Question Description");
         mockedQuestionService.createQuestion(params);
         this.questionController = new QuestionController(mockedQuestionService);
 
