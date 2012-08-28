@@ -34,7 +34,6 @@ public class QuestionService {
 
     public int createQuestion(Map<String, String> params) {
         return questionRepository.createQuestion(params);
-
     }
 
     @Transactional

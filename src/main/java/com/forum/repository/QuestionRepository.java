@@ -19,6 +19,14 @@ public class QuestionRepository {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    public List<Question> getAllQuestions() {
+        return jdbcTemplate.query("SELECT * FROM QUESTION", new QuestionRowMapper());
+    }
+
+    public List<Question> getQuestionsPostedInLast12Months(){
+        return jdbcTemplate.query("SELECT * FROM QUESTION WHERE CREATED_AT > DATE_SUB(NOW() , INTERVAL 12 MONTH)", new QuestionRowMapper());
+    }
+
     public List<Question> latestQuestion(int number) {
         QuestionRowMapper rowMapper = new QuestionRowMapper();
         return jdbcTemplate.query("SELECT * FROM QUESTION ORDER BY CREATED_AT DESC LIMIT ?", new Object[]{number}, rowMapper);
@@ -33,7 +41,6 @@ public class QuestionRepository {
     public int createQuestion(Map<String, String> params) {
         return jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
                 new Object[]{params.get("questionTitle"), params.get("questionDescription"), "2038-01-19 03:14:07", 26});
-//        return true;
     }
 
     public List<Question> latestQuestion(int pageNum, int pageSize) {

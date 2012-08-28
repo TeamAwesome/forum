@@ -1,15 +1,16 @@
 package com.forum.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Question implements Serializable {
     private int id;
     private String title;
-    private String createdAt;
+    private Date createdAt;
     private String description;
     private int userId;
 
-    public Question(int id, String title,String description,int userId,String createdAt){
+    public Question(int id, String title,String description,int userId,Date createdAt){
         this.id = id;
         this.title=title;
         this.userId=userId;
@@ -21,7 +22,7 @@ public class Question implements Serializable {
         return title;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
