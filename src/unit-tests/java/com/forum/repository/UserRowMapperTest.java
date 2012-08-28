@@ -27,7 +27,6 @@ public class UserRowMapperTest {
         when(resultSetMock.getInt("AGE")).thenReturn(200);
         User user = UserRowMapper.mapRow(resultSetMock, 1);
         assertThat(user.getName(), is("Corner"));
-        assertThat(user.getUsername(), is("Corner"));
         assertThat(user.getAge(), is(200));
         assertThat(user.getCountry(), is("US"));
         assertThat(user.getEmail(), is("ll@mail.com"));

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<project name="common" basedir=".">
+    <property name="env.name" value="dev"/>
+    <echo message="----------------------------------------------------------------"/>
+    <echo message="Loading build.properties for the environment ${env.name}"/>
+    <echo message="----------------------------------------------------------------"/>
+
+    <loadproperties srcFile="${basedir}/buildprofiles/${env.name}/build.properties"/>
+
+    <property name="bootstrap.ant.jar.dir" location="${basedir}/bootstrap/ant"/>
+    <property name="buildtime.jar.dir" location="${basedir}/lib/buildtime/jar"/>
+</project>

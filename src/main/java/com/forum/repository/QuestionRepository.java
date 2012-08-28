@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -27,26 +28,30 @@ public class QuestionRepository {
         return jdbcTemplate.query("SELECT * FROM QUESTION WHERE CREATED_AT > DATE_SUB(NOW() , INTERVAL 12 MONTH)", new QuestionRowMapper());
     }
 
-    public List<Question> latestQuestion(int number) {
-        QuestionRowMapper rowMapper = new QuestionRowMapper();
-        return jdbcTemplate.query("SELECT * FROM QUESTION ORDER BY CREATED_AT DESC LIMIT ?", new Object[]{number}, rowMapper);
-    }
-
     public Question getById(Integer questionId) {
         QuestionRowMapper rowMapper = new QuestionRowMapper();
-        return (Question) jdbcTemplate.queryForObject("SELECT * FROM QUESTION WHERE ID = ?", new Object[]{questionId}, rowMapper);
+        String query = "SELECT Q.ID AS QUESTION_ID, Q.TITLE, Q.DESCRIPTION, " +
+                "Q.CREATED_AT, U.* FROM QUESTION Q JOIN USER U WHERE Q.USER_ID=U.ID AND Q.ID = ?";
+        return (Question) jdbcTemplate.queryForObject(query, new Object[]{questionId}, rowMapper);
 
     }
 
     public int createQuestion(Map<String, String> params) {
+        java.util.Date date= new java.util.Date();
+        Timestamp timestamp = new Timestamp(date.getTime());
+
         return jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
-                new Object[]{params.get("questionTitle"), params.get("questionDescription"), "2038-01-19 03:14:07", 26});
+                new Object[]{params.get("questionTitle"), params.get("editor"), timestamp.toString(), 1});
+
     }
 
     public List<Question> latestQuestion(int pageNum, int pageSize) {
-        int pageStart = (pageNum-1)*pageSize;
+        int pageStart = (pageNum - 1) * pageSize;
         QuestionRowMapper rowMapper = new QuestionRowMapper();
-        return jdbcTemplate.query("SELECT * FROM QUESTION ORDER BY CREATED_AT DESC LIMIT ?,?",
+        String query = "SELECT Q.ID AS QUESTION_ID, Q.TITLE, Q.DESCRIPTION, "
+                + "Q.CREATED_AT, U.* FROM QUESTION Q JOIN USER U WHERE Q.USER_ID=U.ID "
+                + "ORDER BY Q.CREATED_AT DESC LIMIT ?,?";
+        return jdbcTemplate.query(query,
                 new Object[]{pageStart, pageSize}, rowMapper);
     }
 }

@@ -8,12 +8,12 @@ public class Question implements Serializable {
     private String title;
     private Date createdAt;
     private String description;
-    private int userId;
+    private User user;
 
-    public Question(int id, String title,String description,int userId,Date createdAt){
+    public Question(int id, String title,String description, User user, Date createdAt){
         this.id = id;
         this.title=title;
-        this.userId=userId;
+        this.user= user;
         this.createdAt = createdAt;
         this.description=description;
     }
@@ -30,8 +30,8 @@ public class Question implements Serializable {
         return description;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
     public int getLikes() {
@@ -48,6 +48,17 @@ public class Question implements Serializable {
 
     public int getFlags() {
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", createdAt=" + createdAt.toString() +
+                ", description='" + description + '\'' +
+                ", user=" + user +
+                '}';
     }
 
     public int getId() {

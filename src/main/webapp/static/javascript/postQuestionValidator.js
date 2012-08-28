@@ -1,3 +1,5 @@
+var onSubmit = false;
+var submitSuccess = false;
 var YUIHandler = function() {
                   //Setup some private variables
                   var Dom = YAHOO.util.Dom,
@@ -8,7 +10,7 @@ var YUIHandler = function() {
                       var myConfig = {
                           height: '300px',
                           width: '600px',
-                          dompath: true,
+                          dompath: false,
                           focusAtStart: false
                       };
 
@@ -29,36 +31,65 @@ var track = function(){
     var text = html.replace(stripHTML, '');
     //alert(text);
     var remainingChars = (maxLimit-text.length);
+    if(remainingChars<0)
+    $("#descriptionValidationMessage").text("Description should be less than 500 Character.");
+    else
     $("#descriptionValidationMessage").text(remainingChars+" Characters Remaining");
+
     return text;
     }
 myEditor.subscribe('editorKeyPress',track);
 myEditor.subscribe('editorKeyUp',track);
 myEditor.subscribe('editorKeyDown',track);
 
+$('#submitButton').click(handleSubmit);
+$("#titleValidationMessage").text("100 Characters Remaining");
+$("#descriptionValidationMessage").text("500 Characters Remaining");
+
 $('#questionTitle').keyup(function() {
+            if(!onSubmit){
             var validator = new Validation();
             var titleValidationMessage = validator.checkIfTitleIsEmpty($("#questionTitle").val());
             var titleValidationMessage = validator.checkNumberOfRemainingCharactersInTheTitle($("#questionTitle").val());
             $("#titleValidationMessage").text(titleValidationMessage);
+            }
+            else
+            {
+            onSubmit=false;
+            handleSubmit();
+            }
+
         });
 
-$('#submitButton').click(function(){
-            var validator = new Validation();
-            var title = $("#questionTitle").val();
-            //alert("submit");
-            var description = track();
+function handleSubmit(e){
+     var validator = new Validation();
+     var title = $("#questionTitle").val();
+     var description = track();
 
-            if(validator.checkTitle(title) && validator.checkDescription(description)){
-                  $("#questionForm").submit();
-            } else if(!validator.checkTitle(title) && !validator.checkDescription(description)){
-                  $("#titleValidationMessage").text("A Question must have a title.");
-                  $("#descriptionValidationMessage").text("A Question must have a description.");
-            } else if(!validator.checkTitle(title)){
-                  $("#titleValidationMessage").text("A Question must have a title.");
-            } else {
-                   $("#descriptionValidationMessage").text("A Question must have a description.");
-            }
-            });
-$("#titleValidationMessage").text("100 Characters Remaining");
-$("#descriptionValidationMessage").text("500 Characters Remaining");
+     if(validator.checkTitle(title) && validator.checkDescription(description)){
+
+           submitSuccess = true;
+           $("#questionForm").submit();
+     }
+     else{
+     if(!validator.checkTitle(title)){
+
+           $("#titleValidationMessage").text("A Question must have a title.");
+     }
+     if(!validator.checkDescription(description)){
+            $("#descriptionValidationMessage").text("A Question must have a description ");
+     }
+     }
+     return submitSuccess;
+     }
+
+
+$('#questionForm').bind('submit',function (event){
+    if(!submitSuccess){
+    onSubmit =true;
+    event.preventDefault();
+    //onSubmit =
+    handleSubmit();
+
+    }
+});

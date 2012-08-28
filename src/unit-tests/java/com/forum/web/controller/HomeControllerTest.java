@@ -18,10 +18,6 @@ public class HomeControllerTest {
     @Test
     public void shouldDefaultToHomePage(){
         QuestionService questionService = mock(QuestionService.class);
-
-        List<Question> questionList = new ArrayList<Question>();
-        when(questionService.latestQuestion()).thenReturn(questionList);
-
         HomeController homeController = new HomeController(questionService);
         ModelAndView activityModelAndView = homeController.activityView();
         assertThat(activityModelAndView.getViewName(), is("home"));

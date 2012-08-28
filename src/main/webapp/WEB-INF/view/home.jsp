@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <title>Welcome</title>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/style.css"/>">
     <script src='http://connect.facebook.net/en_US/all.js'></script>
     <script src="<c:url value="/static/javascript/shareToSocialMedia.js"/>"></script>
     <script src="<c:url value="/static/jsquery/jquery.js"/>"></script>
@@ -9,10 +10,13 @@
 
 </head>
 <body class="home">
+<center>
+<div class="headers">
 <%@ include file="registerHeader.jsp" %>
+</div>
 
 <div class="title">
-    <span><h1>The Forum</h1></span>
+    <span><img src="<c:url value="/static/images/The forum.jpg"/>"</span>
 </div>
 
 <div class ="activityWall" style="width:500px; border:1px solid black;">
@@ -22,7 +26,7 @@
      </a>
         <span data-bind="text: createdAt"> </span>
         <br />
-        <span data-bind="text: description"> </span>
+        <span data-bind="html: description"> </span>
         <br />
         <span data-bind="text: userId"> </span>
         <br /><br />
@@ -39,6 +43,7 @@
     <a onclick='postToFeed(); return false;'><img style="cursor: pointer; cursor: hand" src="<c:url value="static/CLEditor1_3_0/images/facebookShare.png"/>" alt="Facebook" class="Facebook Icon" height="50" width="50"></a>
     <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://10.10.5.107:8080/forum/" data-text="Need info on Bangalore?" data-size="large" data-count="none">Tweet</a>
 </p>
+</center>
 
 
 

@@ -1,6 +1,7 @@
 package com.forum.service;
 
 import com.forum.domain.Question;
+import com.forum.domain.User;
 import com.forum.repository.QuestionRepository;
 import org.junit.Test;
 
@@ -18,6 +19,8 @@ public class AdminServiceTest {
     @Test
     public void shouldGetTotalNumberOfQuestions(){
         List<Question> questions = new ArrayList<Question>();
+        User user = new User("Tom", "pass", "Tom Tom", "tom@tom.com", "1234567",
+                "Moon", "He doesn't know", 200);
 
         QuestionRepository questionRepository = mock(QuestionRepository.class);
         when(questionRepository.getAllQuestions()).thenReturn(questions);
@@ -25,10 +28,10 @@ public class AdminServiceTest {
         AdminService adminService = new AdminService(questionRepository);
 
         assertThat(adminService.getTotalNumberOfQuestions(), is(questions.size()));
-        questions.add(new Question(1, "test","test",1,new Date()));
+        questions.add(new Question(1, "test","test",user,new Date()));
         assertThat(adminService.getTotalNumberOfQuestions(), is(questions.size()));
-        questions.add(new Question(2, "test","test",2,new Date()));
-        questions.add(new Question(3, "test","test",3,new Date()));
+        questions.add(new Question(2, "test","test",user,new Date()));
+        questions.add(new Question(3, "test","test",user,new Date()));
         assertThat(adminService.getTotalNumberOfQuestions(), is(questions.size()));
     }
 
@@ -36,12 +39,15 @@ public class AdminServiceTest {
     public void shouldGenerateCountOfRecordsForEachMonth() {
         List<Question> questions = new ArrayList<Question>();
 
-        questions.add(new Question(01,"mock question","mock description",01, addMonth(-1)));
-        questions.add(new Question(02,"mock question","mock description",02, addMonth(-2)));
-        questions.add(new Question(03,"mock question","mock description",03, addMonth(-5)));
-        questions.add(new Question(04,"mock question","mock description",04, addMonth(-7)));
-        questions.add(new Question(05,"mock question","mock description",05, addMonth(-7)));
-        questions.add(new Question(06,"mock question","mock description",06, addMonth(-7)));
+        User user = new User("Tom", "pass", "Tom Tom", "tom@tom.com", "1234567",
+                "Moon", "He doesn't know", 200);
+
+        questions.add(new Question(01,"mock question","mock description",user, addMonth(-1)));
+        questions.add(new Question(02,"mock question","mock description",user, addMonth(-2)));
+        questions.add(new Question(03,"mock question","mock description",user, addMonth(-5)));
+        questions.add(new Question(04,"mock question","mock description",user, addMonth(-7)));
+        questions.add(new Question(05,"mock question","mock description",user, addMonth(-7)));
+        questions.add(new Question(06,"mock question","mock description",user, addMonth(-7)));
 
         QuestionRepository questionRepository = mock(QuestionRepository.class);
         when(questionRepository.getQuestionsPostedInLast12Months()).thenReturn(questions);
