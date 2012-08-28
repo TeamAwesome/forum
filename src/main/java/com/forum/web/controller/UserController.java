@@ -37,7 +37,7 @@ public class UserController {
     public String processRegistrationForm(@Valid User user,  BindingResult result, Map model) {
         model.put("countries", countries);
 
-        if (result.hasErrors() || !userService.validatePhoneNumberLength(user)) {
+        if (result.hasErrors()) {
             return "join";
         }
 
