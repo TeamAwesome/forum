@@ -4,9 +4,9 @@ body {
 	background: #FFFFFF;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
+	text-align:center;
 	color: #3B3B3B;
-
-}
+	}
 
 
 h1, h2, h3 {
@@ -22,8 +22,9 @@ h1, h2, h3 {
 
 h1 {
 	font-size: 2em;
-
+    color:#000000;
 }
+
 
 h2 {
 	font-size: 2.4em;
@@ -36,17 +37,47 @@ h3 {
 p, ul, ol {
 	margin-top: 0;
 	line-height: 100%;
+
 }
 
 ul, ol {
+
+}
+ul li{
+    display:inline;
+}
+
+ul li a{
+color:#000000;
 }
 
 a {
 	text-decoration: none;
-	color: #5472B9;
+	color: #F3AE12;
 }
-
+table {
+  border-collapse: collapse;
+}
+table td, table th {
+  word-wrap: break-word;
+  border: 1px solid white;
+}
+table tr:first-child th {
+  border-top: 0;
+}
+table tr:last-child td {
+  border-bottom: 0;
+}
+table tr td:first-child,
+table tr th:first-child {
+  border-left: 0;
+}
+table tr td:last-child,
+table tr th:last-child {
+  border-right: 0;
+}
 a:hover {
+
 }
 
 {
@@ -55,4 +86,102 @@ a:hover {
 	margin: 0px auto;
 }
 
+#title{
+    width:1024px;
+    height:20%;
+    align: center;
+    background-color:#f7f2c9;
+}
+
+#rightButton {
+
+    float: right;
+    margin-top: 15px;
+    width:400px;
+}
+
+#leftButton {
+
+    float: left;
+    margin-top: 20px;
+    width:410px;
+}
+
+img.logo{
+    width=400px;
+    height=100px;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+    align:center;
+
+}
+
+
+
+.main{
+     width:100%;
+     position:relative;
+     margin-left:200px;
+}
+
+.activityWall{
+
+    width:700px;
+    background-color:#DDB863;
+    position:absolute;
+
+}
+
+.rightPane{
+     left: 835px;
+     width: 320px;
+     height:100%;
+     background-color:#f7f2c9;
+    position:absolute;
+}
+
+
+
+
+#logo{
+    width:500px;
+}
+
+#activityWallTitle{
+    margin-left: 2px;
+    text-align:center;
+
+}
+
+#QuestionParagraph{
+    line-height:180%;
+    margin-left: 40px;
+    text-align:left;
+}
+
+#questionTitle{
+    word-wrap: break-word;
+    color: #FFFFFF;
+}
+
+#questionDescription{
+    word-wrap: break-word;
+}
+
+
+
+#joinButton{
+    background-color: #C4AB73;
+}
+
+#advertisement{
+width: 320px;
+height: 200px;
+Background-color:#C4AB73;
+}
+
+#tagCloud{
+width: 320px;
+}
 
