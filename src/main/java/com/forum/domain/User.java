@@ -1,10 +1,12 @@
 package com.forum.domain;
 
 
-import org.hibernate.validator.constraints.NotBlank;
+import com.forum.service.validation.PhoneNumber;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 public class User {
@@ -12,21 +14,36 @@ public class User {
     @NotEmpty
     private String username;
 
-    @NotEmpty
+    @Size(min=8)
     private String password;
 
+    @NotEmpty
     private String name;
+
+    @NotEmpty
+    @Email
     private String email;
+
+    @PhoneNumber
     private String phoneNumber;
+
+    @NotEmpty
     private String country;
+
+    @NotEmpty
     private String gender;
-    private int age;
+
+    @NotNull
+    private int ageRange;
+
+    @NotEmpty
     private List<String> interests;
+
     private List<String> knowledge;
     private Boolean privacy;
 
     public User(String username, String password, String name, String email, String phoneNumber,
-                             String country, String gender, int age) {
+                             String country, String gender, int ageRange) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -34,7 +51,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.country = country;
         this.gender = gender;
-        this.age = age;
+        this.ageRange = ageRange;
         this.interests = interests;
         this.knowledge = knowledge;
         this.privacy = privacy;
@@ -101,8 +118,8 @@ public class User {
         this.gender = gender;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setAgeRange(int ageRange) {
+        this.ageRange = ageRange;
     }
 
     public void setInterests(List<String> interests) {
@@ -130,7 +147,7 @@ public class User {
         return gender;
     }
 
-    public int getAge() {
-        return age;
+    public int getAgeRange() {
+        return ageRange;
     }
 }

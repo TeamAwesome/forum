@@ -4,15 +4,12 @@
 
 <head>
     <title>Join us</title>
-        <link rel="stylesheet" type="text/css" href="/app/static/CLEditor1_3_0/jquery.cleditor.css" />
-            <script type="text/javascript" src="/app/static/jsquery/jquery.min.js"></script>
-
 
 </head>
 <body class="home">
 
 <h2>User Registration</h2>
-<form:form method="post" action="submitInfo" commandName="user">
+<form:form method="post" action="join" commandName="user">
 
     <table>
         <tr>
@@ -20,8 +17,8 @@
         </tr>
 
         <tr>
-        	<td><form:input path="username" /> <form:errors
-        	path="username" class="errorMsg" /></td>
+        	<td><form:input path="username" id="username"/> <form:errors
+        	path="username" class="errorMsg" id="usernameMsg"/></td>
         </tr>
 
         <tr>
@@ -29,7 +26,7 @@
         </tr>
 
         <tr>	
-        	<td><form:password path="password" /> <form:errors path="password" class="errorMsg" /></td>
+        	<td><form:password path="password" id="password"/> <form:errors path="password" class="errorMsg" id="passwordMsg"/></td>
         </tr>
 
         <tr>
@@ -37,8 +34,8 @@
         </tr>
 
         <tr>	
-       		<td><form:input path="name" /><form:errors
-        path="name" class="errorMsg" /></td>
+       		<td><form:input path="name" id="name"/><form:errors
+        path="name" class="errorMsg" id="nameMsg"/></td>
         </tr>
         
         <tr>
@@ -46,29 +43,29 @@
         </tr>
 
         <tr>	
-       		<td><form:input path="email" /><form:errors
-        path="email" class="errorMsg" /></td>
+       		<td><form:input path="email" id="email"/><form:errors
+        path="email" class="errorMsg" id="emailMsg"/></td>
         </tr>
         <tr>
        		<td>Phone Number:</td>
         </tr>
 
         <tr>	
-       		<td><form:input path="phoneNumber" /><form:errors
-        path="phoneNumber" class="errorMsg" /></td>
+       		<td><form:input path="phoneNumber" id="phoneNumber"/><form:errors
+        path="phoneNumber" class="errorMsg" id="phoneNumberMsg"/></td>
         </tr>
         
         <tr>
        		<td>Country of Origin:</td>
        	</tr>
         <tr>
-       		<td><form:select path="country">
+       		<td><form:select path="country" id="country">
             	<form:option value="" selected="selected">Select Country</form:option>
                 <form:options items="${countries}" itemValue="countryId" itemLabel="countryName" />
 
             </form:select></td><td>
             <form:errors
-        path="country" class="errorMsg" /></td>
+        path="country" class="errorMsg" id="countryMsg"/></td>
         </tr>
         
         <tr>
@@ -76,21 +73,23 @@
         </tr>
         <tr>
         	<td>
-            	<form:radiobutton path="gender" value="M" label="Male" />
-				<form:radiobutton path="gender" value="F" label="Female" />
+            	<form:radiobutton path="gender" value="M" label="Male" id="genderMale"/>
+				<form:radiobutton path="gender" value="F" label="Female" id="genderFemale"/>
             </td>
+            <td><form:errors path="gender" class="errorMsg" id="genderMsg"/></td>
         </tr>
         <tr>
             <td>Age: </td>
         </tr>
         <tr>
         	<td>
-            	<form:radiobutton path="age" value="0" label="> 25" />
-                <form:radiobutton path="age" value="25" label="25 - 35" />
-                <form:radiobutton path="age" value="35" label="35 - 50" />
-                <form:radiobutton path="age" value="50" label="50 - 70" />
-                <form:radiobutton path="age" value="70" label="< 70" />
+            	<form:radiobutton path="ageRange" value="1" label="< 25" id="ageRangeLessThan25" />
+                <form:radiobutton path="ageRange" value="2" label="25 - 35" id="ageRange25To35" />
+                <form:radiobutton path="ageRange" value="3" label="35 - 50" id="ageRange35To50" />
+                <form:radiobutton path="ageRange" value="4" label="50 - 70" id="ageRange50To70" />
+                <form:radiobutton path="ageRange" value="5" label="> 70" id="ageRangeGreaterThan70" />
             </td>
+            <td><form:errors path="ageRange" class="errorMsg" id="ageRangeMsg"/></td>
         </tr>
         
         <tr>
@@ -98,13 +97,14 @@
         </tr>
         <tr>
             <td>
-            	<form:checkbox path="interests" value="Food" label="Food" />
-                <form:checkbox path="interests" value="Travel" label="Travel" />
-                <form:checkbox path="interests" value="Religious sites" label="Religious sites" />
-                <form:checkbox path="interests" value="Fashion" label="Fashion" />
-                <form:checkbox path="interests" value="Arts" label="Arts" />
-                <form:checkbox path="interests" value="Music" label="Music" />
+            	<form:checkbox path="interests" value="Food" label="Food" id="interestFood" />
+                <form:checkbox path="interests" value="Travel" label="Travel" id="interestTravel" />
+                <form:checkbox path="interests" value="Religious sites" label="Religious sites" id="interestReligiousSites" />
+                <form:checkbox path="interests" value="Fashion" label="Fashion" id="interestFashion" />
+                <form:checkbox path="interests" value="Arts" label="Arts" id="interestArts" />
+                <form:checkbox path="interests" value="Music" label="Music" id="interestMusic" />
             </td>
+            <td><form:errors path="interests" class="errorMsg" id="interestsMessage"/></td>
         </tr>
         
         
@@ -113,12 +113,12 @@
         </tr>
         <tr>
             <td>
-            	<form:checkbox path="knowledge" value="Food" label="Food" />
-                <form:checkbox path="knowledge" value="Travel" label="Travel" />
-                <form:checkbox path="knowledge" value="Religious sites" label="Religious sites" />
-                <form:checkbox path="knowledge" value="Fashion" label="Fashion" />
-                <form:checkbox path="knowledge" value="Arts" label="Arts" />
-                <form:checkbox path="knowledge" value="Music" label="Music" />
+            	<form:checkbox path="knowledge" value="Food" label="Food" id="knowledgeFood" />
+                <form:checkbox path="knowledge" value="Travel" label="Travel" id="knowledgeTravel" />
+                <form:checkbox path="knowledge" value="Religious sites" label="Religious sites" id="knowledgeReligiousSites" />
+                <form:checkbox path="knowledge" value="Fashion" label="Fashion" id="knowledgeFashion" />
+                <form:checkbox path="knowledge" value="Arts" label="Arts" id="knowledgeArts" />
+                <form:checkbox path="knowledge" value="Music" label="Music" id="knowledgeMusic" />
             </td>
         </tr>
         
@@ -127,7 +127,7 @@
         </tr>
         
        <tr>
-       		<td> By submitting this form, you are agreeing to our <a name="tos" href="/forum/terms">Terms and Conditions</a>. </td>
+       		<td> By submitting this form, you are agreeing to our <a name="tos" href="terms">Terms and Conditions</a>. </td>
        </tr>
 
         
