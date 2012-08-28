@@ -2,6 +2,7 @@
 <project name="dbbuild" basedir=".">
     <import file="commonbuild.xml"/>
     <property name="data.dir" location="${basedir}/data"/>
+    <mkdir dir="${build.dir}"/>
     <path id="dbdeploy.classpath">
         <!-- include the dbdeploy-ant jar -->
         <fileset dir="${bootstrap.ant.jar.dir}">

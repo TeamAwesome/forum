@@ -17,27 +17,32 @@ import java.util.Map;
 @Controller
 public class UserController {
     private UserService userService;
+    private List<Country> countries;
 
     @Autowired
     public UserController(UserService userService){
         this.userService = userService;
+        countries = userService.getAvailableCountries();
     }
 
     @RequestMapping(value = "/join",method = RequestMethod.GET)
     public String showRegistrationForm(Map model) {
-        List<Country> countries = userService.getAvailableCountries();
         User user = new User();
         model.put("user", user);
         model.put("countries", countries);
         return "join";
     }
 
-    @RequestMapping(value = "submitInfo", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public String processRegistrationForm(@Valid User user,  BindingResult result, Map model) {
+        model.put("countries", countries);
+
         if (result.hasErrors()) {
             return "join";
         }
-         model.put("user", user);
-         return "showProfile";
+
+        model.put("user", user);
+
+        return "showProfile";
     }
 }

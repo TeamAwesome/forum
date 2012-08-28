@@ -9,4 +9,5 @@
 
     <property name="bootstrap.ant.jar.dir" location="${basedir}/bootstrap/ant"/>
     <property name="buildtime.jar.dir" location="${basedir}/lib/buildtime/jar"/>
+    <property name="build.dir" location="build"/>
 </project>

@@ -2,6 +2,7 @@ package com.forum.service;
 
 import com.forum.domain.User;
 import com.forum.repository.UserRepository;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -11,17 +12,35 @@ import static org.mockito.Mockito.when;
 
 public class UserServiceTest {
 
+    private UserRepository userRepository;
+    private UserService userService;
+
+    @Before
+    public void setupUserService(){
+        userRepository = mock(UserRepository.class);
+        userService = new UserService(userRepository);
+    }
+
     @Test
     public void shouldGetUserById(){
-        UserRepository userRepository = mock(UserRepository.class);
-
         User user = new User("Tom", "pass", "Tom Tom", "tom@tom.com", "1234567",
                             "Moon", "He doesn't know", 200);
-
         when(userRepository.getById(1)).thenReturn(user);
 
-        UserService userService = new UserService(userRepository);
         assertThat(userService.getById(1), is(user));
     }
 
+    @Test
+    public void shouldReturnTrueIfUsernameExistsInDB(){
+        User user = new User("lu", "pass", "Tom Tom", "tom@tom.com", "1234567",
+                "Moon", "He doesn't know", 200);
+        when(userRepository.getByUsername("lu")).thenReturn(user);
+        assertThat(userService.checkExistenceOfUsername("lu"), is(true));
+    }
+
+    @Test
+    public void shouldReturnFalseIfUsernameNotExistsInDB(){
+        when(userRepository.getByUsername("who")).thenReturn(null);
+        assertThat(userService.checkExistenceOfUsername("who"), is(false));
+    }
 }

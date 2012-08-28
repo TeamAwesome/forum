@@ -31,7 +31,7 @@
         <span data-bind="text: userId"> </span>
         <br /><br />
     </p>
-    <button data-bind="click: loadMoreQuestion">more..</button>
+    <button id="loadMoreQuestion" data-bind="click: loadMoreQuestion">more..</button>
     <script src="<c:url value="/static/javascript/moreQuestionsLoader.js"/>"></script>
     <br /><br />
 

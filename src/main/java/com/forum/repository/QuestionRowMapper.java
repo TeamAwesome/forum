@@ -19,7 +19,7 @@ public class QuestionRowMapper implements RowMapper {
                 resultSet.getString("PHONE_NUMBER"),
                 resultSet.getString("COUNTRY"),
                 resultSet.getString("GENDER"),
-                resultSet.getInt("AGE"));
+                resultSet.getInt("AGE_RANGE"));
 
         Question question = new Question(resultSet.getInt("QUESTION_ID"),
                 resultSet.getString("TITLE"),
