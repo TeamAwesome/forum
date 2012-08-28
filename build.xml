@@ -93,6 +93,10 @@
         <classpath location="${bootstrap.ant.jar.dir}/ivy-2.1.0.jar"/>
     </taskdef>
 
+    <taskdef resource="net/sf/antcontrib/antlib.xml">
+        <classpath location="${bootstrap.ant.jar.dir}/ant-contrib-1.0b3.jar"/>
+    </taskdef>
+
     <target name="fetch-libs" description="Fetch third-party libraries using ivy.">
         <property name="ivy.default.ivy.user.dir" value="${basedir}/../ivy"/>
         <configure/>

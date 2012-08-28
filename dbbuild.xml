@@ -23,26 +23,13 @@
 
     <target name="db.migrate" depends="db.print.info, db.clean, db.update" description="Migrates the DB Schema"/>
 
-    <target name="db.clean" depends="db.print.info, db.recreate, db.create-changelog-table"/>
+    <target name="db.clean" depends="db.print.info, db.recreate.mysql, db.create-changelog-table"/>
 
     <target name="db.create-changelog-table">
         <sql driver="${db.driver}" url="${db.url}"
              userid="${db.username}" password="${db.password}" classpathref="db.classpath">
             <fileset file="${basedir}/scripts/sql/dbdeploy/createSchemaVersionTable.${db.dbms}.sql"/>
         </sql>
-    </target>
-
-    <target name="db.recreate">
-        <echo message="Recreating database for ${db.dbms}" />
-        <if>
-            <equals arg1="${db.dbms}" arg2="hsql"/>
-            <then>
-                <antcall target="db.recreate.hsql"/>
-            </then>
-            <else>
-                <antcall target="db.recreate.mysql"/>
-            </else>
-        </if>
     </target>
 
     <target name="db.recreate.hsql">

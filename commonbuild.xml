@@ -9,8 +9,4 @@
 
     <property name="bootstrap.ant.jar.dir" location="${basedir}/bootstrap/ant"/>
     <property name="buildtime.jar.dir" location="${basedir}/lib/buildtime/jar"/>
-
-    <taskdef resource="net/sf/antcontrib/antlib.xml">
-        <classpath location="${bootstrap.ant.jar.dir}/ant-contrib-1.0b3.jar"/>
-    </taskdef>
 </project>
