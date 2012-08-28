@@ -1,12 +1,6 @@
 <?xml version="1.0"?>
 <project name="forum" default="build" basedir=".">
-    <property name="env.name" value="dev"/>
-    <echo message="----------------------------------------------------------------"/>
-    <echo message="Loading build.properties for the environment ${env.name}"/>
-    <echo message="----------------------------------------------------------------"/>
-
-    <loadproperties srcFile="${basedir}/buildprofiles/${env.name}/build.properties"/>
-
+    <import file="commonbuild.xml"/>
     <property name="src.dir" location="src/main"/>
     <property name="unit.test.dir" location="src/unit-tests"/>
     <property name="integration.test.dir" location="src/integration-tests"/>
@@ -16,13 +10,10 @@
     <property name="compile.dir" location="${build.dir}/compile"/>
     <property name="report.dir" location="${build.dir}/report"/>
     <property name="dist.dir" location="${build.dir}/dist"/>
-    <property name="bootstrap.ant.jar.dir" location="${basedir}/bootstrap/ant"/>
-    <property name="buildtime.jar.dir" location="${basedir}/lib/buildtime/jar"/>
     <property name="runtime.jar.dir" location="${basedir}/lib/runtime/jar"/>
     <property name="jetty.jar.dir" location="${basedir}/lib/jetty/jar"/>
 
     <property name="test.report.dir" location="${report.dir}/test"/>
-    <property name="data.dir" location="${basedir}/data"/>
 
     <!-- Cobertura -->
     <property name="build.instrumented.dir" value="${build.dir}/instrumented-classes"/>
@@ -100,10 +91,6 @@
 
     <taskdef resource="org/apache/ivy/ant/antlib.xml">
         <classpath location="${bootstrap.ant.jar.dir}/ivy-2.1.0.jar"/>
-    </taskdef>
-
-    <taskdef resource="net/sf/antcontrib/antlib.xml">
-        <classpath location="${bootstrap.ant.jar.dir}/ant-contrib-1.0b3.jar"/>
     </taskdef>
 
     <target name="fetch-libs" description="Fetch third-party libraries using ivy.">
