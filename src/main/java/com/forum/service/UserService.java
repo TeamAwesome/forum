@@ -38,4 +38,10 @@ public class UserService {
         scanner.close();
         return countries;
     }
+
+    public boolean checkExistenceOfUsername(String username) {
+        if (userRepository.getByUsername(username) == null)
+            return false;
+        return true;
+    }
 }

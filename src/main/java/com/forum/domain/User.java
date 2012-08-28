@@ -1,6 +1,7 @@
 package com.forum.domain;
 
 
+import com.forum.service.validation.Age;
 import com.forum.service.validation.PhoneNumber;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -33,7 +34,7 @@ public class User {
     @NotEmpty
     private String gender;
 
-    @NotNull
+    @Age
     private int ageRange;
 
     @NotEmpty

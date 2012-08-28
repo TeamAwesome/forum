@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -24,8 +25,8 @@ public class UserRowMapperTest {
         when(resultSetMock.getString("PHONE_NUMBER")).thenReturn("12345678945");
         when(resultSetMock.getString("COUNTRY")).thenReturn("US");
         when(resultSetMock.getString("GENDER")).thenReturn("who knows");
-        when(resultSetMock.getInt("AGE")).thenReturn(200);
-        User user = UserRowMapper.mapRow(resultSetMock, 1);
+        when(resultSetMock.getInt("AGE_RANGE")).thenReturn(200);
+        User user = UserRowMapper.mapRow(resultSetMock, 0);
         assertThat(user.getName(), is("Corner"));
         assertThat(user.getAgeRange(), is(200));
         assertThat(user.getCountry(), is("US"));
@@ -34,4 +35,5 @@ public class UserRowMapperTest {
         assertThat(user.getPassword(), is("John"));
         assertThat(user.getPhoneNumber(), is("12345678945"));
     }
+
 }
