@@ -1,5 +1,7 @@
-$("#titleValidationMessage").text("100 Characters Remaining");
-$("#descriptionValidationMessage").text("500 Characters Remaining");
+$(this).load(function(){
+    $("#titleValidationMessage").text(Question.MAX_TITLE_LENGTH + " characters remaining");
+    $("#descriptionValidationMessage").text(Question.MAX_DESCRIPTION_LENGTH + " characters remaining");
+});
 
 var createYUIEditor = function() {
     var descriptionEditorConfig = {
@@ -15,43 +17,28 @@ var createYUIEditor = function() {
 questionDescriptionEditor = createYUIEditor();
 questionDescriptionEditor.render();
 
-function descriptionText() {
-    var stripHTML = /<\S[^><]*>/g;
-    var html = questionDescriptionEditor.saveHTML();
-    var description = html.replace(stripHTML, '');
-
-    return description;
+function update() {
+    var question = new Question($("#questionTitle").val(), questionDescriptionEditor.saveHTML());
+    question.updateMessages();
+    $("#titleValidationMessage").text(question.messages['title']);
+    $("#descriptionValidationMessage").text(question.messages['description']);
 }
 
-function validateDescription() {
-    var maxLimit = 500;
-    var remainingChars = (maxLimit - descriptionText().length);
-    if(remainingChars < 0) {
-        $("#descriptionValidationMessage").text("Description should be less than 500 characters.");
-        return false;
-    } else {
-        $("#descriptionValidationMessage").text(remainingChars+" characters Remaining");
-        return true;
-    }
+function validate() {
+    var question = new Question($("#questionTitle").val(),questionDescriptionEditor.saveHTML());
+    var isValid = question.isValid();
+    $("#titleValidationMessage").text(question.messages['title']);
+    $("#descriptionValidationMessage").text(question.messages['description']);
+
+    return isValid;
 }
 
-questionDescriptionEditor.subscribe('editorKeyPress', validateDescription);
-questionDescriptionEditor.subscribe('editorKeyUp',validateDescription);
-questionDescriptionEditor.subscribe('editorKeyDown',validateDescription);
+questionDescriptionEditor.subscribe('editorKeyPress', update);
+questionDescriptionEditor.subscribe('editorKeyUp',update);
+questionDescriptionEditor.subscribe('editorKeyDown',update);
 
-function validateTitle() {
-    var validator = new Validation();
-    var titleValidationMessage = validator.checkNumberOfRemainingCharactersInTheTitle($("#questionTitle").val());
-    $("#titleValidationMessage").text(titleValidationMessage);
-    return true;
-}
+$('#questionTitle').keyup(update);
+$('#questionTitle').keydown(update);
+$('#questionTitle').keypress(update);
 
-$('#questionTitle').keyup(validateTitle);
-$('#questionTitle').keydown(validateTitle);
-$('#questionTitle').keypress(validateTitle);
-
-function handleSubmit(e){
-    return validateDescription() && validateTitle();
- }
-
-$('#questionForm').submit(handleSubmit);
+$('#questionForm').submit(validate);
