@@ -5,12 +5,8 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/style.css"/>">
     <script src='http://connect.facebook.net/en_US/all.js'></script>
     <script src="<c:url value="/static/javascript/shareToSocialMedia.js"/>"></script>
-
     <script src="<c:url value="/static/jsquery/jquery.js"/>"></script>
     <script src="<c:url value="/static/javascript/knockout-2.1.0.js"/>"></script>
-
-
-
 </head>
 
 <body class="home">
@@ -34,7 +30,6 @@
             </div>
 
             <div id="activityQuestions" >
-
                       <p id="QuestionParagraph" data-bind="foreach: questions">
                       <table>
                       <tr><td width=100px>
@@ -67,19 +62,15 @@
                 <button id="loadMoreQuestions" data-bind="click: loadMoreQuestion">more..</button>
                 <script src="<c:url value="/static/javascript/moreQuestionsLoader.js"/>"></script>
                 <br /><br />
-            </div>
         </div>
     </td>
 
     <td>
         <div class="rightPane">
             <div id="tagCloud">
-            <img src="<c:url value="/static/images/tag_cloud.png"/>">
+                <img src="<c:url value="/static/images/tag_cloud.png"/>">
             </div>
-            <div id="advertisement">
-            ADVERTISEMENT
-            </div>
-
+            <div id="advertisement">ADVERTISEMENT</div>
             <div id='fb-root'>
                 <p id='msg'></p>
                 <p>
@@ -88,6 +79,7 @@
                 </p>
             </div>
         </div>
+    </td>
     </div>
     </td>
     </tr>

@@ -134,7 +134,7 @@ img.logo{
 }
 
 .rightPane{
-     left: 835px;
+     left: 775px;
      width: 320px;
      height:100%;
      background-color:#f7f2c9;
@@ -165,9 +165,7 @@ img.logo{
     color: #FFFFFF;
 }
 
-#questionDescription{
-    word-wrap: break-word;
-}
+
 
 
 
