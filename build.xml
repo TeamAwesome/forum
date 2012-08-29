@@ -129,17 +129,20 @@
 
     <target name="run-unit-tests" depends="make-jars">
         <unit-test testdir="${unit.test.dir}" classpath="common-classpath"/>
+        <antcall target="report-tests"/>
     </target>
 
     <target name="run-integration-tests" depends="make-jars, db.clean, db.update, insert-test-data">
         <unit-test testdir="${integration.test.dir}" classpath="common-classpath"/>
+        <antcall target="report-tests"/>
     </target>
 
     <target name="run-system-tests" depends="make-jars">
         <unit-test testdir="${system.test.dir}" classpath="system-classpath"/>
+        <antcall target="report-tests"/>
     </target>
 
-    <target name="report-tests" if="unit.tests.failed">
+    <target name="report-tests">
         <junitreport todir="${test.report.dir}">
             <fileset dir="${test.report.dir}" includes="TEST-*.xml"/>
             <report todir="${test.report.dir}/html"/>
