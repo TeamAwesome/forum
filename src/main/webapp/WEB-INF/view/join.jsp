@@ -97,12 +97,12 @@
         </tr>
         <tr>
             <td>
-            	<form:checkbox path="interests" value="Food" label="Food" id="interestFood" />
-                <form:checkbox path="interests" value="Travel" label="Travel" id="interestTravel" />
-                <form:checkbox path="interests" value="Religious sites" label="Religious sites" id="interestReligiousSites" />
-                <form:checkbox path="interests" value="Fashion" label="Fashion" id="interestFashion" />
-                <form:checkbox path="interests" value="Arts" label="Arts" id="interestArts" />
-                <form:checkbox path="interests" value="Music" label="Music" id="interestMusic" />
+            	<form:checkbox path="interests" value="1" label="Food" id="interestFood" />
+                <form:checkbox path="interests" value="2" label="Travel" id="interestTravel" />
+                <form:checkbox path="interests" value="3" label="Religious sites" id="interestReligiousSites" />
+                <form:checkbox path="interests" value="4" label="Fashion" id="interestFashion" />
+                <form:checkbox path="interests" value="5" label="Arts" id="interestArts" />
+                <form:checkbox path="interests" value="6" label="Music" id="interestMusic" />
             </td>
             <td><form:errors path="interests" class="errorMsg" id="interestsMessage"/></td>
         </tr>
@@ -113,12 +113,12 @@
         </tr>
         <tr>
             <td>
-            	<form:checkbox path="knowledge" value="Food" label="Food" id="knowledgeFood" />
-                <form:checkbox path="knowledge" value="Travel" label="Travel" id="knowledgeTravel" />
-                <form:checkbox path="knowledge" value="Religious sites" label="Religious sites" id="knowledgeReligiousSites" />
-                <form:checkbox path="knowledge" value="Fashion" label="Fashion" id="knowledgeFashion" />
-                <form:checkbox path="knowledge" value="Arts" label="Arts" id="knowledgeArts" />
-                <form:checkbox path="knowledge" value="Music" label="Music" id="knowledgeMusic" />
+            	<form:checkbox path="knowledge" value="1" label="Food" id="knowledgeFood" />
+                <form:checkbox path="knowledge" value="2" label="Travel" id="knowledgeTravel" />
+                <form:checkbox path="knowledge" value="3" label="Religious sites" id="knowledgeReligiousSites" />
+                <form:checkbox path="knowledge" value="4" label="Fashion" id="knowledgeFashion" />
+                <form:checkbox path="knowledge" value="5" label="Arts" id="knowledgeArts" />
+                <form:checkbox path="knowledge" value="6" label="Music" id="knowledgeMusic" />
             </td>
         </tr>
         

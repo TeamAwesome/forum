@@ -39,16 +39,16 @@ public class User {
     private String gender;
 
     @Age
-    private int ageRange;
+    private Integer ageRange;
 
     @NotEmpty
-    private List<String> interests;
+    private List<Integer> interests;
 
-    private List<String> knowledge;
+    private List<Integer> knowledge;
     private Boolean privacy;
 
     public User(String username, String password, String name, String email, String phoneNumber,
-                             String country, String gender, int ageRange) {
+                             String country, String gender, Integer ageRange) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -66,11 +66,11 @@ public class User {
     }
 
 
-    public List<String> getInterests() {
+    public List<Integer> getInterests() {
         return interests;
     }
 
-    public List<String> getKnowledge() {
+    public List<Integer> getKnowledge() {
         return knowledge;
     }
 
@@ -123,15 +123,15 @@ public class User {
         this.gender = gender;
     }
 
-    public void setAgeRange(int ageRange) {
+    public void setAgeRange(Integer ageRange) {
         this.ageRange = ageRange;
     }
 
-    public void setInterests(List<String> interests) {
+    public void setInterests(List<Integer> interests) {
         this.interests = interests;
     }
 
-    public void setKnowledge(List<String> knowledge) {
+    public void setKnowledge(List<Integer> knowledge) {
         this.knowledge = knowledge;
     }
 
@@ -152,7 +152,7 @@ public class User {
         return gender;
     }
 
-    public int getAgeRange() {
+    public Integer getAgeRange() {
         return ageRange;
     }
 }
