@@ -27,7 +27,7 @@
                       <table>
                       <tr>
                       <td width=105px>
-                      <font color="#599425">Stats</font>
+                      <font color="#599425">Statistics</font>
                           <br>
                           <font class="small">
                               0 Likes

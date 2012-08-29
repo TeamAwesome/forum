@@ -30,7 +30,7 @@ public class QuestionDetailedTest {
 
     @Test
     public void shouldGoToDetailedView() {
-        WebElement activityWall = driver.findElement(By.className("activityWall"));
+        WebElement activityWall = driver.findElement(By.id("leftPane"));
         List<WebElement> questions = activityWall.findElements(By.tagName("a"));
         WebElement question = questions.get(0);
         String title = question.getText();

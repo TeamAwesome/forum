@@ -31,13 +31,13 @@ public class ActivityWallTest {
     public void shouldLoadMoreQuestions() {
         WebElement loadMore = driver.findElement(By.id("loadMoreQuestions"));
 
-        WebElement activityWall = driver.findElement(By.className("activityWall"));
-        List<WebElement> questions = activityWall.findElements(By.id("questionTitle"));
+        WebElement activityWall = driver.findElement(By.id("leftPane"));
+        List<WebElement> questions = activityWall.findElements(By.className("questionTitle"));
         assertThat(questions.size(), is(10));
 
         loadMore.click();
 
-        questions = activityWall.findElements(By.id("questionTitle"));
+        questions = activityWall.findElements(By.className("questionTitle"));
         assertThat(questions.size(), is(20));
     }
 }
