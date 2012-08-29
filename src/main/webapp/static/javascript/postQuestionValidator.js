@@ -117,7 +117,7 @@ questionDescriptionEditor.subscribe('editorKeyPress', update);
 questionDescriptionEditor.subscribe('editorKeyUp',update);
 questionDescriptionEditor.subscribe('editorKeyDown',update);
 
-$('#questionTitle').keyup(update);
+//$('#questionTitle').keyup(update);
 $('#questionTitle').keydown(update);
 $('#questionTitle').keypress(update);
 
