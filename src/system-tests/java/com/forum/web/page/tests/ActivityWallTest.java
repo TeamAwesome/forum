@@ -19,7 +19,7 @@ public class ActivityWallTest {
     @Before
     public void initializeWebDriver() {
         driver = new FirefoxDriver();
-        driver.get("http://localhost:8080/app");
+        driver.get("http://localhost:8080/forum");
     }
 
     @After

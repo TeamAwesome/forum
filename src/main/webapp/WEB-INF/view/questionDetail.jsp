@@ -2,71 +2,11 @@
 <html>
 <head>
     <title>Forum - Your Question</title>
-    <style type="text/css">
-
-
-    #wrap {
-        width:70%;
-        margin:0 auto;
-        max-width: 1260px;
-        min-width: 780px;
-        background: #fff;
-    }
-
-    #left
-    {
-        float:left;
-        width:60%;
-
-    }
-
-    #right
-    {
-        float:right;
-        width:40%;
-        position: relative;
-        top : 20%;
-        right: 10%;
-    }
-
-
-    #questionDescription
-    {
-        border-style: solid;
-        border-width: 1px;
-        max-height:300px;
-        width: 70%;
-        overflow: auto;
-    }
-    #review
-    {
-        position: absolute;
-    }
-
-    #posted_by
-    {
-        padding-left : 3em;
-    }
-    #posted_at
-    {
-        padding-left :2em;
-    }
-    #status
-    {
-        padding-top: 3em;
-    }
-
-    #replyTextarea
-    {
-       resize: none;
-    }
-
-    </style>
-
+    <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/questionDetail.css"/>' />
 </head>
 <body class="question">
 
-<a href="<c:url value="/"/>">Home</a>
+<a href='<c:url value="/"/>'>Home</a>
 
 <div id ="wrap">
 

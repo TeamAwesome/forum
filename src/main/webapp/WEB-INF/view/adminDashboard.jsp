@@ -1,13 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/app/static/jsquery/jquery.jqplot.css" />
-<script language="javascript" type="text/javascript" src="/app/static/jsquery/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="/app/static/jsquery/jquery.min.js"></script>
-<script language="javascript" type="text/javascript" src="/app/static/jsquery/jquery.jqplot.min.js"></script>
-<script language="javascript" type="text/javascript" src="/app/static/jsquery/jqplot.canvasAxisLabelRenderer.js"></script>
-<script language="javascript" type="text/javascript" src="/app/static/jsquery/jqplot.canvasTextRenderer.min.js"></script>
-<script language="javascript" type="text/javascript" src="/app/static/javascript/graphsForAdminDashboard.js"></script>
+<link rel="stylesheet" type="text/css" href='<c:url value="/static/jsquery/jquery.jqplot.css" />' />
+<script language="javascript" type="text/javascript" src='<c:url value="/static/jsquery/jquery.js" />'></script>
+<script language="javascript" type="text/javascript" src='<c:url value="/static/jsquery/jquery.min.js" />'></script>
+<script language="javascript" type="text/javascript" src='<c:url value="/static/jsquery/jquery.jqplot.min.js" />'></script>
+<script language="javascript" type="text/javascript" src='<c:url value="/static/jsquery/jqplot.canvasAxisLabelRenderer.js" />'></script>
+<script language="javascript" type="text/javascript" src='<c:url value="/static/jsquery/jqplot.canvasTextRenderer.min.js" />'></script>
+<script language="javascript" type="text/javascript" src='<c:url value="/static/javascript/graphsForAdminDashboard.js" />'></script>
 
  <script>
      function plot(input){
