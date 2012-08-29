@@ -2,6 +2,7 @@ function Question(title, description){
     var MAX_TITLE_LENGTH = 100;
     var MAX_DESCRIPTION_LENGTH = 500;
     this.title = stripSpaces(title);
+    var scriptlessTitle = stripHTML(this.title);
     this.description = stripHTML(description);
     //alert(this.description);
     this.description = stripSpaces(this.description);
@@ -14,6 +15,10 @@ function Question(title, description){
             that.messages['title'] = 'Title is empty.';
             return false;
         }
+//        else if(that.title != that.scriptlessTitle){
+//            that.messages['title'] = 'Title Cannot Have Scripts or HTML elements.'
+//            return false;
+//        }
 
         return true;
     }
