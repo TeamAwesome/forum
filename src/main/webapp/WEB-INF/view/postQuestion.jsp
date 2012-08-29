@@ -13,7 +13,7 @@
               <!-- Needed for Menus, Buttons and Overlays used in the Toolbar -->
               <script src="<c:url value="/static/javascript/container_core-min.js"/>"></script>
               <!-- Source file for Rich Text Editor-->
-              <script src="<c:url value="/static/javascript/simpleeditor-min.js"/>"></script>
+              <script src="<c:url value="/static/javascript/editor-min.js"/>"></script>
 <style type="text/css">
 .validationMessage { color: red; }
 </style>

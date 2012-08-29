@@ -1,8 +1,10 @@
 function Question(title, description){
     var MAX_TITLE_LENGTH = 100;
     var MAX_DESCRIPTION_LENGTH = 500;
-    this.title = title;
+    this.title = stripSpaces(title);
     this.description = stripHTML(description);
+    //alert(this.description);
+    this.description = stripSpaces(this.description);
     this.messages = {'title':null,'description':null};
 
     var that = this;
@@ -49,8 +51,17 @@ function Question(title, description){
 function stripHTML(html) {
     var stripHTML = /<\S[^><]*>/g;
     var text = html.replace(stripHTML, '');
+    var div = document.createElement("div");
+    div.innerHTML = text;
+    return div.textContent || div.innerText;
+}
+
+function stripSpaces(html) {
+    var stripspace = /^\s+|\s+$/g;
+    var text = html.replace(stripspace, '');
     return text;
 }
+
 
 Question.constructor.prototype.MAX_TITLE_LENGTH = 100;
 Question.constructor.prototype.MAX_DESCRIPTION_LENGTH = 500;
