@@ -33,7 +33,7 @@ public class UserController {
         return "join";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/join", method = RequestMethod.POST)
     public String processRegistrationForm(@Valid User user,  BindingResult result, Map model) {
         model.put("countries", countries);
 

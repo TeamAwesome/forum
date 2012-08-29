@@ -36,4 +36,13 @@ public class UserRepository {
             return null;
         }
     }
+
+    public User getByEmail(String email) {
+        UserRowMapper rowMapper = new UserRowMapper();
+        try{
+            return (User) jdbcTemplate.queryForObject("SELECT * FROM USER WHERE EMAIL_ADDRESS = ?", new Object[]{email}, rowMapper);
+        }  catch (IncorrectResultSizeDataAccessException e) {
+            return null;
+        }
+    }
 }

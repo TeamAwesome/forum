@@ -44,4 +44,10 @@ public class UserService {
             return false;
         return true;
     }
+
+    public boolean checkExistenceOfEmail(String email) {
+        if(userRepository.getByEmail(email) == null)
+            return false;
+        return true;
+    }
 }

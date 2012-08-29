@@ -3,7 +3,8 @@ package com.forum.domain;
 
 import com.forum.service.validation.Age;
 import com.forum.service.validation.PhoneNumber;
-import com.forum.service.validation.Username;
+import com.forum.service.validation.UniqueEmail;
+import com.forum.service.validation.UniqueUsername;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public class User {
 
     @NotEmpty
-    @Username
+    @UniqueUsername
     private String username;
 
     @Size(min=8)
@@ -25,6 +26,7 @@ public class User {
 
     @NotEmpty
     @Email
+    @UniqueEmail
     private String email;
 
     @PhoneNumber

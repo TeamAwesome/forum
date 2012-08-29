@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class UsernameValidator implements ConstraintValidator<Username,String> {
+public class UniqueUsernameValidator implements ConstraintValidator<UniqueUsername,String> {
 
-    private Username username;
+    private UniqueUsername uniqueUsername;
     private UserService userService;
 
     @Override
-    public void initialize(Username username) {
-        this.username = username;
+    public void initialize(UniqueUsername username) {
+        this.uniqueUsername = username;
     }
 
     @Override

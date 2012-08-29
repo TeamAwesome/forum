@@ -43,4 +43,19 @@ public class UserRepositoryTest extends IntegrationTestBase {
         User user = userRepository.getByUsername("who");
         assertNull(user);
     }
+
+    @Test
+    public void shouldGetUserByEmailIfExistsInDB() {
+        User user = userRepository.getByEmail("cece@thoughtworks.com");
+        if (user == null)
+            fail();
+        else
+            assertThat(user.getUsername(), is("cece"));
+    }
+
+    @Test
+    public void shouldReturnNullIfEmailNotExistsInDB() {
+        User user = userRepository.getByEmail("who@who.com");
+        assertNull(user);
+    }
 }

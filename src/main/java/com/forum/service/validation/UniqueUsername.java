@@ -13,12 +13,12 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Documented
-@Constraint(validatedBy = { UsernameValidator.class })
+@Constraint(validatedBy = { UniqueUsernameValidator.class })
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
 @Retention(RUNTIME)
 @ReportAsSingleViolation
 @NotNull
-public @interface Username {
+public @interface UniqueUsername {
     String message() default "Username is in use.";
 
     Class<?>[] groups() default {};
