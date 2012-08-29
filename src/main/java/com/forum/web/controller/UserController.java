@@ -29,13 +29,13 @@ public class UserController {
     public String showRegistrationForm(Map model) {
         User user = new User();
         model.put("user", user);
-        model.put("countries", countries);
+        model.put("countries.txt", countries);
         return "join";
     }
 
     @RequestMapping(value = "/join", method = RequestMethod.POST)
     public String processRegistrationForm(@Valid User user,  BindingResult result, Map model) {
-        model.put("countries", countries);
+        model.put("countries.txt", countries);
 
         if (result.hasErrors()) {
             return "join";

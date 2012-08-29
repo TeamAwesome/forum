@@ -28,7 +28,7 @@ public class UserService {
     public List<Country> getAvailableCountries() {
         List<Country> countries = new ArrayList<Country>();
         Scanner scanner = null;
-        InputStream countriesInputStream = UserService.class.getClassLoader().getResourceAsStream("countries");
+        InputStream countriesInputStream = UserService.class.getClassLoader().getResourceAsStream("countries.txt");
         scanner = new Scanner(countriesInputStream);
         while (scanner.hasNextLine()) {
             String string = scanner.nextLine();

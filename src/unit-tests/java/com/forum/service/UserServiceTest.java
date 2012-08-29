@@ -5,6 +5,8 @@ import com.forum.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.logging.Logger;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -14,6 +16,7 @@ public class UserServiceTest {
 
     private UserRepository userRepository;
     private UserService userService;
+    private static Logger logger = Logger.getLogger(UserServiceTest.class.getName());
 
     @Before
     public void setupUserService(){
@@ -56,5 +59,10 @@ public class UserServiceTest {
     public void shouldReturnFalseIfEmailNotExistsInDB(){
         when(userRepository.getByEmail("who@who.com")).thenReturn(null);
         assertThat(userService.checkExistenceOfUsername("who@who.com"), is(false));
+    }
+
+    @Test
+    public void shouldReturnListOfCountries(){
+        logger.info(userService.getAvailableCountries().toString());
     }
 }

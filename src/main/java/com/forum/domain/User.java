@@ -155,4 +155,42 @@ public class User {
     public Integer getAgeRange() {
         return ageRange;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (ageRange != null ? !ageRange.equals(user.ageRange) : user.ageRange != null) return false;
+        if (country != null ? !country.equals(user.country) : user.country != null) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        if (gender != null ? !gender.equals(user.gender) : user.gender != null) return false;
+        if (interests != null ? !interests.equals(user.interests) : user.interests != null) return false;
+        if (knowledge != null ? !knowledge.equals(user.knowledge) : user.knowledge != null) return false;
+        if (name != null ? !name.equals(user.name) : user.name != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (phoneNumber != null ? !phoneNumber.equals(user.phoneNumber) : user.phoneNumber != null) return false;
+        if (privacy != null ? !privacy.equals(user.privacy) : user.privacy != null) return false;
+        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = username != null ? username.hashCode() : 0;
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + (country != null ? country.hashCode() : 0);
+        result = 31 * result + (gender != null ? gender.hashCode() : 0);
+        result = 31 * result + (ageRange != null ? ageRange.hashCode() : 0);
+        result = 31 * result + (interests != null ? interests.hashCode() : 0);
+        result = 31 * result + (knowledge != null ? knowledge.hashCode() : 0);
+        result = 31 * result + (privacy != null ? privacy.hashCode() : 0);
+        return result;
+    }
 }
