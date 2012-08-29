@@ -84,7 +84,7 @@
                         <include name="**/*Test.java"/>
                         <!--8/28/2012 - These tests are excluded as the build is red on Go and rumor has it
                         that they are breaking the build. There will be a discussion with the team regarding the same-->
-                        <exclude name="**/ActivityWallTest.java"/>
+                        <!--<exclude name="**/ActivityWallTest.java"/>-->
                         <exclude name="**/QuestionDetailedTest.java"/>
                     </fileset>
                 </batchtest>

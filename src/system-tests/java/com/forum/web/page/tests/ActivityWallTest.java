@@ -19,7 +19,7 @@ public class ActivityWallTest {
     @Before
     public void initializeWebDriver() {
         driver = new FirefoxDriver();
-        driver.get("http://10.10.5.107:8080/forum");
+        driver.get("http://localhost:8080/app");
     }
 
     @After
@@ -29,15 +29,15 @@ public class ActivityWallTest {
 
     @Test
     public void shouldLoadMoreQuestions() {
-        WebElement loadMore = driver.findElement(By.id("loadMoreQuestion"));
+        WebElement loadMore = driver.findElement(By.id("loadMoreQuestions"));
 
-        WebElement activityWall = driver.findElement(By.className("ActivityWall"));
-        List<WebElement> questions = activityWall.findElements(By.tagName("a"));
+        WebElement activityWall = driver.findElement(By.className("activityWall"));
+        List<WebElement> questions = activityWall.findElements(By.id("questionTitle"));
         assertThat(questions.size(), is(10));
 
         loadMore.click();
 
-        questions = activityWall.findElements(By.tagName("a"));
+        questions = activityWall.findElements(By.id("questionTitle"));
         assertThat(questions.size(), is(20));
     }
 }
