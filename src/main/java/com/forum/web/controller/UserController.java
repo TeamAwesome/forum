@@ -16,6 +16,10 @@ import java.util.Map;
 
 @Controller
 public class UserController {
+    public static final String COUNTRIES = "countries";
+    public static final String USER = "user";
+    public static final String JOIN = "join";
+    public static final String SHOW_PROFILE = "showProfile";
     private UserService userService;
     private List<Country> countries;
 
@@ -28,21 +32,21 @@ public class UserController {
     @RequestMapping(value = "/join",method = RequestMethod.GET)
     public String showRegistrationForm(Map model) {
         User user = new User();
-        model.put("user", user);
-        model.put("countries.txt", countries);
-        return "join";
+        model.put(USER, user);
+        model.put(COUNTRIES, countries);
+        return JOIN;
     }
 
     @RequestMapping(value = "/join", method = RequestMethod.POST)
     public String processRegistrationForm(@Valid User user,  BindingResult result, Map model) {
-        model.put("countries.txt", countries);
+        model.put(COUNTRIES, countries);
 
         if (result.hasErrors()) {
-            return "join";
+            return JOIN;
         }
 
-        model.put("user", user);
 
-        return "showProfile";
+        model.put(USER, user);
+        return SHOW_PROFILE;
     }
 }

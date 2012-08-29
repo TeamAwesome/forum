@@ -33,9 +33,9 @@ public class UserControllerTest {
         String activityModelAndView = userController.showRegistrationForm(map);
 
         //Then
-        assertThat((User)map.get("user"), is(new User()));
-        assertTrue(map.containsKey("countries.txt"));
-        assertThat(activityModelAndView, is("join"));
+        assertThat((User)map.get(UserController.USER), is(new User()));
+        assertTrue(map.containsKey(UserController.COUNTRIES));
+        assertThat(activityModelAndView, is(UserController.JOIN));
 
     }
 
@@ -47,8 +47,8 @@ public class UserControllerTest {
 
         String activityModelAndView =userController.processRegistrationForm(new User(), mockBindingResult, map);
 
-        assertTrue(map.containsKey("countries.txt"));
-        assertThat(activityModelAndView, is("join"));
+        assertTrue(map.containsKey(UserController.COUNTRIES));
+        assertThat(activityModelAndView, is(UserController.JOIN));
     }
 
 
@@ -60,9 +60,10 @@ public class UserControllerTest {
 
         String activityModelAndView =userController.processRegistrationForm(new User(), mockBindingResult, map);
 
-        assertThat((User)map.get("user"), is(new User()));
-        assertTrue(map.containsKey("countries.txt"));
-        assertThat(activityModelAndView, is("showProfile"));
+        assertThat((User)map.get(UserController.USER), is(new User()));
+        assertTrue(map.containsKey(UserController.COUNTRIES));
+        assertThat(activityModelAndView, is(UserController.SHOW_PROFILE));
     }
+
 
 }
