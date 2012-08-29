@@ -5,14 +5,18 @@ import com.forum.service.validation.Age;
 import com.forum.service.validation.PhoneNumber;
 import com.forum.service.validation.UniqueEmail;
 import com.forum.service.validation.UniqueUsername;
+import com.forum.util.Encrypter;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public class User {
+
+    private Encrypter encrypter;
 
     @NotEmpty
     @UniqueUsername
@@ -47,10 +51,15 @@ public class User {
     private List<Integer> knowledge;
     private Boolean privacy;
 
+    public User(){
+        this.encrypter = new Encrypter();
+    }
+
     public User(String username, String password, String name, String email, String phoneNumber,
-                             String country, String gender, Integer ageRange) {
+                             String country, String gender, Integer ageRange) throws UnsupportedOperationException {
+        this();
         this.username = username;
-        this.password = password;
+        setPassword(password);
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -61,10 +70,6 @@ public class User {
         this.knowledge = knowledge;
         this.privacy = privacy;
     }
-
-    public User() {
-    }
-
 
     public List<Integer> getInterests() {
         return interests;
@@ -99,8 +104,9 @@ public class User {
         this.username = username;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String password) throws UnsupportedOperationException, IllegalArgumentException {
+        if(password ==null) throw new IllegalArgumentException();
+        this.password = encrypter.encryptUsingMd5(password);
     }
 
     public void setName(String name) {

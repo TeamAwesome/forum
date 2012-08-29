@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class QuestionRowMapper implements RowMapper {
 
     @Override
-    public Question mapRow(ResultSet resultSet, int i) throws SQLException {
+    public Question mapRow(ResultSet resultSet, int i) throws SQLException, UnsupportedOperationException {
         User user = new User(
                 resultSet.getString("USERNAME"),
                 resultSet.getString("PASSWORD"),

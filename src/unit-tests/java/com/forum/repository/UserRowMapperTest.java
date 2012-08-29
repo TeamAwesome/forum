@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -32,7 +34,8 @@ public class UserRowMapperTest {
         assertThat(user.getCountry(), is("US"));
         assertThat(user.getEmail(), is("ll@mail.com"));
         assertThat(user.getGender(), is("who knows"));
-        assertThat(user.getPassword(), is("John"));
+        assertThat(user.getPassword(), not("John"));
+        assertNotNull(user.getPassword());
         assertThat(user.getPhoneNumber(), is("12345678945"));
     }
 

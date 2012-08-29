@@ -1,10 +1,12 @@
 package com.forum.service;
 
+import com.forum.domain.Country;
 import com.forum.domain.User;
 import com.forum.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -63,6 +65,9 @@ public class UserServiceTest {
 
     @Test
     public void shouldReturnListOfCountries(){
-        logger.info(userService.getAvailableCountries().toString());
+        List<Country> countryList = userService.getAvailableCountries();
+        assertThat(countryList.size(), is(241));
+        assertThat(countryList.contains(new Country("China", "China")), is(true));
+        assertThat(countryList.contains(new Country("Germany", "Germany")), is(true));
     }
 }
