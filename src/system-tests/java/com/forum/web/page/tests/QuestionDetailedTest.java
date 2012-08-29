@@ -20,7 +20,7 @@ public class QuestionDetailedTest {
     @Before
     public void initializeWebDriver() {
         driver = new FirefoxDriver();
-        driver.get("http://10.10.5.107:8080/forum");
+        driver.get("http://localhost:8080/app");
     }
 
     @After
