@@ -21,10 +21,14 @@ function PlotGraphs (){
                  		 		if (lenTime == '12'){
                          		    lengthOfTime = '12';
                          		 }
+                         		 if(lenTime=='90'){
+                         		 lengthOfTime = '120';
+                         		 }
 	};
 
 	this.plot = function(){
-		 $("#chartdiv").jqplot('chartdiv',  [[[1, numberOfQuestions1],[2,numberOfQuestions2],[3,numberOfQuestions3]]],{title: 'Number of Questions',axesDefaults: {
+		 $("#chartdiv").jqplot('chartdiv',  [[[1, numberOfQuestions1],[2,numberOfQuestions2],[3,numberOfQuestions3]]],
+		 {title: 'Number of Questions',axesDefaults: {
 																						  tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
 																						   tickOptions: {
 																							 angle: -60,

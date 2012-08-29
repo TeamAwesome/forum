@@ -55,7 +55,7 @@
 <script>
 
         var plotGraphs = new PlotGraphs();
-        plotGraphs.setQuestionsGraphFor3Months(${month1},30,40,3);
+        plotGraphs.setQuestionsGraphFor3Months(${month1},30,40,90);
         plotGraphs.plot();
 
 
