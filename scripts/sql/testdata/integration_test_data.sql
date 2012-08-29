@@ -21,28 +21,31 @@ INSERT INTO QUESTION(
     DESCRIPTION,
     CREATED_AT,
     USER_ID)
-  VALUES('What\'s up today Lu', 'I don\'t know. You tell me Du Juan', '2012-08-23 07:08:04', 1);
+  VALUES('Shopping places in the city', 'I\'m looking for nice places to shop in Bangalore, can anyone make any suggestions?',
+           '2012-08-23 07:08:04', 1);
 
 INSERT INTO QUESTION(
     TITLE,
     DESCRIPTION,
     CREATED_AT,
     USER_ID)
-  VALUES('What\'s up today Lu', 'I don\'t know. You tell me Du Juan', '2012-08-23 08:08:04', 1);
+  VALUES('How much should I be paying?', 'I\'m new to Bangalore, and I\'ve been taking auto-rickshaws to get around, but my local friends keep telling me I\'m being ripped off. So tell me, what\'s a decent price for a short journey.',
+            '2012-08-23 08:08:04', 1);
 
 INSERT INTO QUESTION(
     TITLE,
     DESCRIPTION,
     CREATED_AT,
     USER_ID)
-  VALUES('What\'s up today Lu', 'I don\'t know. You tell me Du Juan', '2012-08-23 09:08:04', 1);
+  VALUES('Where\'s the best place to eat in Koramangala?', 'I\'m only in India for a week, and I\'m staying near Koramangala, I don\'t have time to try all the food here though, so could anyone suggest a good place?' ,
+            '2012-08-23 09:08:04', 1);
 
 INSERT INTO QUESTION(
     TITLE,
     DESCRIPTION,
     CREATED_AT,
     USER_ID)
-  VALUES('What\'s up today Lu', 'I don\'t know. You tell me Du Juan', '2012-08-23 10:00:04', 1);
+  VALUES('I can\'t take the spice', 'Someone please tell me where I can find non spicy food. ;_;', '2012-08-23 10:00:04', 1);
 
 INSERT INTO QUESTION(
     TITLE,
@@ -155,13 +158,6 @@ INSERT INTO QUESTION(
     CREATED_AT,
     USER_ID)
   VALUES('What\'s up today Lu', 'I don\'t know. You tell me Du Juan', '2012-08-23 10:16:04', 1);
-
-INSERT INTO QUESTION(
-    TITLE,
-    DESCRIPTION,
-    CREATED_AT,
-    USER_ID)
-  VALUES('What\'s up today Lu', 'I don\'t know. You tell me Du Juan', '2012-08-30 10:17:04', 1);
 
 INSERT INTO QUESTION(
     TITLE,

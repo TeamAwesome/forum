@@ -23,7 +23,7 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
 
         Question question = questionRepository.getById(1);
 
-        assertThat(question.getTitle(), is("What\'s up today Lu"));
+        assertThat(question.getTitle(), is("Shopping places in the city"));
     }
 
     @Test
