@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class QuestionRepository {
@@ -36,13 +36,9 @@ public class QuestionRepository {
 
     }
 
-    public int createQuestion(Map<String, String> params) {
-        java.util.Date date= new java.util.Date();
-        Timestamp timestamp = new Timestamp(date.getTime());
-
+    public int createQuestion(Question question) {
         return jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
-                new Object[]{params.get("questionTitle"), params.get("questionDescription"), timestamp.toString(), 1});
-//        return true;
+                new Object[]{question.getTitle(), question.getDescription(), question.getCreatedAt(), question.getUser()});
     }
 
     public List<Question> latestQuestion(int pageNum, int pageSize) {

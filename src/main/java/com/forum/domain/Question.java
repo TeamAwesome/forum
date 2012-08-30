@@ -18,6 +18,13 @@ public class Question implements Serializable {
         this.description=description;
     }
 
+    public Question(String title,String description, User user, Date createdAt){
+        this.title=title;
+        this.user= user;
+        this.createdAt = createdAt;
+        this.description=description;
+    }
+
     public String getTitle() {
         return title;
     }

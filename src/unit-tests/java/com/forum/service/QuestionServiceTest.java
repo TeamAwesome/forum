@@ -1,5 +1,6 @@
 package com.forum.service;
 
+import com.forum.domain.Question;
 import com.forum.repository.QuestionRepository;
 import org.junit.Test;
 
@@ -17,12 +18,12 @@ public class QuestionServiceTest {
 
     @Test
     public void shouldSaveQuestionToRepository(){
-        Map<String,String> params = new HashMap<String,String>();
+        Question question = new Question("Question Title", "Question Description", null, null);
         QuestionRepository mockQuestionRepository = mock(QuestionRepository.class);
-        when(mockQuestionRepository.createQuestion(params)).thenReturn(1);
+        when(mockQuestionRepository.createQuestion(question)).thenReturn(1);
         questionService = new QuestionService(mockQuestionRepository);
 
-        int questionUpdatedNumber = questionService.createQuestion(params);
+        int questionUpdatedNumber = questionService.createQuestion(question);
 
         assertThat(questionUpdatedNumber, is(1));
     }

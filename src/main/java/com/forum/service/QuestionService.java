@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class QuestionService {
@@ -22,8 +21,8 @@ public class QuestionService {
         return questionRepository.getById(questionId);
     }
 
-    public int createQuestion(Map<String, String> params) {
-        return questionRepository.createQuestion(params);
+    public int createQuestion(Question question) {
+        return questionRepository.createQuestion(question);
     }
 
     @Transactional

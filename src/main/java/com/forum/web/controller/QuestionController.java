@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -31,7 +33,11 @@ public class QuestionController {
 
     @RequestMapping(value = "/showPostedQuestion", method = RequestMethod.POST)
     public ModelAndView showPostedQuestion(@RequestParam Map<String, String> params){
-        questionService.createQuestion(params);
+        Date date = new Date();
+        Timestamp timestamp = new Timestamp(date.getTime());
+
+        Question question = new Question(params.get("questionTitle"), params.get("questionDescription"), null, timestamp);
+        questionService.createQuestion(question);
         ModelAndView modelAndView = new ModelAndView("showPostedQuestion");
         modelAndView.addObject("questionTitle",params.get("questionTitle"));
         modelAndView.addObject("questionDescription",params.get("questionDescription"));

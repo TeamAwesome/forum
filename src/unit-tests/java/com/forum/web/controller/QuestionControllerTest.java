@@ -1,9 +1,12 @@
 package com.forum.web.controller;
 
+import com.forum.domain.Question;
 import com.forum.service.QuestionService;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,10 +28,11 @@ public class QuestionControllerTest {
     @Test
     public void shouldReturnPostedQuestion(){
         QuestionService mockedQuestionService = mock(QuestionService.class);
+        Question question = new Question("Question Title", "Question Description", null, null);
         Map<String, String> params = new HashMap<String, String>();
-        params.put("questionTitle", "Question Title");
-        params.put("questionDescription", "Question Description");
-        mockedQuestionService.createQuestion(params);
+        params.put("questionTitle", question.getTitle());
+        params.put("questionDescription", question.getDescription());
+        mockedQuestionService.createQuestion(question);
         this.questionController = new QuestionController(mockedQuestionService);
 
         ModelAndView questionModelAndView = questionController.showPostedQuestion(params);
@@ -38,5 +42,4 @@ public class QuestionControllerTest {
         assertThat(questionTitle, is("Question Title"));
         assertThat(questionDescription, is("Question Description"));
     }
-
 }
