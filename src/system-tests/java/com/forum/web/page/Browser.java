@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Browser {
 
@@ -24,6 +25,7 @@ public class Browser {
             this.driver = new HtmlUnitDriver();
             this.javascriptEnabled = false;
         }
+        this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     public Browser open(String url) {
