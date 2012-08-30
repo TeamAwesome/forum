@@ -1,4 +1,5 @@
 function PlotGraphs (){
+    var lengthOfTime;
 	var numberOfQuestions1;
 	var numberOfQuestions2;
 	var numberOfQuestions3;

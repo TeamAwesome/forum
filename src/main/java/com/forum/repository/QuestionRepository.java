@@ -24,10 +24,6 @@ public class QuestionRepository {
         return jdbcTemplate.query("SELECT * FROM QUESTION", new QuestionRowMapper());
     }
 
-    public List<Question> getQuestionsPostedInLast12Months(){
-        return jdbcTemplate.query("SELECT * FROM QUESTION WHERE CREATED_AT > DATE_SUB(NOW() , INTERVAL 12 MONTH)", new QuestionRowMapper());
-    }
-
     public Question getById(Integer questionId) {
         QuestionRowMapper rowMapper = new QuestionRowMapper();
         String query = "SELECT Q.ID AS QUESTION_ID, Q.TITLE, Q.DESCRIPTION, " +

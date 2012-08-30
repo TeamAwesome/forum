@@ -58,7 +58,6 @@
         plotGraphs.setQuestionsGraphFor3Months(${month1},30,40,90);
         plotGraphs.plot();
 
-
 </script>
 
 </html>
