@@ -11,18 +11,7 @@ function PlotGraphs (){
 		numberOfQuestions2 = numQuestionsMon2;
 		numberOfQuestions3 = numQuestionsMon3;
 
-		if (lenTime == '3'){
-		    lengthOfTime = '4';
-		}
-        if (lenTime == '6'){
-            lengthOfTime = '8';
-        }
-        if (lenTime == '9'){
-            lengthOfTime = '12';
-        }
-        if (lenTime == '12'){
-            lengthOfTime = '12';
-        }
+        lengthOfTime = lenTime;
 	};
 
 	this.plot = function(){

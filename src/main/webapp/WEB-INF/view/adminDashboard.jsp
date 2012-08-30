@@ -29,17 +29,7 @@
     <span align="centre"> <input type="submit"  name="View-flagged-users" value="View flagged users">
     <input type="submit"  name="Logout" value="Logout">
     </span>
-    <span><br> <br>
-    FILTER:
-    <form name="month" action="<c:url value="/adminDashboard"/>" method="post">
-        <select id="month" onChange="plot(this)">
-
-         <option value=3 selected> 3 Months ago</option>
-         <option value=6> 6 Months ago</option>
-         <option value=9> 9 Months ago</option>
-         <option value=12> 1 year ago</option>
-         </select>
-     </form>
+    <span>
 
      <br> <br>
     Statistics
