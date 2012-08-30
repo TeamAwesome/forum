@@ -6,10 +6,10 @@ import com.forum.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-import java.util.logging.Logger;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -65,10 +65,9 @@ public class UserServiceTest {
         assertThat(userService.checkExistenceOfUsername("who@who.com"), is(false));
     }
 
-    @Test
+   @Test
     public void shouldReturnListOfCountries(){
         List<Country> countryList = userService.getAvailableCountries();
-
         assertThat(countryList.size(), is(241));
         assertThat(countryList.contains(new Country("China", "China")), is(true));
         assertThat(countryList.contains(new Country("Germany", "Germany")), is(true));

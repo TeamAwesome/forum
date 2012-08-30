@@ -45,7 +45,7 @@ public class UserRepository {
         }
     }
     public String validateUser(String username) {
-         System.out.println("inside validateuser"+username);
+
          String expectedPassword = (String) jdbcTemplate.queryForObject("SELECT PASSWORD FROM USER WHERE USERNAME = ?",new Object[]{username},String.class);
          return  (String)expectedPassword;
     }
