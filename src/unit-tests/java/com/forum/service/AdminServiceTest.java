@@ -34,5 +34,4 @@ public class AdminServiceTest {
         questions.add(new Question(3, "test","test",user,new Date()));
         assertThat(adminService.getTotalNumberOfQuestions(), is(questions.size()));
     }
-
 }
