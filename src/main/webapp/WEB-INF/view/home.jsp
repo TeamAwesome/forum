@@ -58,8 +58,8 @@
                       <td>
                     <img src="<c:url value="/static/images/empty_profile_picture.gif"/>" width=60 height=60>
 
-                    <br />UserId
-                    <span id="questionUserID" data-bind="text: userId">
+                    <br />
+                    <span id="questionUserID" data-bind="text: userName">
                     <img src="<c:url value="/static/images/empty_profile_picture.gif"/>" width=100 height=100> </span>
                     <br />
                      </td>

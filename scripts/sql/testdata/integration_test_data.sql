@@ -178,11 +178,11 @@ INSERT INTO QUESTION(
     DESCRIPTION,
     CREATED_AT,
     USER_ID)
-  VALUES('What\'s up today Lu', 'I don\'t know. You tell me Du Juan', '2012-08-25 10:19:54', 1);
+  VALUES('What\'s up today Lu', 'I don\'t know. You tell me Du Juan', '2012-08-25 10:19:54', 3);
 
 INSERT INTO QUESTION(
     TITLE,
     DESCRIPTION,
     CREATED_AT,
     USER_ID)
-  VALUES('What\'s up today Lu', 'I don\'t know. You tell me Du Juan', '2012-08-13 10:20:04', 1);
+  VALUES('What\'s up today Lu', 'I don\'t know. You tell me Du Juan', '2012-08-13 10:20:04', 2);
