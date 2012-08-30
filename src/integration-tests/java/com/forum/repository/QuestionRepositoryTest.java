@@ -2,12 +2,14 @@ package com.forum.repository;
 
 
 import com.forum.domain.Question;
+import com.forum.domain.User;
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;
+import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -43,4 +45,14 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
 
         assertThat(questions.size(), is(24));
     }
+
+//    @Test
+//    public void shouldInsertQuestion(){
+//        Question question = new Question("test question","i think i am a test question and that makes me very very sad",new User(),new Date());
+//
+//        questionRepository.createQuestion(question);
+//        List<Question> questions = questionRepository.getAllQuestions();
+//
+//        assertThat(questions.contains(question), is(true));
+//    }
 }

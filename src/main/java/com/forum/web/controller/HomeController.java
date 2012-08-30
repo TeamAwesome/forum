@@ -30,8 +30,7 @@ public class HomeController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
     public String loadMoreQuestions(@RequestParam String pageNum,
-                                    @RequestParam String pageSize,
-                                    HttpServletResponse response) {
+                                    @RequestParam String pageSize) {
         List<Question> questionList = questionService.latestQuestion(pageNum, pageSize);
         String result = gson.toJson(questionList);
         return result;
