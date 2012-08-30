@@ -39,7 +39,7 @@ public class QuestionDetailedTest {
 
         question.click();
 
-        String detailedViewTitle = driver.findElement(By.tagName("h2")).getText();
+        String detailedViewTitle = driver.findElement(By.tagName("h1")).getText();
         assertThat(detailedViewTitle, is(title));
         assertTrue(driver.getCurrentUrl().contains("/question/view/"));
     }

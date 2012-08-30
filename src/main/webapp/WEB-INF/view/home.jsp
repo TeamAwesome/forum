@@ -52,15 +52,15 @@
                       style='width: 350px; height: 1em; overflow: hidden; display: inline-block; font-size:.8em;'>
                        </span>...
                       <br><font color="#599425" size="2em">Created on:</font><br>
-                                            <span class="questionCreatedAt" data-bind="text: createdAt" style="font-size:.7em;"> </span>
+                      <span class="questionCreatedAt" data-bind="text: createdAt" style="font-size:.7em;"> </span>
                       </td>
 
                       <td>
-                    <img src="<c:url value="/static/images/empty_profile_picture.gif"/>" width=60 height=60>
+                    <img src='<c:url value="/static/images/empty_profile_picture.gif"/>' width=60 height=60>
 
                     <br />
                     <span id="questionUserID" data-bind="text: userName">
-                    <img src="<c:url value="/static/images/empty_profile_picture.gif"/>" width=100 height=100> </span>
+                    <img src='<c:url value="/static/images/empty_profile_picture.gif"/>' width=100 height=100> </span>
                     <br />
                      </td>
                      </tr>
