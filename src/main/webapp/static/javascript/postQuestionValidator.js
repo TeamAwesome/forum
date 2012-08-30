@@ -1,73 +1,44 @@
-    var YUIHandler = function() {
-        //Setup some private variables
-        var Dom = YAHOO.util.Dom,
-        Event = YAHOO.util.Event;
+$(this).load(function(){
+    $("#titleValidationMessage").text(Question.MAX_TITLE_LENGTH + " characters remaining");
+    $("#descriptionValidationMessage").text(Question.MAX_DESCRIPTION_LENGTH + " characters remaining");
+});
 
-        //The SimpleEditor config
-        var myConfig = {
-            height: '300px',
-            width: '600px',
-            dompath: true,
-            focusAtStart: false
-        };
-
-        //Now let's load the SimpleEditor..
-        var myEditor = new YAHOO.widget.SimpleEditor('editor', myConfig);
-        return myEditor;
+var createYUIEditor = function() {
+    var descriptionEditorConfig = {
+      height: '280px',
+      width: '580px'
     };
 
-    var myEditor = YUIHandler();
-    myEditor.render();
+    return new YAHOO.widget.Editor('descriptionEditor', descriptionEditorConfig);
+ }
 
-    var track = function(){
-        var stripHTML = /<\S[^><]*>/g;
-        var maxLimit = 500;
+questionDescriptionEditor = createYUIEditor();
+questionDescriptionEditor.render();
 
-        //Get the HTML from the Editor, assuming myEditor is your Editor reference
-        var html = myEditor.saveHTML();
+function update() {
+    var question = new Question($("#questionTitle").val(), questionDescriptionEditor.saveHTML());
+    question.updateMessages();
+    $("#titleValidationMessage").text(question.messages['title']);
+    $("#descriptionValidationMessage").text(question.messages['description']);
+}
 
-        //Remove the HTML tags from the returned string
-        var text = html.replace(stripHTML, '');
+function validate() {
+    var question = new Question($("#questionTitle").val(),questionDescriptionEditor.saveHTML());
+    var isValid = question.isValid();
+    $("#titleValidationMessage").text(question.messages['title']);
+    $("#descriptionValidationMessage").text(question.messages['description']);
 
-        //alert(text);
-        var remainingChars = (maxLimit-text.length);
-        if(remainingChars < 500){
-            $("#descriptionNumberRemainingMessage").text(remainingChars+" Characters Remaining");
-        }else{
-            $("#descriptionValidationMessage").text("");
-        }
+    return isValid;
+}
 
-        return text;
-    }
+questionDescriptionEditor.subscribe('editorKeyPress', update);
+questionDescriptionEditor.subscribe('editorKeyUp',update);
+questionDescriptionEditor.subscribe('editorKeyDown',update);
 
-    myEditor.subscribe('editorKeyPress',track);
-    myEditor.subscribe('editorKeyUp',track);
-    myEditor.subscribe('editorKeyDown',track);
+//$('#questionTitle').keyup(update);
+$('#questionTitle').keydown(update);
+$('#questionTitle').keypress(update);
+$('#questionDescription').keydown(update);
+$('#questionDescription').keypress(update);
 
-    $('#questionTitle').keyup(function() {
-        var title = $("#questionTitle").val();
-        var validator = new Validation();
-        var titleNumberRemainingMessage = validator.checkNumberOfRemainingCharactersInTheTitle($("#questionTitle").val());
-        $("#titleNumberRemainingMessage").text(titleNumberRemainingMessage);
-
-        if(validator.checkTitle(title)){
-            $("#titleValidationMessage").text("");
-        }
-    });
-
-    $('#submitButton').click(function(){
-        var validator = new Validation();
-        var title = $("#questionTitle").val();
-        var description = track();
-
-        if(validator.checkTitle(title) && validator.checkDescription(description)){
-            $("#questionForm").submit();
-        } else if(!validator.checkTitle(title) && !validator.checkDescription(description)){
-            $("#titleValidationMessage").text("* A Question must have a title.");
-            $("#descriptionValidationMessage").text("* A Question must have a description.");
-        } else if(!validator.checkTitle(title)){
-            $("#titleValidationMessage").text("* A Question must have a title.");
-        } else {
-            $("#descriptionValidationMessage").text("* A Question must have a description.");
-        }
-    });
+$('#questionForm').submit(validate);
