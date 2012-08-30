@@ -2,7 +2,6 @@ package com.forum.repository;
 
 import com.forum.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -44,5 +43,10 @@ public class UserRepository {
         }  catch (IncorrectResultSizeDataAccessException e) {
             return null;
         }
+    }
+    public String validateUser(String username) {
+         System.out.println("inside validateuser"+username);
+         String expectedPassword = (String) jdbcTemplate.queryForObject("SELECT PASSWORD FROM USER WHERE USERNAME = ?",new Object[]{username},String.class);
+         return  (String)expectedPassword;
     }
 }

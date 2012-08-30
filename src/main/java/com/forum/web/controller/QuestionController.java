@@ -21,14 +21,17 @@ public class QuestionController {
 
     private QuestionService questionService;
 
+
     @Autowired
     public QuestionController(QuestionService questionService) {
         this.questionService = questionService;
+
     }
 
     @RequestMapping(value = "/postQuestion", method = RequestMethod.GET)
     public ModelAndView postQuestion() {
-        return new ModelAndView("postQuestion");
+        ModelAndView modelAndView=new ModelAndView("postQuestion");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/showPostedQuestion", method = RequestMethod.POST)

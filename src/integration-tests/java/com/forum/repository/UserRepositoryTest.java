@@ -58,4 +58,9 @@ public class UserRepositoryTest extends IntegrationTestBase {
         User user = userRepository.getByEmail("who@who.com");
         assertNull(user);
     }
+    @Test
+    public void shouldReturnNullIfUserNotPresent(){
+        String validUser = userRepository.validateUser("lu");
+        assertThat(validUser,is("QWERTY"));
+    }
 }

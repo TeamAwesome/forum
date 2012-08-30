@@ -1,26 +1,46 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
 <head>
-   <link type="text/css" rel="stylesheet" href="<c:url value="/static/css/main.css"/>">
-   <title>Login</title>
+    <title>Login</title>
 </head>
-<body>
- <div class="title">
-     <span>Login </span>
- </div>
-  <form method="post">
-      <p>
-        <label for="username" accesskey="U">Enter your <span class="mnemonic">U</span>sername:</label>
-        <input id="username" type="text" name="username" size="20" />
-      </p>
-      <p>
-        <label for="password" accesskey="P">Enter your <span class="mnemonic">P</span>assword:</label>
-        <input id="password" type="password" name="password" size="20" />
-      </p>
-      <p>
-        <input type="submit" value="Submit" name="submit">
-      </p>
-  </form>
+
+<body onload='document.loginForm.Username.focus();'>
+
+    <form name="loginForm" action="login" method = "POST">
+        <div style="color:red; text-align:center" id="messagetobedisplayed">
+            ${messageToBeDisplayed}
+        </div>
+        <table align="left">
+            <tr>
+                <td>
+                    <table style="margin-left:50">
+                        <tr>
+                            <td>Username:<FONT color="red">
+                            <div style="color:red; text-align:center" id="usernameError">
+                               ${usernameError}
+                            </div>
+                        </tr>
+
+                        <tr>
+                            <td><input path="username" type = "text" name = "Username" /></td>
+                        </tr>
+
+                        <tr>
+                            <td>Password:<FONT color="red">
+                            <div style="color:red; text-align:center" id="passwordError">
+                               ${passwordError}
+                            </div>
+                        </tr>
+                        <tr>
+                            <td><input path="password" type ="password" name = "Password" /></td>
+                        </tr>
+                        <tr>
+                            <td><input type="submit" value="Submit" name = "Submit"/></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </form>
 </body>
 </html>

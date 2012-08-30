@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 @Service
@@ -50,4 +51,13 @@ public class UserService {
             return false;
         return true;
     }
+
+    public boolean getValidation(Map<String, String> params) {
+        String username=params.get("Username");
+        String expectedPassword = userRepository.validateUser(username);
+        if((expectedPassword).equals(params.get("Password"))){
+             return  true;
+        }
+        return  false;
+        }
 }

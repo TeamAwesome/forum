@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -66,8 +68,17 @@ public class UserServiceTest {
     @Test
     public void shouldReturnListOfCountries(){
         List<Country> countryList = userService.getAvailableCountries();
+
         assertThat(countryList.size(), is(241));
         assertThat(countryList.contains(new Country("China", "China")), is(true));
         assertThat(countryList.contains(new Country("Germany", "Germany")), is(true));
+    }
+    @Test
+    public void shouldReturnTrueIfUserExists(){
+        Map<String,String> param=new HashMap();
+        when(userRepository.validateUser("lu")).thenReturn("QWERTY");
+        param.put("Username","lu");
+        param.put("Password","QWERTY");
+        assertThat(userService.getValidation(param),is(true));
     }
 }
