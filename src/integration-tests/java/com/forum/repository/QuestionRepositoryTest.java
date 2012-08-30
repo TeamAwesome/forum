@@ -3,6 +3,7 @@ package com.forum.repository;
 
 import com.forum.domain.Question;
 import org.hamcrest.CoreMatchers;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,13 +15,16 @@ import static org.junit.Assert.assertThat;
 
 public class QuestionRepositoryTest extends IntegrationTestBase {
 
+    private QuestionRepository questionRepository;
     @Autowired
     private DataSource dataSource;
 
+    @Before
+    public void setup(){
+        questionRepository = new QuestionRepository(dataSource);
+    }
     @Test
     public void shouldBeAbleToRetrieveAQuestionByID(){
-        QuestionRepository questionRepository = new QuestionRepository(dataSource);
-
         Question question = questionRepository.getById(1);
 
         assertThat(question.getTitle(), is("Shopping places in the city"));
@@ -28,8 +32,15 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
 
     @Test
     public void shouldGetLatestQuestions(){
-        QuestionRepository repository = new QuestionRepository(dataSource);
-        List<Question> Questions=repository.latestQuestion(1, 20);
-        assertThat(Questions.size(), CoreMatchers.is(20));
+        List<Question> questions = questionRepository.latestQuestion(1, 20);
+
+        assertThat(questions.size(), CoreMatchers.is(20));
+    }
+
+    @Test
+    public void shouldGetAllQuestions(){
+        List<Question> questions = questionRepository.getAllQuestions();
+
+        assertThat(questions.size(), is(24));
     }
 }

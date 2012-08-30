@@ -21,14 +21,14 @@ public class QuestionRepository {
     }
 
     public List<Question> getAllQuestions() {
-        return jdbcTemplate.query("SELECT * FROM QUESTION", new QuestionRowMapper());
+        String query = "SELECT Q.ID AS QUESTION_ID, Q.TITLE, Q.DESCRIPTION, Q.CREATED_AT, U.* FROM QUESTION Q JOIN USER U WHERE Q.USER_ID=U.ID ORDER BY Q.ID ASC; ";
+        return jdbcTemplate.query(query,new QuestionRowMapper());
     }
 
     public Question getById(Integer questionId) {
-        QuestionRowMapper rowMapper = new QuestionRowMapper();
         String query = "SELECT Q.ID AS QUESTION_ID, Q.TITLE, Q.DESCRIPTION, " +
                 "Q.CREATED_AT, U.* FROM QUESTION Q JOIN USER U WHERE Q.USER_ID=U.ID AND Q.ID = ?";
-        return (Question) jdbcTemplate.queryForObject(query, new Object[]{questionId}, rowMapper);
+        return (Question) jdbcTemplate.queryForObject(query, new Object[]{questionId}, new QuestionRowMapper());
 
     }
 
@@ -39,11 +39,10 @@ public class QuestionRepository {
 
     public List<Question> latestQuestion(int pageNum, int pageSize) {
         int pageStart = (pageNum - 1) * pageSize;
-        QuestionRowMapper rowMapper = new QuestionRowMapper();
         String query = "SELECT Q.ID AS QUESTION_ID, Q.TITLE, Q.DESCRIPTION, "
                 + "Q.CREATED_AT, U.* FROM QUESTION Q JOIN USER U WHERE Q.USER_ID=U.ID "
                 + "ORDER BY Q.CREATED_AT DESC LIMIT ?,?";
         return jdbcTemplate.query(query,
-                new Object[]{pageStart, pageSize}, rowMapper);
+                new Object[]{pageStart, pageSize}, new QuestionRowMapper());
     }
 }
