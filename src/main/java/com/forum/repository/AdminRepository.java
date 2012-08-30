@@ -9,6 +9,7 @@ public class AdminRepository {
 
     private JdbcTemplate jdbcTemplate;
 
+
     @Autowired
     public AdminRepository(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);

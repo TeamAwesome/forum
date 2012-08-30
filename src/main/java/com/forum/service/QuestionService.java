@@ -29,4 +29,5 @@ public class QuestionService {
     public List<Question> latestQuestion(String pageNum, String pageSize) {
         return questionRepository.latestQuestion(Integer.parseInt(pageNum), Integer.parseInt(pageSize));
     }
+
 }

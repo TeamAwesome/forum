@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
     }
     @Test
     public void shouldBeAbleToRetrieveAQuestionByID(){
+        QuestionRepository questionRepository = new QuestionRepository(dataSource);
         Question question = questionRepository.getById(1);
 
         assertThat(question.getTitle(), is("Shopping places in the city"));
@@ -54,5 +57,27 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
         assertThat(questionRepository.createQuestion(question),is(1));
     }
 
+
+    @Test
+    public void shouldGetNumberOfQuestionInAParticularDay(){
+        QuestionRepository questionRepository = new QuestionRepository(dataSource);
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,00);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.MILLISECOND,0);
+        Date date = cal.getTime();
+        Timestamp timestamp = new Timestamp(date.getTime());
+        questionRepository.createQuestion(new Question("test1", "test1", null, timestamp));
+        questionRepository.createQuestion(new Question("test2", "test2", null, timestamp));
+        questionRepository.createQuestion(new Question("test3", "test3", null, timestamp));
+        questionRepository.createQuestion(new Question("test4", "test4", null, timestamp));
+        questionRepository.createQuestion(new Question("test5", "test5", null, timestamp));
+        questionRepository.createQuestion(new Question("test6", "test6", null, timestamp));
+        int numberOfQuestion = questionRepository.getNumberOfQuestionInADay(timestamp);
+
+        assertThat(numberOfQuestion, is(6));
+    }
 
 }

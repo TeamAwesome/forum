@@ -7,11 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 @Repository
-public class QuestionRepository {
+public class    QuestionRepository {
 
     private JdbcTemplate jdbcTemplate;
 
@@ -44,5 +45,24 @@ public class QuestionRepository {
                 + "ORDER BY Q.CREATED_AT DESC LIMIT ?,?";
         return jdbcTemplate.query(query,
                 new Object[]{pageStart, pageSize}, new QuestionRowMapper());
+    }
+
+    public int getNumberOfQuestionInADay(Date beginningDate) {
+        int numberOfQuestionInADay = 0;
+        QuestionRowMapper rowMapper = new QuestionRowMapper();
+        Timestamp beginningTime = new Timestamp(beginningDate.getTime());
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,23);
+        cal.set(Calendar.MINUTE,59);
+        cal.set(Calendar.SECOND,59);
+        cal.set(Calendar.MILLISECOND,59);
+        Date endingDate = cal.getTime();
+        Timestamp endingTime = new Timestamp(endingDate.getTime());
+
+        String query = "SELECT COUNT(ID) FROM QUESTION where CREATED_AT >= ? AND CREATED_AT <= ?";
+        numberOfQuestionInADay = jdbcTemplate.queryForInt(query,
+                new Object[]{beginningTime.toString(), endingTime.toString()});
+        return numberOfQuestionInADay;
+
     }
 }
