@@ -6,9 +6,7 @@ import com.forum.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -73,11 +71,13 @@ public class UserServiceTest {
         assertThat(countryList.contains(new Country("Germany", "Germany")), is(true));
     }
     @Test
-    public void shouldReturnTrueIfUserExists(){
-        Map<String,String> param=new HashMap();
-        when(userRepository.validateUser("lu")).thenReturn("QWERTY");
-        param.put("Username","lu");
-        param.put("Password","QWERTY");
-        assertThat(userService.getValidation(param),is(true));
+    public void shouldReturnTrueIfPasswordValidForUser(){
+        User mockUser = mock(User.class);
+        String username = "MYNAME";
+        when(mockUser.getUsername()).thenReturn(username);
+        String md5 = "MYPASSWORDBUTMD5";
+        when(mockUser.getPassword()).thenReturn(md5);
+        when(userRepository.getPasswordByUsername(username)).thenReturn(md5);
+        assertThat(userService.getValidation(mockUser),is(true));
     }
 }

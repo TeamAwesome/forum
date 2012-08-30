@@ -22,7 +22,7 @@
                         </tr>
 
                         <tr>
-                            <td><input path="username" type = "text" name = "Username" /></td>
+                            <td><input path="username" type = "text" name = "username" /></td>
                         </tr>
 
                         <tr>
@@ -32,10 +32,10 @@
                             </div>
                         </tr>
                         <tr>
-                            <td><input path="password" type ="password" name = "Password" /></td>
+                            <td><input path="password" type ="password" name = "password" /></td>
                         </tr>
                         <tr>
-                            <td><input type="submit" value="Submit" name = "Submit"/></td>
+                            <td><input type="submit" value="Submit" name = "submit"/></td>
                         </tr>
                     </table>
                 </td>

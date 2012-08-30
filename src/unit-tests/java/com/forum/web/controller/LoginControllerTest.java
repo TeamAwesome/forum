@@ -5,13 +5,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class LoginControllerTest {
 
     private LoginController loginController;
-   private UserService userService;
+    private UserService userService;
 
     @Before
     public void setUp() {
@@ -25,6 +30,34 @@ public class LoginControllerTest {
         ModelAndView activityModelAndView = loginController.loginView();
         //Then
         assertThat(activityModelAndView.getViewName(), is("login"));
+    }
+
+    @Test
+    public void shouldRejectLoginWithEmptyUsername() {
+        Map userMap = new HashMap();
+        HttpServletRequest mockHttpServletRequest = mock(HttpServletRequest.class);
+        userMap.put(LoginController.USERNAME, "");
+        userMap.put(LoginController.PASSWORD, "QWERTY");
+
+        ModelAndView modelAndView = loginController.validateForm(userMap, mockHttpServletRequest);
+
+        assertThat(modelAndView.getViewName(), is("login"));
+        Map<String, Object> expectedModel = modelAndView.getModel();
+        assertThat((String) expectedModel.get("usernameError"), is("Please Enter a Valid Username"));
+    }
+
+    @Test
+    public void shouldRejectLoginWithEmptyPassword() {
+        Map userMap = new HashMap();
+        HttpServletRequest mockHttpServletRequest = mock(HttpServletRequest.class);
+        userMap.put(LoginController.USERNAME, "lu");
+        userMap.put(LoginController.PASSWORD, "");
+
+        ModelAndView modelAndView = loginController.validateForm(userMap, mockHttpServletRequest);
+
+        assertThat(modelAndView.getViewName(), is("login"));
+        Map<String, Object> expectedModel = modelAndView.getModel();
+        assertThat((String) expectedModel.get("passwordError"), is("Please Enter a Valid Password"));
     }
 
 }
