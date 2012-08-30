@@ -35,8 +35,8 @@ public class UserRegistrationTest {
         assertTrue(driver.getCurrentUrl().contains("/join"));
     }
 
-    @Ignore("Error msg not showing up")
-    // @Test
+    @Test
+    @Ignore
     public void shouldHavePasswordErrorWhenLessThan8() {
         WebElement passwordField = driver.findElement(By.id("password"));
         passwordField.sendKeys("1234567");
