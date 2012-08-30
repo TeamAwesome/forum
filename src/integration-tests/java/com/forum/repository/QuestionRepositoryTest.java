@@ -53,7 +53,8 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
     public void shouldCreateQuestion(){
         QuestionRepository questionRepository = new QuestionRepository(dataSource);
         User user=new User();
-        Question question =new Question(12,"where","where are you",null,new Date());
+        Date date = new Date(1970,05,25);
+        Question question =new Question(12,"where","where are you",null,date);
         assertThat(questionRepository.createQuestion(question),is(1));
     }
 
