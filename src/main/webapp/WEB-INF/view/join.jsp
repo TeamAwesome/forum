@@ -133,7 +133,7 @@
         
         
         <tr>
-        	<td><input type="submit" value="Register" /></td>
+        	<td><input id="register" type="submit" value="Register" /></td>
         </tr>
         
         
