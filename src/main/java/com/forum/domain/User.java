@@ -197,4 +197,21 @@ public class User {
         result = 31 * result + (privacy != null ? privacy.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                " username='" + username + '\'' +
+                ", password='**********" + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", country='" + country + '\'' +
+                ", gender='" + gender + '\'' +
+                ", ageRange=" + ageRange +
+                ", interests=" + interests +
+                ", knowledge=" + knowledge +
+                ", privacy=" + privacy +
+                '}';
+    }
 }

@@ -69,18 +69,24 @@ public class UserRepositoryTest extends IntegrationTestBase {
     }
 
     @Test
-    public void shouldInsertUserToDatabase(){
+    public void shouldCreateUser(){
 
         User user = new User("Tom-"+System.currentTimeMillis(), "33", "Tom", "tom@tom.com", "1234567",
-                "Moon", "He doesn't know", 2);
+                "Moon", "H", 2);
         List<Integer> interests = new ArrayList<Integer>();
         interests.add(1);
         interests.add(2);
         user.setInterests(interests);
         user.setPrivacy(false);
 
-        User returnUser = userRepository.insert(user);
+        int userCreated = userRepository.createUser(user);
 
-        assertThat(returnUser, is(user));
+        assertThat(userCreated, is(1));
+    }
+    @Test
+    public  void shouldConvertABooleanToInteger(){
+        assertThat(userRepository.toInteger(false),is(0));
+        assertThat(userRepository.toInteger(true),is(1));
+
     }
 }

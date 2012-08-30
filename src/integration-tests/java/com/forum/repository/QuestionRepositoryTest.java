@@ -46,13 +46,13 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
         assertThat(questions.size(), is(24));
     }
 
-//    @Test
-//    public void shouldInsertQuestion(){
-//        Question question = new Question("test question","i think i am a test question and that makes me very very sad",new User(),new Date());
-//
-//        questionRepository.createQuestion(question);
-//        List<Question> questions = questionRepository.getAllQuestions();
-//
-//        assertThat(questions.contains(question), is(true));
-//    }
+    @Test
+    public void shouldCreateQuestion(){
+        QuestionRepository questionRepository = new QuestionRepository(dataSource);
+        User user=new User();
+        Question question =new Question(12,"where","where are you",null,new Date());
+        assertThat(questionRepository.createQuestion(question),is(1));
+    }
+
+
 }
