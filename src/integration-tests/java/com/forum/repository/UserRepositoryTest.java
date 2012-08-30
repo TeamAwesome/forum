@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
@@ -58,9 +61,26 @@ public class UserRepositoryTest extends IntegrationTestBase {
         User user = userRepository.getByEmail("who@who.com");
         assertNull(user);
     }
+
     @Test
     public void shouldReturnNullIfUserNotPresent(){
         String validUser = userRepository.validateUser("lu");
         assertThat(validUser,is("QWERTY"));
+    }
+
+    @Test
+    public void shouldInsertUserToDatabase(){
+
+        User user = new User("Tom-"+System.currentTimeMillis(), "33", "Tom", "tom@tom.com", "1234567",
+                "Moon", "He doesn't know", 2);
+        List<Integer> interests = new ArrayList<Integer>();
+        interests.add(1);
+        interests.add(2);
+        user.setInterests(interests);
+        user.setPrivacy(false);
+
+        User returnUser = userRepository.insert(user);
+
+        assertThat(returnUser, is(user));
     }
 }

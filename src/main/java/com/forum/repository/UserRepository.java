@@ -45,8 +45,11 @@ public class UserRepository {
         }
     }
     public String validateUser(String username) {
-
          String expectedPassword = (String) jdbcTemplate.queryForObject("SELECT PASSWORD FROM USER WHERE USERNAME = ?",new Object[]{username},String.class);
          return  (String)expectedPassword;
+    }
+
+    public User insert(User user) {
+        return user;  //To change body of created methods use File | Settings | File Templates.
     }
 }
