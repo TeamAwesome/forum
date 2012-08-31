@@ -41,6 +41,16 @@
         display: inline;
         background-color:#FFFFFF;
     }
+    #innerLeftPane{
+            margin-left: auto;
+            margin-right: auto;
+            clear: left;
+            float: left;
+            width: 600px;
+            padding: 10px 20px 10px 20px;
+            display: inline;
+            background-color:#FFFFFF;
+    }
 
     #rightPane{
         margin-left: auto;
@@ -79,6 +89,7 @@
     p, ul, ol {
         margin-top: 0;
         line-height: 100%;
+        padding: 10px 30px 10px 30px;
     }
 
 
