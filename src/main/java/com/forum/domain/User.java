@@ -52,8 +52,6 @@ public class User {
 
     public User() {
         this.encrypter = new Encrypter();
-        this.interests = new ArrayList<Integer>();
-        this.knowledge = new ArrayList<Integer>();
     }
 
     public User(String username, String password, String name, String email, String phoneNumber,
@@ -73,10 +71,14 @@ public class User {
     }
 
     public List<Integer> getInterests() {
+        if (interests == null)
+            return new ArrayList<Integer>();
         return interests;
     }
 
     public List<Integer> getKnowledge() {
+        if (knowledge == null)
+            return new ArrayList<Integer>();
         return knowledge;
     }
 
@@ -235,6 +237,6 @@ public class User {
     }
 
     public int getExpectedRowCount() {
-        return interests.size()+knowledge.size()+1;
+        return getInterests().size() + getKnowledge().size() + 1;
     }
 }

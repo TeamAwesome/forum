@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @Controller
 public class UserController {
@@ -22,6 +23,8 @@ public class UserController {
     public static final String SHOW_PROFILE = "showProfile";
     private UserService userService;
     private List<Country> countries;
+
+    private static Logger logger = Logger.getLogger(UserController.class.getName());
 
     @Autowired
     public UserController(UserService userService){
@@ -39,6 +42,7 @@ public class UserController {
 
     @RequestMapping(value = "/join", method = RequestMethod.POST)
     public String processRegistrationForm(@Valid User user,  BindingResult result, Map model) {
+        logger.info("user = " + user.toString());
         model.put(COUNTRIES, countries);
 
         if (result.hasErrors()) {
