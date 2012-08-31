@@ -27,7 +27,7 @@
             </div>
             <form id="questionForm" action="<c:url value='/showPostedQuestion'/>" method="post">
                 <div class="questionTitle">
-                    <label class="formLabels"> Title: </label> <input type="text" name="questionTitle" size ="91" id="questionTitle" maxlength="100"/>
+                    <label class="formLabels"> Title: </label> <input type="text" name="questionTitle" id="questionTitle" maxlength="100"/>
                     <div class="validationMessage" id="titleValidationMessage"></div>
                 </div>
                 <div class="questionDescription" >
