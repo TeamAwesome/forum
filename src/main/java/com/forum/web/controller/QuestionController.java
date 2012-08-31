@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -42,10 +44,15 @@ public class QuestionController {
 
         Question question = new Question(params.get("questionTitle"), params.get("questionDescription"), new User(), timestamp);
         questionService.createQuestion(question);
+        List latestQuestionList = questionService.latestQuestion("1","1");
+        Question latestQuestion = (Question)latestQuestionList.get(0);
+        Integer questionId = latestQuestion.getId();
+        System.out.println(questionId);
+
         ModelAndView modelAndView = new ModelAndView("showPostedQuestion");
         modelAndView.addObject("questionTitle",params.get("questionTitle"));
         modelAndView.addObject("questionDescription",params.get("questionDescription"));
-        return modelAndView;
+        return viewQuestionDetail(questionId);
     }
 
     @RequestMapping(value = "/question/view/{questionId}", method = RequestMethod.GET)
@@ -64,5 +71,8 @@ public class QuestionController {
         modelAndView.addObject("responses", question.getResponses());
         return modelAndView;
     }
+
+
+
 
 }
