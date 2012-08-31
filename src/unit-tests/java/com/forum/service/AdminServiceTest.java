@@ -35,7 +35,6 @@ public class AdminServiceTest {
 
     @Test
     public void shouldGetNumberOfQuestionsInADay(){
-
         QuestionRepository questionRepositoryMock = mock(QuestionRepository.class);
         Calendar calendar = new GregorianCalendar();
         calendar.add(Calendar.DATE, -1);
@@ -43,7 +42,9 @@ public class AdminServiceTest {
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
+        calendar.set(Calendar.AM_PM, Calendar.AM);
         Timestamp beginningTimestamp = new Timestamp(calendar.getTime().getTime());
+
         calendar.set(Calendar.HOUR_OF_DAY, 23);
         calendar.set(Calendar.MINUTE, 59);
         calendar.set(Calendar.SECOND, 59);
@@ -69,6 +70,7 @@ public class AdminServiceTest {
             calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.SECOND, 0);
             calendar.set(Calendar.MILLISECOND, 0);
+            calendar.set(Calendar.AM_PM, Calendar.AM);
             Timestamp beginningTimestamp = new Timestamp(calendar.getTime().getTime());
             calendar.set(Calendar.HOUR_OF_DAY, 23);
             calendar.set(Calendar.MINUTE, 59);
