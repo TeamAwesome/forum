@@ -2,6 +2,7 @@ package com.forum.web.controller;
 
 
 import com.forum.domain.Question;
+import com.forum.domain.User;
 import com.forum.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +40,7 @@ public class QuestionController {
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
 
-        Question question = new Question(params.get("questionTitle"), params.get("questionDescription"), null, timestamp);
+        Question question = new Question(params.get("questionTitle"), params.get("questionDescription"), new User(), timestamp);
         questionService.createQuestion(question);
         ModelAndView modelAndView = new ModelAndView("showPostedQuestion");
         modelAndView.addObject("questionTitle",params.get("questionTitle"));

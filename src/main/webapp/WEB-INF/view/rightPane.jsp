@@ -1,5 +1,6 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/static/css/style.css'/>">
-
+<script src="<c:url value="/static/javascript/shareToSocialMedia.js"/>"></script>
+<script src='http://connect.facebook.net/en_US/all.js'></script>
 <div id="rightPane">
             <div id="tagCloud">
                 TAG CLOUD
@@ -8,8 +9,8 @@
             <div id='fb-root'>
                 <p id='msg'></p>
                 <p>
-                    <a onclick='postToFeed(); return false;'><img style="cursor: pointer; cursor: hand" src="<c:url value="static/images/facebook.png"/>" alt="Facebook" class="Facebook Icon"></a>
-                    <a href="https://twitter.com/share" data-url="http://10.10.5.107:8080/forum/" data-text="Need info on Bangalore?" data-size="large" data-count="none"><img src="<c:url value="static/images/twitter.png"/>" alt="Twitter"></a>
+                    <a onclick='postToFeed(); return false;'><img style="cursor: pointer; cursor: hand" src="<c:url value='static/images/facebook.png'/>" alt="Facebook" class="Facebook Icon"></a>
+                    <a href="https://twitter.com/share" data-url="http://10.10.5.107:8080/forum/" data-text="Need info on Bangalore?" data-size="large" data-count="none" taget="_blank"><img src="<c:url value='static/images/twitter.png'/>" alt="Twitter"></a>
                 </p>
             </div>
 </div>

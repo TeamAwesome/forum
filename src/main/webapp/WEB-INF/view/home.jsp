@@ -3,10 +3,9 @@
 <head>
     <title>Welcome</title>
     <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>'/>
-    <script src='http://connect.facebook.net/en_US/all.js'></script>
-    <script src='<c:url value="/static/javascript/shareToSocialMedia.js"/>'></script>
     <script src='<c:url value="/static/jsquery/jquery.js"/>'></script>
     <script src='<c:url value="/static/javascript/knockout-2.1.0.js"/>'></script>
+
 </head>
 
 <body>

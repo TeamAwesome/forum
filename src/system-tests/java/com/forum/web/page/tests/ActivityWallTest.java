@@ -1,10 +1,10 @@
 package com.forum.web.page.tests;
 
+import com.forum.web.page.Browser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -14,24 +14,24 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class ActivityWallTest {
-    private WebDriver driver;
+    private Browser browser;
 
     @Before
     public void initializeWebDriver() {
-        driver = new FirefoxDriver();
-        driver.get("http://localhost:8080/forum");
+        browser = new Browser("http://localhost:8080/forum", true);
+        browser.open("/");
     }
 
     @After
     public void closeBrowser() {
-        driver.close();
+        browser.stop();
     }
 
     @Test
     public void shouldLoadMoreQuestions() {
-        WebElement loadMore = driver.findElement(By.id("loadMoreQuestions"));
+        WebElement loadMore = browser.findElement(By.id("loadMoreQuestions"));
 
-        WebElement activityWall = driver.findElement(By.id("leftPane"));
+        WebElement activityWall = browser.findElement(By.id("leftPane"));
         List<WebElement> questions = activityWall.findElements(By.className("questionTitle"));
         assertThat(questions.size(), is(10));
 

@@ -1,6 +1,7 @@
 package com.forum.repository;
 
 import com.forum.domain.Question;
+import com.forum.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -34,8 +35,9 @@ public class    QuestionRepository {
     }
 
     public int createQuestion(Question question) {
+
         return jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
-                new Object[]{question.getTitle(), question.getDescription(), question.getCreatedAt(), question.getUser()});
+                new Object[]{question.getTitle(), question.getDescription(), question.getCreatedAt(), 1});
     }
 
     public List<Question> latestQuestion(int pageNum, int pageSize) {
