@@ -12,9 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class UserRepositoryTest extends IntegrationTestBase {
     @Autowired
@@ -72,21 +70,28 @@ public class UserRepositoryTest extends IntegrationTestBase {
     public void shouldCreateUser(){
 
         User user = new User("Tom-"+System.currentTimeMillis(), "33", "Tom", "tom@tom.com", "1234567",
-                "Moon", "H", 2);
+                "Moon", "H", 2, false);
         List<Integer> interests = new ArrayList<Integer>();
         interests.add(1);
         interests.add(2);
         user.setInterests(interests);
-        user.setPrivacy(false);
 
         int userCreated = userRepository.createUser(user);
 
         assertThat(userCreated, is(1));
     }
+
     @Test
-    public  void shouldConvertABooleanToInteger(){
-        assertThat(userRepository.toInteger(false),is(0));
-        assertThat(userRepository.toInteger(true),is(1));
+    public void shouldReturnUserIdByUserName(){
+        String userName = "Tom-"+System.currentTimeMillis();
+        User user = new User(userName, "33", "Tom", "tom@tom.com", "1234567",
+                "Moon", "H", 2, true);
+
+        int userCreated = userRepository.createUser(user);
+        assertThat(userCreated, is(1));
+
+        Integer userId = userRepository.getUserId(userName);
+        assertNotNull(userId);
 
     }
 }

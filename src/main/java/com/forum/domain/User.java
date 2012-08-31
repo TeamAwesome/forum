@@ -20,7 +20,7 @@ public class User {
     @UniqueUsername
     private String username;
 
-    @Size(min=8)
+    @Size(min = 8)
     private String password;
 
     @NotEmpty
@@ -49,12 +49,12 @@ public class User {
     private List<Integer> knowledge;
     private Boolean privacy;
 
-    public User(){
+    public User() {
         this.encrypter = new Encrypter();
     }
 
     public User(String username, String password, String name, String email, String phoneNumber,
-                             String country, String gender, Integer ageRange) throws UnsupportedOperationException {
+                String country, String gender, Integer ageRange, Boolean privacy) throws UnsupportedOperationException {
         this();
         this.username = username;
         setPassword(password);
@@ -103,7 +103,7 @@ public class User {
     }
 
     public void setPassword(String password) throws UnsupportedOperationException, IllegalArgumentException {
-        if(password ==null) throw new IllegalArgumentException();
+        if (password == null) throw new IllegalArgumentException();
         this.password = encrypter.encryptUsingMd5(password);
     }
 

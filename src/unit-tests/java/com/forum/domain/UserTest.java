@@ -1,7 +1,6 @@
 package com.forum.domain;
 
 import com.forum.service.UserService;
-import com.forum.service.validation.UniqueUsername;
 import com.forum.service.validation.UniqueUsernameValidator;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -44,7 +43,7 @@ public class UserTest {
     public void shouldEncryptPasswordByConstructor() {
         String password = "pass";
         User user = new User("Tom", password, "Tom Tom", "tom@tom.com", "1234567",
-                "Moon", "He doesn't know", 200);
+                "Moon", "He doesn't know", 200, false);
         assertThat(user.getPassword(), not(password));
     }
 
@@ -60,7 +59,7 @@ public class UserTest {
     public void shouldRejectShortName(){
 
         User user = new User("Tomd", "33", "Tom", "tom@tom.com", "1234567",
-                "Moon", "He doesn't know", 200);
+                "Moon", "He doesn't know", 200, false);
 
         UserService mockUserService = mock(UserService.class);
         when(mockUserService.checkExistenceOfUsername("Tomd")).thenReturn(false);

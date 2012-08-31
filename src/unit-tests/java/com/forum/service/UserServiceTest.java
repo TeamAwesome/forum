@@ -29,7 +29,7 @@ public class UserServiceTest {
     @Test
     public void shouldGetUserById(){
         User user = new User("Tom", "pass", "Tom Tom", "tom@tom.com", "1234567",
-                            "Moon", "He doesn't know", 200);
+                            "Moon", "He doesn't know", 200, false);
         when(userRepository.getById(1)).thenReturn(user);
 
         assertThat(userService.getById(1), is(user));
@@ -38,7 +38,7 @@ public class UserServiceTest {
     @Test
     public void shouldReturnTrueIfUsernameExistsInDB(){
         User user = new User("lu", "pass", "Tom Tom", "tom@tom.com", "1234567",
-                "Moon", "He doesn't know", 200);
+                "Moon", "He doesn't know", 200, false);
         when(userRepository.getByUsername("lu")).thenReturn(user);
         assertThat(userService.checkExistenceOfUsername("lu"), is(true));
     }
@@ -52,7 +52,7 @@ public class UserServiceTest {
     @Test
     public void shouldReturnTrueIfEmailExistsInDB(){
         User user = new User("lu", "pass", "Tom Tom", "tom@tom.com", "1234567",
-                "Moon", "He doesn't know", 200);
+                "Moon", "He doesn't know", 200, false);
         when(userRepository.getByEmail("tom@tom.com")).thenReturn(user);
         assertThat(userService.checkExistenceOfEmail("tom@tom.com"), is(true));
     }

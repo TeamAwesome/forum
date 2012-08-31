@@ -20,7 +20,7 @@ public class AdminServiceTest {
     public void shouldGetTotalNumberOfQuestions(){
         List<Question> questions = new ArrayList<Question>();
         User user = new User("Tom", "pass", "Tom Tom", "tom@tom.com", "1234567",
-                "Moon", "He doesn't know", 200);
+                "Moon", "He doesn't know", 200, false);
 
         QuestionRepository questionRepository = mock(QuestionRepository.class);
         when(questionRepository.getAllQuestions()).thenReturn(questions);

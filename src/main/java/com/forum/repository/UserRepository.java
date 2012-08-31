@@ -1,6 +1,7 @@
 package com.forum.repository;
 
 import com.forum.domain.User;
+import com.forum.util.BooleanToInteger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -64,25 +65,28 @@ public class UserRepository {
     }
 
     public int createUser(User user) {
+        BooleanToInteger converter = new BooleanToInteger();
         logger.info(user.toString());
         return jdbcTemplate.update(
                 "INSERT INTO USER (PASSWORD,NAME,EMAIL_ADDRESS,PHONE_NUMBER,COUNTRY,GENDER,AGE_RANGE,USERNAME,PRIVACY,CREATED_AT) VALUES (?,?,?,?,?,?,?,?,?,?)",
-                new Object[]{
-                        user.getPassword(),
-                        user.getName(),
-                        user.getEmail(),
-                        user.getPhoneNumber(),
-                        user.getCountry(),
-                        user.getGender(),
-                        user.getAgeRange(),
-                        user.getUsername(),
-                        toInteger(user.getPrivacy()),
-                        new Date()});
+                user.getPassword(),
+                user.getName(),
+                user.getEmail(),
+                user.getPhoneNumber(),
+                user.getCountry(),
+                user.getGender(),
+                user.getAgeRange(),
+                user.getUsername(),
+                converter.toInteger(user.getPrivacy()),
+                new Date());
 
         }
 
-    public Integer toInteger(boolean aBoolean) {
-        if(aBoolean) return 1;
-        return 0;
+    public Integer getUserId(String userName) {
+        return jdbcTemplate.queryForObject(
+                            "SELECT ID FROM USER WHERE USERNAME = ?",
+                            new Object[]{userName},
+                            Integer.class);  //To change body of created methods use File | Settings | File Templates.
     }
+
 }
