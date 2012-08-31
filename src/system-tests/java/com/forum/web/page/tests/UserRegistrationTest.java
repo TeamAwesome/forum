@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -34,6 +35,35 @@ public class UserRegistrationTest {
         joinLink.click();
         browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("register")));
         assertTrue(browser.getCurrentUrl().contains("/join"));
+    }
+
+    @Test
+    public void shouldRegisterSuccessfully(){
+        String userRegistrationTitle = browser.findElement(By.tagName("h2")).getText();
+        assertThat(userRegistrationTitle, is("User Registration"));
+        assertTrue(browser.getCurrentUrl().contains("/join"));
+
+        WebElement usernameField = browser.findElement(By.id("username"));
+        usernameField.sendKeys("Stephanie1");
+        WebElement passwordField = browser.findElement(By.id("password"));
+        passwordField.sendKeys("saxophone");
+        WebElement nameField = browser.findElement(By.id("name"));
+        nameField.sendKeys("Stephanie");
+        WebElement emailField = browser.findElement(By.id("email"));
+        emailField.sendKeys("sjacobs@thoughtworks.com");
+        Select countryField = new Select(browser.findElement(By.id("country")));
+        countryField.selectByVisibleText("United States");
+        WebElement genderField = browser.findElement(By.id("genderFemale"));
+        genderField.click();
+        WebElement ageRange = browser.findElement(By.id("ageRangeLessThan25"));
+        ageRange.click();
+        WebElement interestField = browser.findElement(By.id("interestMusic"));
+        interestField.click();
+        WebElement registerButton = browser.findElement(By.id("register"));
+        registerButton.click();
+
+        WebElement h1 = browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
+        assertThat(h1.getText(), is("Activity Wall"));
     }
 
     @Ignore("Not showing password msg error.")
