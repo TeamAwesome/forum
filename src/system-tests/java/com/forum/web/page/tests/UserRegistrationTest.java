@@ -7,7 +7,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -32,6 +32,7 @@ public class UserRegistrationTest {
         browser.open("/");
         WebElement joinLink = browser.findElement(By.linkText("Join"));
         joinLink.click();
+        browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("register")));
         assertTrue(browser.getCurrentUrl().contains("/join"));
     }
 
@@ -43,6 +44,8 @@ public class UserRegistrationTest {
 
         WebElement signUp = browser.findElement(By.id("register"));
         signUp.click();
+
+        browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("passwordMsg")));
 
         String errorMsg = browser.findElement(By.id("passwordMsg")).getText();
         assertThat(errorMsg, is("Password should be at least 8 characters."));
@@ -56,6 +59,8 @@ public class UserRegistrationTest {
         WebElement signUp = browser.findElement(By.id("register"));
         signUp.click();
 
+        browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("emailMsg")));
+
         String errorMsg = browser.findElement(By.id("emailMsg")).getText();
         assertThat(errorMsg, is("Please enter a valid email address."));
     }
@@ -64,6 +69,8 @@ public class UserRegistrationTest {
     public void shouldDisplayTermsAndConditions() {
         WebElement termsLink = browser.findElement(By.name("tos"));
         termsLink.click();
+        WebElement TosTitle = browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.tagName("h3")));
         assertTrue(browser.getCurrentUrl().contains("/terms"));
+        assertThat(TosTitle.getText(), is("The Forum Terms and Conditions"));
     }
 }

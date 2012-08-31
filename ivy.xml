@@ -44,7 +44,7 @@
         <dependency org="org.seleniumhq.selenium" name="selenium-server" rev="2.25.0" transitive="false" conf="buildtime->*" />
         <dependency org="org.seleniumhq.selenium" name="selenium-remote-driver" rev="2.25.0" transitive="false" conf="buildtime->*" />
         <dependency org="org.seleniumhq.selenium" name="selenium-parent" rev="2.25.0"/>
-        <dependency org="org.seleniumhq.selenium" name="selenium-support" rev="2.5.0" />
+        <dependency org="org.seleniumhq.selenium" name="selenium-support" rev="2.25.0" />
         <dependency org="com.google.guava" name="guava" rev="r05"/>
         <dependency org="org.json" name="json" rev="20090211"/>
         <dependency org="org.apache.commons" name="commons-exec" rev="1.1" />
