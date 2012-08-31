@@ -1,21 +1,20 @@
 function PlotGraphs (){
-    var lengthOfTime;
-	var numberOfQuestions1;
-	var numberOfQuestions2;
-	var numberOfQuestions3;
-	var count = 1;
-	
-	this.setQuestionsGraphFor3Months =
-	function (numQuestionsMon1, numQuestionsMon2, numQuestionsMon3, lenTime){
-		numberOfQuestions1 = numQuestionsMon1;
-		numberOfQuestions2 = numQuestionsMon2;
-		numberOfQuestions3 = numQuestionsMon3;
+    this.lengthOfTime;
+    this.numberOfQuestions = new Array();
+    this.maximumNumberOfQuestions = 30;
 
-        lengthOfTime = lenTime;
+	this.setQuestionsGraphFor90Days = function(numberOfQuestionsJson){
+	    this.lengthOfTime = numberOfQuestionsJson.length;
+        for(i=0;i<this.lengthOfTime-1;i++){
+            this.numberOfQuestions.push(numberOfQuestionsJson[i]);
+            if(this.maximumNumberOfQuestions < numberOfQuestionsJson[i])
+            this.maximumNumberOfQuestions = numberOfQuestionsJson[i];
+        }
 	};
 
+
 	this.plot = function(){
-        $("#chartdiv").jqplot('chartdiv',[[[1, numberOfQuestions1],[2, numberOfQuestions2],[3, numberOfQuestions3]]],
+        $("#chartdiv").jqplot('chartdiv',[this.numberOfQuestions],
             {
                 title: 'Number of Questions',
                 axesDefaults: {
@@ -29,40 +28,13 @@ function PlotGraphs (){
                 axes: {
                     xaxis: {
                         renderer: $.jqplot.CategoryAxisRenderer,
-                        min:'0',
-                        max:lengthOfTime
+                        min:this.lengthOfTime,
+                        max:'0'
                     },
                     yaxis: {
                         renderer: $.jqplot.CategoryAxisRenderer,
                         min:'0',
-                        max:'60'
-                    }
-                }
-            }
-        );
-
-        $("#chartdiv2").jqplot('chartdiv2', [[[80, 10],[50, 5],[70, 10]]],
-            {
-                title: 'Number of Answers',axesDefaults: {
-                    tickRenderer: $.jqplot.CanvasAxisTickRenderer,
-                    tickOptions:
-                    {
-                        angle: -60,
-                        fontSize: '10pt'
-                    }
-                },
-                axes: {
-                    xaxis:
-                    {
-                        renderer: $.jqplot.CategoryAxisRenderer,
-                        min:'0',
-                        max:'100'
-                    },
-                    yaxis:
-                    {
-                        renderer: $.jqplot.CategoryAxisRenderer,
-                        min:'0',
-                        max:'12'
+                        max:(this.maximumNumberOfQuestions+10).toString()
                     }
                 }
             }
