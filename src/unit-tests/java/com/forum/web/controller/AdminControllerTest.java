@@ -17,4 +17,5 @@ public class AdminControllerTest{
         ModelAndView activityModelAndView = adminController.dashboard();
         assertThat(activityModelAndView.getViewName(), is("adminDashboard"));
     }
+
 }
