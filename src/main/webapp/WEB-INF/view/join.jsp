@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -8,9 +8,10 @@
     <title>Join us</title>
 
 </head>
-<body>
+
  <div id="container">
     <div id="header">
+        <%@ include file="registerHeader.jsp" %>
     </div>
 
     <div id="content">
@@ -146,9 +147,9 @@
 
             </table>
             </form:form>
-        </div>
+            </div>
 
-    </div>
+     </div>
 
 
 
