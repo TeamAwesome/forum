@@ -1,5 +1,8 @@
 package com.forum.security;
 
+import com.forum.domain.User;
+import com.forum.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,14 +16,24 @@ import java.util.logging.Logger;
 
 public class UserAuthenticationProvider implements AuthenticationProvider {
 
+    private UserService userService;
     private static final Logger logger = Logger.getLogger(UserAuthenticationProvider.class.getName());
 
+    @Autowired
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
         try {
             logger.info("Enter Authentication.");
-            if (!authentication.getPrincipal().equals("maomao")) throw new RuntimeException();
+            User user = new User();
+            user.setUsername((String) authentication.getPrincipal());
+            user.setPassword((String) authentication.getPrincipal());
+            User userValidated = userService.getValidation(user);
+
+            if(userValidated==null){
+                 throw new BadCredentialsException("User or password failed.");
+            }
+
 
 
         // Implement the userService logic
@@ -28,7 +41,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
             List<? extends GrantedAuthority> grantedAuthorities = Arrays.asList(new GrantedAuthority() {
                 @Override
                 public String getAuthority() {
-                    return "ROLE_USER";
+                    return "USER";
                 }
             });
 
@@ -38,7 +51,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
                     grantedAuthorities
             );
         } catch (Exception e) {
-            throw new BadCredentialsException("Bad User Credentials.");
+                throw new BadCredentialsException("Bad User Credentials.");
         }
 
     }
@@ -46,5 +59,9 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     @Override
     public boolean supports(Class<?> aClass) {
         return true;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }

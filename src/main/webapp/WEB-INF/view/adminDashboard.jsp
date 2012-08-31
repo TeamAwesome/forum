@@ -22,6 +22,12 @@
         <%@ include file="registerHeader.jsp" %>
     </div>
 
+        <div id="account">
+                <a name="logout" id="logout" href="<c:url value='j_spring_security_logout' />">Logout</a>
+         </div>
+    </span>
+    <span>
+
     <div id="content">
         <div id ="leftPane" >
             <span>Welcome to the Admin Dashboard</span> </br></br>
