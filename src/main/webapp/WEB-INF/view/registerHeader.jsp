@@ -6,13 +6,13 @@
             <a href='<c:url value="/" />' Value="Home" > Home</a>
             </li>&nbsp;
             <li id="joinButton">
-            <a href='<c:url value="login" />' Value="Log In" > Login</a>
+            <a href='<c:url value="/login" />' Value="Log In" > Login</a>
             </li>&nbsp;
             <li id="joinButton">
-            <a href='<c:url value="join" />' Value="Join"> Join</a>&nbsp;
+            <a href='<c:url value="/join" />' Value="Join"> Join</a>&nbsp;
             </li>&nbsp;
             <li id="joinButton">
-            <a href='<c:url value="postQuestion" />' Value="Post Question"> Post Question</a>&nbsp;
+            <a href='<c:url value="/postQuestion" />' Value="Post Question"> Post Question</a>&nbsp;
             </li>&nbsp;
         </ul>
         </div>
