@@ -45,8 +45,9 @@ public class UserController {
             return JOIN;
         }
 
-
         model.put(USER, user);
+        userService.createUser((User)model.get(UserController.USER));
+
         return SHOW_PROFILE;
     }
 }

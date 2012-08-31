@@ -10,10 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class UserControllerTest {
@@ -63,6 +63,18 @@ public class UserControllerTest {
         assertThat((User)map.get(UserController.USER), is(new User()));
         assertTrue(map.containsKey(UserController.COUNTRIES));
         assertThat(activityModelAndView, is(UserController.SHOW_PROFILE));
+    }
+
+    @Test
+    public void shouldSaveUserProfile(){
+        BindingResult mockBindingResult = mock(BindingResult.class);
+        when(mockBindingResult.hasErrors()).thenReturn(false);
+        Map map = new HashMap();
+        when(userService.createUser((User)map.get("user"))).thenReturn(42);
+        User user = new User("a  ","asdf ","asdf","asdf","asdf","asdf","asdf",0,false);
+        userController.processRegistrationForm(user, mockBindingResult, map);
+
+        verify(userService).createUser((User)map.get("user"));
     }
 
 
