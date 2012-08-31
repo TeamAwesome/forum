@@ -62,7 +62,7 @@ public class UserControllerTest {
 
         assertThat((User)map.get(UserController.USER), is(new User()));
         assertTrue(map.containsKey(UserController.COUNTRIES));
-        assertThat(activityModelAndView, is(UserController.SHOW_PROFILE));
+        assertThat(activityModelAndView, is(UserController.HOME_PAGE));
     }
 
     @Test
