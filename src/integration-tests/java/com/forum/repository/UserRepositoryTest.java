@@ -71,14 +71,28 @@ public class UserRepositoryTest extends IntegrationTestBase {
 
         User user = new User("Tom-"+System.currentTimeMillis(), "33", "Tom", "tom@tom.com", "1234567",
                 "Moon", "H", 2, false);
+
         List<Integer> interests = new ArrayList<Integer>();
         interests.add(1);
         interests.add(2);
         user.setInterests(interests);
 
+        List<Integer> knowledge = new ArrayList<Integer>();
+        knowledge.add(3);
+        knowledge.add(2);
+        knowledge.add(1);
+        user.setKnowledge(knowledge);
+
         int userCreated = userRepository.createUser(user);
 
-        assertThat(userCreated, is(1));
+        assertThat(userCreated, is(6));
+
+        User actualUser = userRepository.getByUsername(user.getUsername());
+
+        actualUser.setKnowledge(knowledge);
+        actualUser.setInterests(interests);
+
+        assertThat(actualUser, is(user));
     }
 
     @Test

@@ -4,16 +4,21 @@ import com.forum.service.UserService;
 import com.forum.service.validation.UniqueUsernameValidator;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.ui.context.Theme;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import static junit.framework.Assert.assertEquals;
+import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -71,6 +76,50 @@ public class UserTest {
                 validator.validate(user);
 
         assertEquals(3, constraintViolations.size());
+    }
+
+    @Test
+    public void shouldCompareUsers() {
+        List<Integer> knowledge = new ArrayList<Integer>();
+        knowledge.add(3);
+        knowledge.add(2);
+        knowledge.add(1);
+
+        List<Integer> interests = new ArrayList<Integer>();
+        interests.add(1);
+        interests.add(2);
+
+        User user = new User("Tom-"+System.currentTimeMillis(), "33", "Tom", "tom@tom.com", "1234567",
+                "Moon", "H", 2, false);
+        user.setInterests(interests);
+        user.setKnowledge(knowledge);
+
+        User user2 = new User(user.getUsername(), "33", "Tom", "tom@tom.com", "1234567",
+                "Moon", "H", 2, false);
+        user2.setInterests(interests);
+        user2.setKnowledge(knowledge);
+
+        assertThat(user, is(user2));
+    }
+    @Test
+    public  void shouldGiveTheNumberOfRowsEffected(){
+        List<Integer> knowledge = new ArrayList<Integer>();
+        knowledge.add(3);
+        knowledge.add(2);
+        knowledge.add(1);
+
+        List<Integer> interests = new ArrayList<Integer>();
+        interests.add(1);
+        interests.add(2);
+
+        User user = new User("Tom-"+System.currentTimeMillis(), "33", "Tom", "tom@tom.com", "1234567",
+                "Moon", "H", 2, false);
+        user.setInterests(interests);
+        user.setKnowledge(knowledge);
+
+        assertThat(user.getExpectedRowCount(),is(6));
+
+
     }
 
 }

@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -51,6 +52,8 @@ public class User {
 
     public User() {
         this.encrypter = new Encrypter();
+        this.interests = new ArrayList<Integer>();
+        this.knowledge = new ArrayList<Integer>();
     }
 
     public User(String username, String password, String name, String email, String phoneNumber,
@@ -174,7 +177,15 @@ public class User {
         if (interests != null ? !interests.equals(user.interests) : user.interests != null) return false;
         if (knowledge != null ? !knowledge.equals(user.knowledge) : user.knowledge != null) return false;
         if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+
+        /*
+        * The password is not used for assessing equality as the password is re-hashed when reading a user from
+        * the database.
+        *
+        * TODO do not create the hash of the password in the setter but in the UserController class and uncomment code
+        */
+        //if (password != null ? !password.equals(user.password) : user.password != null) return false;
+
         if (phoneNumber != null ? !phoneNumber.equals(user.phoneNumber) : user.phoneNumber != null) return false;
         if (privacy != null ? !privacy.equals(user.privacy) : user.privacy != null) return false;
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
@@ -185,7 +196,15 @@ public class User {
     @Override
     public int hashCode() {
         int result = username != null ? username.hashCode() : 0;
-        result = 31 * result + (password != null ? password.hashCode() : 0);
+
+        /*
+        * The password is not used for calculating the hashCode as the password is re-hashed when reading a user from
+        * the database.
+        *
+        * TODO do not create the hash of the password in the setter but in the UserController class and uncomment code
+        */
+        //result = 31 * result + (password != null ? password.hashCode() : 0);
+
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
@@ -202,7 +221,7 @@ public class User {
     public String toString() {
         return "User{" +
                 " username='" + username + '\'' +
-                ", password='**********" + '\'' +
+                ", password=********" + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
@@ -213,5 +232,9 @@ public class User {
                 ", knowledge=" + knowledge +
                 ", privacy=" + privacy +
                 '}';
+    }
+
+    public int getExpectedRowCount() {
+        return interests.size()+knowledge.size()+1;
     }
 }

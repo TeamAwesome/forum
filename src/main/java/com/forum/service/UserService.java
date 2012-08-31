@@ -58,4 +58,16 @@ public class UserService {
         }
         return  false;
         }
+
+    public int createUser(User user) throws  RuntimeException {
+        int expectedRowCount = user.getExpectedRowCount();
+        int actualRowCount = userRepository.createUser(user);
+
+        if ( actualRowCount != expectedRowCount)
+            throw new RuntimeException(
+                    "user object has not been fully stored in the database, user is " + user.toString()
+            );
+
+        return actualRowCount;
+    }
 }

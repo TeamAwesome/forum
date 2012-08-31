@@ -1,11 +1,14 @@
 package com.forum.service;
 
 import com.forum.domain.Country;
+import com.forum.domain.Question;
 import com.forum.domain.User;
+import com.forum.repository.QuestionRepository;
 import com.forum.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -79,5 +82,34 @@ public class UserServiceTest {
         when(mockUser.getPassword()).thenReturn(md5);
         when(userRepository.getPasswordByUsername(username)).thenReturn(md5);
         assertThat(userService.getValidation(mockUser),is(true));
+    }
+
+    @Test
+    public void shouldSaveUserToRepository(){
+        User user = new User();
+        when(userRepository.createUser(user)).thenReturn(1);
+
+        assertThat(userService.createUser(user), is(1));
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void shouldCheckThatUserHasBeenCreated() {
+        User user = new User("Tom-"+System.currentTimeMillis(), "33", "Tom", "tom@tom.com", "1234567",
+                "Moon", "H", 2, false);
+
+        List<Integer> interests = new ArrayList<Integer>();
+        interests.add(1);
+        interests.add(2);
+        user.setInterests(interests);
+
+        List<Integer> knowledge = new ArrayList<Integer>();
+        knowledge.add(3);
+        knowledge.add(2);
+        knowledge.add(1);
+        user.setKnowledge(knowledge);
+
+        when(userRepository.createUser(user)).thenReturn(42);
+        userService.createUser(user);
+
     }
 }

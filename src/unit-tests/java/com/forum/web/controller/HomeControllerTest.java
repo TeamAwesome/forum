@@ -42,7 +42,7 @@ public class HomeControllerTest {
         when(questionService.latestQuestion("1","1")).thenReturn(questions);
 
         String result = homeController.loadMoreQuestions("1","1");
-        String expected = "[{\"id\":1,\"title\":\"dummy title\",\"createdAt\":\"Jan 1, 1970 5:30:00 AM\",\"description\":\"dummy description for a dummy question with a dummy title by a dummy developer\",\"user\":{\"encrypter\":{}}}]";
+        String expected = "[{\"id\":1,\"title\":\"dummy title\",\"createdAt\":\"Jan 1, 1970 5:30:00 AM\",\"description\":\"dummy description for a dummy question with a dummy title by a dummy developer\",\"user\":{\"encrypter\":{},\"interests\":[],\"knowledge\":[]}}]";
 
         assertThat(result, is(expected) );
     }
