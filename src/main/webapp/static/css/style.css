@@ -152,7 +152,7 @@
     }
 
     .questionTitle{
-        word-wrap: break-word;
+        word-wrap: break-all;
         color: #000000;
     }
 
