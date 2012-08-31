@@ -10,10 +10,7 @@
 </head>
 <body>
  <div id="container">
-
-
     <div id="header">
-        <%@ include file="registerHeader.jsp" %>
     </div>
 
     <div id="content">
@@ -149,7 +146,7 @@
 
             </table>
             </form:form>
-    </div>
+        </div>
 
     </div>
 
