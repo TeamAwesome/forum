@@ -1,10 +1,7 @@
 package com.forum.domain;
 
 
-import com.forum.service.validation.Age;
-import com.forum.service.validation.PhoneNumber;
-import com.forum.service.validation.UniqueEmail;
-import com.forum.service.validation.UniqueUsername;
+import com.forum.service.validation.*;
 import com.forum.util.Encrypter;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -94,13 +91,13 @@ public class User {
 
     public List<Integer> getInterests() {
         if (interests == null)
-            interests = new ArrayList<Integer>();
+            return new ArrayList<Integer>();
         return interests;
     }
 
     public List<Integer> getKnowledge() {
         if (knowledge == null)
-            knowledge =  new ArrayList<Integer>();
+            return new ArrayList<Integer>();
         return knowledge;
     }
 
