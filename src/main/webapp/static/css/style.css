@@ -159,6 +159,11 @@
         Background-color:#FFFFFF;
     }
 
+    #fb-root{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .small{
         font-size: .75em;
     }
