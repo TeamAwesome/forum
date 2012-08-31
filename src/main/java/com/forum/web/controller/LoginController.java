@@ -33,7 +33,7 @@ public class LoginController {
     }
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView validateForm(@RequestParam Map<String, String> params, HttpServletRequest request) {
 
         ModelAndView modelAndView = new ModelAndView("login");

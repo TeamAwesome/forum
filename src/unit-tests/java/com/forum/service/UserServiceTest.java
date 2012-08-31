@@ -73,6 +73,7 @@ public class UserServiceTest {
         assertThat(countryList.contains(new Country("China", "China")), is(true));
         assertThat(countryList.contains(new Country("Germany", "Germany")), is(true));
     }
+
     @Test
     public void shouldReturnTrueIfPasswordValidForUser(){
         User mockUser = mock(User.class);

@@ -22,7 +22,9 @@
             id="searchButton" width="12" height="13">
             <img src='<c:url value="/static/images/search.png"/>' width="12" height="13" alt="Search"></button>
         </div>
-
+        <div id="account">
+            <a name="logout" id="logout" href="<c:url value='j_spring_security_logout' />">Logout</a>
+        </div>
 </div>
 
 

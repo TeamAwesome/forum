@@ -6,7 +6,7 @@
 
 <body onload='document.loginForm.Username.focus();'>
 
-    <form name="loginForm" action="login" method = "POST">
+    <form name="loginForm" action="${pageContext.request.contextPath}/j_spring_security_check" method = "POST">
         <div style="color:red; text-align:center" id="messagetobedisplayed">
             ${messageToBeDisplayed}
         </div>
@@ -22,7 +22,8 @@
                         </tr>
 
                         <tr>
-                            <td><input path="username" type = "text" name = "username" /></td>
+                            <td><input path="username" type = "text" name="j_username" /></td>
+
                         </tr>
 
                         <tr>
@@ -32,7 +33,7 @@
                             </div>
                         </tr>
                         <tr>
-                            <td><input path="password" type ="password" name = "password" /></td>
+                            <td><input path="password" type ="password" name = "j_password" /></td>
                         </tr>
                         <tr>
                             <td><input type="submit" value="Submit" name = "submit"/></td>

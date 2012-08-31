@@ -4,6 +4,9 @@ import com.forum.domain.Country;
 import com.forum.domain.User;
 import com.forum.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
@@ -12,7 +15,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private UserRepository userRepository;
 
@@ -59,6 +62,7 @@ public class UserService {
         return  false;
         }
 
+
     public int createUser(User user) throws  RuntimeException {
         int expectedRowCount = user.getExpectedRowCount();
         int actualRowCount = userRepository.createUser(user);
@@ -69,5 +73,10 @@ public class UserService {
             );
 
         return actualRowCount;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }
