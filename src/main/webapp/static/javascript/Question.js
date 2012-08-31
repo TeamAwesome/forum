@@ -3,26 +3,26 @@ function Question(title, description){
     var MAX_DESCRIPTION_LENGTH = 500;
 
     this.title = stripSpaces(title);
+    var spacelessTitle = stripSpaces(title);
     var scriptlessTitle = stripHTML(this.title);
     scriptlessTitle = stripHtmlSpaces(scriptlessTitle);
 
-
-
-
     this.description = stripHTML(description);
     this.description = stripHtmlSpaces(this.description);
+
     var scriptlessDescription = stripSpaces(this.description);
+
 
     this.messages = {'title':null,'description':null};
 
     var that = this;
 
     var validateTitle = function() {
-        if(title != scriptlessTitle){
+        if(spacelessTitle != scriptlessTitle){
             that.messages['title'] = 'Title Cannot Have Scripts or HTML elements.'
             return false;
         }
-       else if (title == ""){
+       else if (spacelessTitle == ""){
             that.messages['title'] = 'Title is empty.';
             return false;
         }
@@ -35,7 +35,7 @@ function Question(title, description){
             that.messages['description'] = "Description should be less than "+MAX_DESCRIPTION_LENGTH+" characters.";
             return false;
         }
-        else if (description == ""){
+        else if (scriptlessDescription == ""){
             that.messages['description'] = 'Description is empty.';
             return false;
         }
@@ -54,6 +54,7 @@ function Question(title, description){
         }
 
         var lengthOfDescription = scriptlessDescription.length;
+
         if(lengthOfDescription <= MAX_DESCRIPTION_LENGTH){
             this.messages['description'] = (MAX_DESCRIPTION_LENGTH-lengthOfDescription) +" characters remaining.";
         } else{
