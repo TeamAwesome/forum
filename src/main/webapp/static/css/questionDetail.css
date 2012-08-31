@@ -2,25 +2,28 @@
 #left
 {
     float:left;
-    width:65%;
+    width:50%;
     padding-left: 5%;
 }
 
 #right
 {
     float:left;
-    width:30%;
+    width:40%;
     position: relative;
     padding-top : 5%;
+    padding-left: 5%;
+
 }
 
 
 #questionDescription
 {
+
     border-style: solid;
     border-width: 1px;
     max-height:300px;
-    width: 70%;
+    max-width:300px;
     overflow: auto;
 }
 

@@ -3,14 +3,14 @@
 <head>
     <title>Forum - Post Question</title>
               <!-- Skin CSS file -->
-              <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/skin.css"/>">
+              <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/skin.css"/>'>
               <!-- Utility Dependencies -->
 
 <style type="text/css">
 .validationMessage { color: red; }
 </style>
 
-<link rel="stylesheet" type="text/css" href="<c:url value="/static/css/style.css"/>">
+<link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>'>
 
 </head>
 <body class="yui-skin-sam">
@@ -24,7 +24,7 @@
             <div class="title">
                 <h2><center>Post a Question</center></h2>
             </div>
-            <form id="questionForm" action="<c:url value="/showPostedQuestion"/>" method="post">
+            <form id="questionForm" action='<c:url value="/showPostedQuestion"/>" method="post'>
                 <div class="questionTitle">
                     <label class="formLabels"> Title: </label> <input type="text" name="questionTitle" id="questionTitle" maxlength="100"/>
                     <div class="validationMessage" id="titleValidationMessage"></div>
