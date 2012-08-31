@@ -5,7 +5,7 @@ function PlotGraphs (){
 
 	this.setQuestionsGraphFor90Days = function(numberOfQuestionsJson){
 	    this.lengthOfTime = numberOfQuestionsJson.length;
-        for(i=this.lengthOfTime-1;i>=0;i--){
+        for(i=0;i<this.lengthOfTime-1;i++){
             this.numberOfQuestions.push(numberOfQuestionsJson[i]);
             if(this.maximumNumberOfQuestions < numberOfQuestionsJson[i])
             this.maximumNumberOfQuestions = numberOfQuestionsJson[i];
@@ -28,8 +28,8 @@ function PlotGraphs (){
                 axes: {
                     xaxis: {
                         renderer: $.jqplot.CategoryAxisRenderer,
-                        min:'0',
-                        max:this.lengthOfTime
+                        min:this.lengthOfTime,
+                        max:'0'
                     },
                     yaxis: {
                         renderer: $.jqplot.CategoryAxisRenderer,

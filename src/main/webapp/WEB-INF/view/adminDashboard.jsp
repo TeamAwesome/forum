@@ -28,7 +28,6 @@
 
             <span align="centre">
                 <input type="submit"  name="View-flagged-users" value="View flagged users">
-                <input type="submit"  name="Logout" value="Logout">
             </span>
 
             <span>
