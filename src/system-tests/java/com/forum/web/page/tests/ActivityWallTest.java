@@ -38,7 +38,7 @@ public class ActivityWallTest {
         assertThat(questions.size(), is(10));
 
         loadMore.click();
-        browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("leftPane")));
+        browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("container")));
         questions = activityWall.findElements(By.className("questionTitle"));
         assertThat(questions.size(), is(20));
     }
@@ -55,6 +55,7 @@ public class ActivityWallTest {
 
         WebElement submitButton = browser.findElement(By.name("submit"));
         submitButton.click();
+        browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("container")));
 
         assertTrue(browser.getCurrentUrl().contains("/login"));
 
@@ -66,12 +67,14 @@ public class ActivityWallTest {
 
         WebElement submitButton2 = browser.findElement(By.name("submit"));
         submitButton2.click();
+        browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("container")));
 
         assertTrue(browser.getCurrentUrl().contains("/adminDashboard"));
         assertTrue(browser.findElement(By.id("leftPane")).getText().contains("Welcome to the Admin Dashboard"));
 
         WebElement logoutLink = browser.findElement(By.id("logout"));
         logoutLink.click();
+        browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("container")));
 
         assertThat(browser.getCurrentUrl(), is("http://localhost:8080/forum/"));
 

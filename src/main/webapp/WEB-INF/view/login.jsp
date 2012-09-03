@@ -5,43 +5,44 @@
 </head>
 
 <body onload='document.loginForm.Username.focus();'>
+    <div id="container">
+        <form name="loginForm" action="${pageContext.request.contextPath}/j_spring_security_check" method = "POST">
+            <div style="color:red; text-align:center" id="messagetobedisplayed">
+                ${messageToBeDisplayed}
+            </div>
+            <table align="left">
+                <tr>
+                    <td>
+                        <table style="margin-left:50">
+                            <tr>
+                                <td>Username:<FONT color="red">
+                                <div style="color:red; text-align:center" id="usernameError">
+                                   ${usernameError}
+                                </div>
+                            </tr>
 
-    <form name="loginForm" action="${pageContext.request.contextPath}/j_spring_security_check" method = "POST">
-        <div style="color:red; text-align:center" id="messagetobedisplayed">
-            ${messageToBeDisplayed}
-        </div>
-        <table align="left">
-            <tr>
-                <td>
-                    <table style="margin-left:50">
-                        <tr>
-                            <td>Username:<FONT color="red">
-                            <div style="color:red; text-align:center" id="usernameError">
-                               ${usernameError}
-                            </div>
-                        </tr>
+                            <tr>
+                                <td><input path="username" type = "text" name="j_username" /></td>
 
-                        <tr>
-                            <td><input path="username" type = "text" name="j_username" /></td>
+                            </tr>
 
-                        </tr>
-
-                        <tr>
-                            <td>Password:<FONT color="red">
-                            <div style="color:red; text-align:center" id="passwordError">
-                               ${passwordError}
-                            </div>
-                        </tr>
-                        <tr>
-                            <td><input path="password" type ="password" name = "j_password" /></td>
-                        </tr>
-                        <tr>
-                            <td><input type="submit" value="Submit" name = "submit"/></td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </form>
+                            <tr>
+                                <td>Password:<FONT color="red">
+                                <div style="color:red; text-align:center" id="passwordError">
+                                   ${passwordError}
+                                </div>
+                            </tr>
+                            <tr>
+                                <td><input path="password" type ="password" name = "j_password" /></td>
+                            </tr>
+                            <tr>
+                                <td><input type="submit" value="Submit" name = "submit"/></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </body>
 </html>
