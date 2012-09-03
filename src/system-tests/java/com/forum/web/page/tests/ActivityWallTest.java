@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
@@ -31,21 +30,20 @@ public class ActivityWallTest {
 
     @Test
     public void shouldLoadMoreQuestions() {
+        browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("container")));
         WebElement loadMore = browser.findElement(By.id("loadMoreQuestions"));
 
         WebElement activityWall = browser.findElement(By.id("leftPane"));
         List<WebElement> questions = activityWall.findElements(By.className("questionTitle"));
         assertThat(questions.size(), is(10));
-
         loadMore.click();
-        browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("container")));
         questions = activityWall.findElements(By.className("questionTitle"));
         assertThat(questions.size(), is(20));
     }
 
     @Test
     public  void shouldGoThroughAdminLoginLogoutProcess() {
-       browser.open("/adminDashboard");
+        browser.open("/adminDashboard");
         assertTrue(browser.getCurrentUrl().contains("/login"));
 
         WebElement userNameLogin = browser.findElement(By.name("j_username"));
