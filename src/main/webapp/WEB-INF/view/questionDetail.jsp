@@ -21,9 +21,7 @@
 
     <div id="content">
 
-        <div id="rightPane">
-            <%@ include file="rightPane.jsp" %>
-        </div>
+
 
         <div id ="leftPane" >
 
@@ -70,6 +68,9 @@
 
         </div>
 
+          <div id="rightPane">
+                    <%@ include file="rightPane.jsp" %>
+                </div>
     </div>
 
 </div>
