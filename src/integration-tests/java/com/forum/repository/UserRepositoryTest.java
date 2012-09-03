@@ -27,7 +27,7 @@ public class UserRepositoryTest extends IntegrationTestBase {
     @Test
     public void shouldGetUserById() {
         User user = userRepository.getById(1);
-        assertThat(user.getName(), is("Lu Liu"));
+        assertThat(user.getName(), is("Jules"));
     }
 
     @Test

@@ -82,6 +82,8 @@
         <dependency org="org.springframework.security" name="spring-security-core" transitive="false" rev="3.1.2.RELEASE"/>
         <dependency org="org.springframework.security" name="spring-security-web" transitive="false" rev="3.1.2.RELEASE"/>
         <dependency org="org.springframework" name="spring-aop" transitive="false" rev="3.1.2.RELEASE"/>
+        <dependency org="aopalliance" name="aopalliance" rev="1.0" transitive="false"/>
+
 
     </dependencies>
 </ivy-module>

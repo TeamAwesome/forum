@@ -17,6 +17,9 @@ public class User {
 
     private Encrypter encrypter;
 
+    private int id;
+    private Privilege privilege;
+
     @NotEmpty
     @UniqueUsername
     private String username;
@@ -50,6 +53,7 @@ public class User {
     private List<Integer> knowledge;
     private Boolean privacy;
 
+
     public User() {
         this.encrypter = new Encrypter();
     }
@@ -68,6 +72,22 @@ public class User {
         this.interests = interests;
         this.knowledge = knowledge;
         this.privacy = privacy;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Privilege getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(Privilege privilege) {
+        this.privilege = privilege;
     }
 
     public List<Integer> getInterests() {

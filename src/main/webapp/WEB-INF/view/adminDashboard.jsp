@@ -21,7 +21,6 @@
     <div id="header">
         <%@ include file="registerHeader.jsp" %>
     </div>
-
         <div id="account">
                 <a name="logout" id="logout" href="<c:url value='j_spring_security_logout' />">Logout</a>
          </div>
@@ -30,7 +29,7 @@
 
     <div id="content">
         <div id ="leftPane" >
-            <span>Welcome to the Admin Dashboard</span> </br></br>
+            <span>Welcome to the Admin Dashboard, ${username}</span> </br></br>
 
             <span align="centre">
                 <input type="submit"  name="View-flagged-users" value="View flagged users">

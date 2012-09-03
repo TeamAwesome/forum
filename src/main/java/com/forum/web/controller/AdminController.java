@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.security.Principal;
 import java.util.*;
 
 @Controller
@@ -23,9 +25,10 @@ public class AdminController {
 
 
     @RequestMapping(value = "/adminDashboard", method = RequestMethod.GET)
-    public ModelAndView dashboard() {
+    public ModelAndView dashboard(Principal principal) {
         ModelAndView modelAndView = new ModelAndView("adminDashboard");
-
+        String name = principal.getName();
+        modelAndView.addObject("username", name);
         List<Integer> numberOfQuestions = adminService.getNumberOfQuestionsInNinetyDays();
         String numberOfQuestionsJson = gson.toJson(numberOfQuestions);
         modelAndView.addObject("numberOfQuestions", numberOfQuestionsJson);

@@ -59,8 +59,10 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
     public void shouldCreateQuestion(){
         QuestionRepository questionRepository = new QuestionRepository(dataSource);
         User user=new User();
+        user.setUsername("Silly");
+        user.setId(42);
         Date date = new Date(1970,05,25);
-        Question question =new Question(12,"where","where are you",null,date);
+        Question question =new Question(12,"where","where are you",user,date);
         assertThat(questionRepository.createQuestion(question),is(1));
     }
 
@@ -71,12 +73,14 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
 
         Calendar cal = Calendar.getInstance();
         Timestamp timestamp = new Timestamp(cal.getTime().getTime());
-        questionRepository.createQuestion(new Question("test1", "test1", null, timestamp));
-        questionRepository.createQuestion(new Question("test2", "test2", null, timestamp));
-        questionRepository.createQuestion(new Question("test3", "test3", null, timestamp));
-        questionRepository.createQuestion(new Question("test4", "test4", null, timestamp));
-        questionRepository.createQuestion(new Question("test5", "test5", null, timestamp));
-        questionRepository.createQuestion(new Question("test6", "test6", null, timestamp));
+        User user=new User();
+        user.setUsername("Silly");
+        questionRepository.createQuestion(new Question("test1", "test1", user, timestamp));
+        questionRepository.createQuestion(new Question("test2", "test2", user, timestamp));
+        questionRepository.createQuestion(new Question("test3", "test3", user, timestamp));
+        questionRepository.createQuestion(new Question("test4", "test4", user, timestamp));
+        questionRepository.createQuestion(new Question("test5", "test5", user, timestamp));
+        questionRepository.createQuestion(new Question("test6", "test6", user, timestamp));
 
 
         cal.set(Calendar.HOUR_OF_DAY, 00);

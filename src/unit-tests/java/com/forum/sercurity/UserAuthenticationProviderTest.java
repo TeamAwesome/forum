@@ -36,19 +36,19 @@ public class UserAuthenticationProviderTest {
         user.setUsername(username);
         user.setPassword(password);
         User userWithPrivilege = new User();
-        user.setUsername(username);
-        user.setPassword(password);
+        userWithPrivilege.setUsername(username);
+        userWithPrivilege.setPassword(password);
         when(mockAuthentication.getPrincipal()).thenReturn(username);
         when(mockAuthentication.getCredentials()).thenReturn(password);
         when(mockUserService.getValidation(user)).thenReturn(userWithPrivilege);
 
 //        Authentication authentication =  userAuthenticationProvider.authenticate(mockAuthentication);
-//
+
 //        assertThat((String)authentication.getPrincipal(), is("maomao"));
 //        assertThat((String)authentication.getCredentials(), is("pw"));
 //        Collection grantedAuthorities = authentication.getAuthorities();
 //        assertThat(grantedAuthorities.size(), is(1));
 //        GrantedAuthority grantedAuthority = (GrantedAuthority) grantedAuthorities.toArray()[0];
-//        assertThat(grantedAuthority.getAuthority(), is("ADMIN"));
+//        assertThat(grantedAuthority.getAuthority(), is("ROLE_ADMIN"));
     }
 }

@@ -94,4 +94,7 @@ public class Question implements Serializable {
         return 0;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

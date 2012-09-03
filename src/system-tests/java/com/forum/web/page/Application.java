@@ -29,9 +29,10 @@ public class Application {
         }
         try {
             int port = findFreePort();
+            int sslPort = findFreePort();
             instance = new Application();
             registerShutdownHook();
-            instance.start(port);
+            instance.start(port, sslPort);
             return instance;
 
         } catch (Exception e) {
@@ -50,7 +51,7 @@ public class Application {
         Runtime.getRuntime().addShutdownHook(new Thread(new ShutdownHook()));
     }
 
-    private void start(int port) throws Exception {
+    private void start(int port, int sslPort) throws Exception {
         boolean testWithFirefox = Boolean.getBoolean("test.with.firefox");
         String hostAddress = System.getProperty("test.with.host.address");
 
@@ -58,7 +59,7 @@ public class Application {
         setSystemProperty("icc.service.provider", "local");
 
         if (StringUtils.isBlank(hostAddress)) {
-            server = new WebServer(port).start();
+            server = new WebServer(port, sslPort).start();
             hostAddress = "http://localhost:" + port;
             browser = new Browser(hostAddress, testWithFirefox);
         } else {

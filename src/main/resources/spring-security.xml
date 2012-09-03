@@ -6,19 +6,27 @@
                         http://www.springframework.org/schema/security
                         http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-    <http auto-config="true">
-        <!--<intercept-url pattern="/postQuestion" access="USER, ADMIN" />    -->
+    <global-method-security secured-annotations="enabled">
+    </global-method-security>
+
+
+    <http auto-config="true" >
+        <intercept-url pattern="/postQuestion" access="ROLE_USER, ROLE_ADMIN" />
         <intercept-url pattern="/adminDashboard" access="ROLE_ADMIN"/>
-        <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <form-login login-page="/login" default-target-url = "/"/>
+        <intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY"  requires-channel="http" />
+        <intercept-url pattern="/join" access="IS_AUTHENTICATED_ANONYMOUSLY"  requires-channel="http" />
+        <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" requires-channel="http"/>
+        <form-login login-page="/login" default-target-url = "/" authentication-success-handler-ref="loginSuccessHandler"/>
         <logout logout-success-url = "/" />
+        <access-denied-handler ref="errorHandlingFilter" />
+        <port-mappings>
+            <port-mapping http="8080" https="8443"/>
+        </port-mappings>
     </http>
 
-    <!--<bean class="org.springframework.security.authentication.event.LoggerListener" />-->
 
-    <!--<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
-        <!--<property name="dataSource" ref="dataSource" />-->
-    <!--</bean>-->
+    <beans:bean id="errorHandlingFilter" class="com.forum.security.ErrorHandler" />
+    <beans:bean id="loginSuccessHandler" class="com.forum.security.LoginHandler" />
 
     <!--<beans:bean id="UserAuthenticationProvider" class="com.forum.security.UserAuthenticationProvider"/>-->
     <beans:bean id="tempUserAuthenticationProvider" class="com.forum.security.TempUserAuthenticationProvider"/>
@@ -26,6 +34,12 @@
     <beans:bean id="userService" class="com.forum.service.UserService"/>
 
     <authentication-manager>
+
+        <!--<authentication-provider>-->
+            <!--<user-service>-->
+                <!--<user name="maomao" password="spring" authorities="ROLE_USER" />-->
+            <!--</user-service>-->
+        <!--</authentication-provider>-->
         <!--<authentication-provider ref="UserAuthenticationProvider"/>-->
         <authentication-provider ref="tempUserAuthenticationProvider"/>
     </authentication-manager>

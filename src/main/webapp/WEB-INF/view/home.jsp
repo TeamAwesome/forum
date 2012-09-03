@@ -70,7 +70,7 @@
                 </p>
 
                 <button id="loadMoreQuestions" data-bind="click: loadMoreQuestion">more..</button>
-                <script src="<c:url value="/static/javascript/moreQuestionsLoader.js"/>"></script>
+                <script src='<c:url value="/static/javascript/moreQuestionsLoader.js"/>'></script>
                 <br /><br />
         </div>
         </div>
