@@ -55,3 +55,9 @@
 {
    resize: none;
 }
+
+.statsButtons{
+    max-width: 100px;
+    float: left;
+
+}

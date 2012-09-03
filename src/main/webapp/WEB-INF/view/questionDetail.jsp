@@ -21,7 +21,9 @@
 
     <div id="content">
 
-
+        <div id="rightPane">
+            <%@ include file="rightPane.jsp" %>
+        </div>
 
         <div id ="leftPane" >
 
@@ -35,18 +37,20 @@
                     </div>
 
                     <div id = "response">
-                    <br>
-                        <form id='likeForm' name='likeForm' method='post' action='<c:url value="/question/view/${questionId}"/>' >
-                            <input type="hidden" name="likes" value='${likes}'></input>
-                            <input type='submit' name="like" value="Like"></button>
-
-                            <input type="hidden" name="dislikes" value='${dislikes}'></input>
-                            <input type='submit' name="dislike" value="Dislike"></button>
-
-                           <input type="hidden" name="flags" value='${flags}'></input>
-                            <input type='submit' name="flag" value="Flag as inappropriate"></button>
-                        </form>
-                        <p><label class="questionDetail" name="tags"> Tags:</label> ${questionTags} </p>
+                            <form class="statsButtons" id='likeForm' name='likeForm' method='post' action='<c:url value="/question/view/${questionId}"/>' >
+                                <input type="hidden" name="likes" value='${likes}'></input>
+                                <input type='submit' name="like" value="Like"></button>
+                            </form>
+                            <form class="statsButtons" id='dislikeForm' name='dislikeForm' method='post' action='<c:url value="/question/view/${questionId}"/>' >
+                                <input type="hidden" name="dislikes" value='${dislikes}'></input>
+                                <input type='submit' name="dislike" value="Dislike"></button>
+                            </form>
+                            <form  class="statsButtons" id='flagForm' name='flagForm' method='post' action='<c:url value="/question/view/${questionId}"/>' >
+                                <input type="hidden" name="flags" value='${flags}'></input>
+                                <input type='submit' name="flag" value="Flag as inappropriate"></button>
+                            </form>
+                        </br>
+                        <p><label style="float: left;" class="questionDetail" name="tags"> Tags:</label> ${questionTags} </p>
                         <p><label>Your Reply: </label></p>
                         <textarea id="replyTextarea" cols="40" rows="14" ></textarea>
                         <p><button name="submitReply">Submit</button><p>
@@ -65,14 +69,11 @@
                     <label class="questionDetail" name="flags">  (${flags})Flags </label>
                     </p>
                 </div>
-
         </div>
 
-          <div id="rightPane">
-                    <%@ include file="rightPane.jsp" %>
-                </div>
     </div>
 
 </div>
 
-
+</body>
+</html>
