@@ -44,6 +44,7 @@
             <user-service>
                 <user password="password" name="chris" authorities="ROLE_USER" />
                 <user password="password" name="lu.liu" authorities="ROLE_ADMIN" />
+                <user password="Great!" name="Jules" authorities="ROLE_ADMIN" />
             </user-service>
         </authentication-provider>
     </authentication-manager>
