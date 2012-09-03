@@ -66,7 +66,6 @@ public class UserRegistrationTest {
         assertThat(h1.getText(), is("Activity Wall"));
     }
 
-    @Ignore("Not showing password msg error.")
     @Test
     public void shouldHavePasswordErrorWhenLessThan8() {
         WebElement passwordField = browser.findElement(By.id("password"));

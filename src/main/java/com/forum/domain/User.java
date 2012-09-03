@@ -129,7 +129,10 @@ public class User {
 
     public void setPassword(String password) throws UnsupportedOperationException, IllegalArgumentException {
         if (password == null) throw new IllegalArgumentException();
-        this.password = encrypter.encryptUsingMd5(password);
+        if (password.length() < 8) {
+            this.password = "";
+        } else
+            this.password = encrypter.encryptUsingMd5(password);
     }
 
     public void setName(String name) {
