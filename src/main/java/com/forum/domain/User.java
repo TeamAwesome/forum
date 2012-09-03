@@ -9,6 +9,7 @@ import com.forum.util.Encrypter;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +31,10 @@ public class User {
     @NotEmpty
     private String name;
 
-    @NotEmpty
-    @Email
     @UniqueEmail
+    @Pattern(regexp =
+            "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)+$",
+            message = "Please enter a valid email address.")
     private String email;
 
     @PhoneNumber
@@ -123,10 +125,6 @@ public class User {
         return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public void setPassword(String password) throws UnsupportedOperationException, IllegalArgumentException {
         if (password == null) throw new IllegalArgumentException();
         if (password.length() < 8) {
@@ -135,8 +133,12 @@ public class User {
             this.password = encrypter.encryptUsingMd5(password);
     }
 
+    public void setUsername(String username) {
+        this.username = username.trim();
+    }
+
     public void setName(String name) {
-        this.name = name;
+        this.name = name.trim();
     }
 
     public void setEmail(String email) {
