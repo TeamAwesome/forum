@@ -5,10 +5,11 @@
 <head>
 
     <title>Forum - Your Question</title>
-    <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/questionDetail.css"/>' />
     <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>' />
+    <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/questionDetail.css"/>' />
 
 </head>
+
 
 <body class="question">
 
@@ -27,12 +28,12 @@
         <div id ="leftPane" >
 
                 <div id="left">
-                    <div id="questionTitle">
-                        <h1>${questionTitle}</h1>
+                    <div id="questionTitle" >
+                        ${questionTitle}
                     </div>
 
                     <div id="questionDescription" >
-                        <p>${questionDescription}</p>
+                       ${questionDescription}
                     </div>
 
                     <div id = "response">

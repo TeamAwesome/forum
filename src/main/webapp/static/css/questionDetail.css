@@ -17,17 +17,33 @@
 }
 
 
-#questionDescription
+#questionTitle
 {
 
-    border-style: solid;
-    border-width: 1px;
-    max-height:300px;
-    max-width:300px;
-    overflow: auto;
+    word-wrap: break-word;
+        overflow: auto;
+        font-weight: bold;
+        padding: 10px 3px 8px 5px;
+
+
 }
 
 
+
+#questionDescription
+{
+    word-wrap:break-word;
+    border-style: solid;
+    max-height:300px;
+    max-width:300px;
+    overflow: auto;
+    padding: 5px 3px 2px 5px;
+}
+
+#response p
+{
+    padding: 5px 3px 2px 5px;
+}
 
 
 #status
