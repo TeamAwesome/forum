@@ -39,8 +39,10 @@
             <span>
                 </br></br>
                 Statistics
+
                 <table>
-                    <td><div id="chartdiv" style="height:300px;width:400px; "></div></td>
+                    <tr><td>Questions &nbsp &nbsp</td><td><div id="chartdiv" style="height:300px;width:400px; "></div></td></tr>
+                    <tr><td></td><td align='center'>Days</td></tr>
                 </table>
             </span>
         </div>
