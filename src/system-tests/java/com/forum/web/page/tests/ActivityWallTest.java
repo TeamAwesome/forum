@@ -12,6 +12,7 @@ import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class ActivityWallTest {
     private Browser browser;
@@ -39,5 +40,40 @@ public class ActivityWallTest {
 
         questions = activityWall.findElements(By.className("questionTitle"));
         assertThat(questions.size(), is(20));
+    }
+
+    @Test
+    public  void shouldGoThroughAdminLoginLogoutProcess() {
+       browser.open("/adminDashboard");
+        assertTrue(browser.getCurrentUrl().contains("/login"));
+
+        WebElement userNameLogin = browser.findElement(By.name("j_username"));
+        userNameLogin.sendKeys("jules");
+        WebElement passwordLogin = browser.findElement(By.name("j_password"));
+        passwordLogin.sendKeys("great!");
+
+        WebElement submitButton = browser.findElement(By.name("submit"));
+        submitButton.click();
+
+        assertTrue(browser.getCurrentUrl().contains("/login"));
+
+
+        WebElement userNameLogin2 = browser.findElement(By.name("j_username"));
+        userNameLogin2.sendKeys("Jules");
+        WebElement passwordLogin2 = browser.findElement(By.name("j_password"));
+        passwordLogin2.sendKeys("Great!");
+
+        WebElement submitButton2 = browser.findElement(By.name("submit"));
+        submitButton2.click();
+
+        assertTrue(browser.getCurrentUrl().contains("/adminDashboard"));
+        assertTrue(browser.findElement(By.id("leftPane")).getText().contains("Welcome to the Admin Dashboard"));
+
+        WebElement logoutLink = browser.findElement(By.id("logout"));
+        logoutLink.click();
+
+        assertThat(browser.getCurrentUrl(), is("http://localhost:8080/forum/"));
+
+
     }
 }

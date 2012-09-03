@@ -41,5 +41,6 @@ public class QuestionDetailedTest {
 
         assertThat(detailedViewTitle.getText(), is(title));
         assertTrue(browser.getCurrentUrl().contains("/question/view/"));
+
     }
 }
