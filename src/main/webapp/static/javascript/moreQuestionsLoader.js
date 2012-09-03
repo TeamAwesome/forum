@@ -1,5 +1,4 @@
 
-
 function Question(id, title, createdAt, description, userName) {
     var self = this;
     self.id = id;
