@@ -9,7 +9,6 @@ function Question(title, description){
 
     this.description = stripHTML(description);
     this.description = stripHtmlSpaces(this.description);
-
     var scriptlessDescription = stripSpaces(this.description);
 
 

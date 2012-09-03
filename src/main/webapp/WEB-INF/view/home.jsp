@@ -43,7 +43,7 @@
 
                       </td>
                       <td width=350px><a data-bind="attr: {href: url }"><b>
-                      <span class="questionTitle" data-bind="text: title"> </span></b>
+                      <span class="questionTitle" data-bind="html: title"> </span></b>
                       </a>
                       &nbsp;-&nbsp;
                       <br />

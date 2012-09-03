@@ -20,7 +20,7 @@ public class UserController {
     public static final String COUNTRIES = "countries";
     public static final String USER = "user";
     public static final String JOIN = "join";
-    public static final String SHOW_PROFILE = "showProfile";
+    public static final String HOME_PAGE = "redirect:";
     private UserService userService;
     private List<Country> countries;
 
@@ -52,6 +52,6 @@ public class UserController {
         model.put(USER, user);
         userService.createUser((User)model.get(UserController.USER));
 
-        return SHOW_PROFILE;
+        return HOME_PAGE;
     }
 }

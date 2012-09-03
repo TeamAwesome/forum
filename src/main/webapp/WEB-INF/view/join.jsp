@@ -16,6 +16,7 @@
 
     <div id="content">
         <div id ="leftPane" >
+        <div id ="innerLeftPane" >
         <form:form method="post" action="join" commandName="user">
         <h2>User Registration</h2>
             <table>
@@ -148,7 +149,7 @@
             </table>
             </form:form>
             </div>
-
+        </div>
      </div>
 
 

@@ -74,15 +74,17 @@ public class UserServiceTest {
         assertThat(countryList.contains(new Country("Germany", "Germany")), is(true));
     }
 
-    @Test
+    @Test          //TODO: should changed.
     public void shouldReturnTrueIfPasswordValidForUser(){
         User mockUser = mock(User.class);
         String username = "MYNAME";
         when(mockUser.getUsername()).thenReturn(username);
         String md5 = "MYPASSWORDBUTMD5";
         when(mockUser.getPassword()).thenReturn(md5);
+        User user = new User(username, md5, "Tom Tom", "tom@tom.com", "1234567",
+                "Moon", "He doesn't know", 200, false);
         when(userRepository.getPasswordByUsername(username)).thenReturn(md5);
-        assertThat(userService.getValidation(mockUser),is(true));
+        assertThat(userService.getValidation(mockUser),is(mockUser));
     }
 
     @Test

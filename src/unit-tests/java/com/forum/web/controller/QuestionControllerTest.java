@@ -7,9 +7,7 @@ import com.forum.service.QuestionService;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -30,8 +28,17 @@ public class QuestionControllerTest {
     @Test
     public void shouldReturnPostedQuestion(){
         QuestionService mockedQuestionService = mock(QuestionService.class);
-        Question question = new Question("Question Title", "Question Description", null, null);
+        User user = new User();
+        user.setName("Dummy User");
+        Date createdAt = new Date();
+        Question question = new Question(1,"Question Title", "Question Description", user, createdAt);
+        List<Question> questionList = new LinkedList<Question>();
+        questionList.add(question);
+        when(mockedQuestionService.latestQuestion("1","1")).thenReturn(questionList);
+        when(mockedQuestionService.getById(1)).thenReturn(question);
+
         Map<String, String> params = new HashMap<String, String>();
+        params.put("questionID",question.getId()+"");
         params.put("questionTitle", question.getTitle());
         params.put("questionDescription", question.getDescription());
         mockedQuestionService.createQuestion(question);
@@ -40,7 +47,9 @@ public class QuestionControllerTest {
         ModelAndView questionModelAndView = questionController.showPostedQuestion(params);
         String questionTitle = (String)questionModelAndView.getModel().get("questionTitle");
         String questionDescription = (String)questionModelAndView.getModel().get("questionDescription");
+        String questionId = (String)questionModelAndView.getModel().get("questionID");
 
+        assertThat(questionId,is("1"));
         assertThat(questionTitle, is("Question Title"));
         assertThat(questionDescription, is("Question Description"));
     }

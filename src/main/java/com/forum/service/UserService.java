@@ -1,6 +1,7 @@
 package com.forum.service;
 
 import com.forum.domain.Country;
+import com.forum.domain.Privilege;
 import com.forum.domain.User;
 import com.forum.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,12 +55,12 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
-    public boolean getValidation(User user) {
+    public User getValidation(User user) {
         String passwordFromDatabase = userRepository.getPasswordByUsername(user.getUsername());
         if((passwordFromDatabase).equals(user.getPassword())){
-             return  true;
+             return user;
         }
-        return  false;
+        return null;
         }
 
 
@@ -78,5 +79,9 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public Privilege getRole(User user) {
+        return Privilege.ADMIN;
     }
 }
