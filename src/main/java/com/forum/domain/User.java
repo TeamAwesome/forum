@@ -72,13 +72,13 @@ public class User {
 
     public List<Integer> getInterests() {
         if (interests == null)
-            return new ArrayList<Integer>();
+            interests = new ArrayList<Integer>();
         return interests;
     }
 
     public List<Integer> getKnowledge() {
         if (knowledge == null)
-            return new ArrayList<Integer>();
+            knowledge =  new ArrayList<Integer>();
         return knowledge;
     }
 
