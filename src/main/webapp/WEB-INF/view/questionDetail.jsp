@@ -21,9 +21,7 @@
 
     <div id="content">
 
-        <div id="rightPane">
-            <%@ include file="rightPane.jsp" %>
-        </div>
+
 
         <div id ="leftPane" >
 
@@ -69,11 +67,14 @@
                     <label class="questionDetail" name="flags">  (${flags})Flags </label>
                     </p>
                 </div>
+
         </div>
 
+          <div id="rightPane">
+                    <%@ include file="rightPane.jsp" %>
+                </div>
     </div>
 
 </div>
 
-</body>
-</html>
+
