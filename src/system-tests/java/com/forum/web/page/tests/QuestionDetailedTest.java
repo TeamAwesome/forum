@@ -37,7 +37,7 @@ public class QuestionDetailedTest {
 
         question.click();
 
-        WebElement detailedViewTitle = browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
+        WebElement detailedViewTitle = browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("questionTitle")));
 
         assertThat(detailedViewTitle.getText(), is(title));
         assertTrue(browser.getCurrentUrl().contains("/question/view/"));

@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class ActivityWallTest {
         assertThat(questions.size(), is(10));
 
         loadMore.click();
-
+        browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("leftPane")));
         questions = activityWall.findElements(By.className("questionTitle"));
         assertThat(questions.size(), is(20));
     }
