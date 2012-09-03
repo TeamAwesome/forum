@@ -3,7 +3,6 @@ package com.forum.domain;
 
 import com.forum.service.validation.*;
 import com.forum.util.Encrypter;
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Pattern;

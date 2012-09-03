@@ -30,6 +30,7 @@ public class UserControllerTest {
     @Test
     public void shouldNavigateToJoinPage() {
         Map map = new HashMap();
+
         String activityModelAndView = userController.showRegistrationForm(map);
 
         //Then
@@ -72,6 +73,7 @@ public class UserControllerTest {
         Map map = new HashMap();
         when(userService.createUser((User)map.get("user"))).thenReturn(42);
         User user = new User("a  ","asdf ","asdf","asdf","asdf","asdf","asdf",0,false);
+
         userController.processRegistrationForm(user, mockBindingResult, map);
 
         verify(userService).createUser((User)map.get("user"));
