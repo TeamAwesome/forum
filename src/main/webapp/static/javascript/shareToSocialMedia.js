@@ -6,7 +6,7 @@ function postToFeed() {
     var obj = {
       method: 'feed',
       link: window.location.href,
-      picture: 'http://fbrell.com/f8.jpg',
+      picture: '../images/facebook.png',
       name: 'The Forum',
       caption: 'Info on Bangalore',
       description: 'Seek and share answers about Bangalore.'
