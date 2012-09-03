@@ -196,6 +196,12 @@
         <java classname="com.forum.jetty.WebServer" classpathref="system-classpath" fork="true" failonerror="true" />
     </target>
 
+    <target name="test-and-run-jetty"
+            depends="clean, run-unit-and-integration-tests"
+            description="Spring cleaning, run unit and integration tests and then application in Jetty.">
+        <java classname="com.forum.jetty.WebServer" classpathref="system-classpath" fork="true" failonerror="true" />
+    </target>
+
     <target name="debug-jetty" depends="make-jars" description="Debug application in Jetty.">
         <java classname="com.forum.jetty.WebServer" classpathref="system-classpath" fork="true" failonerror="true">
             <jvmarg value="-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n"/>

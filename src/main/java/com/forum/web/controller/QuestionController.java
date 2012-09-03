@@ -6,10 +6,7 @@ import com.forum.domain.User;
 import com.forum.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -75,31 +72,27 @@ public class QuestionController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/question/view/{questionId}", method = RequestMethod.POST)
-    public ModelAndView viewQuestionDetailWhenPosted(@PathVariable Integer questionId, @RequestParam Map<String, Integer> params) {
-        if(params.containsKey("likes")){
-            questionService.addLikesById(questionId);
-        }
-        else if(params.containsKey("dislikes")){
-            questionService.addDisLikesById(questionId);
-        }
-        else if(params.containsKey("flags")){
-            questionService.addFlagsByID(questionId);
-        }
-
+    @RequestMapping(value = "/question/like/{questionId}", method = RequestMethod.POST)
+    @ResponseBody
+    public String likeQuestion(@PathVariable Integer questionId, @RequestParam Map<String, Integer> params) {
+        questionService.addLikesById(questionId);
         Question question = questionService.getById(questionId);
-        ModelAndView modelAndView = new ModelAndView("questionDetail");
-        modelAndView.addObject("questionDescription", question.getDescription());
-        modelAndView.addObject("questionId", question.getId());
-        modelAndView.addObject("questionTitle", question.getTitle());
-        modelAndView.addObject("username", question.getUser().getName());
-        modelAndView.addObject("dateCreatedAt", new SimpleDateFormat("MMMM dd,yyyy").format(question.getCreatedAt()));
-        modelAndView.addObject("timeCreatedAt", new SimpleDateFormat("hh:mm:ss a").format(question.getCreatedAt()));
-        modelAndView.addObject("likes", question.getLikes());
-        modelAndView.addObject("dislikes", question.getDislikes());
-        modelAndView.addObject("views", question.getViews());
-        modelAndView.addObject("flags", question.getFlags());
-        modelAndView.addObject("responses", question.getResponses());
-        return modelAndView;
+        return "(" + question.getLikes() + ") Likes";
+    }
+
+    @RequestMapping(value = "/question/dislike/{questionId}", method = RequestMethod.POST)
+    @ResponseBody
+    public String dislikeQuestion(@PathVariable Integer questionId, @RequestParam Map<String, Integer> params) {
+        questionService.addDisLikesById(questionId);
+        Question question = questionService.getById(questionId);
+        return "(" + question.getDislikes() + ") Dislikes";
+    }
+
+    @RequestMapping(value = "/question/flag/{questionId}", method = RequestMethod.POST)
+    @ResponseBody
+    public String flagQuestion(@PathVariable Integer questionId, @RequestParam Map<String, Integer> params) {
+        questionService.addFlagsByID(questionId);
+        Question question = questionService.getById(questionId);
+        return "(" + question.getFlags() + ") Flags";
     }
 }
