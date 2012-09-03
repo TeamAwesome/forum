@@ -107,10 +107,12 @@
     }
     table {
       border-collapse: collapse;
+      padding:3px;
     }
     table td, table th {
       word-wrap: break-word;
       border: 1px solid #9bf07b;
+      padding: 5px;
     }
     table tr:first-child th {
       border-top: 0;
@@ -145,7 +147,7 @@
 
     #QuestionParagraph{
         line-height:180%;
-        margin-left: 40px;
+        margin-left: 0px;
         text-align:left;
     }
 

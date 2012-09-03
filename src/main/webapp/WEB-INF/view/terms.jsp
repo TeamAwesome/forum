@@ -10,7 +10,7 @@
     <div id="header">
     </div>
     <div id="content">
-        <div id ="leftPane" >
+        <div id ="leftPane" style="padding:20px;" >
             <div class="text">
                 <span>
 

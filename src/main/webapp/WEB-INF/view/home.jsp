@@ -25,7 +25,7 @@
 
             <div id="activityQuestions" >
                       <p id="QuestionParagraph" data-bind="foreach: questions">
-                      <table>
+                      <table >
                       <tr>
                       <td width=105px>
                       <font color="#599425">Statistics</font>
