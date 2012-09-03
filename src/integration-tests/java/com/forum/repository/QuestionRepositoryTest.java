@@ -8,6 +8,8 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 
 import javax.sql.DataSource;
 import java.sql.Timestamp;
@@ -18,6 +20,8 @@ import java.util.logging.Logger;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class QuestionRepositoryTest extends IntegrationTestBase {
 
@@ -91,6 +95,38 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
 
         assertThat(numberOfQuestion, is(6));
     }
+
+    @Test
+    public void shouldUpdateNumberOfLikes(){
+        JdbcTemplate jdbcTemplate = mock(JdbcTemplate.class);
+        String query = "UPDATE QUESTION SET LIKES=LIKES+1 WHERE ID=?";
+        Integer questionID = new Integer(23);
+        when(jdbcTemplate.update(query,new Object[] {questionID})).thenReturn(1);
+        QuestionRepository questionRepository = new QuestionRepository(dataSource);
+        assertThat(questionRepository.addLikesById(questionID), is(1));
+    }
+
+    @Test
+    public void shouldUpdateNumberOfDisLikes(){
+        JdbcTemplate jdbcTemplate = mock(JdbcTemplate.class);
+        String query = "UPDATE QUESTION SET DISLIKES=DISLIKES+1 WHERE ID=?";
+        Integer questionID = new Integer(23);
+        when(jdbcTemplate.update(query,new Object[] {questionID})).thenReturn(1);
+        QuestionRepository questionRepository = new QuestionRepository(dataSource);
+        assertThat(questionRepository.addDisLikesById(questionID), is(1));
+    }
+
+    @Test
+    public void shouldUpdateNumberOfFlags(){
+        JdbcTemplate jdbcTemplate = mock(JdbcTemplate.class);
+        String query = "UPDATE QUESTION SET FLAGS=FLAGS+1 WHERE ID=?";
+        Integer questionID = new Integer(23);
+        when(jdbcTemplate.update(query,new Object[] {questionID})).thenReturn(1);
+        QuestionRepository questionRepository = new QuestionRepository(dataSource);
+        assertThat(questionRepository.addFlagsById(questionID), is(1));
+    }
+
+
 }
 
 

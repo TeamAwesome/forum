@@ -18,11 +18,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @Controller
 public class QuestionController {
 
     private QuestionService questionService;
+    private Logger logger = Logger.getLogger(QuestionController.class.getName());
 
 
     @Autowired
@@ -59,7 +61,7 @@ public class QuestionController {
     public ModelAndView viewQuestionDetail(@PathVariable Integer questionId) {
         Question question = questionService.getById(questionId);
         ModelAndView modelAndView = new ModelAndView("questionDetail");
-        modelAndView.addObject("questionID", question.getId()+"");
+        modelAndView.addObject("questionId", question.getId());
         modelAndView.addObject("questionTitle", question.getTitle());
         modelAndView.addObject("questionDescription", question.getDescription());
         modelAndView.addObject("username", question.getUser().getName());
@@ -73,7 +75,31 @@ public class QuestionController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/question/view/{questionId}", method = RequestMethod.POST)
+    public ModelAndView viewQuestionDetailWhenPosted(@PathVariable Integer questionId, @RequestParam Map<String, Integer> params) {
+        if(params.containsKey("likes")){
+            questionService.addLikesById(questionId);
+        }
+        else if(params.containsKey("dislikes")){
+            questionService.addDisLikesById(questionId);
+        }
+        else if(params.containsKey("flags")){
+            questionService.addFlagsByID(questionId);
+        }
 
-
-
+        Question question = questionService.getById(questionId);
+        ModelAndView modelAndView = new ModelAndView("questionDetail");
+        modelAndView.addObject("questionDescription", question.getDescription());
+        modelAndView.addObject("questionId", question.getId());
+        modelAndView.addObject("questionTitle", question.getTitle());
+        modelAndView.addObject("username", question.getUser().getName());
+        modelAndView.addObject("dateCreatedAt", new SimpleDateFormat("MMMM dd,yyyy").format(question.getCreatedAt()));
+        modelAndView.addObject("timeCreatedAt", new SimpleDateFormat("hh:mm:ss a").format(question.getCreatedAt()));
+        modelAndView.addObject("likes", question.getLikes());
+        modelAndView.addObject("dislikes", question.getDislikes());
+        modelAndView.addObject("views", question.getViews());
+        modelAndView.addObject("flags", question.getFlags());
+        modelAndView.addObject("responses", question.getResponses());
+        return modelAndView;
+    }
 }

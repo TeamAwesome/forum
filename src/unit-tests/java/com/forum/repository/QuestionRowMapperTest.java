@@ -22,12 +22,17 @@ public class QuestionRowMapperTest {
         when(resultSetMock.getString("TITLE")).thenReturn("title");
         when(resultSetMock.getString("PASSWORD")).thenReturn("pw");
         when(resultSetMock.getString("DESCRIPTION")).thenReturn("description");
+        when(resultSetMock.getInt("LIKES")).thenReturn(0);
+        when(resultSetMock.getInt("LIKES")).thenReturn(0);
+        when(resultSetMock.getInt("FLAGS")).thenReturn(0);
 
         Question question = questionRowMapper.mapRow(resultSetMock, 1);
         assertThat(question.getId(), is(1));
         assertThat(question.getTitle(), is("title"));
         assertNotNull(question.getUser());
-        assertThat(question.getDescription(), is("description"));
+        assertThat(question.getLikes(), is(0));
+        assertThat(question.getDislikes(), is(0));
+        assertThat(question.getFlags(), is(0));
     }
 
 }

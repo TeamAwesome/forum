@@ -57,4 +57,38 @@ public class QuestionServiceTest {
 
         assertThat(returnedList, is(questions));
     }
+    @Test
+    public void shouldUpdateLikeOfAQuestion(){
+        Question question = new Question(100,"Question Title", "Question Description", null, null,0,0,0);
+        QuestionRepository mockQuestionRepository = mock(QuestionRepository.class);
+        when(mockQuestionRepository.addLikesById(100)).thenReturn(1);
+        questionService = new QuestionService(mockQuestionRepository);
+
+        int numberOfRowsEffected = questionService.addLikesById(question.getId());
+
+        assertThat(numberOfRowsEffected, is(1));
+    }
+    @Test
+    public void shouldUpdateDisLikeOfAQuestion(){
+        Question question = new Question(100,"Question Title", "Question Description", null, null,0,0,0);
+        QuestionRepository mockQuestionRepository = mock(QuestionRepository.class);
+        when(mockQuestionRepository.addDisLikesById(100)).thenReturn(1);
+        questionService = new QuestionService(mockQuestionRepository);
+
+        int numberOfRowsEffected = questionService.addDisLikesById(question.getId());
+
+        assertThat(numberOfRowsEffected, is(1));
+    }
+    @Test
+    public void shouldUpdateFlagsOfAQuestion(){
+        Question question = new Question(100,"Question Title", "Question Description", null, null,0,0,0);
+        QuestionRepository mockQuestionRepository = mock(QuestionRepository.class);
+        when(mockQuestionRepository.addFlagsById(100)).thenReturn(1);
+        questionService = new QuestionService(mockQuestionRepository);
+
+        int numberOfRowsAffected = questionService.addFlagsByID(question.getId());
+
+        assertThat(numberOfRowsAffected, is(1));
+    }
+
 }

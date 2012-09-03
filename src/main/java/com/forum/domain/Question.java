@@ -9,6 +9,10 @@ public class Question implements Serializable {
     private Date createdAt;
     private String description;
     private User user;
+    private int likes;
+    private int dislikes;
+    private int flags;
+    private int views;
 
     public Question(int id, String title,String description, User user, Date createdAt){
         this.id = id;
@@ -24,6 +28,20 @@ public class Question implements Serializable {
         this.createdAt = createdAt;
         this.description=description;
     }
+
+    public Question(int id, String title, String description, User user, Date createdAt, int likes, int disLikes, int flags) {
+        this.id = id;
+        this.title=title;
+        this.user= user;
+        this.createdAt = createdAt;
+        this.description=description;
+        this.likes = likes;
+        this.dislikes = disLikes;
+        this.flags = flags;
+    }
+
+
+
 
     public String getTitle() {
         return title;
@@ -42,19 +60,19 @@ public class Question implements Serializable {
     }
 
     public int getLikes() {
-        return 0;
+        return likes;
     }
 
     public int getDislikes() {
-        return 0;
+        return dislikes;
     }
 
     public int getViews() {
-        return 0;
+        return views;
     }
 
     public int getFlags() {
-        return 0;
+        return flags;
     }
 
     @Override
@@ -75,4 +93,5 @@ public class Question implements Serializable {
     public int getResponses() {
         return 0;
     }
+
 }

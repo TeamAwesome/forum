@@ -27,7 +27,10 @@ public class QuestionRowMapper implements RowMapper {
                 resultSet.getString("TITLE"),
                 resultSet.getString("DESCRIPTION"),
                 user,
-                resultSet.getTimestamp("CREATED_AT"));
+                resultSet.getTimestamp("CREATED_AT"),
+                resultSet.getInt("LIKES"),
+                resultSet.getInt("DISLIKES"),
+                resultSet.getInt("FLAGS"));
         return question;
     }
 }

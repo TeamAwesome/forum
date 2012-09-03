@@ -25,9 +25,20 @@ public class QuestionService {
         return questionRepository.createQuestion(question);
     }
 
+    public int addLikesById(Integer questionId) {
+        return questionRepository.addLikesById(questionId);
+    }
+
     @Transactional
     public List<Question> latestQuestion(String pageNum, String pageSize) {
         return questionRepository.latestQuestion(Integer.parseInt(pageNum), Integer.parseInt(pageSize));
     }
 
+    public int addDisLikesById(Integer questionId) {
+        return questionRepository.addDisLikesById(questionId);
+    }
+
+    public int addFlagsByID(Integer questionId) {
+        return questionRepository.addFlagsById(questionId);
+    }
 }

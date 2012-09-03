@@ -3,7 +3,9 @@ package com.forum.web.controller;
 import com.forum.domain.Question;
 
 import com.forum.domain.User;
+import com.forum.repository.QuestionRepository;
 import com.forum.service.QuestionService;
+import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,8 +44,9 @@ public class HomeControllerTest {
         when(questionService.latestQuestion("1","1")).thenReturn(questions);
 
         String result = homeController.loadMoreQuestions("1","1");
-        String expected = "[{\"id\":1,\"title\":\"dummy title\",\"createdAt\":\"Jan 1, 1970 5:30:00 AM\",\"description\":\"dummy description for a dummy question with a dummy title by a dummy developer\",\"user\":{\"encrypter\":{}}}]";
+        String expected = "[{\"id\":1,\"title\":\"dummy title\",\"createdAt\":\"Jan 1, 1970 5:30:00 AM\",\"description\":\"dummy description for a dummy question with a dummy title by a dummy developer\",\"user\":{\"encrypter\":{}},\"likes\":0,\"dislikes\":0,\"flags\":0,\"views\":0}]";
 
         assertThat(result, is(expected) );
     }
+
 }

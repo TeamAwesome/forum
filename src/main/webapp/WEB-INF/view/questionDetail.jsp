@@ -36,9 +36,18 @@
                     </div>
 
                     <div id = "response">
-                        <button name="like">Like</button>
-                        <button name="dislike">Dislike</button>
-                        <button name="flag">Flag</button>
+                        <form id='likeForm' name='likeForm' method='post' action='<c:url value="/question/view/${questionId}"/>' >
+                            <input type="hidden" name="likes" value='${likes}'></input>
+                            <input type='submit' name="like" value="Like"></button>
+                        </form>
+                        <form id='dislikeForm' name='dislikeForm' method='post' action='<c:url value="/question/view/${questionId}"/>' >
+                            <input type="hidden" name="dislikes" value='${dislikes}'></input>
+                            <input type='submit' name="dislike" value="DisLike"></button>
+                        </form>
+                        <form id='flagForm' name='flagForm' method='post' action='<c:url value="/question/view/${questionId}"/>' >
+                            <input type="hidden" name="flags" value='${flags}'></input>
+                            <input type='submit' name="flag" value="Flags"></button>
+                        </form>
                         <p><label class="questionDetail" name="tags"> Tags:</label> ${questionTags} </p>
                         <p><label>Your Reply: </label></p>
                         <textarea id="replyTextarea" cols="40" rows="14" ></textarea>
