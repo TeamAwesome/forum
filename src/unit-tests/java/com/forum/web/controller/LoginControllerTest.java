@@ -5,13 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
 
 public class LoginControllerTest {
 
@@ -30,6 +25,13 @@ public class LoginControllerTest {
         ModelAndView activityModelAndView = loginController.loginView();
         //Then
         assertThat(activityModelAndView.getViewName(), is("login"));
+    }
+
+    @Test
+    public void shouldThrowErrorMessageIfUserValidationFails() {
+        ModelAndView errorModelAndView = loginController.errorLoginView();
+
+        assertThat(errorModelAndView.getViewName(), is("login"));
     }
 
 //    @Test
@@ -59,5 +61,4 @@ public class LoginControllerTest {
 //        Map<String, Object> expectedModel = modelAndView.getModel();
 //        assertThat((String) expectedModel.get("passwordError"), is("Please Enter a Valid Password"));
 //    }
-
 }
