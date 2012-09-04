@@ -219,7 +219,7 @@
     <target name="coverage" depends="instrument-cobertura, run-unit-and-integration-tests, report-cobertura"
             description="Calculate the percentage of code accessed by tests.">
         <cobertura-check datafile="${build.instrumented.dir}/cobertura.ser"
-                         branchrate="70" totalbranchrate="59" linerate="70" totallinerate="90">
+                         branchrate="70" totalbranchrate="59" linerate="70" totallinerate="83">
             <regex pattern="com.forum.domain.*" branchrate="30" linerate="30"/>
             <regex pattern="com.forum.security.*" branchrate="0" linerate="0" />
         </cobertura-check>
