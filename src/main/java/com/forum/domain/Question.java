@@ -1,47 +1,53 @@
 package com.forum.domain;
 
+import com.forum.service.validation.NoHTMLScript;
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class Question implements Serializable {
     private int id;
+
+    @NotBlank(message = "Title is empty.")
+    @NoHTMLScript
     private String title;
-    private Date createdAt;
+
+    @NotBlank(message = "Description is empty.")
     private String description;
+
+    private Date createdAt;
     private User user;
     private int likes;
     private int dislikes;
     private int flags;
     private int views;
 
-    public Question(int id, String title,String description, User user, Date createdAt){
+    public Question(int id, String title, String description, User user, Date createdAt) {
         this.id = id;
-        this.title=title;
-        this.user= user;
+        this.title = title;
+        this.user = user;
         this.createdAt = createdAt;
-        this.description=description;
+        this.description = description;
     }
 
-    public Question(String title,String description, User user, Date createdAt){
-        this.title=title;
-        this.user= user;
+    public Question(String title, String description, User user, Date createdAt) {
+        this.title = title;
+        this.user = user;
         this.createdAt = createdAt;
-        this.description=description;
+        this.description = description;
     }
 
     public Question(int id, String title, String description, User user, Date createdAt, int likes, int disLikes, int flags) {
         this.id = id;
-        this.title=title;
-        this.user= user;
+        this.title = title;
+        this.user = user;
         this.createdAt = createdAt;
-        this.description=description;
+        this.description = description;
         this.likes = likes;
         this.dislikes = disLikes;
         this.flags = flags;
     }
-
-
-
 
     public String getTitle() {
         return title;
@@ -92,9 +98,5 @@ public class Question implements Serializable {
 
     public int getResponses() {
         return 0;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }
