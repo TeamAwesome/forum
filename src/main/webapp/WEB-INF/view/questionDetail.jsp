@@ -56,7 +56,7 @@
                         <p><label class="questionDetail" name="tags"> Tags:</label> ${questionTags} </p>
 
                         <sec:authorize access="isAnonymous()">
-                            <button type="button" id="loginAndPost">Post advice</button>
+                            <button type="button" id="loginAndPost" onclick='javascript:window.location="/forum/login";'>Post advice</button>
                         </sec:authorize>
                         <sec:authorize access="isAuthenticated()">
                             <form id="adviceForm" action="<c:url value='/postAdvice'/>" method="post">
