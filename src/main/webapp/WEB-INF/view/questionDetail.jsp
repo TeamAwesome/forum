@@ -34,9 +34,21 @@
                     </div>
 
                     <div id = "response">
-                        <input id= "likeInput" type='submit' name="like" value="Like"></input>
-                        <input id="dislikeInput" type='submit' name="dislike" value="Dislike"></input>
-                        <input id="flagInput" type='submit' name="flag" value="Flags"></input>
+                            <form class="statsButtons" id='likeForm' name='likeForm' method='post' action='<c:url value="/question/view/${questionId}"/>' >
+                                <input type="hidden" name="likes" value='${likes}'></input>
+                                <input type='submit' name="like" value="Like"></button>
+                            </form>
+                            <form class="statsButtons" id='dislikeForm' name='dislikeForm' method='post' action='<c:url value="/question/view/${questionId}"/>' >
+                                <input type="hidden" name="dislikes" value='${dislikes}'></input>
+                                <input type='submit' name="dislike" value="Dislike"></button>
+                            </form>
+                            <form  class="statsButtons" id='flagForm' name='flagForm' method='post' action='<c:url value="/question/view/${questionId}"/>' >
+                                <input type="hidden" name="flags" value='${flags}'></input>
+                                <input type='submit' name="flag" value="Flag as inappropriate"></button>
+                            </form>
+                    </div>
+                    <div id="response2">
+                        </br>
                         <p><label class="questionDetail" name="tags"> Tags:</label> ${questionTags} </p>
                         <p><label>Your Reply: </label></p>
                         <textarea id="replyTextarea" cols="40" rows="14" ></textarea>
