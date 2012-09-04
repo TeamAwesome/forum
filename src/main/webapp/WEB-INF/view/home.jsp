@@ -1,8 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>'/>
 <head>
     <title>Welcome</title>
-    <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>'/>
+
     <script src='<c:url value="/static/jsquery/jquery.js"/>'></script>
     <script src='<c:url value="/static/javascript/knockout-2.1.0.js"/>'></script>
     <script src='http://connect.facebook.net/en_US/all.js'></script>
@@ -10,7 +11,7 @@
 
 </head>
 
-<body>
+<body text-align="center">
 
  <div id="container">
         <div id="header">
@@ -27,19 +28,19 @@
                       <p id="QuestionParagraph" data-bind="foreach: questions">
                       <table >
                       <tr>
-                      <td width=105px>
+                      <td width=80px>
                       <font color="#599425">Statistics</font>
                           <br>
                           <font class="small">
-                              0 Likes
-                              <hr class="dottedLine">
-                              0 Dislikes
-                              <hr class="dottedLine">
-                              0 Views
-                              <hr class="dottedLine">
-                              0 Responses
-                              <hr class="dottedLine">
-                              0 Flags
+                              0&nbsp;Likes
+                             <hr class="dottedLine"/>
+                              0&nbsp;Dislikes
+                              <hr class="dottedLine"/>
+                              0&nbsp;Views
+                              <hr class="dottedLine"/>
+                              0&nbsp;Responses
+                              <hr class="dottedLine"/>
+                              0&nbsp;Flags
                               <br><br>
                           </font>
 
@@ -75,14 +76,7 @@
         </div>
 
        <div id="rightPane">
-            <%@ include file="rightPane.jsp" %>
-            <div id='fb-root'>
-                         <p id='msg'></p>
-                         <a onclick='postToFeed(); return false;'><img style="cursor: pointer; cursor: hand" src="<c:url value='/static/images/facebook.png'/>" alt="Facebook" class="Facebook Icon"></a>
-                         <a href="https://twitter.com/share" data-url="http://10.10.5.107:8080/forum"  data-count="none" target="_blank"> <img src="<c:url value='/static/images/twitter.png'/>"  alt="Share on Twitter"></a>
-            </div>
-
-
+                  <%@ include file="rightPane.jsp" %>
        </div>
 
 
