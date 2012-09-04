@@ -113,14 +113,14 @@
       <script src='<c:url value="/static/javascript/yahoo-dom-event.js"/>'></script>
       <script src='<c:url value="/static/javascript/jquery-latest.js"/>' type="text/javascript"></script>
       <script src='<c:url value="/static/javascript/jquery-events.js"/>' type="text/javascript"></script>
-      <script type="text/javascript" src='<c:url value="/static/javascript/Question.js"/>'></script>
+      <script type="text/javascript" src='<c:url value="/static/javascript/Advice.js"/>'></script>
       <script src='<c:url value="/static/javascript/element-min.js"/>'></script>
       <!-- Needed for Menus, Buttons and Overlays used in the Toolbar -->
       <script src='<c:url value="/static/javascript/container_core-min.js"/>'></script>
       <!-- Source file for Rich Text Editor-->
       <script src='<c:url value="/static/javascript/editor-min.js"/>'></script>
       <!---<script src='<c:url value="/static/javascript/simpleeditor-min.js"/>'></script> --->
-      <script src='<c:url value="/static/javascript/postQuestionValidator.js"/>'></script>
+      <script src='<c:url value="/static/javascript/postAdviceValidator.js"/>'></script>
 </div>
 </body>
 </html>
