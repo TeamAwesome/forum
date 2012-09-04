@@ -3,7 +3,7 @@
 {
     float:left;
     width:50%;
-    padding-left: 5%;
+    padding-left: 1%;
 }
 
 #right
@@ -16,6 +16,11 @@
 
 }
 
+#right p, ul, ol {
+    margin-top: 0;
+    line-height: 100%;
+    padding: 0px 30px 0px 30px;
+}
 
 #questionTitle
 {
