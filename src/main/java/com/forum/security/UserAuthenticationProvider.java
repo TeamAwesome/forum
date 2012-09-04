@@ -22,37 +22,37 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-
-        try {
-            logger.info("Enter Authentication.");
-            User user = new User();
-            user.setUsername((String) authentication.getPrincipal());
-            user.setPassword((String) authentication.getPrincipal());
-            User userValidated = userService.getValidation(user);
-
-            if(userValidated==null){
-                 throw new BadCredentialsException("User or password failed.");
-            }
-
-
-
-        // Implement the userService logic
-        //            userService.authenticateAndReturnUser((String) authentication.getPrincipal(),(String) authentication.getCredentials());
-            List<? extends GrantedAuthority> grantedAuthorities = Arrays.asList(new GrantedAuthority() {
-                @Override
-                public String getAuthority() {
-                    return "USER";
-                }
-            });
-
-            return new UsernamePasswordAuthenticationToken(
-                    authentication.getPrincipal(),
-                    authentication.getCredentials(),
-                    grantedAuthorities
-            );
-        } catch (Exception e) {
-                throw new BadCredentialsException("Bad User Credentials.");
-        }
+        throw new RuntimeException();
+//        try {
+//            logger.info("Enter Authentication.");
+//            User user = new User();
+//            user.setUsername((String) authentication.getPrincipal());
+//            user.setPassword((String) authentication.getPrincipal());
+//            User userValidated = userService.getValidation(user);
+//
+//            if(userValidated==null){
+//                 throw new BadCredentialsException("User or password failed.");
+//            }
+//
+//
+//
+//        // Implement the userService logic
+//        //            userService.authenticateAndReturnUser((String) authentication.getPrincipal(),(String) authentication.getCredentials());
+//            List<? extends GrantedAuthority> grantedAuthorities = Arrays.asList(new GrantedAuthority() {
+//                @Override
+//                public String getAuthority() {
+//                    return "USER";
+//                }
+//            });
+//
+//            return new UsernamePasswordAuthenticationToken(
+//                    authentication.getPrincipal(),
+//                    authentication.getCredentials(),
+//                    grantedAuthorities
+//            );
+//        } catch (Exception e) {
+//                throw new BadCredentialsException("Bad User Credentials.");
+//        }
 
     }
 
