@@ -1,9 +1,5 @@
 package com.forum.web.page.tests;
 
-import com.forum.web.page.Browser;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -14,23 +10,10 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class UserRegistrationTest {
-    private Browser browser;
-
-    @Before
-    public void initializeWebDriver() {
-        browser = new Browser("http://localhost:8080/forum", true);
-        browser.open("/join");
-    }
-
-    @After
-    public void closeBrowser() {
-        browser.stop();
-    }
+public class UserRegistrationTest extends FunctionalTestBase {
 
     @Test
     public void shouldGoToRegistrationPage() {
-        browser.open("/");
         WebElement joinLink = browser.findElement(By.linkText("Join"));
         joinLink.click();
         browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("register")));
@@ -39,18 +22,19 @@ public class UserRegistrationTest {
 
     @Test
     public void shouldRegisterSuccessfully(){
+        browser.open("/join");
         String userRegistrationTitle = browser.findElement(By.tagName("h1")).getText();
         assertThat(userRegistrationTitle, is("User Registration"));
         assertTrue(browser.getCurrentUrl().contains("/join"));
 
         WebElement usernameField = browser.findElement(By.id("username"));
-        usernameField.sendKeys("Stephanie1");
+        usernameField.sendKeys("Stephanie4");
         WebElement passwordField = browser.findElement(By.id("password"));
         passwordField.sendKeys("saxophone");
         WebElement nameField = browser.findElement(By.id("name"));
         nameField.sendKeys("Stephanie");
         WebElement emailField = browser.findElement(By.id("email"));
-        emailField.sendKeys("sjacobs@thoughtworks.com");
+        emailField.sendKeys("sjacobs2@thoughtworks.com");
         Select countryField = new Select(browser.findElement(By.id("country")));
         countryField.selectByVisibleText("United States");
         WebElement genderField = browser.findElement(By.id("genderFemale"));
@@ -68,6 +52,7 @@ public class UserRegistrationTest {
 
     @Test
     public void shouldHavePasswordErrorWhenLessThan8() {
+        browser.open("/join");
         WebElement passwordField = browser.findElement(By.id("password"));
         passwordField.sendKeys("1234567");
 
@@ -82,6 +67,7 @@ public class UserRegistrationTest {
 
     @Test
     public void shouldDisplayErrorWhenEmailFormatInvalid() {
+        browser.open("/join");
         WebElement emailField = browser.findElement(By.id("email"));
         emailField.sendKeys("123asdf");
 
@@ -96,6 +82,7 @@ public class UserRegistrationTest {
 
     @Test
     public void shouldDisplayTermsAndConditions() {
+        browser.open("/join");
         WebElement termsLink = browser.findElement(By.name("tos"));
         termsLink.click();
         WebElement TosTitle = browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.tagName("h3")));
