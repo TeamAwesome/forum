@@ -38,18 +38,9 @@
                     </div>
 
                     <div id = "response">
-                            <form class="statsButtons" id='likeForm' name='likeForm' method='post' action='<c:url value="/question/view/${questionId}"/>' >
-                                <input type="hidden" name="likes" value='${likes}'></input>
-                                <input type='submit' name="like" value="Like"></input>
-                            </form>
-                            <form class="statsButtons" id='dislikeForm' name='dislikeForm' method='post' action='<c:url value="/question/view/${questionId}"/>' >
-                                <input type="hidden" name="dislikes" value='${dislikes}'></input>
-                                <input type='submit' name="dislike" value="Dislike"></input>
-                            </form>
-                            <form  class="statsButtons" id='flagForm' name='flagForm' method='post' action='<c:url value="/question/view/${questionId}"/>' >
-                                <input type="hidden" name="flags" value='${flags}'></input>
-                                <input type='submit' name="flag" value="Flag as inappropriate"></input>
-                            </form>
+                        <input id= "likeInput" type='submit' name="like" value="Like"></input>
+                        <input id="dislikeInput" type='submit' name="dislike" value="Dislike"></input>
+                        <input id="flagInput" type='submit' name="flag" value="Flags"></input>
                     </div>
                     <div id="response2">
                         </br>
