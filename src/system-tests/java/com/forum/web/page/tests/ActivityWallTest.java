@@ -55,13 +55,13 @@ public class ActivityWallTest {
         submitButton.click();
         browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("container")));
 
-        assertTrue(browser.getCurrentUrl().contains("/login"));
+        assertTrue(browser.getCurrentUrl().contains("/errorLogin"));
 
 
         WebElement userNameLogin2 = browser.findElement(By.name("j_username"));
-        userNameLogin2.sendKeys("Jules");
+        userNameLogin2.sendKeys("lu");
         WebElement passwordLogin2 = browser.findElement(By.name("j_password"));
-        passwordLogin2.sendKeys("Great!");
+        passwordLogin2.sendKeys("password");
 
         WebElement submitButton2 = browser.findElement(By.name("submit"));
         submitButton2.click();
