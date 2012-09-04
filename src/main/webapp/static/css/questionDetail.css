@@ -13,7 +13,6 @@
     position: relative;
     padding-top : 5%;
     padding-left: 5%;
-
 }
 
 #right p, ul, ol {
@@ -24,7 +23,6 @@
 
 #questionTitle
 {
-
     word-wrap: break-word;
         overflow: auto;
         font-weight: bold;
@@ -33,8 +31,6 @@
 
 
 }
-
-
 
 #questionDescription
 {
@@ -52,7 +48,6 @@
     padding: 5px 3px 2px 5px;
 }
 
-
 #status
 {
     padding-top: 3em;
@@ -63,8 +58,8 @@
    resize: none;
 }
 
-.statsButtons{
+.statsButtons
+{
     max-width: 130px;
     float: left;
-
 }
