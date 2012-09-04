@@ -18,8 +18,12 @@ import java.util.logging.Logger;
 public class UserAuthenticationProvider implements AuthenticationProvider {
 
     private UserService userService;
-
     private static final Logger logger = Logger.getLogger(UserAuthenticationProvider.class.getName());
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -30,27 +34,27 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
             user.setPassword((String) authentication.getCredentials());
             User userValidated = userService.getValidation(user);
 
-            if(userValidated==null){
-                 throw new BadCredentialsException("User or password failed.");
+            if (userValidated == null) {
+                throw new BadCredentialsException("User or password failed.");
             }
             final Privilege userPrivilege = userService.getRole(user);
             List<? extends GrantedAuthority> grantedAuthorities = Arrays.asList(new GrantedAuthority() {
                 @Override
                 public String getAuthority() {
-                    switch (userPrivilege){
+                    switch (userPrivilege) {
                         case ADMIN: {
                             return "ROLE_ADMIN";
                         }
-                        default:{
+                        default: {
                             return "ROLE_USER";
                         }
                     }
                 }
             });
 
-            return new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),authentication.getCredentials(),grantedAuthorities);
+            return new UsernamePasswordAuthenticationToken(authentication.getPrincipal(), authentication.getCredentials(), grantedAuthorities);
         } catch (Exception e) {
-                throw new BadCredentialsException("Bad User Credentials.");
+            throw new BadCredentialsException("Bad User Credentials.");
         }
 
     }
@@ -58,10 +62,5 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     @Override
     public boolean supports(Class<?> aClass) {
         return true;
-    }
-
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
     }
 }
