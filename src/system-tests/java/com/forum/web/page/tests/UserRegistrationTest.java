@@ -39,7 +39,7 @@ public class UserRegistrationTest {
 
     @Test
     public void shouldRegisterSuccessfully(){
-        String userRegistrationTitle = browser.findElement(By.tagName("h2")).getText();
+        String userRegistrationTitle = browser.findElement(By.tagName("h1")).getText();
         assertThat(userRegistrationTitle, is("User Registration"));
         assertTrue(browser.getCurrentUrl().contains("/join"));
 
@@ -63,7 +63,7 @@ public class UserRegistrationTest {
         registerButton.click();
 
         WebElement h1 = browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
-        assertThat(h1.getText(), is("Activity Wall"));
+        assertThat(h1.getText(), is("User Registration"));
     }
 
     @Test

@@ -57,6 +57,7 @@ public class QuestionServiceTest {
 
         assertThat(returnedList, is(questions));
     }
+
     @Test
     public void shouldUpdateLikeOfAQuestion(){
         Question question = new Question(100,"Question Title", "Question Description", null, null,0,0,0);

@@ -28,6 +28,7 @@
     word-wrap: break-word;
         overflow: auto;
         font-weight: bold;
+        font-size:1.2em;
         padding: 10px 3px 8px 5px;
 
 
@@ -38,11 +39,12 @@
 #questionDescription
 {
     word-wrap:break-word;
-    border-style: solid;
+    border: 0px solid;
     max-height:300px;
     max-width:300px;
     overflow: auto;
     padding: 5px 3px 2px 5px;
+    background-color:#FFF0DB;
 }
 
 #response

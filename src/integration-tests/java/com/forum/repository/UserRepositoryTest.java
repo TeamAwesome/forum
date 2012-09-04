@@ -89,6 +89,10 @@ public class UserRepositoryTest extends IntegrationTestBase {
 
         User actualUser = userRepository.getByUsername(user.getUsername());
 
+        /*
+         * When reading a user from the datastore, interests and areas of knowledge are not yet read.
+         * Therefore the actual user object is amended before comparing it to the first user object.
+         */
         actualUser.setKnowledge(knowledge);
         actualUser.setInterests(interests);
 
