@@ -109,19 +109,6 @@
       border-collapse: collapse;
       padding:3px;
     }
-    table td, table th {
-      word-wrap: break-word;
-      border: 1px solid #9bf07b;
-      padding: 5px;
-    }
-    table tr:first-child th {
-      border-top: 0;
-    }
-    table tr:last-child td {
-      border-bottom: 0;
-      width: 500px;
-    }
-
     table td {
       float:left;
       width:30%;

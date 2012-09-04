@@ -63,7 +63,7 @@ public class UserRegistrationTest {
         registerButton.click();
 
         WebElement h1 = browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
-        assertThat(h1.getText(), is("User Registration"));
+        assertThat(h1.getText(), is("Activity Wall"));
     }
 
     @Test
