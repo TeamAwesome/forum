@@ -11,7 +11,7 @@
 
 </head>
 
-<body text-align="center">
+<body>
 
  <div id="container">
         <div id="header">
