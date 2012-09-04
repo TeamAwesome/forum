@@ -30,6 +30,7 @@ public class UserAuthenticationProviderTest {
     @Test
     public void shouldPassAuthentication(){
         Authentication mockAuthentication = mock(Authentication.class);
+        userAuthenticationProvider.setUserService(mockUserService);
         String username = "maomao";
         String password = "pw";
         User user = new User();
@@ -41,14 +42,14 @@ public class UserAuthenticationProviderTest {
         when(mockAuthentication.getPrincipal()).thenReturn(username);
         when(mockAuthentication.getCredentials()).thenReturn(password);
         when(mockUserService.getValidation(user)).thenReturn(userWithPrivilege);
+        when(mockUserService.getRole(user)).thenReturn(Privilege.ADMIN);
+        Authentication authentication =  userAuthenticationProvider.authenticate(mockAuthentication);
 
-//        Authentication authentication =  userAuthenticationProvider.authenticate(mockAuthentication);
-
-//        assertThat((String)authentication.getPrincipal(), is("maomao"));
-//        assertThat((String)authentication.getCredentials(), is("pw"));
-//        Collection grantedAuthorities = authentication.getAuthorities();
-//        assertThat(grantedAuthorities.size(), is(1));
-//        GrantedAuthority grantedAuthority = (GrantedAuthority) grantedAuthorities.toArray()[0];
-//        assertThat(grantedAuthority.getAuthority(), is("ROLE_ADMIN"));
+        assertThat((String)authentication.getPrincipal(), is("maomao"));
+        assertThat((String)authentication.getCredentials(), is("pw"));
+        Collection grantedAuthorities = authentication.getAuthorities();
+        assertThat(grantedAuthorities.size(), is(1));
+        GrantedAuthority grantedAuthority = (GrantedAuthority) grantedAuthorities.toArray()[0];
+        assertThat(grantedAuthority.getAuthority(), is("ROLE_ADMIN"));
     }
 }

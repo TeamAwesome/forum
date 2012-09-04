@@ -63,7 +63,7 @@ public class UserRepositoryTest extends IntegrationTestBase {
     @Test
     public void shouldReturnNullIfUserNotPresent(){
         String validUser = userRepository.getPasswordByUsername("lu");
-        assertThat(validUser,is("QWERTY"));
+        assertThat(validUser,is("5f4dcc3b5aa765d61d8327deb882cf99"));
     }
 
     @Test

@@ -15,15 +15,13 @@ public class LoginControllerTest {
 
     @Before
     public void setUp() {
-        //Given
         loginController = new LoginController(userService);
     }
 
     @Test
     public void shouldNavigateToLoginPage() {
-        //When
         ModelAndView activityModelAndView = loginController.loginView();
-        //Then
+
         assertThat(activityModelAndView.getViewName(), is("login"));
     }
 
@@ -33,32 +31,4 @@ public class LoginControllerTest {
 
         assertThat(errorModelAndView.getViewName(), is("login"));
     }
-
-//    @Test
-//    public void shouldRejectLoginWithEmptyUsername() {
-//        Map userMap = new HashMap();
-//        HttpServletRequest mockHttpServletRequest = mock(HttpServletRequest.class);
-//        userMap.put(LoginController.USERNAME, "");
-//        userMap.put(LoginController.PASSWORD, "QWERTY");
-//
-//        ModelAndView modelAndView = loginController.validateForm(userMap, mockHttpServletRequest);
-//
-//        assertThat(modelAndView.getViewName(), is("login"));
-//        Map<String, Object> expectedModel = modelAndView.getModel();
-//        assertThat((String) expectedModel.get("usernameError"), is("Please Enter a Valid Username"));
-//    }
-//
-//    @Test
-//    public void shouldRejectLoginWithEmptyPassword() {
-//        Map userMap = new HashMap();
-//        HttpServletRequest mockHttpServletRequest = mock(HttpServletRequest.class);
-//        userMap.put(LoginController.USERNAME, "lu");
-//        userMap.put(LoginController.PASSWORD, "");
-//
-//        ModelAndView modelAndView = loginController.validateForm(userMap, mockHttpServletRequest);
-//
-//        assertThat(modelAndView.getViewName(), is("login"));
-//        Map<String, Object> expectedModel = modelAndView.getModel();
-//        assertThat((String) expectedModel.get("passwordError"), is("Please Enter a Valid Password"));
-//    }
 }

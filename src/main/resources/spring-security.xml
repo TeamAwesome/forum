@@ -27,7 +27,7 @@
     <beans:bean id="errorHandlingFilter" class="com.forum.security.ErrorHandler" />
     <beans:bean id="loginSuccessHandler" class="com.forum.security.LoginHandler" />
 
-    <!--<beans:bean id="UserAuthenticationProvider" class="com.forum.security.UserAuthenticationProvider"/>-->
+    <beans:bean id="userAuthProvider" class="com.forum.security.UserAuthenticationProvider"/>
     <beans:bean id="tempUserAuthenticationProvider" class="com.forum.security.TempUserAuthenticationProvider"/>
 
     <beans:bean id="userService" class="com.forum.service.UserService"/>
@@ -39,13 +39,13 @@
                 <!--<user name="maomao" password="spring" authorities="ROLE_USER" />-->
             <!--</user-service>-->
         <!--</authentication-provider>-->
-        <!--<authentication-provider ref="UserAuthenticationProvider"/>-->
-        <authentication-provider>
-            <user-service>
-                <user password="password" name="chris" authorities="ROLE_USER" />
-                <user password="password" name="lu.liu" authorities="ROLE_ADMIN" />
-                <user password="Great!" name="Jules" authorities="ROLE_ADMIN" />
-            </user-service>
-        </authentication-provider>
+        <authentication-provider ref="userAuthProvider"/>
+        <!--<authentication-provider>-->
+            <!--<user-service>-->
+                <!--<user password="password" name="chris" authorities="ROLE_USER" />-->
+                <!--<user password="password" name="lu.liu" authorities="ROLE_ADMIN" />-->
+                <!--<user password="Great!" name="Jules" authorities="ROLE_ADMIN" />-->
+            <!--</user-service>-->
+        <!--</authentication-provider>-->
     </authentication-manager>
 </beans:beans>

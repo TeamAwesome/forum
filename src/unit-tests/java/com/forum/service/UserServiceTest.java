@@ -1,9 +1,7 @@
 package com.forum.service;
 
 import com.forum.domain.Country;
-import com.forum.domain.Question;
 import com.forum.domain.User;
-import com.forum.repository.QuestionRepository;
 import com.forum.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -84,6 +82,7 @@ public class UserServiceTest {
         User user = new User(username, md5, "Tom Tom", "tom@tom.com", "1234567",
                 "Moon", "He doesn't know", 200, false);
         when(userRepository.getPasswordByUsername(username)).thenReturn(md5);
+        when(userRepository.getByUsername(username)).thenReturn(mockUser);
         assertThat(userService.getValidation(mockUser),is(mockUser));
     }
 
