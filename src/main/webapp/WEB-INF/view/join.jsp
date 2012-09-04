@@ -22,52 +22,38 @@
             <table>
                 <tr>
                     <td>Username:</td>
+                    <td><form:input path="username" id="username"/> </td>
+                    <td><form:errors path="username" class="errorMsg" id="usernameMsg"/></td>
                 </tr>
 
-                <tr>
-                    <td><form:input path="username" id="username"/> <form:errors
-                    path="username" class="errorMsg" id="usernameMsg"/></td>
-                </tr>
-
-                <tr>
+                <tr >
                     <td>Password:</td>
-                </tr>
-
-                <tr>
-                    <td><form:password path="password" id="password"/> <form:errors path="password" class="errorMsg" id="passwordMsg"/></td>
+                    <td><form:password path="password" id="password"/></td>
+                    <td> <form:errors path="password" class="errorMsg" id="passwordMsg"/></td>
                 </tr>
 
                 <tr>
                     <td>Name:</td>
-                </tr>
-
-                <tr>
-                    <td><form:input path="name" id="name"/><form:errors
-                path="name" class="errorMsg" id="nameMsg"/></td>
+                    <td><form:input path="name" id="name"/></td>
+                    <td><form:errors path="name" class="errorMsg" id="nameMsg"/></td>
                 </tr>
 
                 <tr>
                     <td>Email:</td>
-                </tr>
-
-                <tr>
-                    <td><form:input path="email" id="email"/><form:errors
-                path="email" class="errorMsg" id="emailMsg"/></td>
-                </tr>
+                    <td><form:input path="email" id="email"/></td>
+                    <td><form:errors path="email" class="errorMsg" id="emailMsg"/></td>
+                </tr >
                 <tr>
                     <td>Phone Number:</td>
-                </tr>
-
-                <tr>
-                    <td><form:input path="phoneNumber" id="phoneNumber"/><form:errors
-                path="phoneNumber" class="errorMsg" id="phoneNumberMsg"/></td>
+                    <td><form:input path="phoneNumber" id="phoneNumber"/></td>
+                    <td><form:errors path="phoneNumber" class="errorMsg" id="phoneNumberMsg"/></td>
                 </tr>
 
                 <tr>
                     <td>Country of Origin:</td>
                 </tr>
                 <tr>
-                    <td><form:select path="country" id="country">
+                    <td class = "fullRow"><form:select path="country" id="country">
                         <form:option value="" selected="selected">Select Country</form:option>
                         <form:options items="${countries}" itemValue="countryId" itemLabel="countryName" />
 
@@ -104,7 +90,7 @@
                     <td>Interests:</td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class = "fullRow">
                         <form:checkbox path="interests" value="1" label="Food" id="interestFood" />
                         <form:checkbox path="interests" value="2" label="Travel" id="interestTravel" />
                         <form:checkbox path="interests" value="3" label="Religious sites" id="interestReligiousSites" />
@@ -112,7 +98,7 @@
                         <form:checkbox path="interests" value="5" label="Arts" id="interestArts" />
                         <form:checkbox path="interests" value="6" label="Music" id="interestMusic" />
                     </td>
-                    <td><form:errors path="interests" class="errorMsg" id="interestsMessage"/></td>
+                    <td class = "fullRow"><form:errors path="interests" class="errorMsg" id="interestsMessage"/></td>
                 </tr>
 
 
@@ -120,7 +106,7 @@
                     <td>Knowledge Areas:</td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="fullRow">
                         <form:checkbox path="knowledge" value="1" label="Food" id="knowledgeFood" />
                         <form:checkbox path="knowledge" value="2" label="Travel" id="knowledgeTravel" />
                         <form:checkbox path="knowledge" value="3" label="Religious sites" id="knowledgeReligiousSites" />
@@ -135,7 +121,7 @@
                 </tr>
 
                <tr>
-                    <td> By submitting this form, you are agreeing to our <a name="tos" href="terms">Terms and Conditions</a>. </td>
+                    <td class = "fullRow"> By submitting this form, you are agreeing to our <a name="tos" href="terms">Terms and Conditions</a>. </td>
                </tr>
 
 

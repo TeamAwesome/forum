@@ -119,14 +119,21 @@
     }
     table tr:last-child td {
       border-bottom: 0;
+      width: 600px;
     }
-    table tr td:first-child,
-    table tr th:first-child {
-      border-left: 0;
+
+    table td {
+      float:left;
+      width:30%;
     }
-    table tr td:last-child,
-    table tr th:last-child {
-      border-right: 0;
+
+    table tr {
+      border-bottom: 1px solid #9bf07b;
+      border-top:1px solid #9bf07b;
+    }
+
+    .fullRow{
+    width:100%;
     }
 
     #searchBar {
@@ -192,6 +199,7 @@
     }
 
     .errorMsg{
+
         color:#FF0000;
     }
 
