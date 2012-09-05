@@ -13,8 +13,6 @@
         <div id ="leftPane" style="padding:20px;" >
             <div class="text">
                 <span>
-
-
                 <h3>The Forum Terms and Conditions</h3>
                 <p>The Forum offers this Web site, including all information, software, products and services available from this Web site or offered as part of or in conjunction with this Web site (the "Web site"), to you, the user, conditioned upon your acceptance of all of the terms, conditions, policies and notices stated here. The Forum reserves the right to make changes to these Terms and Conditions immediately by posting the changed Terms and Conditions in this location.
                 Your continued use of the Web site constitutes your agreement to all such terms, conditions and notices, and any changes to the Terms and Conditions made by The Forum.

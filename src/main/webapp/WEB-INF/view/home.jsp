@@ -15,7 +15,7 @@
 
 <body>
 
- <div id="container">
+ <div id="container" >
         <div id="header">
             <%@ include file="registerHeader.jsp" %>
         </div>
@@ -28,28 +28,27 @@
 
             <div id="activityQuestions" >
                       <p id="QuestionParagraph" data-bind="foreach: questions">
-                      <table >
+                      <table>
                       <tr>
-                      <td width=80px>
-                      <font color="#599425">Statistics</font>
-                          <br>
-                          <font class="small">
-                              0&nbsp;Likes
-                             <hr class="dottedLine"/>
-                              0&nbsp;Dislikes
-                              <hr class="dottedLine"/>
-                              0&nbsp;Views
-                              <hr class="dottedLine"/>
-                              0&nbsp;Responses
-                              <hr class="dottedLine"/>
-                              0&nbsp;Flags
-                              <br><br>
-                          </font>
+                      <td width=10%>
+                      <font size = 3 color="#599425">Statistics<br></font>
+                       <span class="questionlikes" data-bind="text: likes"
+                            style=' height: 1em; display: inline-block; font-size:.75em;'>
+                       </span> <font size = 1>Likes<br></font>
+                       <hr class="dottedLine"/><br>
+                       <span class="questiondislikes" data-bind="text: dislikes"
+                           style=' height: 1em; display: inline-block; font-size:.75em;'>
+                      </span><font size = 1> Dislikes<br></font>
+                       <hr class="dottedLine"/><br>
+                      <span class="questionflags" data-bind="text: flags"
+                         style=' height: 1em; display: inline-block; font-size:.75em;'>
+                      </span><font size = 1> Flags<br></font>
 
                       </td>
-                      <td width=350px><a data-bind="attr: {href: url }"><b>
+                      <td width=40%>
+                      <a data-bind="attr:{href:url}"><b>
                       <span class="questionTitle" data-bind="html: title" style='width: 350px; height: 1em;overflow: hidden; display: inline-block;'> </span></b>
-                      </a>
+                       </a>
                       &nbsp;-&nbsp;
                       <br />
                      <span class="questionDescription" data-bind="html: description"
@@ -59,7 +58,7 @@
                       <span class="questionCreatedAt" data-bind="text: createdAt" style="font-size:.7em;"> </span>
                       </td>
 
-                      <td>
+                    <td width=10%>
                     <img src='<c:url value="/static/images/empty_profile_picture.gif"/>' width=60 height=60>
 
                     <br />
@@ -77,14 +76,7 @@
             </div>
         </div>
 
-       <div id="rightPane">
-           <%@ include file="rightPane.jsp" %>
-       </div>
-
-       <span id='fb-root'>
-           <a onclick='postToFeed(); return false;'><img style="cursor: pointer; cursor: hand; padding-top: 20px;" src="<c:url value='static/images/facebook.png'/>" alt="Facebook" class="Facebook Icon"></a>
-           <a href="https://twitter.com/share" style="padding-top: 20px;" data-url="http://10.10.5.107:8080/forum/" data-text="Need info on Bangalore?" data-size="large" data-count="none" target="_blank"><img src="<c:url value='static/images/twitter.png'/>" alt="Twitter"></a>
-       </span>
+        <%@ include file="rightPane.jsp" %>
 
 
     </div>

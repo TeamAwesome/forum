@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
@@ -19,11 +20,11 @@
             <div id ="innerLeftPane" >
             <form:form method="post" action="join" commandName="user">
             <h1>User Registration</h1>
-            <font color="red" size=3>Fields with * are Mandatory</font>
-                <table width="600px" id="registrationForm">
+            <font color="red" size=2>Fields with * are Mandatory</font>
+                <table width="560px" id="registrationForm">
                     <tr>
                         <td>Username:</td>
-                        <td><form:input path="username" id="username"/><font color="red" size=3>*</font> </td>
+                        <td float="left"><form:input path="username" id="username"/><font color="red" size=3>*</font> </td>
                         <td><form:errors path="username" class="errorMsg" id="usernameMsg"/></td>
                     </tr>
 
@@ -118,7 +119,7 @@
                     </tr>
 
                     <tr id="privacy">
-                        <td><form:checkbox path="privacy" value="1" label="Privacy Settings" /></td>
+                        <td><br><form:checkbox path="privacy" value="1" label="Privacy Settings" /></td>
                     </tr>
 
                    <tr>
