@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Logger;
 
 /*
@@ -79,7 +78,6 @@ public class UserRepository {
     public int createUser(User user) {
         int result = 0;
         BooleanToInteger converter = new BooleanToInteger();
-
         logger.info(user.toString());
         result+=jdbcTemplate.update(
                 "INSERT INTO USER (PASSWORD,NAME,EMAIL_ADDRESS,PHONE_NUMBER,COUNTRY,GENDER,AGE_RANGE,USERNAME,PRIVACY,CREATED_AT) VALUES (?,?,?,?,?,?,?,?,?,?)",
@@ -118,4 +116,7 @@ public class UserRepository {
                 Integer.class);  //To change body of created methods use File | Settings | File Templates.
     }
 
+    public int getUserPrivilege(User user) {
+        return jdbcTemplate.queryForInt("SELECT PRIVILEGE FROM USER WHERE USERNAME = ?",user.getUsername());
+    }
 }

@@ -59,7 +59,7 @@ public class ActivityWallTest {
 
 
         WebElement userNameLogin2 = browser.findElement(By.name("j_username"));
-        userNameLogin2.sendKeys("lu");
+        userNameLogin2.sendKeys("Jules");
         WebElement passwordLogin2 = browser.findElement(By.name("j_password"));
         passwordLogin2.sendKeys("password");
 

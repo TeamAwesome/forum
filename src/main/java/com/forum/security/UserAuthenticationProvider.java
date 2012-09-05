@@ -32,11 +32,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
             User user = new User();
             user.setUsername((String) authentication.getPrincipal());
             user.setPassword((String) authentication.getCredentials());
-            User userValidated = userService.getValidation(user);
-
-            if (userValidated == null) {
-                throw new BadCredentialsException("User or password failed.");
-            }
+            userService.validate(user);
             final Privilege userPrivilege = userService.getRole(user);
             List<? extends GrantedAuthority> grantedAuthorities = Arrays.asList(new GrantedAuthority() {
                 @Override

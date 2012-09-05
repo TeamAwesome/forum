@@ -5,6 +5,7 @@ import com.forum.domain.Privilege;
 import com.forum.domain.User;
 import com.forum.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -55,14 +56,11 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
-    public User getValidation(User user) {
-        if(userRepository.getByUsername(user.getUsername()) == null) return null;
+    public void validate(User user) throws BadCredentialsException{
+        if(userRepository.getByUsername(user.getUsername()) == null) throw new BadCredentialsException("The user name is invalid");
         String passwordFromDatabase = userRepository.getPasswordByUsername(user.getUsername());
-        if((passwordFromDatabase).equals(user.getPassword())){
-             return user;
-        }
-        return null;
-        }
+        if(!((passwordFromDatabase).equals(user.getPassword()))) throw new BadCredentialsException("The password is incorrect");
+    }
 
 
     public int createUser(User user) throws  RuntimeException {
@@ -83,6 +81,7 @@ public class UserService implements UserDetailsService {
     }
 
     public Privilege getRole(User user) {
-        return Privilege.ADMIN;
+        int privilege =  userRepository.getUserPrivilege(user);
+        return Privilege.getPrivilege(privilege);
     }
 }

@@ -21,7 +21,7 @@
             </li>&nbsp;
             <sec:authorize access="isAuthenticated()">
                 <li id="logoutLink">
-                    <a name="logout" id="logout" href="<c:url value='j_spring_security_logout' />">Logout</a>
+                    <a name="logout" id="logout" href="<c:url value='forum_logout' />">Logout</a>
                 </li>
             </sec:authorize>
         </ul>

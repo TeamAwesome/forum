@@ -5,6 +5,7 @@ import com.forum.domain.User;
 import com.forum.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.security.authentication.BadCredentialsException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,8 +73,22 @@ public class UserServiceTest {
         assertThat(countryList.contains(new Country("Germany", "Germany")), is(true));
     }
 
-    @Test          //TODO: should changed.
-    public void shouldReturnTrueIfPasswordValidForUser(){
+    @Test(expected = BadCredentialsException.class)
+    public void shouldThrowErrorIfPasswordIsNotValid() {
+        User mockUser = mock(User.class);
+        String username = "MYNAME";
+        when(mockUser.getUsername()).thenReturn(username);
+        String md5 = "MYPASSWORDBUTMD5";
+        when(mockUser.getPassword()).thenReturn(md5);
+        User user = new User(username, md5, "Tom Tom", "tom@tom.com", "1234567",
+                "Moon", "He doesn't know", 200, false);
+        when(userRepository.getPasswordByUsername(username)).thenReturn("");
+        when(userRepository.getByUsername(username)).thenReturn(mockUser);
+        userService.validate(mockUser);
+    }
+
+    @Test(expected = BadCredentialsException.class)
+    public void shouldThrowErrorIfUsernameIsNotValid() {
         User mockUser = mock(User.class);
         String username = "MYNAME";
         when(mockUser.getUsername()).thenReturn(username);
@@ -82,8 +97,8 @@ public class UserServiceTest {
         User user = new User(username, md5, "Tom Tom", "tom@tom.com", "1234567",
                 "Moon", "He doesn't know", 200, false);
         when(userRepository.getPasswordByUsername(username)).thenReturn(md5);
-        when(userRepository.getByUsername(username)).thenReturn(mockUser);
-        assertThat(userService.getValidation(mockUser),is(mockUser));
+        when(userRepository.getByUsername(username)).thenReturn(null);
+        userService.validate(mockUser);
     }
 
     @Test
