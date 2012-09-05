@@ -33,5 +33,16 @@ public class TagControllerTest {
         assertThat(tagJSON, is(json.toJson(listOfTags)));
     }
 
+    @Test
+    public void shouldReturnListOfTagsAsJSON(){
+        tagController =  new TagController(null);
+        String tags = tagController.getAllTags();
+
+        String testResult = "[{\"text\": \"Lorem\", \"weight\": 11, \"link\":\"fjdkjkl\"}," +
+                "{\"text\": \"Home\", \"weight\": 15, \"link\": \"http://localhost:8080/forum/\", \"title\": \"Tags\"}," +
+                "{\"text\": \"food\", \"weight\": 200}," +
+                "{\"text\": \"java\", \"weight\": 2}]";
+        assertThat(tags, is(testResult));
+    }
 
 }

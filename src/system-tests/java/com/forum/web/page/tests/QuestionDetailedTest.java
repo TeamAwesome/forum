@@ -15,8 +15,7 @@ import static org.junit.Assert.assertTrue;
 public class QuestionDetailedTest extends FunctionalTestBase {
     @Test
     public void shouldGoToDetailedView() {
-        WebElement activityWall = browser.findElement(By.id("leftPane"));
-        List<WebElement> questions = activityWall.findElements(By.tagName("a"));
+        List<WebElement> questions = browser.findElements(By.cssSelector("#activityQuestions a"));
         WebElement question = questions.get(0);
         String title = question.getText();
 
