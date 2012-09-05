@@ -4,7 +4,9 @@ import com.forum.service.validation.NoHTMLScript;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Question implements Serializable {
     private int id;
@@ -17,11 +19,17 @@ public class Question implements Serializable {
     private String description;
 
     private Date createdAt;
+
     private User user;
+
     private int likes;
     private int dislikes;
     private int flags;
     private int views;
+    private ArrayList<Tag> tags = new ArrayList<Tag>();
+
+    public Question() {
+    }
 
     public Question(int id, String title, String description, User user, Date createdAt) {
         this.id = id;
@@ -65,6 +73,10 @@ public class Question implements Serializable {
         return user;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
     public int getLikes() {
         return likes;
     }
@@ -79,6 +91,18 @@ public class Question implements Serializable {
 
     public int getFlags() {
         return flags;
+    }
+
+    public void setTags(String tags) {
+        this.tags.add(new Tag(tags));
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

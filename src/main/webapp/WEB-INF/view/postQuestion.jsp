@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
@@ -25,25 +27,32 @@
             <div class="title">
                 <h2><center>Post a Question</center></h2>
             </div>
-            <form id="questionForm" action="<c:url value='/showPostedQuestion'/>" method="post">
+
+            <form:form method="post" action="showPostedQuestion" commandName="question">
                 <div class="questionTitle">
-                    <label class="formLabels"> Title: </label> <input type="text" name="questionTitle" id="questionTitle" maxlength="100"/>
+                    <label class="formLabels"> Title: </label>
+                    <form:input path="title" name="questionTitle" id="questionTitle" maxlength="100"/>
                     <div class="validationMessage" id="titleValidationMessage"></div>
+                    <form:errors path="title" class="errorMsg" id="titleMsg"/>
                 </div>
+
                 <div class="questionDescription" >
                     <label class="formLabels"> Description: </label></br>
-                    <textarea id="descriptionEditor" name="questionDescription" rows="20" cols="75" maxlength="500"></textarea>
+                    <form:textarea path="description" id="descriptionEditor" name="questionDescription" rows="20" cols="75" maxlength="500"/>
+                    <form:errors path="description" class="errorMsg" id="descriptionMsg"/>
                     <div class="validationMessage" id="descriptionValidationMessage"></div>
                 </div>
                 <div id="descriptionValidationMessage"></div>
 
                 <div class="questionTags">
                     <label for="questionTags" class="formLabels">Tags: </label>
-                    <input id="questionTags" name="questionTags"></input>
+                    <form:input path="tags" id="questionTags" name="questionTags"/>
+                    <form:errors path="tags" class="errorMsg" id="tagsMsg"/>
                 </div>
 
                 <input type="submit" value="Submit" id="submitButton"/>
-            </form>
+
+            </form:form>
 
 
  </div>

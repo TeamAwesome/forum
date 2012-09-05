@@ -4,8 +4,8 @@ package com.forum.web.controller;
 import com.forum.domain.Question;
 import com.forum.domain.User;
 import com.forum.service.QuestionService;
-import com.google.gson.Gson;
 import org.junit.Test;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
@@ -23,8 +23,8 @@ public class QuestionControllerTest {
     @Test
     public void shouldShowPostQuestionPage() {
         this.questionController = new QuestionController(null);
-        ModelAndView questionPageModelAndView = questionController.postQuestion();
-        assertThat(questionPageModelAndView.getViewName(), is("postQuestion"));
+        String questionView = questionController.postQuestion(new HashMap());
+        assertThat(questionView, is("postQuestion"));
     }
 
     @Test
@@ -46,14 +46,12 @@ public class QuestionControllerTest {
         mockedQuestionService.createQuestion(question);
         this.questionController = new QuestionController(mockedQuestionService);
 
-        ModelAndView questionModelAndView = questionController.showPostedQuestion(params);
-        String questionTitle = (String) questionModelAndView.getModel().get("questionTitle");
-        String questionDescription = (String) questionModelAndView.getModel().get("questionDescription");
-        Integer questionId = (Integer) questionModelAndView.getModel().get("questionId");
+        BindingResult result = mock(BindingResult.class);
+        when(result.hasErrors()).thenReturn(false);
 
-        assertThat(questionId, is(1));
-        assertThat(questionTitle, is("Question Title"));
-        assertThat(questionDescription, is("Question Description"));
+        String questionView = questionController.showPostedQuestion(question, result, new HashMap());
+
+        assertThat(questionView, is("redirect:/question/view/" + question.getId()));
     }
 
     @Test

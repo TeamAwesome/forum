@@ -7,10 +7,12 @@ import com.forum.service.QuestionService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.validation.Valid;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,31 +31,27 @@ public class QuestionController {
     @Autowired
     public QuestionController(QuestionService questionService) {
         this.questionService = questionService;
-
     }
 
     @RequestMapping(value = "/postQuestion", method = RequestMethod.GET)
-    public ModelAndView postQuestion() {
-        ModelAndView modelAndView=new ModelAndView("postQuestion");
-        return modelAndView;
+    public String postQuestion(Map model) {
+        Question question = new Question();
+        model.put("question", question);
+        return "postQuestion";
     }
 
     @RequestMapping(value = "/showPostedQuestion", method = RequestMethod.POST)
-    public ModelAndView showPostedQuestion(@RequestParam Map<String, String> params){
-        Date date = new Date();
-        Timestamp timestamp = new Timestamp(date.getTime());
+    public String showPostedQuestion(@Valid Question question, BindingResult result, Map model){
+        if(result.hasErrors()) {
+            return "postQuestion";
+        }
 
-        Question question = new Question(params.get("questionTitle"), params.get("questionDescription"), new User(), timestamp);
         questionService.createQuestion(question);
         List latestQuestionList = questionService.latestQuestion("1","1");
         Question latestQuestion = (Question)latestQuestionList.get(0);
         Integer questionId = latestQuestion.getId();
-        System.out.println(questionId);
 
-        ModelAndView modelAndView = new ModelAndView("showPostedQuestion");
-        modelAndView.addObject("questionTitle",params.get("questionTitle"));
-        modelAndView.addObject("questionDescription",params.get("questionDescription"));
-        return viewQuestionDetail(questionId);
+        return "redirect:/question/view/" + questionId;
     }
 
     @RequestMapping(value = "/question/view/{questionId}", method = RequestMethod.GET)
