@@ -9,6 +9,8 @@
     <script src='http://connect.facebook.net/en_US/all.js'></script>
     <script src="<c:url value="/static/javascript/shareToSocialMedia.js"/>"></script>
 
+
+
 </head>
 
 <body>
@@ -72,12 +74,17 @@
                 <button id="loadMoreQuestions" data-bind="click: loadMoreQuestion">more..</button>
                 <script src='<c:url value="/static/javascript/moreQuestionsLoader.js"/>'></script>
                 <br /><br />
-        </div>
+            </div>
         </div>
 
        <div id="rightPane">
-                  <%@ include file="rightPane.jsp" %>
+           <%@ include file="rightPane.jsp" %>
        </div>
+
+       <span id='fb-root'>
+           <a onclick='postToFeed(); return false;'><img style="cursor: pointer; cursor: hand; padding-top: 20px;" src="<c:url value='static/images/facebook.png'/>" alt="Facebook" class="Facebook Icon"></a>
+           <a href="https://twitter.com/share" style="padding-top: 20px;" data-url="http://10.10.5.107:8080/forum/" data-text="Need info on Bangalore?" data-size="large" data-count="none" target="_blank"><img src="<c:url value='static/images/twitter.png'/>" alt="Twitter"></a>
+       </span>
 
 
     </div>
