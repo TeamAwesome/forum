@@ -56,6 +56,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User getValidation(User user) {
+        if(userRepository.getByUsername(user.getUsername()) == null) return null;
         String passwordFromDatabase = userRepository.getPasswordByUsername(user.getUsername());
         if((passwordFromDatabase).equals(user.getPassword())){
              return user;

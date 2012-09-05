@@ -13,7 +13,6 @@
     position: relative;
     padding-top : 5%;
     padding-left: 5%;
-
 }
 
 #right p, ul, ol {
@@ -24,32 +23,30 @@
 
 #questionTitle
 {
-
     word-wrap: break-word;
         overflow: auto;
         font-weight: bold;
+        font-size:1.2em;
         padding: 10px 3px 8px 5px;
 
 
 }
 
-
-
 #questionDescription
 {
     word-wrap:break-word;
-    border-style: solid;
+    border: 0px solid;
     max-height:300px;
     max-width:300px;
     overflow: auto;
     padding: 5px 3px 2px 5px;
+    background-color:#FFF0DB;
 }
 
 #response
 {
     padding: 5px 3px 2px 5px;
 }
-
 
 #status
 {
@@ -61,8 +58,8 @@
    resize: none;
 }
 
-.statsButtons{
+.statsButtons
+{
     max-width: 130px;
     float: left;
-
 }

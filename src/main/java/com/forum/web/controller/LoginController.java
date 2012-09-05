@@ -1,17 +1,10 @@
 package com.forum.web.controller;
 
-import com.forum.domain.User;
 import com.forum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.Map;
 
 
 @Controller
@@ -62,6 +55,12 @@ public class LoginController {
 //        }
 //        return modelAndView;
 //    }
+    @RequestMapping(value = "/errorLogin")
+    public ModelAndView errorLoginView() {
+        ModelAndView errorModelAndView = new ModelAndView("login");
+        errorModelAndView.addObject("usernameError","Invalid Username or Password.");
+        return errorModelAndView;
+    }
 }
 
 

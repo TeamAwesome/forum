@@ -15,14 +15,16 @@
                     <td>
                         <table style="margin-left:50">
                             <tr>
-                                <td>Username:<FONT color="red">
-                                <div style="color:red; text-align:center" id="usernameError">
-                                   ${usernameError}
-                                </div>
+                                  <td>Username:<FONT color="red">
+                                  </td>
                             </tr>
 
                             <tr>
                                 <td><input path="username" type = "text" name="j_username" /></td>
+                                    <div style="color:red; text-align:center" id="usernameError">
+                                        ${usernameError}
+                                    </div>
+                                </td>
 
                             </tr>
 

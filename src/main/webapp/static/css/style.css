@@ -1,6 +1,5 @@
     body {
         margin: 0;
-        padding: 0;
         background-color:#ffff;
         background-image: url('../images/background.png');
         background-repeat:no-repeat;
@@ -8,7 +7,10 @@
         background-position:center center;
         font-family: Arial, sans-serif;
         font-size: 1em;
+        padding: 0px 20px 0px 20px;
         color: #3B3B3B;
+        text-align:center;
+
 	}
 
     #container{
@@ -20,34 +22,34 @@
         float:left;
         width:874px;
         background-color:#FEE1B7;
-        padding-top:10px;
-        padding-left:10px;
-        padding-right:10px;
+        padding:10px 10px 10px 10px;
+
     }
 
     #header{
         background-color:#599425;
         background-image: url('../images/forum.png');
         height: 175px;
+        width:874px;
+        padding: 0px 10px 0px 10px;
+
     }
 
     #leftPane{
         margin-left: auto;
         margin-right: auto;
-        clear: left;
         float: left;
-        width: 600px;
-        padding: 0 0;
+        width: 560px;
         display: inline;
+        padding: 0px 20px 0px 20px;
         background-color:#FFFFFF;
     }
     #innerLeftPane{
             margin-left: auto;
             margin-right: auto;
-            clear: left;
-            float: left;
-            width: 600px;
-            padding: 10px 20px 10px 20px;
+           float: left;
+            width:600px;
+            padding: 10px 10px 10px 10px;
             display: inline;
             background-color:#FFFFFF;
     }
@@ -59,14 +61,12 @@
          float: right;
          width: 264px;
          padding: 0 0;
-         padding-left:10px;
          display: inline;
 
     }
 
     h1, h2, h3 {
         margin: 0px;
-        padding: 0px;
         letter-spacing: -2px;
         font-weight: bold;
         line-height: 200%;
@@ -75,7 +75,6 @@
 
     h1 {
         font-size: 1.5em;
-        color:#000000;
     }
 
     h2 {
@@ -90,7 +89,8 @@
     p, ul, ol {
         margin-top: 0;
         line-height: 100%;
-        padding: 10px 30px 10px 30px;
+        padding: 10px 10px 10px 10px;
+        text-align : justify;
     }
 
 
@@ -107,24 +107,21 @@
     }
     table {
       border-collapse: collapse;
+      padding:3px;
     }
-    table td, table th {
-      word-wrap: break-word;
-      border: 1px solid #9bf07b;
+    table td {
+      float:left;
+      width:30%;
+      text-align:left;
     }
-    table tr:first-child th {
-      border-top: 0;
+
+    table tr {
+      border-bottom: 1px solid #9bf07b;
+      border-top:1px solid #9bf07b;
     }
-    table tr:last-child td {
-      border-bottom: 0;
-    }
-    table tr td:first-child,
-    table tr th:first-child {
-      border-left: 0;
-    }
-    table tr td:last-child,
-    table tr th:last-child {
-      border-right: 0;
+
+    .fullRow{
+    width:100%;
     }
 
     #searchBar {
@@ -145,12 +142,12 @@
 
     #QuestionParagraph{
         line-height:180%;
-        margin-left: 40px;
+        margin-left: 10px;
         text-align:left;
     }
 
     .questionTitle{
-        word-wrap: break-word;
+        word-wrap: break-all;
         color: #000000;
     }
 
@@ -174,6 +171,7 @@
     #fb-root{
         margin-left: auto;
         margin-right: auto;
+        padding-left:30px;
     }
 
     .small{
@@ -185,11 +183,17 @@
         border:#000 1px dotted;
         border-style: none none dashed;
         color:#fff;
-        width: 95;
+        width: 70px;
+        float:left;
         margin-bottom:0px;
     }
 
     .errorMsg{
         color:#FF0000;
+    }
+
+    #registrationForm{
+    font-size: .75em;
+    width:600px;
     }
 

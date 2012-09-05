@@ -1,8 +1,5 @@
 package com.forum.web.page.tests;
 
-import com.forum.web.page.Browser;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -14,19 +11,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class ActivityWallTest {
-    private Browser browser;
-
-    @Before
-    public void initializeWebDriver() {
-        browser = new Browser("http://localhost:8080/forum", true);
-        browser.open("/");
-    }
-
-    @After
-    public void closeBrowser() {
-        browser.stop();
-    }
+public class ActivityWallTest extends FunctionalTestBase {
 
     @Test
     public void shouldLoadMoreQuestions() {
@@ -55,13 +40,13 @@ public class ActivityWallTest {
         submitButton.click();
         browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("container")));
 
-        assertTrue(browser.getCurrentUrl().contains("/login"));
+        assertTrue(browser.getCurrentUrl().contains("/errorLogin"));
 
 
         WebElement userNameLogin2 = browser.findElement(By.name("j_username"));
-        userNameLogin2.sendKeys("Jules");
+        userNameLogin2.sendKeys("lu");
         WebElement passwordLogin2 = browser.findElement(By.name("j_password"));
-        passwordLogin2.sendKeys("Great!");
+        passwordLogin2.sendKeys("password");
 
         WebElement submitButton2 = browser.findElement(By.name("submit"));
         submitButton2.click();
