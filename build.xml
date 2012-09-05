@@ -238,6 +238,7 @@
     <target name="instrument-cobertura" depends="init-cobertura, make-jars">
         <cobertura-instrument todir="${build.instrumented.dir}"
                               datafile="${build.instrumented.dir}/cobertura.ser">
+            <ignore regex="com.forum.domain.Tag"/>
             <fileset dir="${compile.dir}">
                 <include name="*.jar"/>
                 <exclude name="*-tests.jar"/>

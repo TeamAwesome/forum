@@ -30,19 +30,12 @@ public class QuestionControllerTest {
     @Test
     public void shouldReturnPostedQuestion() {
         QuestionService mockedQuestionService = mock(QuestionService.class);
-        User user = new User();
-        user.setName("Dummy User");
-        Date createdAt = new Date();
-        Question question = new Question(1, "Question Title", "Question Description", user, createdAt);
+        Question question = new Question(1, "Question Title", "Question Description", new User(), new Date());
         List<Question> questionList = new LinkedList<Question>();
         questionList.add(question);
         when(mockedQuestionService.latestQuestion("1", "1")).thenReturn(questionList);
         when(mockedQuestionService.getById(1)).thenReturn(question);
 
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("questionId", question.getId() + "");
-        params.put("questionTitle", question.getTitle());
-        params.put("questionDescription", question.getDescription());
         mockedQuestionService.createQuestion(question);
         this.questionController = new QuestionController(mockedQuestionService);
 
@@ -52,6 +45,22 @@ public class QuestionControllerTest {
         String questionView = questionController.showPostedQuestion(question, result, new HashMap());
 
         assertThat(questionView, is("redirect:/question/view/" + question.getId()));
+    }
+
+    @Test
+    public void shouldReturnToPostQuestionWhenInvalid() {
+        QuestionService mockedQuestionService = mock(QuestionService.class);
+        Date createdAt = new Date();
+        Question question = new Question(1, "Question Title", "Question Description", new User(), createdAt);
+
+        this.questionController = new QuestionController(mockedQuestionService);
+
+        BindingResult result = mock(BindingResult.class);
+        when(result.hasErrors()).thenReturn(true);
+
+        String questionView = questionController.showPostedQuestion(question, result, new HashMap());
+
+        assertThat(questionView, is("postQuestion"));
     }
 
     @Test
