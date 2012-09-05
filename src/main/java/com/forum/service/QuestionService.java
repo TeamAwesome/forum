@@ -41,4 +41,5 @@ public class QuestionService {
     public int addFlagsByID(Integer questionId) {
         return questionRepository.addFlagsById(questionId);
     }
+
 }
