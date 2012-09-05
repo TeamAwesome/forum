@@ -100,6 +100,36 @@ public class UserRepositoryTest extends IntegrationTestBase {
     }
 
     @Test
+    public void shouldRollbackUser(){
+        User user = new User("Tom-"+System.currentTimeMillis(), "33", "Tom", "tom@tom.com", "1234567",
+                "Moon", "H", 2, false);
+
+        List<Integer> interests = new ArrayList<Integer>();
+        interests.add(1);
+        interests.add(2);
+        user.setInterests(interests);
+
+        List<Integer> knowledge = new ArrayList<Integer>();
+        knowledge.add(3);
+        knowledge.add(2);
+        knowledge.add(1);
+        user.setKnowledge(knowledge);
+
+        BrokenUserRepository brokenUserRepository = new BrokenUserRepository(dataSource);
+        try{
+            int userCreated = brokenUserRepository.createUser(user);
+        }
+        catch (RuntimeException e){
+           /*
+            * CONTINUE HERE, work in progress for adding database transactions
+            */
+            //fail("bummer, still got a runtime exception we expected to be handled by Spring");
+        }
+        User actualUser = userRepository.getByUsername(user.getUsername());
+        //assertNull(actualUser);
+    }
+
+    @Test
     public void shouldReturnUserIdByUserName(){
         String userName = "Tom-"+System.currentTimeMillis();
         User user = new User(userName, "33", "Tom", "tom@tom.com", "1234567",

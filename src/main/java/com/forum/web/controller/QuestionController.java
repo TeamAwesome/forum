@@ -4,6 +4,7 @@ package com.forum.web.controller;
 import com.forum.domain.Question;
 import com.forum.domain.User;
 import com.forum.service.QuestionService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -95,4 +97,5 @@ public class QuestionController {
         Question question = questionService.getById(questionId);
         return "(" + question.getFlags() + ") Flags";
     }
+
 }

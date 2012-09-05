@@ -4,8 +4,10 @@ package com.forum.web.controller;
 import com.forum.domain.Question;
 import com.forum.domain.User;
 import com.forum.service.QuestionService;
+import com.google.gson.Gson;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -19,58 +21,58 @@ public class QuestionControllerTest {
     private QuestionController questionController;
 
     @Test
-    public void shouldShowPostQuestionPage(){
+    public void shouldShowPostQuestionPage() {
         this.questionController = new QuestionController(null);
         ModelAndView questionPageModelAndView = questionController.postQuestion();
-        assertThat(questionPageModelAndView.getViewName() ,is("postQuestion"));
+        assertThat(questionPageModelAndView.getViewName(), is("postQuestion"));
     }
 
     @Test
-    public void shouldReturnPostedQuestion(){
+    public void shouldReturnPostedQuestion() {
         QuestionService mockedQuestionService = mock(QuestionService.class);
         User user = new User();
         user.setName("Dummy User");
         Date createdAt = new Date();
-        Question question = new Question(1,"Question Title", "Question Description", user, createdAt);
+        Question question = new Question(1, "Question Title", "Question Description", user, createdAt);
         List<Question> questionList = new LinkedList<Question>();
         questionList.add(question);
-        when(mockedQuestionService.latestQuestion("1","1")).thenReturn(questionList);
+        when(mockedQuestionService.latestQuestion("1", "1")).thenReturn(questionList);
         when(mockedQuestionService.getById(1)).thenReturn(question);
 
         Map<String, String> params = new HashMap<String, String>();
-        params.put("questionId",question.getId()+"");
+        params.put("questionId", question.getId() + "");
         params.put("questionTitle", question.getTitle());
         params.put("questionDescription", question.getDescription());
         mockedQuestionService.createQuestion(question);
         this.questionController = new QuestionController(mockedQuestionService);
 
         ModelAndView questionModelAndView = questionController.showPostedQuestion(params);
-        String questionTitle = (String)questionModelAndView.getModel().get("questionTitle");
-        String questionDescription = (String)questionModelAndView.getModel().get("questionDescription");
+        String questionTitle = (String) questionModelAndView.getModel().get("questionTitle");
+        String questionDescription = (String) questionModelAndView.getModel().get("questionDescription");
         Integer questionId = (Integer) questionModelAndView.getModel().get("questionId");
 
-        assertThat(questionId,is(1));
+        assertThat(questionId, is(1));
         assertThat(questionTitle, is("Question Title"));
         assertThat(questionDescription, is("Question Description"));
     }
 
     @Test
-    public void shouldReturnDetailedViewOfQuestion(){
+    public void shouldReturnDetailedViewOfQuestion() {
         QuestionService questionService = mock(QuestionService.class);
         ModelAndView modelAndView;
         User user = new User();
         user.setName("Dummy User");
         Date createdAt = new Date();
-        Question question = new Question(42,"model question title","model question description", user, createdAt);
+        Question question = new Question(42, "model question title", "model question description", user, createdAt);
         when(questionService.getById(42)).thenReturn(question);
         this.questionController = new QuestionController(questionService);
 
         modelAndView = questionController.viewQuestionDetail(42);
-        String questionTitle = (String)modelAndView.getModel().get("questionTitle");
-        String questionDescription = (String)modelAndView.getModel().get("questionDescription");
-        String questionDate = (String)modelAndView.getModel().get("dateCreatedAt");
-        String questionTime = (String)modelAndView.getModel().get("timeCreatedAt");
-        String questionUserName = (String)modelAndView.getModel().get("username");
+        String questionTitle = (String) modelAndView.getModel().get("questionTitle");
+        String questionDescription = (String) modelAndView.getModel().get("questionDescription");
+        String questionDate = (String) modelAndView.getModel().get("dateCreatedAt");
+        String questionTime = (String) modelAndView.getModel().get("timeCreatedAt");
+        String questionUserName = (String) modelAndView.getModel().get("username");
 
         assertThat(questionTitle, is("model question title"));
         assertThat(questionDescription, is("model question description"));
@@ -79,19 +81,20 @@ public class QuestionControllerTest {
         assertThat(questionUserName, is(user.getName()));
 
     }
-@Test
-    public void shouldReturnDetailedViewOfQuestionWithLikesDisLikesAndFlags(){
+
+    @Test
+    public void shouldReturnDetailedViewOfQuestionWithLikesDisLikesAndFlags() {
         QuestionService questionService = mock(QuestionService.class);
         ModelAndView modelAndView;
         User user = new User();
         user.setName("Dummy User");
         Date createdAt = new Date();
-        Question question = new Question(100,"model question title","model question description", user, createdAt,10,10,10);
+        Question question = new Question(100, "model question title", "model question description", user, createdAt, 10, 10, 10);
         when(questionService.getById(100)).thenReturn(question);
         this.questionController = new QuestionController(questionService);
 
         modelAndView = questionController.viewQuestionDetail(100);
-        Integer questionLikes =(Integer) modelAndView.getModel().get("likes");
+        Integer questionLikes = (Integer) modelAndView.getModel().get("likes");
         Integer questionDisLikes = (Integer) modelAndView.getModel().get("dislikes");
         Integer questionFlags = (Integer) modelAndView.getModel().get("flags");
 
@@ -100,12 +103,13 @@ public class QuestionControllerTest {
         assertThat(questionFlags, is(question.getFlags()));
 
     }
-    @Test
-    public void shouldLikeQuestion(){
-        int likes = 1;
-        prepareQuestionController(likes,2,3);
 
-        Map<String,Integer> params = new HashMap<String, Integer>();
+    @Test
+    public void shouldLikeQuestion() {
+        int likes = 1;
+        prepareQuestionController(likes, 2, 3);
+
+        Map<String, Integer> params = new HashMap<String, Integer>();
         params.put("likes", likes);
 
         String result = questionController.likeQuestion(24, params);
@@ -113,24 +117,24 @@ public class QuestionControllerTest {
     }
 
     @Test
-    public void shouldDisLikeQuestion(){
+    public void shouldDisLikeQuestion() {
         int dislikes = 1;
-        prepareQuestionController(1,dislikes,3);
+        prepareQuestionController(1, dislikes, 3);
 
-        Map<String,Integer> params = new HashMap<String, Integer>();
-        params.put("dislikes",dislikes);
+        Map<String, Integer> params = new HashMap<String, Integer>();
+        params.put("dislikes", dislikes);
 
         String result = questionController.dislikeQuestion(24, params);
         assertThat(result, is("(" + (dislikes + 1) + ") Dislikes"));
     }
 
     @Test
-    public void shouldFlagQuestion(){
+    public void shouldFlagQuestion() {
         int flags = 1;
-        prepareQuestionController(1,2,flags);
+        prepareQuestionController(1, 2, flags);
 
-        Map<String,Integer> params = new HashMap<String, Integer>();
-        params.put("flags",flags);
+        Map<String, Integer> params = new HashMap<String, Integer>();
+        params.put("flags", flags);
 
         String result = questionController.flagQuestion(24, params);
         assertThat(result, is("(" + (flags + 1) + ") Flags"));
@@ -150,4 +154,5 @@ public class QuestionControllerTest {
         when(questionService.getById(24)).thenReturn(question);
         this.questionController = new QuestionController(questionService);
     }
+
 }
