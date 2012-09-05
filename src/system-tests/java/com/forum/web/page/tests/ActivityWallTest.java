@@ -59,7 +59,7 @@ public class ActivityWallTest extends FunctionalTestBase {
         logoutLink.click();
         browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("container")));
 
-        assertThat(browser.getCurrentUrl(), is("http://localhost:8080/forum/"));
+        assertThat(browser.getCurrentUrl(), is("http://localhost:8080/forum/forum_logout"));
 
 
     }

@@ -5,12 +5,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import java.util.Random;
+
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class UserRegistrationTest extends FunctionalTestBase {
+
+    private Random random = new Random();
+    int randomNumber = random.nextInt();
+
 
     @Test
     public void shouldGoToRegistrationPage() {
@@ -28,13 +34,13 @@ public class UserRegistrationTest extends FunctionalTestBase {
         assertTrue(browser.getCurrentUrl().contains("/join"));
 
         WebElement usernameField = browser.findElement(By.id("username"));
-        usernameField.sendKeys("Stephanie4");
+        usernameField.sendKeys("Stephanie" + randomNumber);
         WebElement passwordField = browser.findElement(By.id("password"));
         passwordField.sendKeys("saxophone");
         WebElement nameField = browser.findElement(By.id("name"));
         nameField.sendKeys("Stephanie");
         WebElement emailField = browser.findElement(By.id("email"));
-        emailField.sendKeys("sjacobs2@thoughtworks.com");
+        emailField.sendKeys("sjacobs" + randomNumber + "@thoughtworks.com");
         Select countryField = new Select(browser.findElement(By.id("country")));
         countryField.selectByVisibleText("United States");
         WebElement genderField = browser.findElement(By.id("genderFemale"));
