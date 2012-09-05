@@ -1,6 +1,7 @@
 package com.forum.web.controller;
 
 import com.forum.domain.Advice;
+import com.forum.domain.User;
 import com.forum.service.AdviceService;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +28,9 @@ public class AdviceControllerTest {
         model.put(AdviceController.USERNAME, username);
         String description = "This is an advice for question 20";
         model.put(AdviceController.DESCRIPTION, description);
-        Advice advice = new Advice(20,  username, description);
+        User user = new User();
+        user.setUsername(username);
+        Advice advice = new Advice(20,  user, description);
         mockAdviceService = mock(AdviceService.class);
         when(mockAdviceService.save(advice)).thenReturn(true);
         adviceController = new AdviceController(mockAdviceService);
@@ -45,7 +48,9 @@ public class AdviceControllerTest {
         model.put(AdviceController.USERNAME, username);
         String description = "This is an advice for question 20";
         model.put(AdviceController.DESCRIPTION, description);
-        Advice advice = new Advice(20, username, description);
+        User user = new User();
+        user.setUsername(username);
+        Advice advice = new Advice(20,  user, description);
         mockAdviceService = mock(AdviceService.class);
         when(mockAdviceService.save(advice)).thenReturn(false);
         adviceController = new AdviceController(mockAdviceService);

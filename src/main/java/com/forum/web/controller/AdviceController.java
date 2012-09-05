@@ -1,6 +1,7 @@
 package com.forum.web.controller;
 
 import com.forum.domain.Advice;
+import com.forum.domain.User;
 import com.forum.service.AdviceService;
 
 import java.util.Date;
@@ -19,11 +20,13 @@ public class AdviceController {
     }
 
     public String saveAdvice(Map model) {
-        Advice advice = new Advice(Integer.parseInt((String) model.get(QUESTION_ID)), (String)model.get(USERNAME), (String)model.get(DESCRIPTION));
-        boolean succeed =  adviceService.save(advice);
-        if(succeed){
-            return SHOW_QUESTION_DETAILS+model.get(QUESTION_ID);
-        } else{
+        User user = new User();
+        user.setUsername((String) model.get(USERNAME));
+        Advice advice = new Advice(Integer.parseInt((String) model.get(QUESTION_ID)), user, (String) model.get(DESCRIPTION));
+        boolean succeed = adviceService.save(advice);
+        if (succeed) {
+            return SHOW_QUESTION_DETAILS + model.get(QUESTION_ID);
+        } else {
             return ERROR_PAGE;
         }
     }
