@@ -4,58 +4,70 @@ import com.forum.domain.Tag;
 import com.forum.repository.TagRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
 
-
+@RunWith(MockitoJUnitRunner.class)
 public class TagServiceTest {
+    @Mock
     TagRepository tagRepositoryMock;
     TagService tagService;
 
     @Before
     public void setUp() throws Exception {
-        tagRepositoryMock = mock(TagRepository.class);
-        tagService=new TagService(tagRepositoryMock);
+        tagService = new TagService(tagRepositoryMock);
     }
 
     @Test
     public void shouldGetTags() throws Exception {
-        List<Tag> tagList = new ArrayList<Tag>();
-        tagList.add(new Tag(1,"contour",2));
-        tagList.add(new Tag(1,"touring",2));
-
-
+        List<Tag> tagList = Arrays.asList(
+                new Tag(1, "contour", 2),
+                new Tag(1, "touring", 2)
+        );
         when(tagRepositoryMock.getTagsByTerm("tour")).thenReturn(tagList);
+
         List<Tag> expectedListOfTags = tagService.getTagsByTerm("tour");
-        assertThat(expectedListOfTags,is(tagList));
 
-
+        assertThat(expectedListOfTags, sameInstance(tagList));
     }
 
     @Test
-    public  void  shouldCreateTagIfTagDoesNotExist(){
-        Tag tagLabel1 =new Tag(1,"ice cream",2);
-        Tag tagLabel2 =new Tag(2,"creamy cake",2);
-        when(tagRepositoryMock.createTag(tagLabel1)).thenReturn(1);
-        when(tagRepositoryMock.createTag(tagLabel2)).thenReturn(0);
-        assertThat(tagService.createTag(tagLabel1), is(1));
-        assertThat(tagService.createTag(tagLabel2),is(0));
+    public void shouldReturnAllTagsFromRepository() {
+        List<Tag> allTagsFromRepository = Arrays.asList(new Tag(1,"food",10));
+        when(tagRepositoryMock.allTags()).thenReturn(allTagsFromRepository);
+
+        List<Tag> allTags = tagService.getAllTags();
+
+        assertThat(allTags, sameInstance(allTagsFromRepository));
     }
 
     @Test
-    public void shouldCheckIfATagExists() {
-        Tag tag1 = new Tag(1,"corner house",2);
-        Tag tag2 = new Tag(2,"house",2);
-        when(tagRepositoryMock.getTagByName(tag1.getValue())).thenReturn(tag1);
-        when(tagRepositoryMock.getTagByName(tag2.getValue())).thenReturn(null);
-        Boolean expectedResultOfIsPresent = tagService.isPresent(tag1);
-        assertThat(expectedResultOfIsPresent,is(true));
-        assertThat(tagService.isPresent(tag2),is(false));
+    public void shouldCreateTagIfTagDoesNotExist() {
+        Tag tagLabel = new Tag(1, "ice cream", 2);
+        when(tagRepositoryMock.getTagByName("ice cream")).thenReturn(null);
+
+        tagService.createTag(tagLabel);
+
+        verify(tagRepositoryMock).createTag(tagLabel);
     }
+
+    @Test
+    public void shouldNotCreateTagIfTagDoesExist() {
+        Tag tagLabel = new Tag(1, "ice cream", 2);
+        when(tagRepositoryMock.getTagByName("ice cream")).thenReturn(new Tag(1, "test.name", 4));
+
+        tagService.createTag(tagLabel);
+
+        verify(tagRepositoryMock, never()).createTag(any(Tag.class));
+    }
+
 }

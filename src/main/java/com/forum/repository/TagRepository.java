@@ -38,4 +38,8 @@ public class TagRepository {
         return (Tag)jdbcTemplate.queryForObject(query,
                 new Object[]{tag}, new TagRowMapper());
     }
+
+    public List<Tag> allTags() {
+        return null;  //To change body of created methods use File | Settings | File Templates.
+    }
 }
