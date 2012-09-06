@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -36,11 +37,11 @@ public class TagControllerTest {
     @Test
     public void shouldReturnListOfTagsAsJSON() {
         TagService tagService = mock(TagService.class);
-        List<Tag> tags = new ArrayList<Tag>();
-        tags.add(new Tag(1,"Lorem",11));
-        tags.add(new Tag(2,"Home",15));
-        tags.add(new Tag(3,"food",20));
-        tags.add(new Tag(4,"java",2));
+        List<Tag> tags = Arrays.asList(
+                new Tag(1,"Lorem",11),
+                new Tag(2,"Home",15),
+                new Tag(3,"food",20),
+                new Tag(4,"java",2));
         when(tagService.getAllTags()).thenReturn(tags);
 
         tagController = new TagController(tagService);
