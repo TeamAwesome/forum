@@ -27,7 +27,7 @@ public class ActivityWallTest extends FunctionalTestBase {
     }
 
     @Test
-    public  void shouldGoThroughAdminLoginLogoutProcess() {
+    public void shouldGoThroughAdminLoginLogoutProcess() {
         browser.open("/adminDashboard");
         assertTrue(browser.getCurrentUrl().contains("/login"));
 
@@ -59,7 +59,7 @@ public class ActivityWallTest extends FunctionalTestBase {
         logoutLink.click();
         browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("container")));
 
-        assertThat(browser.getCurrentUrl(), is("http://localhost:8080/forum/"));
+        assertTrue(browser.getCurrentUrl().endsWith("/forum/"));
 
 
     }
