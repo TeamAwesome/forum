@@ -19,12 +19,7 @@ public class TagRepository {
     }
 
     public List<Tag> getTagsByTerm(String term) {
-        List<Tag> tags;
-        String query = "SELECT * FROM TAG WHERE NAME LIKE ?" ;
-        tags = jdbcTemplate.query(query,
-                new Object[]{"%"+term+"%"}, new TagRowMapper());
-
-        return tags;
+        return retrieveTags("SELECT * FROM TAG WHERE NAME LIKE ?", "%"+term+"%");
     }
 
     public Integer createTag(Tag tag) {
@@ -40,6 +35,11 @@ public class TagRepository {
     }
 
     public List<Tag> allTags() {
-        return null;  //To change body of created methods use File | Settings | File Templates.
+        return retrieveTags("SELECT * FROM TAG");
+    }
+
+    @SuppressWarnings("unchecked")
+    private List<Tag> retrieveTags(String query, Object... params) {
+        return jdbcTemplate.query(query, params, new TagRowMapper());
     }
 }
