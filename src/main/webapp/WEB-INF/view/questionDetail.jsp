@@ -42,7 +42,7 @@
                     <div id = "response">
                         <input id= "likeInput" type='submit' name="like" value="Like"></input>
                         <input id="dislikeInput" type='submit' name="dislike" value="Dislike"></input>
-                        <input id="flagInput" type='submit' name="flag" value="Flags"></input>
+                        <input id="flagInput" type='submit' name="flag" value="Flag as Inappropriate"></input>
                     </div>
                     <div id="response2">
                         </br>
@@ -71,12 +71,10 @@
                 <div id="right">
                     <p><label class="questionDetail" id = "posted_by" name="user" > Posted by </label> ${username} </p>
                     <p><label class="questionDetail" id = "posted_on" name="postedOn">On: </label>${dateCreatedAt} </p>
-                    <p><label class="questionDetail" id = "posted_at" name="postedOn">At: </label>${timeCreatedAt}</p>
+                    <p><label class="questionDetail" id = "posted_at" name="postedAt">At: </label>${timeCreatedAt}</p>
                     <p>
-                    <label id="likeCount" class="questionDetail" name="likes">  (${likes}) Likes </label>
-                    <label id="dislikeCount" class="questionDetail" name="dislikes">  (${dislikes}) Dislikes </label>
-                    <label class="questionDetail" name="views">  (${views})Views </label>
-                    <label class="questionDetail" name="responses">  (${responses})Responses </label>
+                    <label id="likeCount" class="questionDetail" name="likes">  (${likes}) Likes </label><br>
+                    <label id="dislikeCount" class="questionDetail" name="dislikes">  (${dislikes}) Dislikes </label><br>
                     <label id="flagCount" class="questionDetail" name="flags">  (${flags}) Flags </label>
                     </p>
                 </div>

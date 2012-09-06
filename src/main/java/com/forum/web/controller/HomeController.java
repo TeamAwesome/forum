@@ -31,7 +31,6 @@ public class  HomeController {
     public String loadMoreQuestions(@RequestParam String pageNum,
                                     @RequestParam String pageSize) {
         List<Question> questionList = questionService.latestQuestion(pageNum, pageSize);
-//        List<Question> questionListWithoutSpace = questionService.removeSpaces(questionList);
         String result = gson.toJson(questionList);
         return result;
     }
