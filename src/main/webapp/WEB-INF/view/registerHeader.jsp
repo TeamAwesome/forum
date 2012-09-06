@@ -20,7 +20,7 @@
             </li>
             <sec:authorize access="isAuthenticated()">
                 <li id="logoutLink">
-                    <a name="logout" id="logout" href="<c:url value='forum_logout' />">Logout</a>
+                    <a name="logout" id="logout" href="<c:url value='/forum_logout' />">Logout</a>
                 </li>
             </sec:authorize>
         </ul>
