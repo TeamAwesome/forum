@@ -15,7 +15,7 @@
         <intercept-url pattern="/**" access="permitAll" requires-channel="http"/>
         <form-login login-page="/login" login-processing-url="/j_spring_security_check"
                     always-use-default-target="true" default-target-url="/" authentication-success-handler-ref="loginSuccessHandler" authentication-failure-url="/errorLogin"/>
-        <logout logout-success-url = "/" logout-url="/forum_logout" />
+        <logout logout-success-url = "/logout" logout-url="/forum_logout" />
         <access-denied-handler ref="errorHandlingFilter" />
         <port-mappings>
             <port-mapping http="8080" https="8443"/>

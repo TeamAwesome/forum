@@ -32,9 +32,9 @@ public class ActivityWallTest extends FunctionalTestBase {
         assertTrue(browser.getCurrentUrl().contains("/login"));
 
         WebElement userNameLogin = browser.findElement(By.name("j_username"));
-        userNameLogin.sendKeys("jules");
+        userNameLogin.sendKeys("Jules");
         WebElement passwordLogin = browser.findElement(By.name("j_password"));
-        passwordLogin.sendKeys("great!");
+        passwordLogin.sendKeys("Great!");
 
         WebElement submitButton = browser.findElement(By.name("submit"));
         submitButton.click();
@@ -58,9 +58,6 @@ public class ActivityWallTest extends FunctionalTestBase {
         WebElement logoutLink = browser.findElement(By.id("logout"));
         logoutLink.click();
         browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("container")));
-
-        assertTrue(browser.getCurrentUrl().endsWith("/forum/"));
-
-
+        assertTrue(browser.getCurrentUrl().endsWith("/forum/logout"));
     }
 }

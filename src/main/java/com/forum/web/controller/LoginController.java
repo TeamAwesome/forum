@@ -28,8 +28,15 @@ public class LoginController {
     @RequestMapping(value = "/errorLogin")
     public ModelAndView errorLoginView() {
         ModelAndView errorModelAndView = new ModelAndView("login");
-        errorModelAndView.addObject("usernameError","Invalid Username or Password.");
+        errorModelAndView.addObject("noticeMessage","<span style=\"color:red;\" >Invalid Username or Password.</spam>");
         return errorModelAndView;
+    }
+
+    @RequestMapping(value = "/logout")
+    public ModelAndView LogoutView() {
+        ModelAndView logoutModelAndView = new ModelAndView("login");
+        logoutModelAndView.addObject("noticeMessage", "You have successfully logged out.");
+        return logoutModelAndView;
     }
 }
 
