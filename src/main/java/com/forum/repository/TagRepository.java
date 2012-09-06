@@ -1,6 +1,6 @@
 package com.forum.repository;
 
-import com.forum.domain.TagLabel;
+import com.forum.domain.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -18,8 +18,8 @@ public class TagRepository {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public List<TagLabel> getTagsByTerm(String term) {
-        List<TagLabel> tags;
+    public List<Tag> getTagsByTerm(String term) {
+        List<Tag> tags;
         String query = "SELECT * FROM TAG WHERE NAME LIKE ?" ;
         tags = jdbcTemplate.query(query,
                 new Object[]{"%"+term+"%"}, new TagRowMapper());
@@ -27,15 +27,15 @@ public class TagRepository {
         return tags;
     }
 
-    public Integer createTag(TagLabel tag) {
+    public Integer createTag(Tag tag) {
         return jdbcTemplate.update("INSERT INTO TAG (NAME) VALUES (?)",
                 new Object[]{tag.getValue()});
     }
 
-    public TagLabel getTagByName(String tag) {
+    public Tag getTagByName(String tag) {
         String query = "SELECT * FROM TAG WHERE NAME=?" ;
 
-        return (TagLabel)jdbcTemplate.queryForObject(query,
+        return (Tag)jdbcTemplate.queryForObject(query,
                 new Object[]{tag}, new TagRowMapper());
     }
 }

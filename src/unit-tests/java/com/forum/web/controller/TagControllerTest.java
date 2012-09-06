@@ -1,6 +1,6 @@
 package com.forum.web.controller;
 
-import com.forum.domain.TagLabel;
+import com.forum.domain.Tag;
 import com.forum.service.TagService;
 import com.google.gson.Gson;
 import org.junit.Test;
@@ -21,7 +21,7 @@ public class TagControllerTest {
     public void shouldGetTagsForGivenTerm() {
         TagService tagService = mock(TagService.class);
 
-        List<TagLabel> listOfTags = new ArrayList<TagLabel>();
+        List<Tag> listOfTags = new ArrayList<Tag>();
         String term = "ore";
         when(tagService.getTagsByTerm(term)).thenReturn(listOfTags);
         this.tagController = new TagController(tagService);

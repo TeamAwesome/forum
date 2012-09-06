@@ -1,6 +1,6 @@
 package com.forum.repository;
 
-import com.forum.domain.TagLabel;
+import com.forum.domain.Tag;
 import org.junit.Test;
 
 import java.sql.ResultSet;
@@ -18,7 +18,7 @@ public class TagRowMapperTest {
         ResultSet mockResultSet=mock(ResultSet.class);
         when(mockResultSet.getString("NAME")).thenReturn("bangalore");
         when(mockResultSet.getInt("ID")).thenReturn(1);
-       TagLabel tag = tagRowMapper.mapRow(mockResultSet,1);
+       Tag tag = tagRowMapper.mapRow(mockResultSet,1);
         assertThat(tag.getId(),is(1));
         assertThat(tag.getValue(),is("bangalore"));
 

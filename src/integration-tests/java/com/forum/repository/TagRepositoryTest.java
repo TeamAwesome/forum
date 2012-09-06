@@ -1,6 +1,6 @@
 package com.forum.repository;
 
-import com.forum.domain.TagLabel;
+import com.forum.domain.Tag;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +23,15 @@ public class TagRepositoryTest extends IntegrationTestBase {
 
     @Test
     public void shouldCreateTag() {
-        TagLabel tag = new TagLabel(1, "bangalore", 1);
+        Tag tag = new Tag(1, "bangalore", 1);
         assertThat(tagRepository.createTag(tag), is(1));
     }
 
     @Test
     public void shouldGetTagsByTerm() {
-        List<TagLabel> tags ;
-        tagRepository.createTag(new TagLabel(1, "bangalore", 1));
-        tagRepository.createTag(new TagLabel(1, "bangle", 2));
+        List<Tag> tags ;
+        tagRepository.createTag(new Tag(1, "bangalore", 1));
+        tagRepository.createTag(new Tag(1, "bangle", 2));
         tags = tagRepository.getTagsByTerm("bang");
 
         assertThat(tags.get(0).getValue(), is("bangalore"));

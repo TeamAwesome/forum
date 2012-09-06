@@ -30,7 +30,7 @@ public class Question implements Serializable {
     public Question() {
     }
 
-    private List<TagLabel> tags;
+    private List<Tag> tags;
 
     public Question(int id, String title, String description, User user, Date createdAt) {
         this.id = id;
@@ -38,7 +38,7 @@ public class Question implements Serializable {
         this.user = user;
         this.createdAt = createdAt;
         this.description = description;
-        tags = new ArrayList<TagLabel>();
+        tags = new ArrayList<Tag>();
     }
 
     public Question(String title, String description, User user, Date createdAt) {
@@ -46,7 +46,7 @@ public class Question implements Serializable {
         this.user = user;
         this.createdAt = createdAt;
         this.description = description;
-        tags = new ArrayList<TagLabel>();
+        tags = new ArrayList<Tag>();
     }
 
     public Question(int id, String title, String description, User user, Date createdAt, int likes, int disLikes, int flags) {
@@ -58,10 +58,10 @@ public class Question implements Serializable {
         this.likes = likes;
         this.dislikes = disLikes;
         this.flags = flags;
-        tags = new ArrayList<TagLabel>();
+        tags = new ArrayList<Tag>();
     }
 
-    public Question(int id, String title, String description, User user, Date createdAt, int likes, int disLikes, int flags , List<TagLabel> tags) {
+    public Question(int id, String title, String description, User user, Date createdAt, int likes, int disLikes, int flags , List<Tag> tags) {
         this.id = id;
         this.title = title;
         this.user = user;
@@ -71,7 +71,7 @@ public class Question implements Serializable {
         this.dislikes = disLikes;
         this.flags = flags;
         this.tags = tags;
-        this.tags = new ArrayList<TagLabel>();
+        this.tags = new ArrayList<Tag>();
     }
     public String getTitle() {
         return title;

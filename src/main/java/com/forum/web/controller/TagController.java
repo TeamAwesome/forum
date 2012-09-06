@@ -1,17 +1,14 @@
 package com.forum.web.controller;
 
-import com.forum.domain.TagLabel;
+import com.forum.domain.Tag;
 import com.forum.service.TagService;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,7 +23,7 @@ public class TagController {
     @ResponseBody
     public String getTagsByTerm(@PathVariable String term) {
 
-        List<TagLabel> listOfTags = tagService.getTagsByTerm(term);
+        List<Tag> listOfTags = tagService.getTagsByTerm(term);
 
         Gson json = new Gson();
         return json.toJson(listOfTags);

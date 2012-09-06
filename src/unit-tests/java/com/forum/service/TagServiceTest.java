@@ -1,6 +1,6 @@
 package com.forum.service;
 
-import com.forum.domain.TagLabel;
+import com.forum.domain.Tag;
 import com.forum.repository.TagRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,13 +26,13 @@ public class TagServiceTest {
 
     @Test
     public void shouldGetTags() throws Exception {
-        List<TagLabel> tagList = new ArrayList<TagLabel>();
-        tagList.add(new TagLabel(1,"contour",2));
-        tagList.add(new TagLabel(1,"touring",2));
+        List<Tag> tagList = new ArrayList<Tag>();
+        tagList.add(new Tag(1,"contour",2));
+        tagList.add(new Tag(1,"touring",2));
 
 
         when(tagRepositoryMock.getTagsByTerm("tour")).thenReturn(tagList);
-        List<TagLabel> expectedListOfTags = tagService.getTagsByTerm("tour");
+        List<Tag> expectedListOfTags = tagService.getTagsByTerm("tour");
         assertThat(expectedListOfTags,is(tagList));
 
 
@@ -40,8 +40,8 @@ public class TagServiceTest {
 
     @Test
     public  void  shouldCreateTagIfTagDoesNotExist(){
-        TagLabel tagLabel1 =new TagLabel(1,"ice cream",2);
-        TagLabel tagLabel2 =new TagLabel(2,"creamy cake",2);
+        Tag tagLabel1 =new Tag(1,"ice cream",2);
+        Tag tagLabel2 =new Tag(2,"creamy cake",2);
         when(tagRepositoryMock.createTag(tagLabel1)).thenReturn(1);
         when(tagRepositoryMock.createTag(tagLabel2)).thenReturn(0);
         assertThat(tagService.createTag(tagLabel1), is(1));
@@ -50,8 +50,8 @@ public class TagServiceTest {
 
     @Test
     public void shouldCheckIfATagExists() {
-        TagLabel tag1 = new TagLabel(1,"corner house",2);
-        TagLabel tag2 = new TagLabel(2,"house",2);
+        Tag tag1 = new Tag(1,"corner house",2);
+        Tag tag2 = new Tag(2,"house",2);
         when(tagRepositoryMock.getTagByName(tag1.getValue())).thenReturn(tag1);
         when(tagRepositoryMock.getTagByName(tag2.getValue())).thenReturn(null);
         Boolean expectedResultOfIsPresent = tagService.isPresent(tag1);
