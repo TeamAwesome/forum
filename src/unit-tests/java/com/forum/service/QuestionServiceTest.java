@@ -104,4 +104,17 @@ public class QuestionServiceTest {
         assertThat(numberOfRowsAffected, is(1));
     }
 
+    @Test
+    public void shouldRemoveExtraSpacesInDescription(){
+        List<Question> questionList = new ArrayList<Question>();
+        Question question = new Question(100,"Question Title", "                Question Description", null, null,0,0,0);
+        Question question1 = new Question(101,"Question Title", "                        Question Description 1", null, null,0,0,0);
+        questionList.add(question);
+        questionList.add(question1);
+
+        List<Question> questionResultList = questionService.removeSpaces(questionList);
+        assertThat(questionResultList.get(0).getDescription(),is("Question Description"));
+        assertThat(questionResultList.get(1).getDescription(),is("Question Description 1"));
+    }
+
 }

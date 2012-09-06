@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -43,7 +44,8 @@ public class QuestionService {
 
     @Transactional
     public List<Question> latestQuestion(String pageNum, String pageSize) {
-        return questionRepository.latestQuestion(Integer.parseInt(pageNum), Integer.parseInt(pageSize));
+        List<Question> questionList = questionRepository.latestQuestion(Integer.parseInt(pageNum), Integer.parseInt(pageSize));
+        return removeSpaces(questionList);
     }
 
     public int addDisLikesById(Integer questionId) {
@@ -54,4 +56,10 @@ public class QuestionService {
         return questionRepository.addFlagsById(questionId);
     }
 
+    public List<Question> removeSpaces(List<Question> questionList) {
+        for(Question question: questionList){
+            question.setDescription(question.getDescription().trim());
+        }
+        return questionList;
+    }
 }
