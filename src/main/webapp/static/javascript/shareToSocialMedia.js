@@ -6,7 +6,7 @@ function postToFeed() {
     var obj = {
       method: 'feed',
       link: '10.10.5.107:8080/forum',
-      picture: '<c:url value="/static/images/facebook.png"',
+      picture: '<c:url value="/static/images/facebook.png"/>',
       name: 'The Forum',
       caption: 'Info on Bangalore',
       description: 'Seek and share answers about Bangalore.'
