@@ -1,12 +1,12 @@
-FB.init({appId: "126401650838612", status: true, cookie: true});
+FB.init({appId: "384033571663513", status: true, cookie: true});
 
 function postToFeed() {
 
     // calling the API ...
     var obj = {
       method: 'feed',
-      link: window.location.href,
-      picture: '../images/facebook.png',
+      link: '10.10.5.107:8080/forum',
+      picture: '<c:url value="/static/images/facebook.png"/>',
       name: 'The Forum',
       caption: 'Info on Bangalore',
       description: 'Seek and share answers about Bangalore.'

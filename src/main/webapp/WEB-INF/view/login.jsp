@@ -1,26 +1,56 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-
+<link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>'/>
 <head>
     <title>Login</title>
+
+    <script src='<c:url value="/static/jsquery/jquery.js"/>'></script>
+    <script src='<c:url value="/static/javascript/knockout-2.1.0.js"/>'></script>
+    <script src='http://connect.facebook.net/en_US/all.js'></script>
+    <script src="<c:url value="/static/javascript/shareToSocialMedia.js"/>"></script>
+
+
+
 </head>
 
 <body onload='document.loginForm.Username.focus();'>
     <div id="container">
-        <form name="loginForm" action="${pageContext.request.contextPath}/j_spring_security_check" method = "POST">
+     <div id="header">
+                <div class="topButtons">
+                <ul>
+                <li>
+                    <div id="forumLinks">
+                       <a href='<c:url value="/" />'> Home</a>
+                    </div>
+                </li>
+                </ul>
+                </div>
+
+            </div>
+
+        <div id="content">
+                <div id ="leftPane" >
+        <form name="loginForm" action="${pageContext.request.contextPath}/j_spring_security_check" method = "POST" autocomplete="off">
             <div style="color:red; text-align:center" id="messagetobedisplayed">
                 ${messageToBeDisplayed}
             </div>
-            <table align="left">
-                <tr>
-                    <td>
+
                         <table style="margin-left:50">
+                            <tr>
+                            <td>
+                                 <div id="noticeMessage">
+                                        <br> ${noticeMessage}
+                                 </div>
+                                 </td>
+                            </tr>
                             <tr>
                                   <td>Username:<FONT color="red">
                                   </td>
                             </tr>
 
                             <tr>
-                                <td><input path="username" type = "text" name="j_username" /></td>
+                                <td><input path="username" type = "text" name="j_username" autocomplete="off" /></td>
                                     <div style="color:red; text-align:center" id="usernameError">
                                         ${usernameError}
                                     </div>
@@ -40,11 +70,19 @@
                             <tr>
                                 <td><input type="submit" value="Submit" name = "submit"/></td>
                             </tr>
-                        </table>
+
+
+                <tr>
+                    <td>
+                        If unregistered user, please click here to  <a href='<c:url value="/join" />'> Join</a>
                     </td>
                 </tr>
             </table>
         </form>
+    </div>
+
+    <%@ include file="rightPane.jsp" %>
+    </div>
     </div>
 </body>
 </html>

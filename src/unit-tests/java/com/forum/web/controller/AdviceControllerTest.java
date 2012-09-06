@@ -3,11 +3,9 @@ package com.forum.web.controller;
 import com.forum.domain.Advice;
 import com.forum.domain.User;
 import com.forum.service.AdviceService;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.validation.BindingResult;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 
 public class AdviceControllerTest {
 
@@ -30,7 +29,7 @@ public class AdviceControllerTest {
         user.setUsername(username);
         Advice advice = new Advice(20,  user, description);
         mockAdviceService = mock(AdviceService.class);
-        when(mockAdviceService.save(advice)).thenReturn(true);
+        when(mockAdviceService.save(advice)).thenReturn(1);
         adviceController = new AdviceController(mockAdviceService);
         BindingResult mockBindingResult = mock(BindingResult.class);
         when(mockBindingResult.hasErrors()).thenReturn(false);
@@ -49,7 +48,7 @@ public class AdviceControllerTest {
         user.setUsername(username);
         Advice advice = new Advice(20,  user, description);
         mockAdviceService = mock(AdviceService.class);
-        when(mockAdviceService.save(advice)).thenReturn(false);
+        when(mockAdviceService.save(advice)).thenReturn(0);
         adviceController = new AdviceController(mockAdviceService);
 
         BindingResult mockBindingResult = mock(BindingResult.class);
@@ -69,7 +68,7 @@ public class AdviceControllerTest {
         user.setUsername(username);
         Advice advice = new Advice(20,  user, description);
         mockAdviceService = mock(AdviceService.class);
-        when(mockAdviceService.save(advice)).thenReturn(false);
+        when(mockAdviceService.save(advice)).thenReturn(0);
         adviceController = new AdviceController(mockAdviceService);
 
         BindingResult mockBindingResult = mock(BindingResult.class);

@@ -30,5 +30,22 @@ public class LoginControllerTest {
         ModelAndView errorModelAndView = loginController.errorLoginView();
 
         assertThat(errorModelAndView.getViewName(), is("login"));
+        assertThat((String) errorModelAndView.getModel().get("noticeMessage"),is("<span style=\"color:red;\" >Invalid Username or Password.</spam>"));
+    }
+
+    @Test
+    public void shouldDisplayMessageOnSuccessfulLogout() {
+        ModelAndView logoutModelAndView = loginController.logoutView();
+
+        assertThat(logoutModelAndView.getViewName(), is("login"));
+        assertThat((String) logoutModelAndView.getModel().get("noticeMessage"),is("You have successfully logged out."));
+    }
+
+    @Test
+    public void shouldDisplayMessageWhenSessionInvalid() {
+        ModelAndView invalidModelAndView = loginController.invalidView();
+
+        assertThat(invalidModelAndView.getViewName(), is("login"));
+        assertThat((String) invalidModelAndView.getModel().get("noticeMessage"),is("Session invalid, please login again."));
     }
 }

@@ -8,14 +8,17 @@
     <http auto-config="true" use-expressions="true">
         <intercept-url pattern="/postQuestion" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" requires-channel="http"/>
         <intercept-url pattern="/adminDashboard" access="hasRole('ROLE_ADMIN')" requires-channel="http"/>
-        <intercept-url pattern="/login" access="permitAll" requires-channel="http"/>
-        <intercept-url pattern="/join" access="permitAll" requires-channel="http"/>
-        <intercept-url pattern="/errorLogin" access="permitAll" requires-channel="http"/>
+        <intercept-url pattern="/login" access="isAnonymous()" requires-channel="http"/>
+        <intercept-url pattern="/join" access="isAnonymous()" requires-channel="http"/>
+        <intercept-url pattern="/errorLogin" access="isAnonymous()" requires-channel="http"/>
+        <intercept-url pattern="/logout" access="isAnonymous()" requires-channel="http"/>
+        <intercept-url pattern="/invalid" access="isAnonymous()" requires-channel="http"/>
         <intercept-url pattern="/j_spring_*" access="permitAll" requires-channel="http" />
         <intercept-url pattern="/**" access="permitAll" requires-channel="http"/>
         <form-login login-page="/login" login-processing-url="/j_spring_security_check"
                     always-use-default-target="true" default-target-url="/" authentication-success-handler-ref="loginSuccessHandler" authentication-failure-url="/errorLogin"/>
-        <logout logout-success-url = "/" logout-url="/forum_logout" />
+        <session-management invalid-session-url="/invalid" />
+        <logout logout-success-url = "/logout" logout-url="/forum_logout" invalidate-session="false"/>
         <access-denied-handler ref="errorHandlingFilter" />
         <port-mappings>
             <port-mapping http="8080" https="8443"/>

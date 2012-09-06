@@ -2,14 +2,13 @@ package com.forum.domain;
 
 public class Tag {
     private int id;
-    private  String value;
-    private  int count;
-
+    private String value;
+    private int count;
 
     public Tag(int id, String value, int count) {
-        this.id=id;
+        this.id = id;
         this.value = value.toLowerCase();
-        this.count=count;
+        this.count = count;
 
     }
 

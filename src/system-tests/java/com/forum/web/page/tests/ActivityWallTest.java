@@ -27,14 +27,14 @@ public class ActivityWallTest extends FunctionalTestBase {
     }
 
     @Test
-    public  void shouldGoThroughAdminLoginLogoutProcess() {
+    public void shouldGoThroughAdminLoginLogoutProcess() {
         browser.open("/adminDashboard");
         assertTrue(browser.getCurrentUrl().contains("/login"));
 
         WebElement userNameLogin = browser.findElement(By.name("j_username"));
-        userNameLogin.sendKeys("jules");
+        userNameLogin.sendKeys("Jules");
         WebElement passwordLogin = browser.findElement(By.name("j_password"));
-        passwordLogin.sendKeys("great!");
+        passwordLogin.sendKeys("Great!");
 
         WebElement submitButton = browser.findElement(By.name("submit"));
         submitButton.click();
@@ -58,9 +58,6 @@ public class ActivityWallTest extends FunctionalTestBase {
         WebElement logoutLink = browser.findElement(By.id("logout"));
         logoutLink.click();
         browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("container")));
-
-        assertThat(browser.getCurrentUrl(), is("http://localhost:8080/forum/"));
-
-
+        assertTrue(browser.getCurrentUrl().endsWith("/forum/logout"));
     }
 }

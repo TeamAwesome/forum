@@ -22,8 +22,9 @@ function QuestionsViewModel() {
     var loadQuestion = function() {
          $.post("./", {"pageNum": page.toString(), "pageSize": pageSize.toString()}, function(data) {
             $.each(data, function (index, question) {
+
                 self.questions.push(
-                     new Question(question.id, question.title, question.createdAt, question.description, question.user.username, question.likes, question.dislikes, question.flags)
+                     new Question(question.id, question.title, question.createdAt, stripHtmlSpaces(question.description), question.user.username, question.likes, question.dislikes, question.flags)
                      );
             });
             page +=1;
@@ -39,3 +40,8 @@ function QuestionsViewModel() {
 
 ko.applyBindings(new QuestionsViewModel());
 
+function stripHtmlSpaces(html) {
+    var space = /&nbsp;/g;
+    var text2 = html.replace(space,'');
+    return text2;
+}

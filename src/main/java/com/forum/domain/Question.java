@@ -29,6 +29,7 @@ public class Question implements Serializable {
     private int flags;
     private int views;
 
+    private List<Advice> advices;
     public Question() {
     }
 
@@ -122,28 +123,20 @@ public class Question implements Serializable {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "Question{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", createdAt=" + createdAt +
-                ", user=" + user +
-                ", likes=" + likes +
-                ", dislikes=" + dislikes +
-                ", flags=" + flags +
-                ", views=" + views +
-                ", tags=" + tags +
-                '}';
-    }
-
     public int getId() {
         return id;
     }
 
     public int getResponses() {
         return 0;
+    }
+
+    public void setAdvices(List<Advice> advices) {
+        this.advices = advices;
+    }
+
+    public List<Advice> getAdvices() {
+        return advices;
     }
 
     public List<Tag> getTags() {
@@ -162,4 +155,22 @@ public class Question implements Serializable {
         }
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", createdAt=" + createdAt +
+                ", user=" + user +
+                ", likes=" + likes +
+                ", dislikes=" + dislikes +
+                ", flags=" + flags +
+                ", views=" + views +
+                ", advices=" + advices +
+                ", tags=" + tags +
+                '}';
+    }
 }
+

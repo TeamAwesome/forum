@@ -20,22 +20,13 @@ public class TagService {
         return tagRepository.getTagsByTerm(term);
     }
 
-    public Integer createTag(Tag tag) {
-        if(!isPresent(tag)){
-        return tagRepository.createTag(tag);
+    public void createTag(Tag tag) {
+        if (tagRepository.getTagByName(tag.getValue()) == null) {
+            tagRepository.createTag(tag);
         }
-        return 0;
-    }
-
-    boolean isPresent(Tag tag) {
-        tag = tagRepository.getTagByName(tag.getValue());
-        if(tag==null){
-            return false;
-        }
-        return true;
     }
 
     public List<Tag> getAllTags() {
-        return null;  //To change body of created methods use File | Settings | File Templates.
+        return tagRepository.allTags();
     }
 }

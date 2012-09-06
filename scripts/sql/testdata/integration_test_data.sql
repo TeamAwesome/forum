@@ -203,3 +203,12 @@ INSERT INTO QUESTION(
     CREATED_AT,
     USER_ID)
   VALUES("What's the weather like in Bangalore currently? ", "I want to visit, but I hear it's been raining", '2012-08-13 10:20:04', 2);
+
+INSERT INTO ADVICE(
+    ID,
+    DESCRIPTION,
+    CREATED_AT,
+    QUESTION_ID,
+    USER_ID)
+  VALUES(1, "I want to visit, but I hear it's been raining", '2012-08-13 10:20:04', 1,3);
+

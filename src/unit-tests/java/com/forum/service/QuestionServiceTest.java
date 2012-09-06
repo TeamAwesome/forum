@@ -1,13 +1,18 @@
 package com.forum.service;
 
 
+import com.forum.domain.Advice;
 import com.forum.domain.Question;
 import com.forum.domain.User;
+import com.forum.repository.AdviceRepository;
 import com.forum.repository.QuestionRepository;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -17,9 +22,12 @@ public class QuestionServiceTest {
 
     private QuestionService questionService;
     private QuestionRepository questionRepository;
+    private AdviceRepository adviceRepository;
+
     @Before
     public void setup(){
         questionRepository = mock(QuestionRepository.class);
+        adviceRepository = mock(AdviceRepository.class);
         questionService = new QuestionService(questionRepository);
     }
 
@@ -43,6 +51,10 @@ public class QuestionServiceTest {
         Question question = new Question(42,"mock question title","mock question description",new User(),new Date());
         when(questionRepository.getById(42)).thenReturn(question);
 
+        ArrayList<Advice> advices = new ArrayList<Advice>();
+        advices.add(new Advice());
+        when(adviceRepository.getByQuestionId(42)).thenReturn(advices);
+        questionService.setAdviceRepository(adviceRepository);
         Question expectedQuestion = questionService.getById(42);
 
         assertThat(expectedQuestion, is(question));
@@ -90,6 +102,19 @@ public class QuestionServiceTest {
         int numberOfRowsAffected = questionService.addFlagsByID(question.getId());
 
         assertThat(numberOfRowsAffected, is(1));
+    }
+
+    @Test
+    public void shouldRemoveExtraSpacesInDescription(){
+        List<Question> questionList = new ArrayList<Question>();
+        Question question = new Question(100,"Question Title", "                Question Description", null, null,0,0,0);
+        Question question1 = new Question(101,"Question Title", "                        Question Description 1", null, null,0,0,0);
+        questionList.add(question);
+        questionList.add(question1);
+
+        List<Question> questionResultList = questionService.removeSpaces(questionList);
+        assertThat(questionResultList.get(0).getDescription(),is("Question Description"));
+        assertThat(questionResultList.get(1).getDescription(),is("Question Description 1"));
     }
 
 }

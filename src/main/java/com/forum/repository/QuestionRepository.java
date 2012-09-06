@@ -19,6 +19,7 @@ public class    QuestionRepository {
     private JdbcTemplate jdbcTemplate;
     private static  Logger logger = Logger.getLogger(QuestionRepository.class.getName());
 
+
     @Autowired
     public QuestionRepository(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
