@@ -9,13 +9,15 @@
         font-size: 1em;
         padding: 0px 20px 0px 20px;
         color: #3B3B3B;
-        text-align:center;
 
-	}
+        }
+
+
 
     #container{
         margin: 0 auto;
     	width: 894px;
+    	display:block;
     }
 
     #content{
@@ -32,7 +34,7 @@
         height: 175px;
         width:874px;
         padding: 0px 10px 0px 10px;
-
+        float:left;
     }
 
     #leftPane{
@@ -48,7 +50,7 @@
             margin-left: auto;
             margin-right: auto;
            float: left;
-            width:600px;
+            width:500px;
             padding: 10px 10px 10px 10px;
             display: inline;
             background-color:#FFFFFF;
@@ -71,10 +73,12 @@
         font-weight: bold;
         line-height: 200%;
         color: #5472B9;
+        text-align:left;
     }
 
     h1 {
         font-size: 1.5em;
+        text-align:left;
     }
 
     h2 {
@@ -108,11 +112,14 @@
     table {
       border-collapse: collapse;
       padding:3px;
+      width:560px;
     }
+
     table td {
       float:left;
       width:30%;
       text-align:left;
+
     }
 
     table tr {
@@ -141,9 +148,11 @@
     }
 
     #QuestionParagraph{
+        float:right;
         line-height:180%;
         margin-left: 10px;
         text-align:left;
+
     }
 
     .questionTitle{
@@ -195,7 +204,9 @@
     }
 
     #registrationForm{
+    float:left;
     font-size: .75em;
     width:600px;
+    text-align:left;
     }
 

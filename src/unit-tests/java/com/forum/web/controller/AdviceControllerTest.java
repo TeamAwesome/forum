@@ -5,6 +5,7 @@ import com.forum.domain.User;
 import com.forum.service.AdviceService;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.validation.BindingResult;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -23,31 +24,27 @@ public class AdviceControllerTest {
     @Test
     public void shouldSaveAdviceAndShowQuestionDetails(){
         Map<String, String> model = new HashMap<String, String>();
-        model.put(AdviceController.QUESTION_ID, "20");
         String username = "Jules";
-        model.put(AdviceController.USERNAME, username);
         String description = "This is an advice for question 20";
-        model.put(AdviceController.DESCRIPTION, description);
         User user = new User();
         user.setUsername(username);
         Advice advice = new Advice(20,  user, description);
         mockAdviceService = mock(AdviceService.class);
         when(mockAdviceService.save(advice)).thenReturn(true);
         adviceController = new AdviceController(mockAdviceService);
+        BindingResult mockBindingResult = mock(BindingResult.class);
+        when(mockBindingResult.hasErrors()).thenReturn(false);
 
-        String url = adviceController.saveAdvice(model);
+        String url = adviceController.saveAdvice(advice, mockBindingResult, model);
 
-        assertThat(url, is(AdviceController.SHOW_QUESTION_DETAILS+"20"));
+        assertThat(url, is("redirect:"+AdviceController.SHOW_QUESTION_DETAILS+"20"));
     }
 
     @Test
     public void shouldRejectWhenSaveAdviceFailed(){
         Map<String, String> model = new HashMap<String, String>();
-        model.put(AdviceController.QUESTION_ID, "20");
         String username = "Jules";
-        model.put(AdviceController.USERNAME, username);
         String description = "This is an advice for question 20";
-        model.put(AdviceController.DESCRIPTION, description);
         User user = new User();
         user.setUsername(username);
         Advice advice = new Advice(20,  user, description);
@@ -55,8 +52,31 @@ public class AdviceControllerTest {
         when(mockAdviceService.save(advice)).thenReturn(false);
         adviceController = new AdviceController(mockAdviceService);
 
-        String url = adviceController.saveAdvice(model);
+        BindingResult mockBindingResult = mock(BindingResult.class);
+        when(mockBindingResult.hasErrors()).thenReturn(false);
 
-        assertThat(url, is(AdviceController.ERROR_PAGE));
+        String url = adviceController.saveAdvice(advice, mockBindingResult, model);
+
+        assertThat(url, is("redirect:"+AdviceController.ERROR_PAGE));
+    }
+
+    @Test
+    public void shouldRejectWhenValidationFailed(){
+        Map<String, String> model = new HashMap<String, String>();
+        String username = "Jules";
+        String description = "This is an advice for question 20";
+        User user = new User();
+        user.setUsername(username);
+        Advice advice = new Advice(20,  user, description);
+        mockAdviceService = mock(AdviceService.class);
+        when(mockAdviceService.save(advice)).thenReturn(false);
+        adviceController = new AdviceController(mockAdviceService);
+
+        BindingResult mockBindingResult = mock(BindingResult.class);
+        when(mockBindingResult.hasErrors()).thenReturn(true);
+
+        String url = adviceController.saveAdvice(advice, mockBindingResult, model);
+
+        assertThat(url, is("redirect:"+AdviceController.SHOW_QUESTION_DETAILS+"20"));
     }
 }

@@ -34,4 +34,8 @@ public class TagService {
         }
         return true;
     }
+
+    public List<Tag> getAllTags() {
+        return null;  //To change body of created methods use File | Settings | File Templates.
+    }
 }
