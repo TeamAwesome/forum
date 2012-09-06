@@ -1,89 +1,73 @@
 package com.forum.web.page.tests;
 
+
 import org.apache.commons.lang.StringUtils;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
-public class PostQuestionTest {
-    private WebDriver driver;
-
-    @Before
-    public void setUp() throws Exception {
-        driver = new FirefoxDriver();
-        driver.get("http://localhost:8080/forum");
-    }
-
-    @After
-    public void closeBrowser() {
-        driver.close();
-    }
+public class PostQuestionTest extends FunctionalTestBase {
 
     @Test
     public void shouldGoThroughPostQuestion() {
-        WebElement login = driver.findElement(By.linkText("Login"));
+        WebElement login = browser.findElement(By.linkText("Login"));
         login.click();
-        WebElement loginUsername = driver.findElement(By.name("j_username"));
+        WebElement loginUsername = browser.findElement(By.name("j_username"));
         loginUsername.sendKeys("Stephanie");
-        WebElement loginPassword = driver.findElement(By.name("j_password"));
+        WebElement loginPassword = browser.findElement(By.name("j_password"));
         loginPassword.sendKeys("Stephanie");
-        WebElement submit = driver.findElement(By.name("submit"));
+        WebElement submit = browser.findElement(By.name("submit"));
         submit.click();
-        WebElement postQuestion = driver.findElement(By.linkText("Post Question"));
+        WebElement postQuestion = browser.findElement(By.linkText("Post Question"));
         postQuestion.click();
-        assertThat(driver.getCurrentUrl(), is("http://localhost:8080/forum/postQuestion"));
-        assertTrue(driver.findElement(By.id("questionTitle")).isDisplayed());
+        assertThat(browser.getCurrentUrl(), is("http://localhost:8080/forum/postQuestion"));
+        assertTrue(browser.findElement(By.id("questionTitle")).isDisplayed());
     }
 
     @Test
     public void checkTitleTest() {
-        WebElement title = driver.findElement(By.id("questionTitle"));
+        WebElement title = browser.findElement(By.id("questionTitle"));
         title.sendKeys("Practice");
-        WebElement post = driver.findElement(By.id("titleValidationMessage"));
+        WebElement post = browser.findElement(By.id("titleValidationMessage"));
         assertThat(post.getText(), is("92 Characters Remaining"));
     }
 
     @Test
     public void testTitleLimit() throws Exception {
-        WebElement title = driver.findElement(By.id("questionTitle"));
+        WebElement title = browser.findElement(By.id("questionTitle"));
         title.sendKeys(StringUtils.repeat("0", 100));
-        WebElement post = driver.findElement(By.id("titleValidationMessage"));
+        WebElement post = browser.findElement(By.id("titleValidationMessage"));
         assertThat(post.getText(), is("0 Characters Remaining"));
     }
 
     @Test
     public void shouldStopTextEntry() throws Exception {
-        WebElement title = driver.findElement(By.id("questionTitle"));
+        WebElement title = browser.findElement(By.id("questionTitle"));
         title.sendKeys(StringUtils.repeat("0", 100) + "132");
         assertThat(title.getAttribute("value"), is(StringUtils.repeat("0", 100)));
     }
 
     @Test
     public void shouldGiveErrorOnSubmitWithEmptyBody() throws Exception {
-        WebElement title = driver.findElement(By.id("questionTitle"));
+        WebElement title = browser.findElement(By.id("questionTitle"));
         title.sendKeys("asdfad");
-        WebElement submit = driver.findElement(By.id("submitButton"));
+        WebElement submit = browser.findElement(By.id("submitButton"));
         submit.click();
-        assertThat(driver.getCurrentUrl(), is("http://localhost:8080/app/postQuestion"));
-        assertThat(driver.findElement(By.id("descriptionValidationMessage")).getText(), is("A Question must have a description."));
+        assertThat(browser.getCurrentUrl(), is("http://localhost:8080/app/postQuestion"));
+        assertThat(browser.findElement(By.id("descriptionValidationMessage")).getText(), is("A Question must have a description."));
     }
 
     @Test
     public void shouldGiveErrorOnSubmitWithEmptyTitle() throws Exception {
-        WebElement submit = driver.findElement(By.id("submitButton"));
+        WebElement submit = browser.findElement(By.id("submitButton"));
         submit.click();
-        assertThat(driver.getCurrentUrl(), is("http://localhost:8080/app/postQuestion"));
-        assertThat(driver.findElement(By.id("titleValidationMessage")).getText(), is("A Question must have a title."));
-        assertThat(driver.findElement(By.id("descriptionValidationMessage")).getText(), is("A Question must have a description."));
+        assertThat(browser.getCurrentUrl(), is("http://localhost:8080/app/postQuestion"));
+        assertThat(browser.findElement(By.id("titleValidationMessage")).getText(), is("A Question must have a title."));
+        assertThat(browser.findElement(By.id("descriptionValidationMessage")).getText(), is("A Question must have a description."));
     }
 }
 
