@@ -26,16 +26,13 @@ public class TagController {
 
         List<Tag> listOfTags = tagService.getTagsByTerm(term);
 
-        Gson json = new Gson();
-        return json.toJson(listOfTags);
+        return new Gson().toJson(listOfTags);
     }
 
     @RequestMapping(value="/tags", method = RequestMethod.GET)
     @ResponseBody
     public String getAllTags() {
-        return "[{\"text\": \"Lorem\", \"weight\": 11, \"link\":\"fjdkjkl\"}," +
-                "{\"text\": \"Home\", \"weight\": 15, \"link\": \"http://localhost:8080/forum/\", \"title\": \"Tags\"}," +
-                "{\"text\": \"food\", \"weight\": 200}," +
-                "{\"text\": \"java\", \"weight\": 2}]";
+        List<Tag> tags = tagService.getAllTags();
+        return new Gson().toJson(tags);
     }
 }

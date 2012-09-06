@@ -34,15 +34,25 @@ public class TagControllerTest {
     }
 
     @Test
-    public void shouldReturnListOfTagsAsJSON(){
-        tagController =  new TagController(null);
-        String tags = tagController.getAllTags();
+    public void shouldReturnListOfTagsAsJSON() {
+        TagService tagService = mock(TagService.class);
+        List<Tag> tags = new ArrayList<Tag>();
+        tags.add(new Tag(1,"Lorem",11));
+        tags.add(new Tag(2,"Home",15));
+        tags.add(new Tag(3,"food",20));
+        tags.add(new Tag(4,"java",2));
+        when(tagService.getAllTags()).thenReturn(tags);
 
-        String testResult = "[{\"text\": \"Lorem\", \"weight\": 11, \"link\":\"fjdkjkl\"}," +
-                "{\"text\": \"Home\", \"weight\": 15, \"link\": \"http://localhost:8080/forum/\", \"title\": \"Tags\"}," +
-                "{\"text\": \"food\", \"weight\": 200}," +
-                "{\"text\": \"java\", \"weight\": 2}]";
-        assertThat(tags, is(testResult));
+        tagController = new TagController(tagService);
+        String tagsAsJSON = tagController.getAllTags();
+
+        String testResult = "[" +
+                "{\"id\":1,\"value\":\"lorem\",\"count\":11}," +
+                "{\"id\":2,\"value\":\"home\",\"count\":15}," +
+                "{\"id\":3,\"value\":\"food\",\"count\":20}," +
+                "{\"id\":4,\"value\":\"java\",\"count\":2}" +
+                "]";
+        assertThat(tagsAsJSON, is(testResult));
     }
 
 }
