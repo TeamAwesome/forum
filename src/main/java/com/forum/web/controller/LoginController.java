@@ -33,10 +33,17 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/logout")
-    public ModelAndView LogoutView() {
+    public ModelAndView logoutView() {
         ModelAndView logoutModelAndView = new ModelAndView("login");
         logoutModelAndView.addObject("noticeMessage", "You have successfully logged out.");
         return logoutModelAndView;
+    }
+
+    @RequestMapping(value = "/invalid")
+    public ModelAndView invalidView() {
+        ModelAndView invalidModelAndView = new ModelAndView("login");
+        invalidModelAndView.addObject("noticeMessage", "Session invalid, please login again.");
+        return invalidModelAndView;
     }
 }
 
