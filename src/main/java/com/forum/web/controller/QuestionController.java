@@ -43,6 +43,11 @@ public class QuestionController {
 
     @RequestMapping(value = "/showPostedQuestion", method = RequestMethod.POST)
     public String showPostedQuestion(@Valid Question question, BindingResult result, Map model){
+
+        logger.info("question = " + question.toString());
+        logger.info("result = " + result.toString());
+        logger.info("model = " + model.toString());
+
         if(result.hasErrors()) {
             return "postQuestion";
         }

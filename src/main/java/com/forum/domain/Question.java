@@ -7,8 +7,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Question implements Serializable {
+    private  static Logger logger = Logger.getLogger(Question.class.getName());
     private int id;
 
     @NotBlank(message = "Title is empty.")
@@ -39,6 +41,8 @@ public class Question implements Serializable {
         this.createdAt = createdAt;
         this.description = description;
         tags = new ArrayList<Tag>();
+
+        logger.info("a question an ID has been created");
     }
 
     public Question(String title, String description, User user, Date createdAt) {
@@ -47,6 +51,8 @@ public class Question implements Serializable {
         this.createdAt = createdAt;
         this.description = description;
         tags = new ArrayList<Tag>();
+
+        logger.info("a question without an id has been created");
     }
 
     public Question(int id, String title, String description, User user, Date createdAt, int likes, int disLikes, int flags) {
@@ -59,9 +65,11 @@ public class Question implements Serializable {
         this.dislikes = disLikes;
         this.flags = flags;
         tags = new ArrayList<Tag>();
+
+        logger.info("a question with stats has been created");
     }
 
-    public Question(int id, String title, String description, User user, Date createdAt, int likes, int disLikes, int flags , List<Tag> tags) {
+    public Question(int id, String title, String description, User user, Date createdAt, int likes, int disLikes, int flags , String tagsAsString) {
         this.id = id;
         this.title = title;
         this.user = user;
@@ -70,8 +78,8 @@ public class Question implements Serializable {
         this.likes = likes;
         this.dislikes = disLikes;
         this.flags = flags;
-        this.tags = tags;
-        this.tags = new ArrayList<Tag>();
+        this.tags = getTagsFromString(tagsAsString);
+        logger.info("a question with stats and tags has been created");
     }
     public String getTitle() {
         return title;
@@ -119,9 +127,14 @@ public class Question implements Serializable {
         return "Question{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", createdAt=" + createdAt.toString() +
                 ", description='" + description + '\'' +
+                ", createdAt=" + createdAt +
                 ", user=" + user +
+                ", likes=" + likes +
+                ", dislikes=" + dislikes +
+                ", flags=" + flags +
+                ", views=" + views +
+                ", tags=" + tags +
                 '}';
     }
 
@@ -131,5 +144,22 @@ public class Question implements Serializable {
 
     public int getResponses() {
         return 0;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(String tagsAsString) {
+        tags = getTagsFromString(tagsAsString);
+    }
+
+    List<Tag> getTagsFromString(String tagsAsString) {
+        List<Tag> result = new ArrayList<Tag>();
+        String[] tagArray = tagsAsString.split(",");
+        for (String tag : tagArray){
+            result.add(new Tag(tag.trim()));
+        }
+        return result;
     }
 }
