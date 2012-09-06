@@ -1,7 +1,8 @@
 package com.forum.service;
 
+import com.forum.domain.Advice;
 import com.forum.domain.Question;
-import com.forum.domain.Tag;
+import com.forum.repository.AdviceRepository;
 import com.forum.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,18 +14,26 @@ import java.util.List;
 public class QuestionService {
     private QuestionRepository questionRepository;
     private  TagService tagService;
+    private AdviceRepository adviceRepository;
 
     @Autowired
     public QuestionService(QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
     }
 
+    @Autowired
+    public void setAdviceRepository(AdviceRepository adviceRepository){
+        this.adviceRepository = adviceRepository;
+    }
+
     public Question getById(Integer questionId) {
-        return questionRepository.getById(questionId);
+        Question question =  questionRepository.getById(questionId);
+        List<Advice> advices = adviceRepository.getByQuestionId(questionId);
+        question.setAdvices(advices);
+        return question;
     }
 
     public int createQuestion(Question question) {
-//        List<Tag> tags=question.getTags();
         return questionRepository.createQuestion(question);
     }
 

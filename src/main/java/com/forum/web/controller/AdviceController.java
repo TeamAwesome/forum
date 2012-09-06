@@ -1,7 +1,6 @@
 package com.forum.web.controller;
 
 import com.forum.domain.Advice;
-import com.forum.domain.User;
 import com.forum.service.AdviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,9 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
@@ -35,8 +32,8 @@ public class AdviceController {
             return "redirect:" + SHOW_QUESTION_DETAILS + advice.getQuestionId();
         } else {
             advice.setCreatedAt(new Date());
-            boolean succeed = adviceService.save(advice);
-            if (succeed) {
+            int succeed = adviceService.save(advice);
+            if (succeed != 0) {
                 return "redirect:" + SHOW_QUESTION_DETAILS + advice.getQuestionId();
             } else {
                 return "redirect:" + ERROR_PAGE;

@@ -3,20 +3,17 @@ package com.forum.repository;
 
 import com.forum.domain.Question;
 import com.forum.domain.User;
-import com.forum.web.controller.AdminController;
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
 
 import javax.sql.DataSource;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -65,7 +62,6 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
         Question question =new Question(12,"where","where are you",user,date);
         assertThat(questionRepository.createQuestion(question),is(1));
     }
-
 
     @Test
     public void shouldGetNumberOfQuestionInAParticularDay(){

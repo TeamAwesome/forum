@@ -25,8 +25,10 @@ public class Question implements Serializable {
     private int likes;
     private int dislikes;
     private int flags;
+
     private int views;
 
+    private List<Advice> advices;
     public Question() {
     }
 
@@ -71,20 +73,19 @@ public class Question implements Serializable {
         this.dislikes = disLikes;
         this.flags = flags;
         this.tags = tags;
-        this.tags = new ArrayList<Tag>();
     }
+
     public String getTitle() {
         return title;
     }
 
-
     public Date getCreatedAt() {
         return createdAt;
     }
-
     public String getDescription() {
         return description;
     }
+
 
     public User getUser() {
         return user;
@@ -131,5 +132,13 @@ public class Question implements Serializable {
 
     public int getResponses() {
         return 0;
+    }
+
+    public void setAdvices(List<Advice> advices) {
+        this.advices = advices;
+    }
+
+    public List<Advice> getAdvices() {
+        return advices;
     }
 }

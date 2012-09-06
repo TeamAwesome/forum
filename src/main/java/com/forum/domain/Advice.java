@@ -20,7 +20,6 @@ public class Advice {
 
     public Advice(int questionId, User user, String description) {
         this.questionId = questionId;
-        this.createdAt = createdAt;
         this.user = user;
         this.description = description;
 
@@ -28,6 +27,17 @@ public class Advice {
 
     public int getQuestionId() {
         return questionId;
+    }
+
+    @Override
+    public String toString() {
+        return "Advice{" +
+                "id=" + id +
+                ", questionId=" + questionId +
+                ", createdAt=" + createdAt +
+                ", user=" + user +
+                ", description='" + description + '\'' +
+                '}';
     }
 
     public void setCreatedAt(Date createdAt) {
