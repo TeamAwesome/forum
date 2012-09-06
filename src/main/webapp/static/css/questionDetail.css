@@ -1,0 +1,65 @@
+
+#left
+{
+    float:left;
+    width:50%;
+    padding-left: 1%;
+}
+
+#right
+{
+    float:left;
+    width:40%;
+    position: relative;
+    padding-top : 5%;
+    padding-left: 5%;
+}
+
+#right p, ul, ol {
+    margin-top: 0;
+    line-height: 100%;
+    padding: 0px 30px 0px 30px;
+}
+
+#questionTitle
+{
+    word-wrap: break-word;
+        overflow: auto;
+        font-weight: bold;
+        font-size:1.2em;
+        padding: 10px 3px 8px 5px;
+
+
+}
+
+#questionDescription
+{
+    word-wrap:break-word;
+    border: 0px solid;
+    max-height:300px;
+    max-width:300px;
+    overflow: auto;
+    padding: 5px 3px 2px 5px;
+    background-color:#FFF0DB;
+}
+
+#response
+{
+    padding: 5px 3px 2px 5px;
+}
+
+#status
+{
+    padding-top: 3em;
+}
+
+#replyTextarea
+{
+   resize: none;
+}
+
+.statsButtons
+{
+    max-width: 130px;
+    float: left;
+}

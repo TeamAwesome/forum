@@ -18,7 +18,8 @@ public class AgeRangeTest {
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void shouldThrowIllegalArgumentExceptionWhenGettingInvalidCode(){
+    public void shouldRejectInvalidCode(){
         AgeRange.getAgeRange(10);
     }
+
 }

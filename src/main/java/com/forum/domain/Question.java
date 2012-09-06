@@ -1,26 +1,82 @@
 package com.forum.domain;
 
+import com.forum.service.validation.NoHTMLScript;
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Question implements Serializable {
     private int id;
+
+    @NotBlank(message = "Title is empty.")
+    @NoHTMLScript
     private String title;
-    private Date createdAt;
+
+    @NotBlank(message = "Description is empty.")
     private String description;
+
+    private Date createdAt;
+
     private User user;
 
-    public Question(int id, String title,String description, User user, Date createdAt){
-        this.id = id;
-        this.title=title;
-        this.user= user;
-        this.createdAt = createdAt;
-        this.description=description;
+    private int likes;
+    private int dislikes;
+    private int flags;
+    private int views;
+
+    public Question() {
     }
 
+    private List<Tag> tags;
+
+    public Question(int id, String title, String description, User user, Date createdAt) {
+        this.id = id;
+        this.title = title;
+        this.user = user;
+        this.createdAt = createdAt;
+        this.description = description;
+        tags = new ArrayList<Tag>();
+    }
+
+    public Question(String title, String description, User user, Date createdAt) {
+        this.title = title;
+        this.user = user;
+        this.createdAt = createdAt;
+        this.description = description;
+        tags = new ArrayList<Tag>();
+    }
+
+    public Question(int id, String title, String description, User user, Date createdAt, int likes, int disLikes, int flags) {
+        this.id = id;
+        this.title = title;
+        this.user = user;
+        this.createdAt = createdAt;
+        this.description = description;
+        this.likes = likes;
+        this.dislikes = disLikes;
+        this.flags = flags;
+        tags = new ArrayList<Tag>();
+    }
+
+    public Question(int id, String title, String description, User user, Date createdAt, int likes, int disLikes, int flags , List<Tag> tags) {
+        this.id = id;
+        this.title = title;
+        this.user = user;
+        this.createdAt = createdAt;
+        this.description = description;
+        this.likes = likes;
+        this.dislikes = disLikes;
+        this.flags = flags;
+        this.tags = tags;
+        this.tags = new ArrayList<Tag>();
+    }
     public String getTitle() {
         return title;
     }
+
 
     public Date getCreatedAt() {
         return createdAt;
@@ -35,19 +91,27 @@ public class Question implements Serializable {
     }
 
     public int getLikes() {
-        return 0;
+        return likes;
     }
 
     public int getDislikes() {
-        return 0;
+        return dislikes;
     }
 
     public int getViews() {
-        return 0;
+        return views;
     }
 
     public int getFlags() {
-        return 0;
+        return flags;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -63,5 +127,9 @@ public class Question implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public int getResponses() {
+        return 0;
     }
 }

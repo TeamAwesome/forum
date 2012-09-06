@@ -5,8 +5,8 @@ import com.forum.domain.User;
 import com.forum.repository.QuestionRepository;
 import org.junit.Test;
 
+import java.sql.Timestamp;
 import java.util.*;
-import java.util.logging.Logger;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -14,19 +14,17 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class AdminServiceTest {
-    private static Logger logger = Logger.getLogger(AdminServiceTest.class.getName());
 
     @Test
     public void shouldGetTotalNumberOfQuestions(){
         List<Question> questions = new ArrayList<Question>();
         User user = new User("Tom", "pass", "Tom Tom", "tom@tom.com", "1234567",
-                "Moon", "He doesn't know", 200);
+                "Moon", "He doesn't know", 200, false);
 
         QuestionRepository questionRepository = mock(QuestionRepository.class);
         when(questionRepository.getAllQuestions()).thenReturn(questions);
 
         AdminService adminService = new AdminService(questionRepository);
-
         assertThat(adminService.getTotalNumberOfQuestions(), is(questions.size()));
         questions.add(new Question(1, "test","test",user,new Date()));
         assertThat(adminService.getTotalNumberOfQuestions(), is(questions.size()));
@@ -36,46 +34,59 @@ public class AdminServiceTest {
     }
 
     @Test
-    public void shouldGenerateCountOfRecordsForEachMonth() {
-        List<Question> questions = new ArrayList<Question>();
+    public void shouldGetNumberOfQuestionsInADay(){
+        QuestionRepository questionRepositoryMock = mock(QuestionRepository.class);
+        Calendar calendar = new GregorianCalendar();
+        calendar.add(Calendar.DATE, -1);
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        calendar.set(Calendar.AM_PM, Calendar.AM);
+        Timestamp beginningTimestamp = new Timestamp(calendar.getTime().getTime());
 
-        User user = new User("Tom", "pass", "Tom Tom", "tom@tom.com", "1234567",
-                "Moon", "He doesn't know", 200);
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 0);
+        Timestamp endingTimestamp = new Timestamp(calendar.getTime().getTime());
 
-        questions.add(new Question(01,"mock question","mock description",user, addMonth(-1)));
-        questions.add(new Question(02,"mock question","mock description",user, addMonth(-2)));
-        questions.add(new Question(03,"mock question","mock description",user, addMonth(-5)));
-        questions.add(new Question(04,"mock question","mock description",user, addMonth(-7)));
-        questions.add(new Question(05,"mock question","mock description",user, addMonth(-7)));
-        questions.add(new Question(06,"mock question","mock description",user, addMonth(-7)));
+        when(questionRepositoryMock.getNumberOfQuestionBetweenTimes(beginningTimestamp, endingTimestamp)).thenReturn(3);
+        AdminService adminService = new AdminService(questionRepositoryMock);
+        int numberOfQuestionInToday= adminService.getNumberOfQuestionInADay(1);
 
-        QuestionRepository questionRepository = mock(QuestionRepository.class);
-        when(questionRepository.getQuestionsPostedInLast12Months()).thenReturn(questions);
-
-        AdminService adminService = new AdminService(questionRepository);
-        List<Integer> count = new ArrayList<Integer>();
-        count = adminService.getQuestionsPostedInLast12Months();
-
-        assertThat("0 months ago", count.get(0), is(0));
-        assertThat("1 months ago", count.get(1), is(1));
-        assertThat("2 months ago", count.get(2), is(1));
-        assertThat("3 months ago", count.get(3), is(0));
-        assertThat("4 months ago", count.get(4), is(0));
-        assertThat("5 months ago", count.get(5), is(1));
-        assertThat("6 months ago", count.get(6), is(0));
-        assertThat("7 months ago", count.get(7), is(3));
-        assertThat("8 months ago", count.get(8), is(0));
-        assertThat("9 months ago", count.get(9), is(0));
-        assertThat("10 months ago", count.get(10), is(0));
-        assertThat("11 months ago", count.get(11), is(0));
+        assertThat(numberOfQuestionInToday, is(3));
     }
 
-    private Date addMonth(int month) {
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.add(Calendar.MONTH, month);
 
-        Date result = calendar.getTime();
-        logger.info(result.toString());
-        return result;
+    @Test
+    public void shouldGetListOfNumberOfQuestionsIn90Days(){
+        QuestionRepository questionRepositoryMock = mock(QuestionRepository.class);
+        for(int i = 0; i < 90; i++){
+            Calendar calendar = new GregorianCalendar();
+            calendar.add(Calendar.DATE, -i);
+
+            calendar.set(Calendar.HOUR, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+            calendar.set(Calendar.AM_PM, Calendar.AM);
+            Timestamp beginningTimestamp = new Timestamp(calendar.getTime().getTime());
+            calendar.set(Calendar.HOUR_OF_DAY, 23);
+            calendar.set(Calendar.MINUTE, 59);
+            calendar.set(Calendar.SECOND, 59);
+            calendar.set(Calendar.MILLISECOND, 0);
+            Timestamp endingTimestamp = new Timestamp(calendar.getTime().getTime());
+
+            when(questionRepositoryMock.getNumberOfQuestionBetweenTimes(beginningTimestamp,endingTimestamp)).thenReturn(3);
+        }
+        AdminService adminService = new AdminService(questionRepositoryMock);
+        List<Integer> listOfNumberOfQuestions = new ArrayList<Integer>();
+
+        for(int  i= 0; i < 90; i++){
+            listOfNumberOfQuestions.add(3);
+        }
+
+        assertThat(listOfNumberOfQuestions, is(adminService.getNumberOfQuestionsInNinetyDays()));
     }
 }

@@ -1,58 +1,201 @@
-body {
-	margin: 0;
-	padding: 0;
-	background: #FFFFFF;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 14px;
-	color: #3B3B3B;
+    body {
+        margin: 0;
+        background-color:#ffff;
+        background-image: url('../images/background.png');
+        background-repeat:no-repeat;
+        background-attachment:fixed;
+        background-position:center center;
+        font-family: Arial, sans-serif;
+        font-size: 1em;
+        padding: 0px 20px 0px 20px;
+        color: #3B3B3B;
+        text-align:center;
 
-}
+	}
+
+    #container{
+        margin: 0 auto;
+    	width: 894px;
+    }
+
+    #content{
+        float:left;
+        width:874px;
+        background-color:#FEE1B7;
+        padding:10px 10px 10px 10px;
+
+    }
+
+    #header{
+        background-color:#599425;
+        background-image: url('../images/forum.png');
+        height: 175px;
+        width:874px;
+        padding: 0px 10px 0px 10px;
+
+    }
+
+    #leftPane{
+        margin-left: auto;
+        margin-right: auto;
+        float: left;
+        width: 560px;
+        display: inline;
+        padding: 0px 20px 0px 20px;
+        background-color:#FFFFFF;
+    }
+    #innerLeftPane{
+            margin-left: auto;
+            margin-right: auto;
+           float: left;
+            width:600px;
+            padding: 10px 10px 10px 10px;
+            display: inline;
+            background-color:#FFFFFF;
+    }
+
+    #rightPane{
+        margin-left: auto;
+        margin-right: auto;
+        background:#FEE1B7;
+         float: right;
+         width: 264px;
+         padding: 0 0;
+         display: inline;
+
+    }
+
+    h1, h2, h3 {
+        margin: 0px;
+        letter-spacing: -2px;
+        font-weight: bold;
+        line-height: 200%;
+        color: #5472B9;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    h2 {
+        font-size: 2.4em;
+    }
+
+    h3 {
+        font-size: 1.6em;
+    }
 
 
-h1, h2, h3 {
-	margin: 0px;
-	padding: 0px;
-	letter-spacing: -2px;
-	text-transform: uppercase;
-	font-family: 'Open Sans Condensed', sans-serif;
-	font-weight: normal;
-	line-height: 200%;
-	color: #5472B9;
-}
+    p, ul, ol {
+        margin-top: 0;
+        line-height: 100%;
+        padding: 10px 10px 10px 10px;
+        text-align : justify;
+    }
 
-h1 {
-	font-size: 2em;
 
-}
+    ul li{
+        display:inline;
+    }
 
-h2 {
-	font-size: 2.4em;
-}
+    ul li a{
+        color:#000000;
+    }
 
-h3 {
-	font-size: 1.6em;
-}
+    a {
+        color: #000000;
+    }
+    table {
+      border-collapse: collapse;
+      padding:3px;
+    }
+    table td {
+      float:left;
+      width:30%;
+      text-align:left;
+    }
 
-p, ul, ol {
-	margin-top: 0;
-	line-height: 100%;
-}
+    table tr {
+      border-bottom: 1px solid #9bf07b;
+      border-top:1px solid #9bf07b;
+    }
 
-ul, ol {
-}
+    .fullRow{
+    width:100%;
+    }
 
-a {
-	text-decoration: none;
-	color: #5472B9;
-}
+    #searchBar {
+        float: right;
+        margin-top: 5px;
+        margin-right:5px;
+    }
 
-a:hover {
-}
+    #forumLinks {
+        float: left;
+        margin-top: 5px;
+    }
 
-{
-	clear: both;
-	width: 1000px;
-	margin: 0px auto;
-}
+    #activityWallTitle{
+        margin-left: 2px;
+        text-align:center;
+    }
 
+    #QuestionParagraph{
+        line-height:180%;
+        margin-left: 10px;
+        text-align:left;
+    }
+
+    .questionTitle{
+        word-wrap: break-all;
+        color: #000000;
+    }
+
+    #advertisement{
+        margin-left: auto;
+        margin-right: auto;
+        width: 200px;
+        height: 200px;
+        Background-color:#FFFFFF;
+    }
+
+
+    #wordCloud{
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom:10px;
+        width: 200px;
+        height:200px;
+        Background-color:#FFFFFF;
+    }
+.errorMsg{
+    color:#FF0000;
+    }
+    #fb-root{
+             margin-left: auto;
+             margin-right: auto;
+         }
+
+    .small{
+        font-size: .75em;
+    }
+
+    .dottedLine{
+        background-color:#fff;
+        border:#000 1px dotted;
+        border-style: none none dashed;
+        color:#fff;
+        width: 70px;
+        float:left;
+        margin-bottom:0px;
+    }
+
+    .errorMsg{
+        color:#FF0000;
+    }
+
+    #registrationForm{
+    font-size: .75em;
+    width:600px;
+    }
 

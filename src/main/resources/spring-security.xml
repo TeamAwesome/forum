@@ -1,0 +1,52 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        http://www.springframework.org/schema/security
+                        http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+    <http auto-config="true" use-expressions="true">
+        <intercept-url pattern="/postQuestion" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" requires-channel="http"/>
+        <intercept-url pattern="/adminDashboard" access="hasRole('ROLE_ADMIN')" requires-channel="http"/>
+        <intercept-url pattern="/login" access="permitAll" requires-channel="http"/>
+        <intercept-url pattern="/join" access="permitAll" requires-channel="http"/>
+        <intercept-url pattern="/errorLogin" access="permitAll" requires-channel="http"/>
+        <intercept-url pattern="/j_spring_*" access="permitAll" requires-channel="http" />
+        <intercept-url pattern="/**" access="permitAll" requires-channel="http"/>
+        <form-login login-page="/login" login-processing-url="/j_spring_security_check"
+                    always-use-default-target="true" default-target-url="/" authentication-success-handler-ref="loginSuccessHandler" authentication-failure-url="/errorLogin"/>
+        <logout logout-success-url = "/" logout-url="/forum_logout" />
+        <access-denied-handler ref="errorHandlingFilter" />
+        <port-mappings>
+            <port-mapping http="8080" https="8443"/>
+        </port-mappings>
+
+        <anonymous />
+    </http>
+
+
+    <beans:bean id="errorHandlingFilter" class="com.forum.security.ErrorHandler" />
+    <beans:bean id="loginSuccessHandler" class="com.forum.security.LoginHandler" />
+
+    <beans:bean id="userAuthProvider" class="com.forum.security.UserAuthenticationProvider"/>
+    <beans:bean id="tempUserAuthenticationProvider" class="com.forum.security.TempUserAuthenticationProvider"/>
+
+    <beans:bean id="userService" class="com.forum.service.UserService"/>
+
+    <authentication-manager>
+
+        <!--<authentication-provider>-->
+            <!--<user-service>-->
+                <!--<user name="maomao" password="spring" authorities="ROLE_USER" />-->
+            <!--</user-service>-->
+        <!--</authentication-provider>-->
+        <authentication-provider ref="userAuthProvider"/>
+        <!--<authentication-provider>-->
+            <!--<user-service>-->
+                <!--<user password="password" name="chris" authorities="ROLE_USER" />-->
+                <!--<user password="password" name="lu.liu" authorities="ROLE_ADMIN" />-->
+                <!--<user password="Great!" name="Jules" authorities="ROLE_ADMIN" />-->
+            <!--</user-service>-->
+        <!--</authentication-provider>-->
+    </authentication-manager>
+</beans:beans>

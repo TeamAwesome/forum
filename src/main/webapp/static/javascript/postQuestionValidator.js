@@ -5,13 +5,11 @@ $(this).load(function(){
 
 var createYUIEditor = function() {
     var descriptionEditorConfig = {
-      height: '300px',
-      width: '600px',
-      dompath: false,
-      focusAtStart: false
+      height: '280px',
+      width: '580px'
     };
 
-    return new YAHOO.widget.SimpleEditor('descriptionEditor', descriptionEditorConfig);
+    return new YAHOO.widget.Editor('descriptionEditor', descriptionEditorConfig);
  }
 
 questionDescriptionEditor = createYUIEditor();
@@ -37,8 +35,10 @@ questionDescriptionEditor.subscribe('editorKeyPress', update);
 questionDescriptionEditor.subscribe('editorKeyUp',update);
 questionDescriptionEditor.subscribe('editorKeyDown',update);
 
-$('#questionTitle').keyup(update);
+//$('#questionTitle').keyup(update);
 $('#questionTitle').keydown(update);
 $('#questionTitle').keypress(update);
+$('#questionDescription').keydown(update);
+$('#questionDescription').keypress(update);
 
 $('#questionForm').submit(validate);

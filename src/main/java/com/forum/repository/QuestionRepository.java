@@ -1,19 +1,21 @@
 package com.forum.repository;
 
 import com.forum.domain.Question;
+import com.forum.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Repository
-public class QuestionRepository {
+public class    QuestionRepository {
 
     private JdbcTemplate jdbcTemplate;
+
 
     @Autowired
     public QuestionRepository(DataSource dataSource) {
@@ -21,37 +23,54 @@ public class QuestionRepository {
     }
 
     public List<Question> getAllQuestions() {
-        return jdbcTemplate.query("SELECT * FROM QUESTION", new QuestionRowMapper());
-    }
-
-    public List<Question> getQuestionsPostedInLast12Months(){
-        return jdbcTemplate.query("SELECT * FROM QUESTION WHERE CREATED_AT > DATE_SUB(NOW() , INTERVAL 12 MONTH)", new QuestionRowMapper());
+        String query = "SELECT Q.ID AS QUESTION_ID, Q.TITLE, Q.DESCRIPTION, Q.CREATED_AT,Q.*, U.* FROM QUESTION Q JOIN USER U WHERE Q.USER_ID=U.ID ORDER BY Q.ID ASC; ";
+        return jdbcTemplate.query(query,new QuestionRowMapper());
     }
 
     public Question getById(Integer questionId) {
-        QuestionRowMapper rowMapper = new QuestionRowMapper();
         String query = "SELECT Q.ID AS QUESTION_ID, Q.TITLE, Q.DESCRIPTION, " +
-                "Q.CREATED_AT, U.* FROM QUESTION Q JOIN USER U WHERE Q.USER_ID=U.ID AND Q.ID = ?";
-        return (Question) jdbcTemplate.queryForObject(query, new Object[]{questionId}, rowMapper);
+                "Q.CREATED_AT,Q.*, U.* FROM QUESTION Q JOIN USER U WHERE Q.USER_ID=U.ID AND Q.ID = ?";
+        return (Question) jdbcTemplate.queryForObject(query, new Object[]{questionId}, new QuestionRowMapper());
 
     }
 
-    public int createQuestion(Map<String, String> params) {
-        java.util.Date date= new java.util.Date();
-        Timestamp timestamp = new Timestamp(date.getTime());
+    public int createQuestion(Question question) {
 
         return jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
-                new Object[]{params.get("questionTitle"), params.get("questionDescription"), timestamp.toString(), 1});
-//        return true;
+                new Object[]{question.getTitle(), question.getDescription(), new Date(), 1});
     }
 
     public List<Question> latestQuestion(int pageNum, int pageSize) {
         int pageStart = (pageNum - 1) * pageSize;
-        QuestionRowMapper rowMapper = new QuestionRowMapper();
         String query = "SELECT Q.ID AS QUESTION_ID, Q.TITLE, Q.DESCRIPTION, "
-                + "Q.CREATED_AT, U.* FROM QUESTION Q JOIN USER U WHERE Q.USER_ID=U.ID "
+                + "Q.CREATED_AT,Q.*, U.* FROM QUESTION Q JOIN USER U WHERE Q.USER_ID=U.ID "
                 + "ORDER BY Q.CREATED_AT DESC LIMIT ?,?";
         return jdbcTemplate.query(query,
-                new Object[]{pageStart, pageSize}, rowMapper);
+                new Object[]{pageStart, pageSize}, new QuestionRowMapper());
+    }
+
+    public int getNumberOfQuestionBetweenTimes(Timestamp beginningTime, Timestamp endingTime) {
+        int numberOfQuestionInADay = 0;
+        QuestionRowMapper rowMapper = new QuestionRowMapper();
+        String query = "SELECT COUNT(ID) FROM QUESTION where CREATED_AT >= ? AND CREATED_AT <= ?";
+        numberOfQuestionInADay = jdbcTemplate.queryForInt(query,
+                new Object[]{beginningTime, endingTime});
+        return numberOfQuestionInADay;
+
+    }
+
+    public int addLikesById(Integer questionId) {
+        String query = "UPDATE QUESTION SET LIKES=LIKES+1 WHERE ID=?";
+        return jdbcTemplate.update(query, new Object[]{questionId});
+
+    }
+
+    public int addDisLikesById(Integer questionId) {
+        String query = "UPDATE QUESTION SET DISLIKES=DISLIKES+1 WHERE ID=?";
+        return jdbcTemplate.update(query, new Object[]{questionId});    }
+
+    public int addFlagsById(Integer questionId) {
+        String query = "UPDATE QUESTION SET FLAGS=FLAGS+1 WHERE ID=?";
+        return jdbcTemplate.update(query, new Object[]{questionId});
     }
 }

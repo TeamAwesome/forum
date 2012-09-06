@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
-public class HomeController {
+public class  HomeController {
 
     private QuestionService questionService;
     private Gson gson;
@@ -30,8 +29,7 @@ public class HomeController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
     public String loadMoreQuestions(@RequestParam String pageNum,
-                                    @RequestParam String pageSize,
-                                    HttpServletResponse response) {
+                                    @RequestParam String pageSize) {
         List<Question> questionList = questionService.latestQuestion(pageNum, pageSize);
         String result = gson.toJson(questionList);
         return result;
@@ -42,4 +40,5 @@ public class HomeController {
         ModelAndView homeModelAndView = new ModelAndView("home");
         return homeModelAndView;
     }
+
 }

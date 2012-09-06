@@ -1,106 +1,128 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <html>
+
 <head>
+
     <title>Forum - Your Question</title>
-    <style type="text/css">
+    <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>' />
+    <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/skin.css"/>'>
 
-
-    #wrap {
-        width:70%;
-        margin:0 auto;
-        max-width: 1260px;
-        min-width: 780px;
-        background: #fff;
-    }
-
-    #left
-    {
-        float:left;
-        width:60%;
-
-    }
-
-    #right
-    {
-        float:right;
-        width:40%;
-        position: absolute;
-        top : 20%;
-        right: 10%;
-    }
-
-
-    #questionDescription
-    {
-        border-style: solid;
-        border-width: 1px;
-        max-height:300px;
-        width: 70%;
-        overflow: auto;
-    }
-    #review
-    {
-        position: absolute;
-    }
-
-    #posted_by
-    {
-        padding-left : 3em;
-    }
-    #posted_at
-    {
-        padding-left :2em;
-    }
-    #status
-    {
-        padding-top: 3em;
-    }
-
-    #replyTextarea
-    {
-       resize: none;
-    }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/questionDetail.css"/>' />
+    <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>' />
+    <script src='<c:url value="/static/jsquery/jquery.js"/>'></script>
 
 </head>
-<body class="question">
 
-<a href="<c:url value="/"/>">Home</a>
 
-<div id ="wrap">
+<body class="yui-skin-sam">
 
-    <div id="left">
-        <h2>${questionTitle}</h2>
-      <div id="questionDescription" >
-            <p>${questionDescription}</p>
-      </div>
-       <div id = "review">
-        <button name="like">Like</button>
-        <button name="dislike">Dislike</button>
-        <button name="flag">Flag</button>
-        <p><label class="questionDetail" name="tags"> Tags:</label> ${questionTags} </p>
-        <p><label>Your Reply: </label></p>
+<div id="container">
 
-        <textarea id="replyTextarea" cols="50" rows="14" ></textarea>
-        <p><button name="submitReply">Submit</button><p>
-       </div>
+    <div id="header">
+        <%@ include file="registerHeader.jsp" %>
     </div>
 
-     <div id="right">
-        <p><label class="questionDetail" id = "posted_by" name="user" > Posted by </label> ${username} </p>
-        <p><label class="questionDetail" id = "posted_on" name="postedOn">On: </label>${dateCreatedAt}
-        &nbsp<label class="questionDetail" id = "posted_at" name="postedOn">At: </label>${timeCreatedAt}</p>
-        <p>
-        <div id = "status">
-        <label class="questionDetail" name="likes">  (${likes})likes </label>
-        <label class="questionDetail" name="dislikes">  (${dislikes})dislikes </label>
-        <label class="questionDetail" name="views">  (${views})views </label>
-        <label class="questionDetail" name="flags">  (${flags})flags </label>
-        </div>
-        </p>
-     </div>
+    <div id="content">
 
+        <div id ="leftPane" >
+
+                <div id="left">
+                    <div id="questionTitle">
+                        <h1>${questionTitle}</h1>
+                    </div>
+
+                    <div id="questionDescription" >
+                        <p>${questionDescription}</p>
+                    </div>
+
+                    <div id = "response">
+                        <input id= "likeInput" type='submit' name="like" value="Like"></input>
+                        <input id="dislikeInput" type='submit' name="dislike" value="Dislike"></input>
+                        <input id="flagInput" type='submit' name="flag" value="Flags"></input>
+                    </div>
+                    <div id="response2">
+                        </br>
+                        <p><label class="questionDetail" name="tags"> Tags:</label> ${questionTags} </p>
+
+                        <sec:authorize access="isAnonymous()">
+                            <button type="button" id="loginAndPost" onclick='javascript:window.location="/forum/login";'>Post advice</button>
+                        </sec:authorize>
+                        <sec:authorize access="isAuthenticated()">
+                            <form id="adviceForm" action="<c:url value='/postAdvice'/>" method="post">
+                                <div class="adviceDescription" >
+                                    <label class="formLabels"> Advice: </label></br>
+                                    <textarea id="descriptionEditor" name="adviceDescription" rows="20" cols="75" maxlength="500"></textarea>
+                                    <div class="validationMessage" id="descriptionValidationMessage"></div>
+                                </div>
+                                <input type="submit" value="Submit" id="submitButton"/>
+                            </form>
+                        </sec:authorize>
+                    </div>
+                </div>
+
+                <div id="right">
+                    <p><label class="questionDetail" id = "posted_by" name="user" > Posted by </label> ${username} </p>
+                    <p><label class="questionDetail" id = "posted_on" name="postedOn">On: </label>${dateCreatedAt} </p>
+                    <p><label class="questionDetail" id = "posted_at" name="postedOn">At: </label>${timeCreatedAt}</p>
+                    <p>
+                    <label id="likeCount" class="questionDetail" name="likes">  (${likes}) Likes </label>
+                    <label id="dislikeCount" class="questionDetail" name="dislikes">  (${dislikes}) Dislikes </label>
+                    <label class="questionDetail" name="views">  (${views})Views </label>
+                    <label class="questionDetail" name="responses">  (${responses})Responses </label>
+                    <label id="flagCount" class="questionDetail" name="flags">  (${flags}) Flags </label>
+                    </p>
+                </div>
+
+        </div>
+
+        <div id="rightPane">
+                <%@ include file="rightPane.jsp" %>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+    $('#likeInput').click(function(){
+        updateCounter('#likeInput', 'like', '#likeCount')
+    });
+
+    $('#dislikeInput').click(function(){
+        updateCounter('#dislikeInput', 'dislike', '#dislikeCount')
+    });
+
+    $('#flagInput').click(function(){
+        updateCounter('#flagInput', 'flag', '#flagCount')
+    });
+
+    function updateCounter(inputElement, countType, countElement) {
+        $.ajax({
+            type: "POST",
+            url: '<c:url value="/question/' + countType + '/${questionId}"/>',
+            success: function(data){
+                $(countElement).html(data);
+            },
+        }).done(function(){
+            $(inputElement).attr("disabled", true);
+        });
+    }
+
+    </script>
+
+      <script src='<c:url value="/static/javascript/yahoo-dom-event.js"/>'></script>
+      <script src='<c:url value="/static/javascript/jquery-latest.js"/>' type="text/javascript"></script>
+      <script src='<c:url value="/static/javascript/jquery-events.js"/>' type="text/javascript"></script>
+      <script type="text/javascript" src='<c:url value="/static/javascript/Advice.js"/>'></script>
+      <script src='<c:url value="/static/javascript/element-min.js"/>'></script>
+      <!-- Needed for Menus, Buttons and Overlays used in the Toolbar -->
+      <script src='<c:url value="/static/javascript/container_core-min.js"/>'></script>
+      <!-- Source file for Rich Text Editor-->
+      <script src='<c:url value="/static/javascript/editor-min.js"/>'></script>
+      <!---<script src='<c:url value="/static/javascript/simpleeditor-min.js"/>'></script> --->
+      <script src='<c:url value="/static/javascript/postAdviceValidator.js"/>'></script>
 </div>
 </body>
 </html>
+
+

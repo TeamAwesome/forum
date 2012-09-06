@@ -82,10 +82,6 @@
                 <batchtest todir="${test.report.dir}">
                     <fileset dir="@{testdir}/java">
                         <include name="**/*Test.java"/>
-                        <!--8/28/2012 - These tests are excluded as the build is red on Go and rumor has it
-                        that they are breaking the build. There will be a discussion with the team regarding the same-->
-                        <exclude name="**/ActivityWallTest.java"/>
-                        <exclude name="**/QuestionDetailedTest.java"/>
                     </fileset>
                 </batchtest>
             </junit>
@@ -109,7 +105,7 @@
 
     <target name="build" depends="clean, make-war" description="Create WAR file."/>
 
-    <target name="precommit" depends="clean, run-unit-and-integration-tests" description="Run this before committing changes."/>
+    <target name="precommit" depends="clean, coverage" description="Run this before committing changes."/>
 
     <target name="clean" description="Delete output directory.">
         <delete dir="${build.dir}"/>
@@ -133,17 +129,20 @@
 
     <target name="run-unit-tests" depends="make-jars">
         <unit-test testdir="${unit.test.dir}" classpath="common-classpath"/>
+        <antcall target="report-tests"/>
     </target>
 
     <target name="run-integration-tests" depends="make-jars, db.clean, db.update, insert-test-data">
         <unit-test testdir="${integration.test.dir}" classpath="common-classpath"/>
+        <antcall target="report-tests"/>
     </target>
 
     <target name="run-system-tests" depends="make-jars">
         <unit-test testdir="${system.test.dir}" classpath="system-classpath"/>
+        <antcall target="report-tests"/>
     </target>
 
-    <target name="report-tests" if="unit.tests.failed">
+    <target name="report-tests">
         <junitreport todir="${test.report.dir}">
             <fileset dir="${test.report.dir}" includes="TEST-*.xml"/>
             <report todir="${test.report.dir}/html"/>
@@ -194,10 +193,17 @@
     </target>
 
     <target name="run-jetty" depends="make-jars" description="Run application in Jetty.">
-        <java classname="com.forum.jetty.WebServer" classpathref="system-classpath" fork="true"
-              failonerror="true">
-            <jvmarg value="-DSTOP.PORT=8079"/>
-            <jvmarg value="-DSTOP.KEY=secret"/>
+        <java classname="com.forum.jetty.WebServer" classpathref="system-classpath" fork="true" failonerror="true" />
+    </target>
+
+    <target name="test-and-run-jetty"
+            depends="clean, run-unit-and-integration-tests"
+            description="Spring cleaning, run unit and integration tests and then application in Jetty.">
+        <java classname="com.forum.jetty.WebServer" classpathref="system-classpath" fork="true" failonerror="true" />
+    </target>
+
+    <target name="debug-jetty" depends="make-jars" description="Debug application in Jetty.">
+        <java classname="com.forum.jetty.WebServer" classpathref="system-classpath" fork="true" failonerror="true">
             <jvmarg value="-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n"/>
             <jvmarg value="-Xdebug"/>
         </java>
@@ -216,10 +222,14 @@
     <!--target for cobertura-->
     <taskdef resource="tasks.properties" classpathref="cobertura-classpath"/>
 
-    <target name="coverage" depends="instrument-cobertura, run-unit-tests, run-integration-tests, report-cobertura"
+    <target name="coverage" depends="instrument-cobertura, run-unit-and-integration-tests, report-cobertura"
             description="Calculate the percentage of code accessed by tests.">
         <cobertura-check datafile="${build.instrumented.dir}/cobertura.ser"
-                         branchrate="49" totalbranchrate="49" totallinerate="48"/>
+                         branchrate="70" totalbranchrate="59" linerate="70" totallinerate="83">
+            <regex pattern="com.forum.domain.*" branchrate="30" linerate="30"/>
+            <regex pattern="com.forum.domain.Tag" branchrate="0" linerate="0"/>
+            <regex pattern="com.forum.security.*" branchrate="0" linerate="0" />
+        </cobertura-check>
     </target>
 
     <target name="init-cobertura" depends="clean-cobertura">
@@ -229,8 +239,6 @@
     <target name="instrument-cobertura" depends="init-cobertura, make-jars">
         <cobertura-instrument todir="${build.instrumented.dir}"
                               datafile="${build.instrumented.dir}/cobertura.ser">
-            <ignore regex="org.apache.log4j.*"/>
-
             <fileset dir="${compile.dir}">
                 <include name="*.jar"/>
                 <exclude name="*-tests.jar"/>

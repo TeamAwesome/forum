@@ -2,22 +2,31 @@ package com.forum.web.controller;
 
 
 import com.forum.domain.Question;
+import com.forum.domain.User;
 import com.forum.service.QuestionService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.validation.Valid;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @Controller
 public class QuestionController {
 
     private QuestionService questionService;
+    private Logger logger = Logger.getLogger(QuestionController.class.getName());
+
 
     @Autowired
     public QuestionController(QuestionService questionService) {
@@ -25,34 +34,66 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/postQuestion", method = RequestMethod.GET)
-    public ModelAndView postQuestion() {
-        return new ModelAndView("postQuestion");
+    public String postQuestion(Map model) {
+        Question question = new Question();
+        model.put("question", question);
+        return "postQuestion";
     }
 
     @RequestMapping(value = "/showPostedQuestion", method = RequestMethod.POST)
-    public ModelAndView showPostedQuestion(@RequestParam Map<String, String> params){
-        questionService.createQuestion(params);
-        ModelAndView modelAndView = new ModelAndView("showPostedQuestion");
-        modelAndView.addObject("questionTitle",params.get("questionTitle"));
-        modelAndView.addObject("questionDescription",params.get("questionDescription"));
-        return modelAndView;
+    public String showPostedQuestion(@Valid Question question, BindingResult result, Map model){
+        if(result.hasErrors()) {
+            return "postQuestion";
+        }
+
+        questionService.createQuestion(question);
+        List latestQuestionList = questionService.latestQuestion("1","1");
+        Question latestQuestion = (Question)latestQuestionList.get(0);
+        Integer questionId = latestQuestion.getId();
+
+        return "redirect:/question/view/" + questionId;
     }
 
     @RequestMapping(value = "/question/view/{questionId}", method = RequestMethod.GET)
     public ModelAndView viewQuestionDetail(@PathVariable Integer questionId) {
         Question question = questionService.getById(questionId);
         ModelAndView modelAndView = new ModelAndView("questionDetail");
+        modelAndView.addObject("questionId", question.getId());
         modelAndView.addObject("questionTitle", question.getTitle());
         modelAndView.addObject("questionDescription", question.getDescription());
         modelAndView.addObject("username", question.getUser().getName());
-        modelAndView.addObject("dateCreatedAt", new SimpleDateFormat("dd/MM/yyyy").format(question.getCreatedAt()));
-        modelAndView.addObject("timeCreatedAt", new SimpleDateFormat("kk:mm:ss").format(question.getCreatedAt()));
+        modelAndView.addObject("dateCreatedAt", new SimpleDateFormat("MMMM dd,yyyy").format(question.getCreatedAt()));
+        modelAndView.addObject("timeCreatedAt", new SimpleDateFormat("hh:mm:ss a").format(question.getCreatedAt()));
         modelAndView.addObject("likes", question.getLikes());
         modelAndView.addObject("dislikes", question.getDislikes());
         modelAndView.addObject("views", question.getViews());
         modelAndView.addObject("flags", question.getFlags());
-
-
+        modelAndView.addObject("responses", question.getResponses());
         return modelAndView;
     }
+
+    @RequestMapping(value = "/question/like/{questionId}", method = RequestMethod.POST)
+    @ResponseBody
+    public String likeQuestion(@PathVariable Integer questionId, @RequestParam Map<String, Integer> params) {
+        questionService.addLikesById(questionId);
+        Question question = questionService.getById(questionId);
+        return "(" + question.getLikes() + ") Likes";
+    }
+
+    @RequestMapping(value = "/question/dislike/{questionId}", method = RequestMethod.POST)
+    @ResponseBody
+    public String dislikeQuestion(@PathVariable Integer questionId, @RequestParam Map<String, Integer> params) {
+        questionService.addDisLikesById(questionId);
+        Question question = questionService.getById(questionId);
+        return "(" + question.getDislikes() + ") Dislikes";
+    }
+
+    @RequestMapping(value = "/question/flag/{questionId}", method = RequestMethod.POST)
+    @ResponseBody
+    public String flagQuestion(@PathVariable Integer questionId, @RequestParam Map<String, Integer> params) {
+        questionService.addFlagsByID(questionId);
+        Question question = questionService.getById(questionId);
+        return "(" + question.getFlags() + ") Flags";
+    }
+
 }

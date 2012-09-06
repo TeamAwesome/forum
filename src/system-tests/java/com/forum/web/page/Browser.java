@@ -6,8 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Browser {
 
@@ -18,12 +21,13 @@ public class Browser {
     public Browser(String hostAddress, boolean testWithFirefox) {
         this.hostAddress = hostAddress;
         if (testWithFirefox) {
-            this.driver = (WebDriver) new FirefoxDriver();
+            this.driver = new FirefoxDriver();
             this.javascriptEnabled = true;
         } else {
             this.driver = new HtmlUnitDriver();
             this.javascriptEnabled = false;
         }
+        this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     public Browser open(String url) {
@@ -75,4 +79,8 @@ public class Browser {
         }
     }
 
+    public WebElement waitFor(ExpectedCondition<WebElement> expectedCondition) {
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        return wait.until(expectedCondition);
+    }
 }

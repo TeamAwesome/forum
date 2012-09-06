@@ -16,33 +16,38 @@ import java.util.Map;
 
 @Controller
 public class UserController {
+    public static final String COUNTRIES = "countries";
+    public static final String USER = "user";
+    public static final String JOIN = "join";
+    public static final String HOME_PAGE = "redirect:";
     private UserService userService;
     private List<Country> countries;
 
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService) {
         this.userService = userService;
         countries = userService.getAvailableCountries();
     }
 
-    @RequestMapping(value = "/join",method = RequestMethod.GET)
+    @RequestMapping(value = "/join", method = RequestMethod.GET)
     public String showRegistrationForm(Map model) {
         User user = new User();
-        model.put("user", user);
-        model.put("countries", countries);
-        return "join";
+        model.put(USER, user);
+        model.put(COUNTRIES, countries);
+        return JOIN;
     }
 
     @RequestMapping(value = "/join", method = RequestMethod.POST)
-    public String processRegistrationForm(@Valid User user,  BindingResult result, Map model) {
-        model.put("countries", countries);
+    public String processRegistrationForm(@Valid User user, BindingResult result, Map model) {
+        model.put(COUNTRIES, countries);
 
         if (result.hasErrors()) {
-            return "join";
+            return JOIN;
         }
 
-        model.put("user", user);
+        model.put(USER, user);
+        userService.createUser((User) model.get(UserController.USER));
 
-        return "showProfile";
+        return HOME_PAGE;
     }
 }

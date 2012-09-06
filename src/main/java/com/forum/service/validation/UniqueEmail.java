@@ -20,7 +20,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @ReportAsSingleViolation
 @NotNull
 public @interface UniqueEmail {
-    String message() default "Email is used.";
+    String message() default "Email is already in use.";
 
     Class<?>[] groups() default {};
 

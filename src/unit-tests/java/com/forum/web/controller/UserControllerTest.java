@@ -1,44 +1,83 @@
 package com.forum.web.controller;
 
+import com.forum.domain.User;
 import com.forum.service.UserService;
+import org.junit.Before;
 import org.junit.Test;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.validation.BindingResult;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class UserControllerTest {
 
+    private UserService userService;
+    private UserController userController;
+
+    @Before
+    public void setupUserController(){
+        userService = mock(UserService.class);
+        userController = new UserController(userService);
+    }
 
     @Test
     public void shouldNavigateToJoinPage() {
-        UserService userService = mock(UserService.class);
-        UserController userController = new UserController(userService);
         Map map = new HashMap();
+
         String activityModelAndView = userController.showRegistrationForm(map);
 
         //Then
-        assertThat(activityModelAndView, is("join"));
-}
+        assertThat((User)map.get(UserController.USER), is(new User()));
+        assertTrue(map.containsKey(UserController.COUNTRIES));
+        assertThat(activityModelAndView, is(UserController.JOIN));
 
-//    @Test
-//    public void shouldGetUsername(){
-//        //Given
-//        UserController userController = new UserController();
-//        Map<String, String> params = new HashMap<String, String>();
-//        params.put("username", "Tester");
-//        String testUsername = "";
-//        //When
-//        testUsername = userController.;
-//        //Then
-//        assertThat(testUsername, is("Tester"));
-//
-//    }
+    }
 
+    @Test
+    public void shouldRejectInvalidUser(){
+        BindingResult mockBindingResult = mock(BindingResult.class);
+        when(mockBindingResult.hasErrors()).thenReturn(true);
+        Map map = new HashMap();
+
+        String activityModelAndView =userController.processRegistrationForm(new User(), mockBindingResult, map);
+
+        assertTrue(map.containsKey(UserController.COUNTRIES));
+        assertThat(activityModelAndView, is(UserController.JOIN));
+    }
+
+
+    @Test
+    public void shouldShowProfile(){
+        BindingResult mockBindingResult = mock(BindingResult.class);
+        when(mockBindingResult.hasErrors()).thenReturn(false);
+        Map map = new HashMap();
+
+        String activityModelAndView =userController.processRegistrationForm(new User(), mockBindingResult, map);
+
+        assertThat((User)map.get(UserController.USER), is(new User()));
+        assertTrue(map.containsKey(UserController.COUNTRIES));
+        assertThat(activityModelAndView, is(UserController.HOME_PAGE));
+    }
+
+    @Test
+    public void shouldSaveUserProfile(){
+        BindingResult mockBindingResult = mock(BindingResult.class);
+        when(mockBindingResult.hasErrors()).thenReturn(false);
+        Map map = new HashMap();
+        when(userService.createUser((User)map.get("user"))).thenReturn(42);
+        User user = new User("a  ","asdf ","asdf","asdf","asdf","asdf","asdf",0,false);
+
+        userController.processRegistrationForm(user, mockBindingResult, map);
+
+        verify(userService).createUser((User)map.get("user"));
+    }
 
 
 }

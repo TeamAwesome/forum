@@ -1,9 +1,14 @@
 package com.forum.service;
 
 import com.forum.domain.Country;
+import com.forum.domain.Privilege;
 import com.forum.domain.User;
 import com.forum.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
@@ -12,7 +17,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private UserRepository userRepository;
 
@@ -28,7 +33,7 @@ public class UserService {
     public List<Country> getAvailableCountries() {
         List<Country> countries = new ArrayList<Country>();
         Scanner scanner = null;
-        InputStream countriesInputStream = UserService.class.getClassLoader().getResourceAsStream("countries");
+        InputStream countriesInputStream = UserService.class.getClassLoader().getResourceAsStream("countries.txt");
         scanner = new Scanner(countriesInputStream);
         while (scanner.hasNextLine()) {
             String string = scanner.nextLine();
@@ -49,5 +54,34 @@ public class UserService {
         if(userRepository.getByEmail(email) == null)
             return false;
         return true;
+    }
+
+    public void validate(User user) throws BadCredentialsException{
+        if(userRepository.getByUsername(user.getUsername()) == null) throw new BadCredentialsException("The user name is invalid");
+        String passwordFromDatabase = userRepository.getPasswordByUsername(user.getUsername());
+        if(!((passwordFromDatabase).equals(user.getPassword()))) throw new BadCredentialsException("The password is incorrect");
+    }
+
+
+    public int createUser(User user) throws  RuntimeException {
+        int expectedRowCount = user.getExpectedRowCount();
+        int actualRowCount = userRepository.createUser(user);
+
+        if ( actualRowCount != expectedRowCount)
+            throw new RuntimeException(
+                    "user object has not been fully stored in the database, user is " + user.toString()
+            );
+
+        return actualRowCount;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public Privilege getRole(User user) {
+        int privilege =  userRepository.getUserPrivilege(user);
+        return Privilege.getPrivilege(privilege);
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class StaticController {
 
     @RequestMapping("/terms")
-    public ModelAndView registerView() {
+    public ModelAndView registerTerms() {
         return new ModelAndView("terms");
     }
 }

@@ -14,9 +14,11 @@ public class AgeRangeValidator implements ConstraintValidator<Age,Integer> {
     }
 
     @Override
-    public boolean isValid(Integer integer, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(Integer ageRangeCode, ConstraintValidatorContext constraintValidatorContext) {
+        if(ageRangeCode==null)
+            return false;
         try {
-            AgeRange.getAgeRange(integer);
+            AgeRange.getAgeRange(ageRangeCode);
             return true;
         } catch (IllegalArgumentException e) {
             return false;
