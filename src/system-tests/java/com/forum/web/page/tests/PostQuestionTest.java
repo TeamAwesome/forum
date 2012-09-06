@@ -20,12 +20,28 @@ public class PostQuestionTest {
     @Before
     public void setUp() throws Exception {
         driver = new FirefoxDriver();
-        driver.get("http://localhost:8080/app/postQuestion");
+        driver.get("http://localhost:8080/forum");
     }
 
     @After
     public void closeBrowser() {
         driver.close();
+    }
+
+    @Test
+    public void shouldGoThroughPostQuestion() {
+        WebElement login = driver.findElement(By.linkText("Login"));
+        login.click();
+        WebElement loginUsername = driver.findElement(By.name("j_username"));
+        loginUsername.sendKeys("Stephanie");
+        WebElement loginPassword = driver.findElement(By.name("j_password"));
+        loginPassword.sendKeys("Stephanie");
+        WebElement submit = driver.findElement(By.name("submit"));
+        submit.click();
+        WebElement postQuestion = driver.findElement(By.linkText("Post Question"));
+        postQuestion.click();
+        assertThat(driver.getCurrentUrl(), is("http://localhost:8080/forum/postQuestion"));
+        assertTrue(driver.findElement(By.id("questionTitle")).isDisplayed());
     }
 
     @Test
