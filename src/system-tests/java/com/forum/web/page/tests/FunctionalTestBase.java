@@ -14,7 +14,7 @@ public class FunctionalTestBase {
 
     @Before
     public void initializeWebDriver() {
-        browser = new Browser("http://10.10.5.107:8080/forum", true);
+        browser = new Browser("http://localhost:8080/forum", true);
         browser.open("/");
     }
 
