@@ -31,6 +31,8 @@ public class Question implements Serializable {
     public Question() {
     }
 
+    private List<TagLabel> tags;
+
     public Question(int id, String title, String description, User user, Date createdAt) {
         this.id = id;
         this.title = title;
@@ -57,8 +59,23 @@ public class Question implements Serializable {
         this.flags = flags;
     }
 
+    public Question(int id, String title, String description, User user, Date createdAt, int likes, int disLikes, int flags , List<TagLabel> tags) {
+        this.id = id;
+        this.title = title;
+        this.user = user;
+        this.createdAt = createdAt;
+        this.description = description;
+        this.likes = likes;
+        this.dislikes = disLikes;
+        this.flags = flags;
+        this.tags = tags;
+    }
     public String getTitle() {
         return title;
+    }
+
+    public List<TagLabel> getTags() {
+        return tags;
     }
 
     public Date getCreatedAt() {

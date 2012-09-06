@@ -43,8 +43,8 @@
 			.autocomplete({
 				minLength: 2,
 				source: function( request, response ) {
-					// delegate back to autocomplete, but extract the last term
-					$.getJSON("http://localhost:8080/forum/postQuestion/getTagsByTerm/"+"hello", {}, response);
+					// delegate back to autocomplete, but extract the last  term
+					$.getJSON("http://localhost:8080/forum/postQuestion/getTagsByTerm/"+extractLast($('#questionTags').val()), {}, response);
                         },
 				focus: function() {
 					// prevent value inserted on focus

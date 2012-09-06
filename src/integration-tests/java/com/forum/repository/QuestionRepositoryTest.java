@@ -129,6 +129,15 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
         QuestionRepository questionRepository = new QuestionRepository(dataSource);
         assertThat(questionRepository.addFlagsById(questionID), is(1));
     }
+    @Test
+    public  void shouldCreateRowQuestion(){
+        QuestionRepository questionRepository = new QuestionRepository(dataSource);
+        User user=new User();
+        user.setUsername("Silly");
+        user.setId(42);
+        Question question =new Question(12,"where","where are you",user,new Date());
+        assertThat(questionRepository.createQuestion(question),is(1));
+    }
 
 
 }

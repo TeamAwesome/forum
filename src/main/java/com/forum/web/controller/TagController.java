@@ -1,5 +1,6 @@
 package com.forum.web.controller;
 
+import com.forum.domain.TagLabel;
 import com.forum.service.TagService;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
@@ -25,9 +26,7 @@ public class TagController {
     @ResponseBody
     public String getTagsByTerm(@PathVariable String term) {
 
-        List<String> listOfTags = new ArrayList<String>();
-        listOfTags.add("Bangalore");
-        listOfTags.add("galore");
+        List<TagLabel> listOfTags = tagService.getTagsByTerm(term);
 
         Gson json = new Gson();
         return json.toJson(listOfTags);

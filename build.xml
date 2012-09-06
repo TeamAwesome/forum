@@ -167,7 +167,7 @@
     <target name="make-war" depends="make-jars,setup-app-properties">
         <mkdir dir="${dist.dir}"/>
         <mkdir dir="${dist.dir}/webapp"/>
-        <war destfile="${dist.dir}/${ant.project.name}.war" webxml="${src.dir}/webapp/WEB-INF/web.xml">
+        <war destfile="${dist.dir}/${ant.project.value}.war" webxml="${src.dir}/webapp/WEB-INF/web.xml">
             <classes dir="${dist.dir}/classes"/>
             <classes dir="${src.dir}/resources"/>
             <webinf dir="${src.dir}/deployment">
@@ -185,11 +185,11 @@
 
     <target name="make-zip" depends="make-war">
         <mkdir dir="${dist.dir}"/>
-        <zip destfile="${dist.dir}/${ant.project.name}.zip">
+        <zip destfile="${dist.dir}/${ant.project.value}.zip">
             <fileset dir="${dist.dir}" includes="*.war"/>
             <fileset dir="${src.dir}/deployment/env"/>
         </zip>
-        <checksum file="${dist.dir}/${ant.project.name}.zip"/>
+        <checksum file="${dist.dir}/${ant.project.value}.zip"/>
     </target>
 
     <target name="run-jetty" depends="make-jars" description="Run application in Jetty.">
@@ -211,8 +211,8 @@
 
     <target name="package-src" description="Create zip of the source code for distribution.">
         <mkdir dir="${dist.dir}"/>
-        <zip basedir="${basedir}" destfile="${dist.dir}/${ant.project.name}-src.zip"/>
-        <checksum file="${dist.dir}/${ant.project.name}-src.zip"/>
+        <zip basedir="${basedir}" destfile="${dist.dir}/${ant.project.value}-src.zip"/>
+        <checksum file="${dist.dir}/${ant.project.value}-src.zip"/>
     </target>
 
     <target name="get-build-number" unless="build.number">
