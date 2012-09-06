@@ -1,12 +1,72 @@
 package com.forum.domain;
 
+import com.forum.service.validation.ContentLength;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.util.Date;
 
 public class Advice {
+    private int id;
     private int questionId;
     private Date createdAt;
     private User user;
+    @NotEmpty
+    @ContentLength
     private String description;
+
+    public Advice() {
+
+    }
+
+    public Advice(int questionId, User user, String description) {
+        this.questionId = questionId;
+        this.createdAt = createdAt;
+        this.user = user;
+        this.description = description;
+
+    }
+
+    public int getQuestionId() {
+        return questionId;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
+    }
+
+    public Date getCreatedAt() {
+
+        return createdAt;
+    }
+
+    public User getUser() {
+
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -30,13 +90,5 @@ public class Advice {
         result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
-    }
-
-    public Advice(int questionId, User user, String description) {
-        this.questionId = questionId;
-        this.createdAt = createdAt;
-        this.user = user;
-        this.description = description;
-
     }
 }

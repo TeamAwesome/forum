@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 
 <html>
 
@@ -50,14 +52,18 @@
                             <button type="button" id="loginAndPost" onclick='javascript:window.location="/forum/login";'>Post advice</button>
                         </sec:authorize>
                         <sec:authorize access="isAuthenticated()">
-                            <form id="adviceForm" action="<c:url value='/postAdvice'/>" method="post">
+                            <form:form method="post" action="../../postAdvice" commandName="advice" id="adviceForm">
                                 <div class="adviceDescription" >
                                     <label class="formLabels"> Advice: </label></br>
-                                    <textarea id="descriptionEditor" name="adviceDescription" rows="20" cols="75" maxlength="500"></textarea>
-                                    <div class="validationMessage" id="descriptionValidationMessage"></div>
+                                    <form:textarea path="description" id="descriptionEditor" name="adviceDescription" rows="20" cols="75" maxlength="500"></form:textarea>
+                                    <div class="validationMessage" id="descriptionValidationMessage">
+                                        <form:errors path="description" class="errorMsg" id="descriptionMsg" />
+                                    </div>
+                                    <form:hidden path="questionId" id="questionId" value="${questionId}" />
+                                    <form:hidden path="user" id="user" value="${user}" />
                                 </div>
-                                <input type="submit" value="Submit" id="submitButton"/>
-                            </form>
+                                <input type="submit" value="Submit" id="submitButton" />
+                            </form:form>
                         </sec:authorize>
                     </div>
                 </div>

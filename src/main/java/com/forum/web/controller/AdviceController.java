@@ -3,31 +3,45 @@ package com.forum.web.controller;
 import com.forum.domain.Advice;
 import com.forum.domain.User;
 import com.forum.service.AdviceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
+@Controller
 public class AdviceController {
     public static final String USERNAME = "username";
     public static final String DESCRIPTION = "description";
     private AdviceService adviceService;
-    public static final String SHOW_QUESTION_DETAILS = "/question/view/";
+    public static final String SHOW_QUESTION_DETAILS = "question/view/";
     public static final String ERROR_PAGE = "500";
     public static final String QUESTION_ID = "questionId";
 
+    @Autowired
     public AdviceController(AdviceService adviceService) {
         this.adviceService = adviceService;
     }
 
-    public String saveAdvice(Map model) {
-        User user = new User();
-        user.setUsername((String) model.get(USERNAME));
-        Advice advice = new Advice(Integer.parseInt((String) model.get(QUESTION_ID)), user, (String) model.get(DESCRIPTION));
-        boolean succeed = adviceService.save(advice);
-        if (succeed) {
-            return SHOW_QUESTION_DETAILS + model.get(QUESTION_ID);
+    @RequestMapping(value = "/postAdvice", method = RequestMethod.POST)
+    public String saveAdvice(@Valid Advice advice, BindingResult result, Map model)  {
+        if (result.hasErrors()) {
+            return "redirect:" + SHOW_QUESTION_DETAILS + advice.getQuestionId();
         } else {
-            return ERROR_PAGE;
+            advice.setCreatedAt(new Date());
+            boolean succeed = adviceService.save(advice);
+            if (succeed) {
+                return "redirect:" + SHOW_QUESTION_DETAILS + advice.getQuestionId();
+            } else {
+                return "redirect:" + ERROR_PAGE;
+            }
         }
     }
+
 }

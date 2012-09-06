@@ -1,6 +1,7 @@
 package com.forum.web.controller;
 
 
+import com.forum.domain.Advice;
 import com.forum.domain.Question;
 import com.forum.domain.User;
 import com.forum.service.QuestionService;
@@ -69,6 +70,9 @@ public class QuestionController {
         modelAndView.addObject("views", question.getViews());
         modelAndView.addObject("flags", question.getFlags());
         modelAndView.addObject("responses", question.getResponses());
+        modelAndView.addObject("user", question.getUser());
+        Advice advice = new Advice(0, question.getUser(), "");
+        modelAndView.addObject("advice", advice);
         return modelAndView;
     }
 
