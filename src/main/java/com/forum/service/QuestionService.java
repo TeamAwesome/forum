@@ -25,7 +25,7 @@ public class QuestionService {
     }
 
     public int createQuestion(Question question) {
-        List<TagLabel> tags=question.getTags();
+//        List<TagLabel> tags=question.getTags();
         return questionRepository.createQuestion(question);
     }
 

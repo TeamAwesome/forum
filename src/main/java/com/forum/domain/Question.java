@@ -26,7 +26,6 @@ public class Question implements Serializable {
     private int dislikes;
     private int flags;
     private int views;
-    private ArrayList<Tag> tags = new ArrayList<Tag>();
 
     public Question() {
     }
@@ -39,6 +38,7 @@ public class Question implements Serializable {
         this.user = user;
         this.createdAt = createdAt;
         this.description = description;
+        tags = new ArrayList<TagLabel>();
     }
 
     public Question(String title, String description, User user, Date createdAt) {
@@ -46,6 +46,7 @@ public class Question implements Serializable {
         this.user = user;
         this.createdAt = createdAt;
         this.description = description;
+        tags = new ArrayList<TagLabel>();
     }
 
     public Question(int id, String title, String description, User user, Date createdAt, int likes, int disLikes, int flags) {
@@ -57,6 +58,7 @@ public class Question implements Serializable {
         this.likes = likes;
         this.dislikes = disLikes;
         this.flags = flags;
+        tags = new ArrayList<TagLabel>();
     }
 
     public Question(int id, String title, String description, User user, Date createdAt, int likes, int disLikes, int flags , List<TagLabel> tags) {
@@ -69,14 +71,12 @@ public class Question implements Serializable {
         this.dislikes = disLikes;
         this.flags = flags;
         this.tags = tags;
+        this.tags = new ArrayList<TagLabel>();
     }
     public String getTitle() {
         return title;
     }
 
-    public List<TagLabel> getTags() {
-        return tags;
-    }
 
     public Date getCreatedAt() {
         return createdAt;
@@ -88,10 +88,6 @@ public class Question implements Serializable {
 
     public User getUser() {
         return user;
-    }
-
-    public List<Tag> getTags() {
-        return tags;
     }
 
     public int getLikes() {
@@ -108,10 +104,6 @@ public class Question implements Serializable {
 
     public int getFlags() {
         return flags;
-    }
-
-    public void setTags(String tags) {
-        this.tags.add(new Tag(tags));
     }
 
     public void setTitle(String title) {
