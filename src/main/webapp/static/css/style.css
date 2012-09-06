@@ -116,6 +116,7 @@
     }
 
     table td {
+      float:left;
       width:30%;
       text-align:left;
 
