@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -26,6 +25,11 @@ public class ActivityWallTest extends FunctionalTestBase {
         List<WebElement> questions = activityWall.findElements(By.className("questionTitle"));
         assertThat(questions.size(), is(10));
         loadMore.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
         questions = activityWall.findElements(By.className("questionTitle"));
         assertThat(questions.size(), is(20));
     }
