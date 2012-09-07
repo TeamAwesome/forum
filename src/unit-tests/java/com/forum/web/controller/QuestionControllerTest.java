@@ -4,10 +4,12 @@ package com.forum.web.controller;
 import com.forum.domain.Question;
 import com.forum.domain.User;
 import com.forum.service.QuestionService;
+import com.forum.service.UserService;
 import org.junit.Test;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -19,10 +21,11 @@ import static org.mockito.Mockito.when;
 public class QuestionControllerTest {
 
     private QuestionController questionController;
+    private Principal principal;
 
     @Test
     public void shouldShowPostQuestionPage() {
-        this.questionController = new QuestionController(null);
+        this.questionController = new QuestionController(null, null);
         String questionView = questionController.postQuestion(new HashMap());
         assertThat(questionView, is("postQuestion"));
     }
@@ -30,19 +33,24 @@ public class QuestionControllerTest {
     @Test
     public void shouldReturnPostedQuestion() {
         QuestionService mockedQuestionService = mock(QuestionService.class);
-        Question question = new Question(1, "Question Title", "Question Description", new User(), new Date());
+        UserService mockedUserService = mock(UserService.class);
+        User user = new User();
+        user.setUsername("lu");
+        Principal principalMock = mock(Principal.class);
+        when(principalMock.getName()).thenReturn(user.getUsername());
+        Question question = new Question(1, "Question Title", "Question Description", user, new Date());
         List<Question> questionList = new LinkedList<Question>();
         questionList.add(question);
         when(mockedQuestionService.latestQuestion("1", "1")).thenReturn(questionList);
         when(mockedQuestionService.getById(1)).thenReturn(question);
 
         mockedQuestionService.createQuestion(question);
-        this.questionController = new QuestionController(mockedQuestionService);
+        this.questionController = new QuestionController(mockedQuestionService, mockedUserService);
 
         BindingResult result = mock(BindingResult.class);
         when(result.hasErrors()).thenReturn(false);
 
-        String questionView = questionController.showPostedQuestion(question, result, new HashMap());
+        String questionView = questionController.showPostedQuestion(question, result, new HashMap(), principalMock);
 
         assertThat(questionView, is("redirect:/question/view/" + question.getId()));
     }
@@ -53,12 +61,12 @@ public class QuestionControllerTest {
         Date createdAt = new Date();
         Question question = new Question(1, "Question Title", "Question Description", new User(), createdAt);
 
-        this.questionController = new QuestionController(mockedQuestionService);
+        this.questionController = new QuestionController(mockedQuestionService, null);
 
         BindingResult result = mock(BindingResult.class);
         when(result.hasErrors()).thenReturn(true);
 
-        String questionView = questionController.showPostedQuestion(question, result, new HashMap());
+        String questionView = questionController.showPostedQuestion(question, result, new HashMap(), principal);
 
         assertThat(questionView, is("postQuestion"));
     }
@@ -72,7 +80,7 @@ public class QuestionControllerTest {
         Date createdAt = new Date();
         Question question = new Question(42, "model question title", "model question description", user, createdAt);
         when(questionService.getById(42)).thenReturn(question);
-        this.questionController = new QuestionController(questionService);
+        this.questionController = new QuestionController(questionService, null);
 
         modelAndView = questionController.viewQuestionDetail(42);
         String questionTitle = (String) modelAndView.getModel().get("questionTitle");
@@ -98,7 +106,7 @@ public class QuestionControllerTest {
         Date createdAt = new Date();
         Question question = new Question(100, "model question title", "model question description", user, createdAt, 10, 10, 10);
         when(questionService.getById(100)).thenReturn(question);
-        this.questionController = new QuestionController(questionService);
+        this.questionController = new QuestionController(questionService, null);
 
         modelAndView = questionController.viewQuestionDetail(100);
         Integer questionLikes = (Integer) modelAndView.getModel().get("likes");
@@ -159,7 +167,7 @@ public class QuestionControllerTest {
                 dislikes + 1,
                 flags + 1);
         when(questionService.getById(24)).thenReturn(question);
-        this.questionController = new QuestionController(questionService);
+        this.questionController = new QuestionController(questionService, null);
     }
 
 }

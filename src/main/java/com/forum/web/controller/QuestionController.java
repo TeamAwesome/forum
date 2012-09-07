@@ -3,7 +3,9 @@ package com.forum.web.controller;
 
 import com.forum.domain.Advice;
 import com.forum.domain.Question;
+import com.forum.domain.User;
 import com.forum.service.QuestionService;
+import com.forum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -11,7 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.security.Principal;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -20,12 +25,13 @@ import java.util.logging.Logger;
 public class QuestionController {
 
     private QuestionService questionService;
-    private Logger logger = Logger.getLogger(QuestionController.class.getName());
+    private UserService userService;
 
 
     @Autowired
-    public QuestionController(QuestionService questionService) {
+    public QuestionController(QuestionService questionService, UserService userService) {
         this.questionService = questionService;
+        this.userService = userService;
     }
 
     @RequestMapping(value = "/postQuestion", method = RequestMethod.GET)
@@ -36,18 +42,17 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/showPostedQuestion", method = RequestMethod.POST)
-    public String showPostedQuestion(@Valid Question question, BindingResult result, Map model){
-
-        logger.info("question = " + question.toString());
-        logger.info("result = " + result.toString());
-        logger.info("model = " + model.toString());
-
+    public String showPostedQuestion(@Valid Question question, BindingResult result, Map model, Principal principal){
         if(result.hasErrors()) {
             return "postQuestion";
         }
+        String username = principal.getName();
+
+        User user = userService.getByUserName(username);
+        question.setUser(user);
 
         questionService.createQuestion(question);
-        List latestQuestionList = questionService.latestQuestion("1","1");
+        List latestQuestionList = questionService.latestQuestion("1", "1");
         Question latestQuestion = (Question)latestQuestionList.get(0);
         Integer questionId = latestQuestion.getId();
 

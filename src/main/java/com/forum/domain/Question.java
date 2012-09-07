@@ -31,6 +31,7 @@ public class Question implements Serializable {
     private int likes;
     private int dislikes;
     private int flags;
+
     private int views;
 
     @NotBlank(message = "A question must have at least one tag.")
@@ -39,9 +40,10 @@ public class Question implements Serializable {
     private String tagsAsString;
 
     private List<Advice> advices;
-
     public Question() {
     }
+
+    private List<Tag> tags;
 
     public Question(int id, String title, String description, User user, Date createdAt) {
         this.id = id;
@@ -87,18 +89,18 @@ public class Question implements Serializable {
         this.tagsAsString = tagsAsString;
         logger.info("a question with stats and tags has been created");
     }
+
     public String getTitle() {
         return title;
     }
 
-
     public Date getCreatedAt() {
         return createdAt;
     }
-
     public String getDescription() {
         return description;
     }
+
 
     public User getUser() {
         return user;
@@ -185,5 +187,8 @@ public class Question implements Serializable {
                 ", advices=" + advices +
                 '}';
     }
-}
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+}

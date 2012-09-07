@@ -42,7 +42,7 @@ public class    QuestionRepository {
         logger.info("question is " + question.toString());
 
         int result =  jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
-                new Object[]{question.getTitle(), question.getDescription(), new Date(), 1});
+                new Object[]{question.getTitle(), question.getDescription(), new Date(), question.getUser().getId()});
 
         for (Tag tag : question.getTags()){
             String query = "";
