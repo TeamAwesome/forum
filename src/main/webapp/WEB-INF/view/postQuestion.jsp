@@ -32,8 +32,8 @@
                 <div class="questionTitle">
                     <label class="formLabels"> Title: </label>
                     <form:input path="title" name="questionTitle" id="questionTitle" maxlength="100"/>
-                    <div class="validationMessage" id="titleValidationMessage"></div>
                     <form:errors path="title" class="errorMsg" id="titleMsg"/>
+                    <div class="validationMessage" id="titleValidationMessage"></div>
                 </div>
 
                 <div class="questionDescription" >

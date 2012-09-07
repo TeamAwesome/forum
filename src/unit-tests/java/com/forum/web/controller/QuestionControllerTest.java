@@ -83,7 +83,7 @@ public class QuestionControllerTest {
 
         assertThat(questionTitle, is("model question title"));
         assertThat(questionDescription, is("model question description"));
-        assertThat(questionDate, is(new SimpleDateFormat("MMMM dd,yyyy").format(createdAt)));
+        assertThat(questionDate, is(new SimpleDateFormat("MMMM dd, yyyy").format(createdAt)));
         assertThat(questionTime, is(new SimpleDateFormat("hh:mm:ss a").format(createdAt)));
         assertThat(questionUserName, is(user.getName()));
 

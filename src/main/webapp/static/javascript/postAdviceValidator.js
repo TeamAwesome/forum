@@ -5,7 +5,7 @@ $(this).load(function(){
 var createYUIEditor = function() {
     var descriptionEditorConfig = {
       height: '280px',
-      width: '580px'
+      width: '560px'
     };
 
     return new YAHOO.widget.Editor('descriptionEditor', descriptionEditorConfig);

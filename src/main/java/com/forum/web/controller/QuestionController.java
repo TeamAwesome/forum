@@ -62,15 +62,17 @@ public class QuestionController {
         modelAndView.addObject("questionTitle", question.getTitle());
         modelAndView.addObject("questionDescription", question.getDescription());
         modelAndView.addObject("username", question.getUser().getName());
-        modelAndView.addObject("dateCreatedAt", new SimpleDateFormat("MMMM dd,yyyy").format(question.getCreatedAt()));
+        modelAndView.addObject("dateCreatedAt", new SimpleDateFormat("MMMM dd, yyyy").format(question.getCreatedAt()));
         modelAndView.addObject("timeCreatedAt", new SimpleDateFormat("hh:mm:ss a").format(question.getCreatedAt()));
         modelAndView.addObject("likes", question.getLikes());
         modelAndView.addObject("dislikes", question.getDislikes());
         modelAndView.addObject("views", question.getViews());
         modelAndView.addObject("flags", question.getFlags());
         modelAndView.addObject("responses", question.getResponses());
-        modelAndView.addObject("user", question.getUser());
-        Advice advice = new Advice(0, question.getUser(), "");
+        if(question.getAdvices() != null){
+            modelAndView.addObject("advices", question.getAdvices());
+        }
+        Advice advice = new Advice(0, null, "");
         modelAndView.addObject("advice", advice);
         return modelAndView;
     }

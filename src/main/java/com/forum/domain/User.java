@@ -1,16 +1,20 @@
 package com.forum.domain;
 
 
-import com.forum.service.validation.*;
+import com.forum.service.validation.Age;
+import com.forum.service.validation.PhoneNumber;
+import com.forum.service.validation.UniqueEmail;
+import com.forum.service.validation.UniqueUsername;
 import com.forum.util.Encrypter;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
 
     private Encrypter encrypter;
 

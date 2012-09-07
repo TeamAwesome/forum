@@ -3,9 +3,11 @@ package com.forum.web.controller;
 import com.forum.domain.Advice;
 import com.forum.domain.User;
 import com.forum.service.AdviceService;
+import com.forum.service.UserService;
 import org.junit.Test;
 import org.springframework.validation.BindingResult;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,16 +27,20 @@ public class AdviceControllerTest {
         Map<String, String> model = new HashMap<String, String>();
         String username = "Jules";
         String description = "This is an advice for question 20";
-        User user = new User();
-        user.setUsername(username);
-        Advice advice = new Advice(20,  user, description);
+        Advice advice = new Advice(20,  null, description);
+        UserService userService = mock(UserService.class);
         mockAdviceService = mock(AdviceService.class);
         when(mockAdviceService.save(advice)).thenReturn(1);
         adviceController = new AdviceController(mockAdviceService);
+        adviceController.setUserService(userService);
         BindingResult mockBindingResult = mock(BindingResult.class);
         when(mockBindingResult.hasErrors()).thenReturn(false);
 
-        String url = adviceController.saveAdvice(advice, mockBindingResult, model);
+        Principal mockPrincipal = mock(Principal.class);
+        when(mockPrincipal.getName()).thenReturn(username);
+        when(userService.getByUserName("Jules")).thenReturn(new User());
+
+        String url = adviceController.saveAdvice(advice, mockBindingResult, model, mockPrincipal);
 
         assertThat(url, is("redirect:"+AdviceController.SHOW_QUESTION_DETAILS+"20"));
     }
@@ -44,17 +50,20 @@ public class AdviceControllerTest {
         Map<String, String> model = new HashMap<String, String>();
         String username = "Jules";
         String description = "This is an advice for question 20";
-        User user = new User();
-        user.setUsername(username);
-        Advice advice = new Advice(20,  user, description);
+        Advice advice = new Advice(20,  null, description);
+        UserService userService = mock(UserService.class);
         mockAdviceService = mock(AdviceService.class);
         when(mockAdviceService.save(advice)).thenReturn(0);
         adviceController = new AdviceController(mockAdviceService);
-
+        adviceController.setUserService(userService);
+        when(userService.getByUserName("Jules")).thenReturn(new User());
         BindingResult mockBindingResult = mock(BindingResult.class);
         when(mockBindingResult.hasErrors()).thenReturn(false);
 
-        String url = adviceController.saveAdvice(advice, mockBindingResult, model);
+        Principal mockPrincipal = mock(Principal.class);
+        when(mockPrincipal.getName()).thenReturn(username);
+
+        String url = adviceController.saveAdvice(advice, mockBindingResult, model, mockPrincipal);
 
         assertThat(url, is("redirect:"+AdviceController.ERROR_PAGE));
     }
@@ -64,9 +73,7 @@ public class AdviceControllerTest {
         Map<String, String> model = new HashMap<String, String>();
         String username = "Jules";
         String description = "This is an advice for question 20";
-        User user = new User();
-        user.setUsername(username);
-        Advice advice = new Advice(20,  user, description);
+        Advice advice = new Advice(20,  null, description);
         mockAdviceService = mock(AdviceService.class);
         when(mockAdviceService.save(advice)).thenReturn(0);
         adviceController = new AdviceController(mockAdviceService);
@@ -74,7 +81,10 @@ public class AdviceControllerTest {
         BindingResult mockBindingResult = mock(BindingResult.class);
         when(mockBindingResult.hasErrors()).thenReturn(true);
 
-        String url = adviceController.saveAdvice(advice, mockBindingResult, model);
+        Principal mockPrincipal = mock(Principal.class);
+        when(mockPrincipal.getName()).thenReturn(username);
+
+        String url = adviceController.saveAdvice(advice, mockBindingResult, model, mockPrincipal);
 
         assertThat(url, is("redirect:"+AdviceController.SHOW_QUESTION_DETAILS+"20"));
     }

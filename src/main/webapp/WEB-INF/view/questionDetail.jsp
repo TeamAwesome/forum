@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/skin.css"/>'>
 
     <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/questionDetail.css"/>' />
-    <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>' />
     <script src='<c:url value="/static/jsquery/jquery.js"/>'></script>
 
 </head>
@@ -44,9 +43,25 @@
                         <input id="dislikeInput" type='submit' name="dislike" value="Dislike"></input>
                         <input id="flagInput" type='submit' name="flag" value="Flag as Inappropriate"></input>
                     </div>
+
+                    <div id ="tags">
+                        <p><label class="questionDetail" name="tags"> Tags:</label> ${questionTags} </p>
+                    </div>
+
+                    <strong>Responses:</strong>
+                    <br></br>
+                    <div id="advice">
+                        <c:forEach var="advice" items="${advices}">
+                            <strong>${advice.user.username} posted on ${advice.createdAt}:</strong>
+                            <br>
+                            ${advice.description}
+                            <hr>
+                        </c:forEach>
+                    </div>
+
                     <div id="response2">
                         </br>
-                        <p><label class="questionDetail" name="tags"> Tags:</label> ${questionTags} </p>
+
 
                         <sec:authorize access="isAnonymous()">
                             <button type="button" id="loginAndPost" onclick='javascript:window.location="/forum/login";'>Post advice</button>
@@ -60,7 +75,6 @@
                                         <form:errors path="description" class="errorMsg" id="descriptionMsg" />
                                     </div>
                                     <form:hidden path="questionId" id="questionId" value="${questionId}" />
-                                    <form:hidden path="user" id="user" value="${user}" />
                                 </div>
                                 <input type="submit" value="Submit" id="submitButton" />
                             </form:form>

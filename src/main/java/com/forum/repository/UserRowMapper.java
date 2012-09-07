@@ -12,7 +12,7 @@ public class UserRowMapper implements RowMapper {
     @Override
     public User mapRow(ResultSet resultSet, int row) throws SQLException {
         BooleanToInteger converter =new BooleanToInteger();
-        return new User(resultSet.getString("USERNAME"),
+        User user =  new User(resultSet.getString("USERNAME"),
                 resultSet.getString("PASSWORD"),
                 resultSet.getString("NAME"),
                 resultSet.getString("EMAIL_ADDRESS"),
@@ -21,5 +21,7 @@ public class UserRowMapper implements RowMapper {
                 resultSet.getString("GENDER"),
                 resultSet.getInt("AGE_RANGE"),
                 converter.toBoolean(resultSet.getInt("PRIVACY")));
+        user.setId(resultSet.getInt("ID"));
+        return user;
     }
 }

@@ -1,7 +1,9 @@
 package com.forum.web.controller;
 
 import com.forum.domain.Advice;
+import com.forum.domain.User;
 import com.forum.service.AdviceService;
+import com.forum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Date;
 import java.util.Map;
 
@@ -20,18 +23,28 @@ public class AdviceController {
     public static final String SHOW_QUESTION_DETAILS = "question/view/";
     public static final String ERROR_PAGE = "500";
     public static final String QUESTION_ID = "questionId";
+    private UserService userService;
 
     @Autowired
     public AdviceController(AdviceService adviceService) {
         this.adviceService = adviceService;
     }
 
+    @Autowired
+    public void setUserService(UserService userService){
+        this.userService = userService;
+    }
+
+
     @RequestMapping(value = "/postAdvice", method = RequestMethod.POST)
-    public String saveAdvice(@Valid Advice advice, BindingResult result, Map model)  {
+    public String saveAdvice(@Valid Advice advice, BindingResult result, Map model, Principal principal)  {
         if (result.hasErrors()) {
             return "redirect:" + SHOW_QUESTION_DETAILS + advice.getQuestionId();
         } else {
             advice.setCreatedAt(new Date());
+            String name = principal.getName();
+            User user = userService.getByUserName(name);
+            advice.setUser(user);
             int succeed = adviceService.save(advice);
             if (succeed != 0) {
                 return "redirect:" + SHOW_QUESTION_DETAILS + advice.getQuestionId();
