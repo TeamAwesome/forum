@@ -1,0 +1,12 @@
+.mnemonic {
+    font-style: bold;
+    text-decoration: underline;
+}
+
+table td {
+      float:left;
+      width:30%;
+      text-align:left;
+
+    }
+

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>'>
-
+<link rel="stylesheet" type="text/css" href='<c:url value="/static/css/joinPage.css"/>'/>
 <head>
     <title>Join us</title>
 
@@ -21,7 +21,7 @@
             <form:form method="post" action="join" commandName="user">
             <h1>User Registration</h1>
             <font color="red" size=2>Fields with * are Mandatory</font>
-                <table width="560px" id="registrationForm">
+                <table>
                     <tr>
                         <td>Username:</td>
                         <td float="left"><form:input path="username" id="username"/><font color="red" size=3>*</font> </td>

@@ -110,6 +110,7 @@
     a {
         color: #000000;
     }
+
     table {
       border-collapse: collapse;
       padding:3px;
@@ -117,7 +118,6 @@
     }
 
     table td {
-      float:left;
       width:30%;
       text-align:left;
 
@@ -127,6 +127,12 @@
       border-bottom: 1px solid #9bf07b;
       border-top:1px solid #9bf07b;
     }
+
+ #registrationForm {
+        font-size: .75em;
+        width:600px;
+        text-align:left;
+        }
 
     .fullRow{
     width:100%;
@@ -204,10 +210,5 @@
         color:#FF0000;
     }
 
-    #registrationForm{
-    float:left;
-    font-size: .75em;
-    width:600px;
-    text-align:left;
-    }
+
 

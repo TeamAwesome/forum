@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>'/>
+
 <head>
     <title>Welcome</title>
 
@@ -28,7 +29,7 @@
 
             <div id="activityQuestions" >
                       <p id="QuestionParagraph" data-bind="foreach: questions">
-                      <table>
+                      <table class = "userTable">
                       <tr>
                       <td width=10%>
                       <font size = 3 color="#599425">Statistics<br></font>
@@ -45,7 +46,7 @@
                       </span><font size = 1> Flags<br></font>
 
                       </td>
-                      <td width=40%>
+                      <td width=60%>
                       <a data-bind="attr:{href:url}"><b>
                       <span class="questionTitle" data-bind="html: title" style='width: 350px; height: 1em;overflow: hidden; display: inline-block;'> </span></b>
                        </a>
@@ -58,7 +59,7 @@
                       <span class="questionCreatedAt" data-bind="text: createdAt" style="font-size:.7em;"> </span>
                       </td>
 
-                    <td width=10%>
+                    <td width=10% class = "image">
                     <img src='<c:url value="/static/images/empty_profile_picture.gif"/>' width=60 height=60>
 
                     <br />
