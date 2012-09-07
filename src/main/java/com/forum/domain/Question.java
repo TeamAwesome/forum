@@ -52,7 +52,7 @@ public class Question implements Serializable {
         this.createdAt = createdAt;
         this.description = description;
 
-        logger.info("a question an ID has been created");
+        logger.fine("a question an ID has been created");
     }
 
     public Question(String title, String description, User user, Date createdAt) {
@@ -61,7 +61,7 @@ public class Question implements Serializable {
         this.createdAt = createdAt;
         this.description = description;
 
-        logger.info("a question without an id has been created");
+        logger.fine("a question without an id has been created");
     }
 
     public Question(int id, String title, String description, User user, Date createdAt, int likes, int disLikes, int flags) {
@@ -74,7 +74,7 @@ public class Question implements Serializable {
         this.dislikes = disLikes;
         this.flags = flags;
 
-        logger.info("a question with stats has been created");
+        logger.fine("a question with stats has been created");
     }
 
     public Question(int id, String title, String description, User user, Date createdAt, int likes, int disLikes, int flags , String tagsAsString) {
@@ -87,7 +87,7 @@ public class Question implements Serializable {
         this.dislikes = disLikes;
         this.flags = flags;
         this.tagsAsString = tagsAsString;
-        logger.info("a question with stats and tags has been created");
+        logger.fine("a question with stats and tags has been created");
     }
 
     public String getTitle() {
