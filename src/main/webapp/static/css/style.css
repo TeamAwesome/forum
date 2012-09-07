@@ -42,9 +42,9 @@
         margin-left: auto;
         margin-right: auto;
         float: left;
-        width: 560px;
+        width: 565px;
         display: inline;
-        padding: 0px 20px 0px 20px;
+        padding: 0px 10px 0px 10px;
         background-color:#FFFFFF;
     }
     #innerLeftPane{
@@ -194,6 +194,9 @@
 
     .small{
         font-size: .75em;
+    }
+    .validationMessage{
+     color:#FF0000;
     }
 
     .dottedLine{
