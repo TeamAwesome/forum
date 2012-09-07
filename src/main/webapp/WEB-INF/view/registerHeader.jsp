@@ -4,9 +4,14 @@
 <div class="topButtons">
     <div id="forumLinks">
         <ul>
-            <li id="joinButton">
+            <li id="homeButton">
             <a href='<c:url value="/" />'> Home</a>
             </li>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <li id="adminButton">
+                            <a href='<c:url value="/adminDashboard" />'> Dashboard</a>
+                </li>
+            </sec:authorize>
             <sec:authorize access="isAnonymous()">
                 <li id="loginLink">
                     <a href='<c:url value="/login" />'> Login</a>&nbsp;
