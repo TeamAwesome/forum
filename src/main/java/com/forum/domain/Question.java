@@ -28,12 +28,12 @@ public class Question implements Serializable {
     private int dislikes;
     private int flags;
     private int views;
+    private String tagsAsString;
 
     private List<Advice> advices;
+
     public Question() {
     }
-
-    private List<Tag> tags;
 
     public Question(int id, String title, String description, User user, Date createdAt) {
         this.id = id;
@@ -41,7 +41,6 @@ public class Question implements Serializable {
         this.user = user;
         this.createdAt = createdAt;
         this.description = description;
-        tags = new ArrayList<Tag>();
 
         logger.info("a question an ID has been created");
     }
@@ -51,7 +50,6 @@ public class Question implements Serializable {
         this.user = user;
         this.createdAt = createdAt;
         this.description = description;
-        tags = new ArrayList<Tag>();
 
         logger.info("a question without an id has been created");
     }
@@ -65,7 +63,6 @@ public class Question implements Serializable {
         this.likes = likes;
         this.dislikes = disLikes;
         this.flags = flags;
-        tags = new ArrayList<Tag>();
 
         logger.info("a question with stats has been created");
     }
@@ -79,7 +76,7 @@ public class Question implements Serializable {
         this.likes = likes;
         this.dislikes = disLikes;
         this.flags = flags;
-        this.tags = getTagsFromString(tagsAsString);
+        this.tagsAsString = tagsAsString;
         logger.info("a question with stats and tags has been created");
     }
     public String getTitle() {
@@ -140,20 +137,24 @@ public class Question implements Serializable {
     }
 
     public List<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(String tagsAsString) {
-        tags = getTagsFromString(tagsAsString);
-    }
-
-    List<Tag> getTagsFromString(String tagsAsString) {
         List<Tag> result = new ArrayList<Tag>();
-        String[] tagArray = tagsAsString.split(",");
-        for (String tag : tagArray){
-            result.add(new Tag(tag.trim()));
+
+        if (tagsAsString != null) {
+            String[] tagArray = tagsAsString.split(",");
+            for (String tag : tagArray){
+                result.add(new Tag(tag.trim()));
+            }
         }
+
         return result;
+    }
+
+    public String getTagsAsString() {
+        return tagsAsString;
+    }
+
+    public void setTagsAsString(String tagsAsString) {
+        this.tagsAsString = tagsAsString;
     }
 
     @Override
@@ -168,8 +169,8 @@ public class Question implements Serializable {
                 ", dislikes=" + dislikes +
                 ", flags=" + flags +
                 ", views=" + views +
+                ", tagsAsString='" + tagsAsString + '\'' +
                 ", advices=" + advices +
-                ", tags=" + tags +
                 '}';
     }
 }

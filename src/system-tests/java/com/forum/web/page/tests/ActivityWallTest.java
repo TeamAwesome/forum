@@ -6,12 +6,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class ActivityWallTest extends FunctionalTestBase {
+
+    private static Logger logger = Logger.getLogger(ActivityWallTest.class.getName());
 
     @Test
     public void shouldLoadMoreQuestions() {
@@ -58,6 +62,9 @@ public class ActivityWallTest extends FunctionalTestBase {
         WebElement logoutLink = browser.findElement(By.id("logout"));
         logoutLink.click();
         browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("container")));
+
+        logger.info(browser.getCurrentUrl());
+
         assertTrue(browser.getCurrentUrl().endsWith("/forum/logout"));
     }
 }

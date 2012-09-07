@@ -58,20 +58,7 @@ public class QuestionTest {
     }
 
     @Test
-    public void shouldTransformStringToTagList() {
-        Question question = new Question("a title", "a description", new User(), new Date());
-        List<Tag> tagList = question.getTagsFromString("Foo, Bar, Baz");
-
-        logger.info("tagList = " + tagList.toString());
-
-        assertThat(tagList.size(), is(3));
-        assertTrue("should contain a tag 'Foo'", tagList.contains(new Tag("Foo")));
-        assertTrue("should contain a tag 'Bar'", tagList.contains(new Tag("Bar")));
-        assertTrue("should contain a tag 'Baz'", tagList.contains(new Tag("Baz")));
-    }
-
-    @Test
-    public void shouldCreateQuestionFromTagString() {
+    public void shouldGetTags() {
         Question question = new Question(
                 123,"a title", "a description", new User(), new Date(), 12, 23, 34, "Foo, Bar, Baz"
         );
@@ -83,16 +70,13 @@ public class QuestionTest {
     }
 
     @Test
-    public void shouldSetTagsFromTagString() {
+    public void shouldHandleNullAsTagAsString(){
         Question question = new Question(
                 123,"a title", "a description", new User(), new Date()
         );
-        question.setTags("Foo, Bar, Baz");
-        List<Tag> tagList = question.getTags();
-        assertThat(tagList.size(), is(3));
-        assertTrue("should contain a tag 'Foo'", tagList.contains(new Tag("Foo")));
-        assertTrue("should contain a tag 'Bar'", tagList.contains(new Tag("Bar")));
-        assertTrue("should contain a tag 'Baz'", tagList.contains(new Tag("Baz")));
+
+        assertThat(question.getTags().size(), is(0));
     }
+
 
 }

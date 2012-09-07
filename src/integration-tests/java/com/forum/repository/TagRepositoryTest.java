@@ -58,7 +58,10 @@ public class TagRepositoryTest extends IntegrationTestBase {
 
         List<Tag> tags = tagRepository.allTags();
 
-        assertThat(tags.size(), is(3));
+        /*
+         * The tag table contains 10 tags as test data, hence expecting 13.
+         */
+        assertThat(tags.size(), is(13));
         assertThat(tags, hasItem(isATagWithValue("test.tag1")));
         assertThat(tags, hasItem(isATagWithValue("test.tag2")));
         assertThat(tags, hasItem(isATagWithValue("test.tag3")));
