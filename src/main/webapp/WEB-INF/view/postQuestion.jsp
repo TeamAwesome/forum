@@ -31,7 +31,7 @@
             <form:form method="post" action="showPostedQuestion" commandName="question">
                 <div class="questionTitle">
                     <label class="formLabels"> Title: </label>
-                    <form:input path="title" name="questionTitle" id="questionTitle" maxlength="100"/>
+                    <form:input path="title" name="questionTitle" id="questionTitle" maxlength="100" style="width:520px" />
                     <form:errors path="title" class="errorMsg" id="titleMsg"/>
                     <div class="validationMessage" id="titleValidationMessage"></div>
                 </div>

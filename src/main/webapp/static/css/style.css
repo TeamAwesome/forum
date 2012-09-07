@@ -68,6 +68,7 @@
 
     }
 
+
     h1, h2, h3 {
         margin: 0px;
         letter-spacing: -2px;
@@ -162,6 +163,7 @@
 
     }
 
+
     .questionTitle{
         word-wrap: break-all;
         color: #000000;
@@ -214,4 +216,7 @@
     }
 
 
+     .activityWall  {
+        text-align:center;
+     }
 

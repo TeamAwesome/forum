@@ -24,7 +24,7 @@
     <div id="content">
         <div id ="leftPane" >
             <div id="activityWallTitle">
-                <h1>Activity Wall</h1>
+                <h1 class="activityWall">Activity Wall</h1>
             </div>
 
             <div id="activityQuestions" >
