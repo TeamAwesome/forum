@@ -1,28 +1,4 @@
  $(document).ready(function() {
-		var availableTags = [
-			"Bangalore",
-			"Food",
-			"People",
-			"Movies",
-			"Hindi",
-			"Places",
-			"Accommodation",
-			"Rickshaw",
-			"Rupees",
-			"Masala",
-			"Spicy Ice cream",
-			"Shopping",
-			"Hotel",
-			"Mall",
-			"Clubbing",
-			"Travel",
-			"Metro",
-			"Koramangala",
-			"Cricket",
-			"Hockey",
-			"Taxi",
-			"Airport"
-		];
 
 		function split( val ) {
 			return val.split( /,\s*/ );

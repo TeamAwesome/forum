@@ -52,14 +52,23 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
         assertThat(questions.size(), is(24));
     }
 
+    /*                                                tags = new ArrayList<Tag>();
+        String[] tagArray = tagsAsString.split(",");
+        for (String tag : tagArray){
+            tags.add(new Tag(tag.trim()));
+        }
+
+     * TODO - continue here for writing tags to the database
+     */
     @Test
     public void shouldCreateQuestion(){
         QuestionRepository questionRepository = new QuestionRepository(dataSource);
         User user=new User();
         user.setUsername("Silly");
         user.setId(42);
-        Date date = new Date(1970,05,25);
+        Date date = new Date();
         Question question =new Question(12,"where","where are you",user,date);
+        question.setTagsAsString("Foo, Bar, Baz");
         assertThat(questionRepository.createQuestion(question),is(1));
     }
 
@@ -125,16 +134,6 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
         QuestionRepository questionRepository = new QuestionRepository(dataSource);
         assertThat(questionRepository.addFlagsById(questionID), is(1));
     }
-    @Test
-    public  void shouldCreateRowQuestion(){
-        QuestionRepository questionRepository = new QuestionRepository(dataSource);
-        User user=new User();
-        user.setUsername("Silly");
-        user.setId(42);
-        Question question =new Question(12,"where","where are you",user,new Date());
-        assertThat(questionRepository.createQuestion(question),is(1));
-    }
-
 
 }
 

@@ -46,7 +46,7 @@
 
                 <div class="questionTags">
                     <label for="questionTags" class="formLabels">Tags: </label>
-                    <input type="text" id="questionTags" name="questionTags"/>
+                    <form:input path="tagsAsString" type="text" id="questionTags" name="questionTags"/>
                 </div>
 
                 <input type="submit" value="Submit" id="submitButton"/>

@@ -1,6 +1,9 @@
 package com.forum.repository;
 
 import com.forum.domain.Question;
+import com.forum.domain.Tag;
+import com.forum.domain.User;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -14,6 +17,7 @@ import java.util.List;
 public class    QuestionRepository {
 
     private JdbcTemplate jdbcTemplate;
+    private static  Logger logger = Logger.getLogger(QuestionRepository.class.getName());
 
 
     @Autowired
@@ -34,8 +38,22 @@ public class    QuestionRepository {
     }
 
     public int createQuestion(Question question) {
-        return jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
+
+        logger.info("question is " + question.toString());
+
+        int result =  jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
                 new Object[]{question.getTitle(), question.getDescription(), new Date(), 1});
+
+        for (Tag tag : question.getTags()){
+            String query = "";
+        }
+        //1) Check if a tag exists already
+        //2) if it exists, find it in the DB and get the ID number
+        //2a) if is doesn't exist add a new entry to the Tag table
+        //3) Create a new entry in Q_T table
+
+
+        return result;
     }
 
     public List<Question> latestQuestion(int pageNum, int pageSize) {

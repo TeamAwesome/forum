@@ -74,7 +74,7 @@
 
                 <tr>
                     <td>
-                        If unregistered user, please click here to  <a href='<c:url value="/join" />'> Join</a>
+                        <br>Not a registered user?, <a href='<c:url value="/join" />'> Join us.</a>
                     </td>
                 </tr>
             </table>
