@@ -1,8 +1,12 @@
 package com.forum.domain;
 
 import com.forum.service.validation.NoHTMLScript;
+import com.forum.service.validation.NotQuestionWords;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,6 +32,10 @@ public class Question implements Serializable {
     private int dislikes;
     private int flags;
     private int views;
+
+    @NotBlank(message = "A question must have at least one tag.")
+    @Pattern(regexp = "^[" + Tag.REGEXP + ",]*$" , message = "special characters should not be included.")
+    @NotQuestionWords
     private String tagsAsString;
 
     private List<Advice> advices;
@@ -142,6 +150,9 @@ public class Question implements Serializable {
         if (tagsAsString != null) {
             String[] tagArray = tagsAsString.split(",");
             for (String tag : tagArray){
+                if(tag.trim().isEmpty()){
+                    continue;
+                }
                 result.add(new Tag(tag.trim()));
             }
         }
@@ -170,6 +181,7 @@ public class Question implements Serializable {
                 ", flags=" + flags +
                 ", views=" + views +
                 ", tagsAsString='" + tagsAsString + '\'' +
+                ", tags=" + this.getTags().toString() + '\'' +
                 ", advices=" + advices +
                 '}';
     }

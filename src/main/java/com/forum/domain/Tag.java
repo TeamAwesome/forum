@@ -1,8 +1,14 @@
 package com.forum.domain;
 
+import javax.validation.constraints.Pattern;
+
 public class Tag {
     private int id;
+    public static final String REGEXP = "a-zA-Z0-9äöüÄÖÜß ";
+
+    @Pattern(regexp = "^[" + REGEXP + "]*$")
     private String value;
+
     private int count;
 
     public Tag(int id, String value, int count) {
