@@ -55,9 +55,6 @@ public class ActivityWallTest extends FunctionalTestBase {
         assertTrue(browser.getCurrentUrl().contains("/adminDashboard"));
         assertTrue(browser.findElement(By.id("leftPane")).getText().contains("Welcome to the Admin Dashboard"));
 
-        WebElement logoutLink = browser.findElement(By.id("logout"));
-        logoutLink.click();
-        browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("container")));
-        assertTrue(browser.getCurrentUrl().endsWith("/forum/logout"));
+        logout();
     }
 }

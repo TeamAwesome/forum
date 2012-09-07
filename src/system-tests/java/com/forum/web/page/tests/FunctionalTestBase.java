@@ -9,12 +9,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+
 public class FunctionalTestBase {
     public Browser browser;
 
     @Before
     public void initializeWebDriver() {
-        browser = new Browser("http://localhost:8080/forum", true);
+        browser = new Browser("http://10.10.5.107:8080/forum", true);
         browser.open("/");
     }
 
@@ -33,5 +37,13 @@ public class FunctionalTestBase {
         WebElement submit = browser.findElement(By.name("submit"));
         submit.click();
         browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("logout")));
+    }
+
+    protected void logout() {
+        WebElement logoutLink = browser.findElement(By.linkText("Logout"));
+        logoutLink.click();
+        browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("container")));
+        assertTrue(browser.getCurrentUrl().endsWith("/forum/logout"));
+
     }
 }
