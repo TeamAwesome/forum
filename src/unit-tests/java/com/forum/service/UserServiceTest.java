@@ -129,4 +129,13 @@ public class UserServiceTest {
         userService.createUser(user);
 
     }
+
+    @Test
+    public void shouldGetUserByUsername(){
+        User user = new User("Tom", "pass", "Tom Tom", "tom@tom.com", "1234567",
+                "Moon", "He doesn't know", 200, false);
+        when(userRepository.getByUsername("Tom")).thenReturn(user);
+
+        assertThat(userService.getByUserName("Tom"),is(user));
+    }
 }

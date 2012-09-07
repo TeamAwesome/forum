@@ -84,4 +84,8 @@ public class UserService implements UserDetailsService {
         int privilege =  userRepository.getUserPrivilege(user);
         return Privilege.getPrivilege(privilege);
     }
+
+    public User getByUserName(String userName) {
+        return userRepository.getByUsername(userName);
+    }
 }

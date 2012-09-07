@@ -3,6 +3,7 @@ package com.forum.web.controller;
 import com.forum.domain.Advice;
 import com.forum.domain.User;
 import com.forum.service.AdviceService;
+import com.forum.service.UserService;
 import org.junit.Test;
 import org.springframework.validation.BindingResult;
 
@@ -27,14 +28,17 @@ public class AdviceControllerTest {
         String username = "Jules";
         String description = "This is an advice for question 20";
         Advice advice = new Advice(20,  null, description);
+        UserService userService = mock(UserService.class);
         mockAdviceService = mock(AdviceService.class);
         when(mockAdviceService.save(advice)).thenReturn(1);
         adviceController = new AdviceController(mockAdviceService);
+        adviceController.setUserService(userService);
         BindingResult mockBindingResult = mock(BindingResult.class);
         when(mockBindingResult.hasErrors()).thenReturn(false);
 
         Principal mockPrincipal = mock(Principal.class);
         when(mockPrincipal.getName()).thenReturn(username);
+        when(userService.getByUserName("Jules")).thenReturn(new User());
 
         String url = adviceController.saveAdvice(advice, mockBindingResult, model, mockPrincipal);
 
@@ -47,10 +51,12 @@ public class AdviceControllerTest {
         String username = "Jules";
         String description = "This is an advice for question 20";
         Advice advice = new Advice(20,  null, description);
+        UserService userService = mock(UserService.class);
         mockAdviceService = mock(AdviceService.class);
         when(mockAdviceService.save(advice)).thenReturn(0);
         adviceController = new AdviceController(mockAdviceService);
-
+        adviceController.setUserService(userService);
+        when(userService.getByUserName("Jules")).thenReturn(new User());
         BindingResult mockBindingResult = mock(BindingResult.class);
         when(mockBindingResult.hasErrors()).thenReturn(false);
 
