@@ -21,9 +21,10 @@ public class TagMatcher extends BaseMatcher<Tag> {
     @Override
     public void describeTo(Description description) {
         description.appendText(String.format("Expected tag[value: %s]. Got tag[value: %s]", value, tag.getValue()));
+
     }
 
-    public static TagMatcher isATagWithValue(String value) {
+    public static TagMatcher aTagWithValue(String value) {
         return new TagMatcher(value);
     }
 }
