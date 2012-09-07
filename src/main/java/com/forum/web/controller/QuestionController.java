@@ -69,8 +69,7 @@ public class QuestionController {
         modelAndView.addObject("views", question.getViews());
         modelAndView.addObject("flags", question.getFlags());
         modelAndView.addObject("responses", question.getResponses());
-        modelAndView.addObject("user", question.getUser());
-        Advice advice = new Advice(0, question.getUser(), "");
+        Advice advice = new Advice(0, null, "");
         modelAndView.addObject("advice", advice);
         return modelAndView;
     }

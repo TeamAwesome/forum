@@ -60,7 +60,6 @@
                                         <form:errors path="description" class="errorMsg" id="descriptionMsg" />
                                     </div>
                                     <form:hidden path="questionId" id="questionId" value="${questionId}" />
-                                    <form:hidden path="user" id="user" value="${user}" />
                                 </div>
                                 <input type="submit" value="Submit" id="submitButton" />
                             </form:form>
