@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/skin.css"/>'>
 
     <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/questionDetail.css"/>' />
-    <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>' />
     <script src='<c:url value="/static/jsquery/jquery.js"/>'></script>
 
 </head>
