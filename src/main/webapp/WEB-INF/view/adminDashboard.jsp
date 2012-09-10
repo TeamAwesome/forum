@@ -9,6 +9,7 @@
     <script language="javascript" type="text/javascript" src='<c:url value="/static/jsquery/jqplot.canvasAxisLabelRenderer.js" />'></script>
     <script language="javascript" type="text/javascript" src='<c:url value="/static/jsquery/jqplot.canvasTextRenderer.min.js" />'></script>
     <script language="javascript" type="text/javascript" src='<c:url value="/static/javascript/graphsForAdminDashboard.js" />'></script>
+    <script language="javascript" type="text/javascript" src='<c:url value="/static/jsquery/jqplot.highlighter.min.js" />'></script>
     <script src='http://connect.facebook.net/en_US/all.js'></script>
     <script src="<c:url value="/static/javascript/shareToSocialMedia.js"/>"></script>
     <script src="<c:url value="/static/javascript/knockout-2.1.0.js"/>"></script>
@@ -25,18 +26,10 @@
         <div id ="leftPane" >
             <span>Welcome to the Admin Dashboard, ${username}</span> </br></br>
 
-            <span align="centre">
-                <input type="submit"  name="View-flagged-users" value="View flagged users">
-            </span>
-
             <span>
                 </br></br>
                 Statistics
-
-                <table>
-                    <tr><td>Number of Questions posted &nbsp &nbsp</td><td><div id="chartdiv" style="height:300px;width:400px; "></div></td></tr>
-                    <tr><td></td><td align='center'>Days ago</td></tr>
-                </table>
+                <div id="chartdiv" style="height:300px;width:400px; "></div>
             </span>
         </div>
 
