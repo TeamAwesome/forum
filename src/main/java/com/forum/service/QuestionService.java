@@ -34,7 +34,7 @@ public class QuestionService {
         }
         return question;
     }
-
+    @Transactional
     public int createQuestion(Question question) {
         return questionRepository.createQuestion(question);
     }
