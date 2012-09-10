@@ -34,8 +34,8 @@
                 Statistics
 
                 <table>
-                    <tr><td>Questions &nbsp &nbsp</td><td><div id="chartdiv" style="height:300px;width:400px; "></div></td></tr>
-                    <tr><td></td><td align='center'>Days</td></tr>
+                    <tr><td>Number of Questions posted &nbsp &nbsp</td><td><div id="chartdiv" style="height:300px;width:400px; "></div></td></tr>
+                    <tr><td></td><td align='center'>Days ago</td></tr>
                 </table>
             </span>
         </div>
