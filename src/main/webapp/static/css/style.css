@@ -145,7 +145,7 @@
         margin-right:5px;
     }
 
-    #forumLinks {
+    .forumLinks {
         float: left;
         margin-top: 5px;
     }
@@ -218,5 +218,9 @@
 
      .activityWall  {
         text-align:center;
+     }
+
+     #loggedUser{
+        float:right;
      }
 
