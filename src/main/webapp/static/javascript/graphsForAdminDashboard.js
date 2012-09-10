@@ -7,8 +7,9 @@ function PlotGraphs (){
 	    this.lengthOfTime = numberOfQuestionsJson.length;
         for(i=0;i<this.lengthOfTime-1;i++){
             this.numberOfQuestions.push(numberOfQuestionsJson[i]);
-            if(this.maximumNumberOfQuestions < numberOfQuestionsJson[i])
-            this.maximumNumberOfQuestions = numberOfQuestionsJson[i];
+            if(this.maximumNumberOfQuestions < numberOfQuestionsJson[i]){
+                this.maximumNumberOfQuestions = (numberOfQuestionsJson[i]%10 +1)*10;
+            }
         }
 	};
 
@@ -33,10 +34,11 @@ function PlotGraphs (){
                         max:'0'
                     },
                     yaxis: {
+                        tickOptions:{formatString:'%d'},
                         label : "Number Of Questions Posted",
                         labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
-                        min:'0',
-                        max:this.maximumNumberOfQuestions+10
+                        min:'',
+                        max:this.maximumNumberOfQuestions+10,
                     }
                 },
                 highlighter: {
