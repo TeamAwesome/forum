@@ -70,7 +70,7 @@ public class QuestionServiceTest {
         List<Question> questions = new ArrayList<Question>();
         when(questionRepository.latestQuestion(1,10)).thenReturn(questions);
 
-        List<Question> returnedList = questionService.latestQuestion("1","10");
+        List<Question> returnedList = questionService.latestQuestions("1", "10");
 
         assertThat(returnedList, is(questions));
     }

@@ -6,6 +6,7 @@ import com.forum.domain.Question;
 import com.forum.domain.User;
 import com.forum.service.QuestionService;
 import com.forum.service.UserService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,12 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 @Controller
 public class QuestionController {
@@ -52,7 +50,7 @@ public class QuestionController {
         question.setUser(user);
 
         questionService.createQuestion(question);
-        List latestQuestionList = questionService.latestQuestion("1", "1");
+        List latestQuestionList = questionService.latestQuestions("1", "1");
         Question latestQuestion = (Question)latestQuestionList.get(0);
         Integer questionId = latestQuestion.getId();
 
@@ -106,4 +104,10 @@ public class QuestionController {
         return "(" + question.getFlags() + ") Flags";
     }
 
+    @RequestMapping(value = "/question/search/latest", method = RequestMethod.POST)
+    @ResponseBody
+    public String retrieveLatestQuestions(@RequestParam String pageNum, @RequestParam String pageSize) {
+        List<Question> questionList = questionService.latestQuestions(pageNum, pageSize);
+        return new Gson().toJson(questionList);
+    }
 }

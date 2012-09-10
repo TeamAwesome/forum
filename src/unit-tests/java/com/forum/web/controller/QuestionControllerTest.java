@@ -5,7 +5,12 @@ import com.forum.domain.Question;
 import com.forum.domain.User;
 import com.forum.service.QuestionService;
 import com.forum.service.UserService;
+import com.google.gson.Gson;
+import org.hamcrest.core.Is;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,10 +23,15 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class QuestionControllerTest {
 
     private QuestionController questionController;
     private Principal principal;
+    @Mock
+    private QuestionService questionService;
+    @Mock
+    private UserService userService;
 
     @Test
     public void shouldShowPostQuestionPage() {
@@ -31,9 +41,23 @@ public class QuestionControllerTest {
     }
 
     @Test
+    public void shouldLoadLatestQuestionsOnBrowser(){
+        List<Question> questions = new ArrayList<Question>();
+        Date date = mock(Date.class);
+        User user = new User();
+        Question question = new Question(1,"dummy title","dummy description for a dummy question with a dummy title by a dummy developer", user,date);
+        questions.add(question);
+        when(questionService.latestQuestions("1", "1")).thenReturn(questions);
+
+        String result = new QuestionController(questionService, null).retrieveLatestQuestions("1", "1");
+        Gson gson = new Gson();
+        Map map = (Map) gson.fromJson(result, ArrayList.class).get(0);
+
+        assertThat((String) map.get("title"), Is.is("dummy title"));
+    }
+
+    @Test
     public void shouldReturnPostedQuestion() {
-        QuestionService mockedQuestionService = mock(QuestionService.class);
-        UserService mockedUserService = mock(UserService.class);
         User user = new User();
         user.setUsername("lu");
         Principal principalMock = mock(Principal.class);
@@ -41,11 +65,11 @@ public class QuestionControllerTest {
         Question question = new Question(1, "Question Title", "Question Description", user, new Date());
         List<Question> questionList = new LinkedList<Question>();
         questionList.add(question);
-        when(mockedQuestionService.latestQuestion("1", "1")).thenReturn(questionList);
-        when(mockedQuestionService.getById(1)).thenReturn(question);
+        when(questionService.latestQuestions("1", "1")).thenReturn(questionList);
+        when(questionService.getById(1)).thenReturn(question);
 
-        mockedQuestionService.createQuestion(question);
-        this.questionController = new QuestionController(mockedQuestionService, mockedUserService);
+        questionService.createQuestion(question);
+        this.questionController = new QuestionController(questionService, userService);
 
         BindingResult result = mock(BindingResult.class);
         when(result.hasErrors()).thenReturn(false);
@@ -57,11 +81,10 @@ public class QuestionControllerTest {
 
     @Test
     public void shouldReturnToPostQuestionWhenInvalid() {
-        QuestionService mockedQuestionService = mock(QuestionService.class);
         Date createdAt = new Date();
         Question question = new Question(1, "Question Title", "Question Description", new User(), createdAt);
 
-        this.questionController = new QuestionController(mockedQuestionService, null);
+        this.questionController = new QuestionController(questionService, null);
 
         BindingResult result = mock(BindingResult.class);
         when(result.hasErrors()).thenReturn(true);
@@ -73,7 +96,6 @@ public class QuestionControllerTest {
 
     @Test
     public void shouldReturnDetailedViewOfQuestion() {
-        QuestionService questionService = mock(QuestionService.class);
         ModelAndView modelAndView;
         User user = new User();
         user.setName("Dummy User");
@@ -99,7 +121,6 @@ public class QuestionControllerTest {
 
     @Test
     public void shouldReturnDetailedViewOfQuestionWithLikesDisLikesAndFlags() {
-        QuestionService questionService = mock(QuestionService.class);
         ModelAndView modelAndView;
         User user = new User();
         user.setName("Dummy User");
@@ -156,7 +177,6 @@ public class QuestionControllerTest {
     }
 
     private void prepareQuestionController(int likes, int dislikes, int flags) {
-        QuestionService questionService = mock(QuestionService.class);
         Question question = new Question(
                 24,
                 "model question title",

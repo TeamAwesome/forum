@@ -19,8 +19,13 @@ function QuestionsViewModel() {
 
     self.questions = ko.observableArray();
 
-    var loadQuestion = function() {
-         $.post("./", {"pageNum": page.toString(), "pageSize": pageSize.toString()}, function(data) {
+    var resetPagination = function() {
+        page = 1;
+        pageSize = 10;
+    }
+
+    var loadQuestions = function(url) {
+         $.post(url, {"pageNum": page.toString(), "pageSize": pageSize.toString()}, function(data) {
             $.each(data, function (index, question) {
 
                 self.questions.push(
@@ -31,14 +36,19 @@ function QuestionsViewModel() {
          },"json");
     }
 
-    loadQuestion();
-
+    self.loadLatestQuestions = function() {
+        self.currentSearch = "/question/search/latest";
+        resetPagination();
+        self.loadMoreQuestion();
+    }
     self.loadMoreQuestion = function() {
-        loadQuestion();
+        loadQuestions("." + self.currentSearch);
     }
 }
 
-ko.applyBindings(new QuestionsViewModel());
+var questions = new QuestionsViewModel();
+ko.applyBindings(questions);
+questions.loadLatestQuestions();
 
 function stripHtmlSpaces(html) {
     var space = /&nbsp;/g;

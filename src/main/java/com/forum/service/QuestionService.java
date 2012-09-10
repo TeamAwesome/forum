@@ -44,7 +44,7 @@ public class QuestionService {
     }
 
     @Transactional
-    public List<Question> latestQuestion(String pageNum, String pageSize) {
+    public List<Question> latestQuestions(String pageNum, String pageSize) {
         List<Question> questionList = questionRepository.latestQuestion(Integer.parseInt(pageNum), Integer.parseInt(pageSize));
         return removeSpaces(questionList);
     }
