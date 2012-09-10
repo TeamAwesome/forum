@@ -78,5 +78,84 @@ public class QuestionTest {
         assertThat(question.getTags().size(), is(0));
     }
 
+    @Test
+    public void shouldRejectSpecialCharactersInTagString() {
+        Question question = new Question(
+                123,"a title", "a description", new User(), new Date(), 12, 23, 34, "abcd1234<>,."
+        );
+
+        Set<ConstraintViolation<Question>> validationResult = validator.validateProperty(question, "tagsAsString");
+        assertThat(validationResult.size(), is(1));
+    }
+
+    @Test
+    public void shouldAcceptAlphanumericCharactersIncludingSpecialGermanCharacters() {
+        Question question = new Question(
+                123,"a title", "a description", new User(), new Date(), 12, 23, 34,
+                "abcdefghijk lmnopqrstu, vwxyzABCD EFGHIJKLMNO, PQRSTUVWXYZ0 123456789äÄöÖüÜß"
+        );
+
+        Set<ConstraintViolation<Question>> validationResult = validator.validateProperty(question, "tagsAsString");
+        assertThat(validationResult.size(), is(0));
+    }
+
+    @Test
+    public void shouldRejectWho() {
+        Question question = new Question(
+                123,"a title", "a description", new User(), new Date(), 12, 23, 34, "Who"
+        );
+
+        Set<ConstraintViolation<Question>> validationResult = validator.validateProperty(question, "tagsAsString");
+        assertThat(validationResult.size(), is(1));
+    }
+
+    @Test
+    public void shouldRejectHow() {
+        Question question = new Question(
+                123,"a title", "a description", new User(), new Date(), 12, 23, 34, "HOW"
+        );
+
+        Set<ConstraintViolation<Question>> validationResult = validator.validateProperty(question, "tagsAsString");
+        assertThat(validationResult.size(), is(1));
+    }
+
+    @Test
+    public void shouldRejectWhat() {
+        Question question = new Question(
+                123,"a title", "a description", new User(), new Date(), 12, 23, 34, "wHat"
+        );
+
+        Set<ConstraintViolation<Question>> validationResult = validator.validateProperty(question, "tagsAsString");
+        assertThat(validationResult.size(), is(1));
+    }
+
+    @Test
+    public void shouldRejectWhyAndWhen() {
+        Question question = new Question(
+                123,"a title", "a description", new User(), new Date(), 12, 23, 34, "why"
+        );
+
+        Question question2 = new Question(
+                123,"a title", "a description", new User(), new Date(), 12, 23, 34, "when"
+        );
+
+        Set<ConstraintViolation<Question>> validationResultForWhy = validator.validateProperty(question, "tagsAsString");
+        Set<ConstraintViolation<Question>> validationResultForWhen = validator.validateProperty(question2, "tagsAsString");
+        assertThat(validationResultForWhy.size(), is(1));
+        assertThat(validationResultForWhen.size(), is(1));
+    }
+
+    @Test
+    public void shouldFilterEmptyTags() {
+        Question question = new Question(
+                123,"a title", "a description", new User(), new Date(), 12, 23, 34, "Foo, , Bar,  \t     , Baz, "
+        );
+        logger.info(question.toString());
+        List<Tag> tagList = question.getTags();
+        assertThat(tagList.size(), is(3));
+        assertTrue("should contain a tag 'Foo'", tagList.contains(new Tag("Foo")));
+        assertTrue("should contain a tag 'Bar'", tagList.contains(new Tag("Bar")));
+        assertTrue("should contain a tag 'Baz'", tagList.contains(new Tag("Baz")));
+    }
 
 }

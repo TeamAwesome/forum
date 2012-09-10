@@ -30,8 +30,11 @@
         font-weight: bold;
         font-size:1.2em;
         padding: 10px 3px 8px 5px;
+}
 
-
+#questionTitle h1{
+        color:#000;
+            font-size:1.2em;
 }
 
 #questionDescription

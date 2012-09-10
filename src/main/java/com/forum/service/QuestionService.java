@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,10 +29,12 @@ public class QuestionService {
     public Question getById(Integer questionId) {
         Question question =  questionRepository.getById(questionId);
         List<Advice> advices = adviceRepository.getByQuestionId(questionId);
-        question.setAdvices(advices);
+        if(advices != null){
+            question.setAdvices(advices);
+        }
         return question;
     }
-
+    @Transactional
     public int createQuestion(Question question) {
         return questionRepository.createQuestion(question);
     }

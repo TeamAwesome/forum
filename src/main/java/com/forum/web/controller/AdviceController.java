@@ -3,6 +3,7 @@ package com.forum.web.controller;
 import com.forum.domain.Advice;
 import com.forum.domain.User;
 import com.forum.service.AdviceService;
+import com.forum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,11 +23,18 @@ public class AdviceController {
     public static final String SHOW_QUESTION_DETAILS = "question/view/";
     public static final String ERROR_PAGE = "500";
     public static final String QUESTION_ID = "questionId";
+    private UserService userService;
 
     @Autowired
     public AdviceController(AdviceService adviceService) {
         this.adviceService = adviceService;
     }
+
+    @Autowired
+    public void setUserService(UserService userService){
+        this.userService = userService;
+    }
+
 
     @RequestMapping(value = "/postAdvice", method = RequestMethod.POST)
     public String saveAdvice(@Valid Advice advice, BindingResult result, Map model, Principal principal)  {
@@ -34,8 +42,8 @@ public class AdviceController {
             return "redirect:" + SHOW_QUESTION_DETAILS + advice.getQuestionId();
         } else {
             advice.setCreatedAt(new Date());
-            User user = new User();
-            user.setUsername(principal.getName());
+            String name = principal.getName();
+            User user = userService.getByUserName(name);
             advice.setUser(user);
             int succeed = adviceService.save(advice);
             if (succeed != 0) {

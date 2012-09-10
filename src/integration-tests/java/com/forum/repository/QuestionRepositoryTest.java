@@ -61,7 +61,7 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
      * TODO - continue here for writing tags to the database
      */
     @Test
-    public void shouldCreateQuestion(){
+    public void shouldCreateQuestionWithNonExistingTags(){
         QuestionRepository questionRepository = new QuestionRepository(dataSource);
         User user=new User();
         user.setUsername("Silly");
@@ -69,7 +69,19 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
         Date date = new Date();
         Question question =new Question(12,"where","where are you",user,date);
         question.setTagsAsString("Foo, Bar, Baz");
-        assertThat(questionRepository.createQuestion(question),is(1));
+        assertThat(questionRepository.createQuestion(question),is(7));
+    }
+
+    @Test
+    public void shouldCreateQuestionWithExistingTags(){
+        QuestionRepository questionRepository = new QuestionRepository(dataSource);
+        User user=new User();
+        user.setUsername("Silly");
+        user.setId(42);
+        Date date = new Date();
+        Question question =new Question(12,"where","where are you",user,date);
+        question.setTagsAsString("Music, Food, Spice");
+        assertThat(questionRepository.createQuestion(question),is(4));
     }
 
     @Test

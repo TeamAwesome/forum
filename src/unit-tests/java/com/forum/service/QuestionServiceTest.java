@@ -1,3 +1,5 @@
+
+
 package com.forum.service;
 
 
@@ -6,6 +8,7 @@ import com.forum.domain.Question;
 import com.forum.domain.User;
 import com.forum.repository.AdviceRepository;
 import com.forum.repository.QuestionRepository;
+import com.forum.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,12 +26,14 @@ public class QuestionServiceTest {
     private QuestionService questionService;
     private QuestionRepository questionRepository;
     private AdviceRepository adviceRepository;
+    private UserRepository userRepository;
 
     @Before
     public void setup(){
         questionRepository = mock(QuestionRepository.class);
         adviceRepository = mock(AdviceRepository.class);
         questionService = new QuestionService(questionRepository);
+
     }
 
 
@@ -117,4 +122,12 @@ public class QuestionServiceTest {
         assertThat(questionResultList.get(1).getDescription(),is("Question Description 1"));
     }
 
+    @Test
+    public void shouldReturnUsername(){
+        User user = new User("lu", "pass", "Tom Tom", "tom@tom.com", "1234567",
+                "Moon", "He doesn't know", 200, false);
+        userRepository = mock(UserRepository.class);
+        when(userRepository.getByUsername("lu")).thenReturn(user);
+        assertThat(user.getUsername(), is("lu"));
+    }
 }

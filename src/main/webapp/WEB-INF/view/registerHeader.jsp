@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>'>
 <div class="topButtons">
-    <div id="forumLinks">
+    <div name="forumLinks">
         <ul>
             <li id="homeButton">
             <a href='<c:url value="/" />'> Home</a>
@@ -27,6 +27,7 @@
                 <li id="logoutLink">
                     <a name="logout" id="logout" href="<c:url value='/forum_logout' />">Logout</a>
                 </li>
+                <li id="loggedUser">Welcome: <strong><sec:authentication property="principal" /></strong></li>
             </sec:authorize>
         </ul>
         </div>

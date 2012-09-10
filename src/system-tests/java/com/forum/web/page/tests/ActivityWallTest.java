@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 

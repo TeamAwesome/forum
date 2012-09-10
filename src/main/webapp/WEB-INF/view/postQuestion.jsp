@@ -31,9 +31,9 @@
             <form:form method="post" action="showPostedQuestion" commandName="question">
                 <div class="questionTitle">
                     <label class="formLabels"> Title: </label>
-                    <form:input path="title" name="questionTitle" id="questionTitle" maxlength="100"/>
-                    <div class="validationMessage" id="titleValidationMessage"></div>
+                    <form:input path="title" name="questionTitle" id="questionTitle" maxlength="100" style="width:520px" />
                     <form:errors path="title" class="errorMsg" id="titleMsg"/>
+                    <div class="validationMessage" id="titleValidationMessage"></div>
                 </div>
 
                 <div class="questionDescription" >
@@ -47,6 +47,8 @@
                 <div class="questionTags">
                     <label for="questionTags" class="formLabels">Tags: </label>
                     <form:input path="tagsAsString" type="text" id="questionTags" name="questionTags"/>
+                    <div class="validationMessage" id="titleValidationMessage"></div>
+                    <form:errors path="tagsAsString" class="errorMsg" id="tagsMsg"/>
                 </div>
 
                 <input type="submit" value="Submit" id="submitButton"/>

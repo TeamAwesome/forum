@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.forum.test.matchers.TagMatcher.isATagWithValue;
+import static com.forum.test.matchers.TagMatcher.aTagWithValue;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -43,8 +43,8 @@ public class TagRepositoryTest extends IntegrationTestBase {
         List<Tag> tags = tagRepository.getTagsByTerm("bang");
 
         assertThat(tags.size(), is(2));
-        assertThat(tags, hasItem(isATagWithValue("bangalore")));
-        assertThat(tags, hasItem(isATagWithValue("bangle")));
+        assertThat(tags, hasItem(aTagWithValue("bangalore")));
+        assertThat(tags, hasItem(aTagWithValue("bangle")));
         //asserting count is another test as counting tag usage is another functionality!!
     }
 
@@ -62,9 +62,9 @@ public class TagRepositoryTest extends IntegrationTestBase {
          * The tag table contains 10 tags as test data, hence expecting 13.
          */
         assertThat(tags.size(), is(13));
-        assertThat(tags, hasItem(isATagWithValue("test.tag1")));
-        assertThat(tags, hasItem(isATagWithValue("test.tag2")));
-        assertThat(tags, hasItem(isATagWithValue("test.tag3")));
+        assertThat(tags, hasItem(aTagWithValue("test.tag1")));
+        assertThat(tags, hasItem(aTagWithValue("test.tag2")));
+        assertThat(tags, hasItem(aTagWithValue("test.tag3")));
     }
 
     private void verifyTagExists(String value) {

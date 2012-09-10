@@ -24,7 +24,7 @@
     <div id="content">
         <div id ="leftPane" >
             <div id="activityWallTitle">
-                <h1>Activity Wall</h1>
+                <h1 class="activityWall">Activity Wall</h1>
             </div>
 
             <div id="activityQuestions" >
@@ -78,7 +78,15 @@
         </div>
 
         <%@ include file="rightPane.jsp" %>
-
+        <p>
+        <center>
+         <a onclick='postToFeed(); return false;'><img style="cursor: pointer; cursor: hand"
+          src="<c:url value='static/images/facebook.png'/>" alt="Facebook" class="Facebook Icon"></a>
+          <a href="https://twitter.com/share" data-url="http://10.10.5.107:8080/forum/"
+          data-text="Need info on Bangalore?" data-size="large" data-count="none" target="_blank">
+          <img src="<c:url value='static/images/twitter.png'/>" alt="Twitter" style="border-style: none"></a>
+          </center>
+          </p>
 
     </div>
 

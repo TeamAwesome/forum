@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService {
 
     private UserRepository userRepository;
 
@@ -75,13 +75,12 @@ public class UserService implements UserDetailsService {
         return actualRowCount;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
     public Privilege getRole(User user) {
         int privilege =  userRepository.getUserPrivilege(user);
         return Privilege.getPrivilege(privilege);
+    }
+
+    public User getByUserName(String username) {
+        return userRepository.getByUsername(username);
     }
 }

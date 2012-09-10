@@ -26,7 +26,8 @@ public class    QuestionRepository {
     }
 
     public List<Question> getAllQuestions() {
-        String query = "SELECT Q.ID AS QUESTION_ID, Q.TITLE, Q.DESCRIPTION, Q.CREATED_AT,Q.*, U.* FROM QUESTION Q JOIN USER U WHERE Q.USER_ID=U.ID ORDER BY Q.ID ASC; ";
+        String query = "SELECT Q.ID AS QUESTION_ID, Q.TITLE, Q.DESCRIPTION," +
+                " Q.CREATED_AT,Q.*, U.* FROM QUESTION Q JOIN USER U WHERE Q.USER_ID=U.ID ORDER BY Q.ID ASC; ";
         return jdbcTemplate.query(query,new QuestionRowMapper());
     }
 
@@ -41,16 +42,28 @@ public class    QuestionRepository {
 
         logger.info("question is " + question.toString());
 
-        int result =  jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
-                new Object[]{question.getTitle(), question.getDescription(), new Date(), 1});
+
+        int result =0;
+        Date createdDate = new Date();
+        result += jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
+                new Object[]{question.getTitle(), question.getDescription(), createdDate, question.getUser().getId()});
+
+
 
         for (Tag tag : question.getTags()){
-            String query = "";
+           int tagCheck = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM TAG WHERE NAME = ?", tag.getValue());
+
+           if(tagCheck == 0){
+                result +=  jdbcTemplate.update("INSERT INTO TAG (NAME) VALUES (?)",
+                        tag.getValue());
+           }
+
+            int questionID = jdbcTemplate.queryForInt("SELECT ID FROM QUESTION WHERE TITLE = ? AND CREATED_AT = ? AND USER_ID = ?", question.getTitle(),createdDate,question.getUser().getId());
+               int tagID = jdbcTemplate.queryForInt("SELECT ID FROM TAG WHERE NAME = ?", tag.getValue());
+                result += jdbcTemplate.update("INSERT INTO QUESTION_TAG (QUESTION_ID,TAG_ID) VALUES (?,?)", questionID,tagID);
+
         }
-        //1) Check if a tag exists already
-        //2) if it exists, find it in the DB and get the ID number
-        //2a) if is doesn't exist add a new entry to the Tag table
-        //3) Create a new entry in Q_T table
+
 
 
         return result;

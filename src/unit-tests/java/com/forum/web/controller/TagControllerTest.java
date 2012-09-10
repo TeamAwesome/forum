@@ -3,7 +3,9 @@ package com.forum.web.controller;
 import com.forum.domain.Tag;
 import com.forum.service.TagService;
 import com.google.gson.Gson;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,15 +19,19 @@ import static org.mockito.Mockito.when;
 
 public class TagControllerTest {
     private TagController tagController;
+    private TagService tagService;
+
+    @Before
+    public void setUp(){
+        tagService = mock(TagService.class);
+        tagController = new TagController(tagService);
+    }
 
     @Test
     public void shouldGetTagsForGivenTerm() {
-        TagService tagService = mock(TagService.class);
-
         List<Tag> listOfTags = new ArrayList<Tag>();
         String term = "ore";
         when(tagService.getTagsByTerm(term)).thenReturn(listOfTags);
-        this.tagController = new TagController(tagService);
 
         String tagJSON = tagController.getTagsByTerm("ore");
 
@@ -36,7 +42,6 @@ public class TagControllerTest {
 
     @Test
     public void shouldReturnListOfTagsAsJSON() {
-        TagService tagService = mock(TagService.class);
         List<Tag> tags = Arrays.asList(
                 new Tag(1,"Lorem",11),
                 new Tag(2,"Home",15),
@@ -44,7 +49,6 @@ public class TagControllerTest {
                 new Tag(4,"java",2));
         when(tagService.getAllTags()).thenReturn(tags);
 
-        tagController = new TagController(tagService);
         String tagsAsJSON = tagController.getAllTags();
 
         String testResult = "[" +
@@ -56,4 +60,14 @@ public class TagControllerTest {
         assertThat(tagsAsJSON, is(testResult));
     }
 
+    @Test
+    public void shouldShowQuestionsWithATagPage(){
+        String expectedTagName = "music";
+
+        ModelAndView questionWithTagModelView = tagController.showQuestionsWithThisTag(expectedTagName);
+        String actualTagName = questionWithTagModelView.getModel().get("tagName").toString();
+
+        assertThat(questionWithTagModelView.getViewName(), is("questionWithTag"));
+        assertThat(actualTagName, is(expectedTagName));
+    }
 }
