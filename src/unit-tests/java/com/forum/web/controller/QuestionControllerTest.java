@@ -97,8 +97,7 @@ public class QuestionControllerTest {
     @Test
     public void shouldReturnDetailedViewOfQuestion() {
         ModelAndView modelAndView;
-        User user = new User();
-        user.setName("Dummy User");
+        User user = new User("username", "password", "name", "email@email.com", "1234567890", "China", "Female", 20, false);
         Date createdAt = new Date();
         Question question = new Question(42, "model question title", "model question description", user, createdAt);
         when(questionService.getById(42)).thenReturn(question);
@@ -115,7 +114,7 @@ public class QuestionControllerTest {
         assertThat(questionDescription, is("model question description"));
         assertThat(questionDate, is(new SimpleDateFormat("MMMM dd, yyyy").format(createdAt)));
         assertThat(questionTime, is(new SimpleDateFormat("hh:mm:ss a").format(createdAt)));
-        assertThat(questionUserName, is(user.getName()));
+        assertThat(questionUserName, is(user.getUsername()));
 
     }
 

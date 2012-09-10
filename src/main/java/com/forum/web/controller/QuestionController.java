@@ -3,7 +3,6 @@ package com.forum.web.controller;
 
 import com.forum.domain.Advice;
 import com.forum.domain.Question;
-import com.forum.domain.Tag;
 import com.forum.domain.User;
 import com.forum.service.QuestionService;
 import com.forum.service.UserService;
@@ -46,7 +45,6 @@ public class QuestionController {
             return "postQuestion";
         }
         String username = principal.getName();
-
         User user = userService.getByUserName(username);
         question.setUser(user);
 
@@ -65,7 +63,7 @@ public class QuestionController {
         modelAndView.addObject("questionId", question.getId());
         modelAndView.addObject("questionTitle", question.getTitle());
         modelAndView.addObject("questionDescription", question.getDescription());
-        modelAndView.addObject("username", question.getUser().getName());
+        modelAndView.addObject("username", question.getUser().getUsername());
         modelAndView.addObject("dateCreatedAt", new SimpleDateFormat("MMMM dd, yyyy").format(question.getCreatedAt()));
         modelAndView.addObject("timeCreatedAt", new SimpleDateFormat("hh:mm:ss a").format(question.getCreatedAt()));
         modelAndView.addObject("likes", question.getLikes());
@@ -80,7 +78,6 @@ public class QuestionController {
         }
         Advice advice = new Advice(0, null, "");
         modelAndView.addObject("advice", advice);
-
         return modelAndView;
     }
 

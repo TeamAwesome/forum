@@ -44,6 +44,7 @@ function PlotGraphs (){
                 highlighter: {
                  show: true,
                  sizeAdjust: 7.5
+                 formatString: 'Days ago:%d, Questions:%d'
                 },
                 cursor: {
                   show: false
