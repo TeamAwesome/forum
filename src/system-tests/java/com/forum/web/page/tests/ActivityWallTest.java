@@ -25,11 +25,6 @@ public class ActivityWallTest extends FunctionalTestBase {
         List<WebElement> questions = activityWall.findElements(By.className("questionTitle"));
         assertThat(questions.size(), is(10));
         loadMore.click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
         questions = activityWall.findElements(By.className("questionTitle"));
         assertThat(questions.size(), is(20));
     }

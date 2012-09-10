@@ -8,7 +8,6 @@
 
 <div id="rightPane" align="center">
             <div id="wordcloud">
-             Tag Cloud
             </div>
             <div id="advertisement">ADVERTISEMENT</div>
             <div id='fb-root'>

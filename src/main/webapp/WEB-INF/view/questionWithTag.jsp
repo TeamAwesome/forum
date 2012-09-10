@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>'/>
 
@@ -16,7 +17,6 @@
                 <h1>Questions with Tag - ${tagName}</h1>
             </div>
             <div id="activityQuestions" >
-                <button id="loadMoreQuestions" data-bind="click: loadMoreQuestion">more..</button>
                 <br /><br />
             </div>
         </div>
