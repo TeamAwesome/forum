@@ -1,6 +1,5 @@
 package com.forum.domain;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -131,13 +130,19 @@ public class QuestionTest {
     }
 
     @Test
-    public void shouldRejectWhy() {
+    public void shouldRejectWhyAndWhen() {
         Question question = new Question(
                 123,"a title", "a description", new User(), new Date(), 12, 23, 34, "why"
         );
 
-        Set<ConstraintViolation<Question>> validationResult = validator.validateProperty(question, "tagsAsString");
-        assertThat(validationResult.size(), is(1));
+        Question question2 = new Question(
+                123,"a title", "a description", new User(), new Date(), 12, 23, 34, "when"
+        );
+
+        Set<ConstraintViolation<Question>> validationResultForWhy = validator.validateProperty(question, "tagsAsString");
+        Set<ConstraintViolation<Question>> validationResultForWhen = validator.validateProperty(question2, "tagsAsString");
+        assertThat(validationResultForWhy.size(), is(1));
+        assertThat(validationResultForWhen.size(), is(1));
     }
 
     @Test

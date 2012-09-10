@@ -20,10 +20,15 @@ public class NotQuestionWordsValidator implements ConstraintValidator<NotQuestio
 
     @Override
     public boolean isValid(String context, ConstraintValidatorContext constraintValidatorContext) {
-        if(context.toUpperCase().contains("HOW")) { return false; }
-        if(context.toUpperCase().contains("WHY")) { return false; }
-        if(context.toUpperCase().contains("WHAT")){ return false; }
-        if(context.toUpperCase().contains("WHO")) { return false; }
+        String[] tagWords = context.split(" ");
+        for(String word: tagWords){
+            if(word.toUpperCase().equals("HOW")) { return false; }
+            if(word.toUpperCase().equals("WHY")) { return false; }
+            if(word.toUpperCase().equals("WHAT")){ return false; }
+            if(word.toUpperCase().equals("WHO")) { return false; }
+            if(word.toUpperCase().equals("WHERE")) { return false; }
+            if(word.toUpperCase().equals("WHEN")) { return false; }
+        }
         return true;
   }
 }
