@@ -59,7 +59,7 @@
         this.showLabel = true;
         // prop: label
         // label for the axis.
-        this.label = '';
+        this.label = 'Number Of Questions Posted';
         // prop: fontFamily
         // CSS spec for the font-family css attribute.
         // Applies only to browsers supporting native font rendering in the

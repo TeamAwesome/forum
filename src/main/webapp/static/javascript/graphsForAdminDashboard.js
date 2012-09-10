@@ -16,7 +16,7 @@ function PlotGraphs (){
 	this.plot = function(){
         $("#chartdiv").jqplot('chartdiv',[this.numberOfQuestions],
             {
-                title: 'Number of Questions',
+                title: 'Number of Questions v/s Days Ago',
                 axesDefaults: {
                     tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
                     tickOptions:
@@ -27,15 +27,24 @@ function PlotGraphs (){
                 },
                 axes: {
                     xaxis: {
-                        renderer: $.jqplot.CategoryAxisRenderer,
+                        label: "Days Ago",
+                        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
                         min:this.lengthOfTime,
                         max:'0'
                     },
                     yaxis: {
-                        renderer: $.jqplot.CategoryAxisRenderer,
+                        label : "Number Of Questions Posted",
+                        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
                         min:'0',
-                        max:(this.maximumNumberOfQuestions+10).toString()
+                        max:this.maximumNumberOfQuestions+10
                     }
+                },
+                highlighter: {
+                 show: true,
+                 sizeAdjust: 7.5
+                },
+                cursor: {
+                  show: false
                 }
             }
         );
