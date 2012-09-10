@@ -44,8 +44,9 @@ public class    QuestionRepository {
 
 
         int result =0;
+        Date createdDate = new Date();
         result += jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
-                new Object[]{question.getTitle(), question.getDescription(), new Date(), question.getUser().getId()});
+                new Object[]{question.getTitle(), question.getDescription(), createdDate, question.getUser().getId()});
 
 
 
@@ -57,7 +58,7 @@ public class    QuestionRepository {
                         tag.getValue());
            }
 
-            int questionID = jdbcTemplate.queryForInt("SELECT ID FROM QUESTION WHERE TITLE = ?", question.getTitle());
+            int questionID = jdbcTemplate.queryForInt("SELECT ID FROM QUESTION WHERE TITLE = ? AND CREATED_AT = ? AND USER_ID = ?", question.getTitle(),createdDate,question.getUser().getId());
                int tagID = jdbcTemplate.queryForInt("SELECT ID FROM TAG WHERE NAME = ?", tag.getValue());
                 result += jdbcTemplate.update("INSERT INTO QUESTION_TAG (QUESTION_ID,TAG_ID) VALUES (?,?)", questionID,tagID);
 

@@ -27,7 +27,7 @@
                 <li id="logoutLink">
                     <a name="logout" id="logout" href="<c:url value='/forum_logout' />">Logout</a>
                 </li>
-                <li id="loggedUser">Welcome!: <strong><sec:authentication property="principal" /></strong></li>
+                <li id="loggedUser">Welcome: <strong><sec:authentication property="principal" /></strong></li>
             </sec:authorize>
         </ul>
         </div>
