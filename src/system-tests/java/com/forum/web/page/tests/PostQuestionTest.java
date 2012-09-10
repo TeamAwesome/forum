@@ -2,7 +2,6 @@ package com.forum.web.page.tests;
 
 
 import org.apache.commons.lang.StringUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -29,7 +28,6 @@ public class PostQuestionTest extends FunctionalTestBase {
         assertTrue(browser.findElement(By.id("questionTitle")).isDisplayed());
     }
 
-    @Ignore("This is a bug! Counter starts counting characters on 2nd letter.")
     @Test
     public void checkTitleTest() {
         login();
@@ -37,10 +35,9 @@ public class PostQuestionTest extends FunctionalTestBase {
         WebElement title = browser.findElement(By.id("questionTitle"));
         title.sendKeys("Practice");
         WebElement post = browser.findElement(By.id("titleValidationMessage"));
-        assertThat(post.getText(), is("92 Characters Remaining"));
+        assertThat(post.getText(), is("92 characters remaining."));
     }
 
-    @Ignore("This is a bug! Counter starts counting characters on 2nd letter.")
     @Test
     public void testTitleLimit() throws Exception {
         login();
@@ -48,7 +45,7 @@ public class PostQuestionTest extends FunctionalTestBase {
         WebElement title = browser.findElement(By.id("questionTitle"));
         title.sendKeys(StringUtils.repeat("0", 100));
         WebElement post = browser.findElement(By.id("titleValidationMessage"));
-        assertThat(post.getText(), is("0 Characters Remaining"));
+        assertThat(post.getText(), is("0 characters remaining."));
     }
 
     @Test
