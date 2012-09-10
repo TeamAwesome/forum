@@ -10,3 +10,4 @@ data/
 *.log
 *.ipr
 *.iws
+junit*.properties
