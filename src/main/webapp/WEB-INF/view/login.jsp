@@ -74,7 +74,7 @@
 
                 <tr>
                     <td>
-                        <br>Not a registered user?, <a href='<c:url value="/join" />'> Join us.</a>
+                        <br>Not a registered user? <a href='<c:url value="/join" />'> Join us!</a>
                     </td>
                 </tr>
             </table>

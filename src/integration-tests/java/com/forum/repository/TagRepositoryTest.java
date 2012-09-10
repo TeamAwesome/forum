@@ -1,6 +1,7 @@
 package com.forum.repository;
 
 import com.forum.domain.Tag;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +10,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import static com.forum.test.matchers.TagMatcher.aTagWithValue;
+
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class TagRepositoryTest extends IntegrationTestBase {
+    private static Logger logger = Logger.getLogger(TagRepository.class.getName());
     private TagRepository tagRepository;
     @Autowired
     private DataSource dataSource;
@@ -76,6 +81,14 @@ public class TagRepositoryTest extends IntegrationTestBase {
         for (Tag tag : tags) {
             template.update("INSERT INTO TAG (NAME) VALUES('" + tag.getValue() + "')");
         }
+    }
+
+    @Test
+    public void  shouldGetTagByQuestionID() {
+
+        List<Tag> expectedTags = tagRepository.getTagByQuestionId(2);
+        assertTrue(expectedTags.contains(new Tag(2,"food",1)  ));
+
     }
 
 

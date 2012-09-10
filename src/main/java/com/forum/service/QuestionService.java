@@ -2,19 +2,25 @@ package com.forum.service;
 
 import com.forum.domain.Advice;
 import com.forum.domain.Question;
+import com.forum.domain.Tag;
 import com.forum.repository.AdviceRepository;
 import com.forum.repository.QuestionRepository;
+import com.forum.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class QuestionService {
+
+    private  static Logger logger = Logger.getLogger(QuestionService.class.getName());
     private QuestionRepository questionRepository;
-    private  TagService tagService;
+    private TagRepository tagRepository;
     private AdviceRepository adviceRepository;
+
 
     @Autowired
     public QuestionService(QuestionRepository questionRepository) {
@@ -26,12 +32,22 @@ public class QuestionService {
         this.adviceRepository = adviceRepository;
     }
 
+    @Autowired
+    public void setTagRepository(TagRepository tagRepository){
+        this.tagRepository = tagRepository;
+    }
+
     public Question getById(Integer questionId) {
         Question question =  questionRepository.getById(questionId);
-        List<Advice> advices = adviceRepository.getByQuestionId(questionId);
-        if(advices != null){
-            question.setAdvices(advices);
+        logger.info("this is the question from repository\n" + question.toString());
+        List <Tag> tags = tagRepository.getTagByQuestionId(questionId);
+
+        for(Tag tag : tags){
+                question.setTagsAsString(tag.getValue());
         }
+
+        List<Advice> advices = adviceRepository.getByQuestionId(questionId);
+        question.setAdvices(advices);
         return question;
     }
     @Transactional

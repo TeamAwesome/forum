@@ -32,8 +32,10 @@ public class    QuestionRepository {
     }
 
     public Question getById(Integer questionId) {
-        String query = "SELECT Q.ID AS QUESTION_ID, Q.TITLE, Q.DESCRIPTION, " +
-                "Q.CREATED_AT,Q.*, U.* FROM QUESTION Q JOIN USER U WHERE Q.USER_ID=U.ID AND Q.ID = ?";
+        String query = "SELECT Q.ID AS QUESTION_ID, Q.TITLE, Q.DESCRIPTION, Q.CREATED_AT," +
+                "Q.*, U.*" +
+                "FROM QUESTION Q JOIN USER U " +
+                "WHERE Q.USER_ID=U.ID AND Q.ID =?";
         return (Question) jdbcTemplate.queryForObject(query, new Object[]{questionId}, new QuestionRowMapper());
 
     }

@@ -37,7 +37,7 @@ public class Question implements Serializable {
     @NotBlank(message = "A question must have at least one tag.")
     @Pattern(regexp = "^[" + Tag.REGEXP + ",]*$" , message = "special characters should not be included.")
     @NotQuestionWords
-    private String tagsAsString;
+    private String tagsAsString="";
 
     private List<Advice> advices;
     public Question() {
@@ -163,11 +163,11 @@ public class Question implements Serializable {
     }
 
     public String getTagsAsString() {
-        return tagsAsString;
+       return tagsAsString;
     }
 
     public void setTagsAsString(String tagsAsString) {
-        this.tagsAsString = tagsAsString;
+        this.tagsAsString += tagsAsString +  "," ;
     }
 
     @Override

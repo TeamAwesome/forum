@@ -5,9 +5,11 @@ package com.forum.service;
 
 import com.forum.domain.Advice;
 import com.forum.domain.Question;
+import com.forum.domain.Tag;
 import com.forum.domain.User;
 import com.forum.repository.AdviceRepository;
 import com.forum.repository.QuestionRepository;
+import com.forum.repository.TagRepository;
 import com.forum.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,12 +29,16 @@ public class QuestionServiceTest {
     private QuestionRepository questionRepository;
     private AdviceRepository adviceRepository;
     private UserRepository userRepository;
+    private TagRepository tagRepository;
 
     @Before
     public void setup(){
         questionRepository = mock(QuestionRepository.class);
         adviceRepository = mock(AdviceRepository.class);
+        tagRepository = mock(TagRepository.class);
         questionService = new QuestionService(questionRepository);
+        questionService.setAdviceRepository(adviceRepository);
+        questionService.setTagRepository(tagRepository);
 
     }
 
@@ -112,8 +118,8 @@ public class QuestionServiceTest {
     @Test
     public void shouldRemoveExtraSpacesInDescription(){
         List<Question> questionList = new ArrayList<Question>();
-        Question question = new Question(100,"Question Title", "                Question Description", null, null,0,0,0);
-        Question question1 = new Question(101,"Question Title", "                        Question Description 1", null, null,0,0,0);
+        Question question = new Question(100,"Question Title", " Question Description", null, null,0,0,0);
+        Question question1 = new Question(101,"Question Title", "Question Description 1", null, null,0,0,0);
         questionList.add(question);
         questionList.add(question1);
 
@@ -129,5 +135,31 @@ public class QuestionServiceTest {
         userRepository = mock(UserRepository.class);
         when(userRepository.getByUsername("lu")).thenReturn(user);
         assertThat(user.getUsername(), is("lu"));
+    }
+
+    @Test
+    public void shouldReturnTagAsString() {
+        Question question = new Question(212,"Test Data","Dont Consider me as a Data", new User(),new Date());
+        question.setTagsAsString("tags,test,display");
+        when(questionRepository.getById(212)).thenReturn(question);
+        when(adviceRepository.getByQuestionId(212)).thenReturn(new ArrayList<Advice>());
+        when(tagRepository.getTagByQuestionId(212)).thenReturn(new ArrayList<Tag>());
+        Question expected = questionService.getById(212);
+
+
+        assertThat(expected.getTagsAsString(),is("tags,test,display,"));
+    }
+
+    @Test
+    public void shouldReturnEmptyTagsWhenPassedNull() {
+        Question question = new Question(212,"Test Data","Dont Consider me as a Data", new User(),new Date());
+        question.setTagsAsString("");
+        when(questionRepository.getById(212)).thenReturn(question);
+        when(adviceRepository.getByQuestionId(212)).thenReturn(new ArrayList<Advice>());
+        when(tagRepository.getTagByQuestionId(212)).thenReturn(new ArrayList<Tag>());
+        Question expected = questionService.getById(212);
+
+
+        assertThat(expected.getTagsAsString(),is(","));
     }
 }

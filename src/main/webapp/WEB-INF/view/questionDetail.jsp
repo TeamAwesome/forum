@@ -44,8 +44,10 @@
                         <input id="flagInput" type='submit' name="flag" value="Flag as Inappropriate"></input>
                     </div>
 
-                    <div id ="tags">
-                        <p><label class="questionDetail" name="tags"> Tags:</label> ${questionTags} </p>
+                    <div id ="tag">
+                        <p><label class="questionDetail"> Tags:</label>
+                        ${questionTags}
+                        </p>
                     </div>
 
                     <strong>Responses:</strong>

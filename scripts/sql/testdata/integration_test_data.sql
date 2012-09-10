@@ -212,3 +212,5 @@ INSERT INTO ADVICE(
     USER_ID)
   VALUES(1, "I want to visit, but I hear it's been raining", '2012-08-13 10:20:04', 1,3);
 
+INSERT INTO QUESTION_TAG
+VALUES(2,2);

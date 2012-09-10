@@ -42,4 +42,10 @@ public class TagRepository {
     private List<Tag> retrieveTags(String query, Object... params) {
         return jdbcTemplate.query(query, params, new TagRowMapper());
     }
+
+    public List<Tag> getTagByQuestionId(Integer questionId) {
+        return jdbcTemplate.query("SELECT ID, NAME FROM QUESTION_TAG, TAG WHERE QUESTION_TAG.TAG_ID=TAG.ID AND QUESTION_TAG.QUESTION_ID=?",
+                new Object[]{questionId},new TagRowMapper());
+    }
+
 }

@@ -6,6 +6,7 @@ public class Tag {
     private int id;
     public static final String REGEXP = "a-zA-Z0-9äöüÄÖÜß ";
 
+
     @Pattern(regexp = "^[" + REGEXP + "]*$")
     private String value;
 
@@ -64,4 +65,6 @@ public class Tag {
                 ", count=" + count +
                 '}';
     }
+
+
 }

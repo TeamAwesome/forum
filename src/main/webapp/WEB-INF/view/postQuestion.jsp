@@ -14,6 +14,10 @@
 </style>
 
 <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>'>
+              <script src="<c:url value='/static/jsquery/jquery.js'/>"></script>
+              <script src='<c:url value="/static/javascript/jquery-1.5.min.js"/>' ></script>
+              <script src='<c:url value="/static/javascript/jquery-ui-1.8.min.js"/>' ></script>
+              <link href="<c:url value='/static/css/jquery-ui-1.8.css' />" rel="stylesheet" type="text/css"/>
 
 </head>
 <body class="yui-skin-sam">
@@ -68,7 +72,6 @@
 
 </body>
               <script src='<c:url value="/static/javascript/yahoo-dom-event.js"/>'></script>
-              <script src='<c:url value="/static/javascript/jquery-latest.js"/>' type="text/javascript"></script>
               <script src='<c:url value="/static/javascript/jquery-events.js"/>' type="text/javascript"></script>
               <script type="text/javascript" src='<c:url value="/static/javascript/Question.js"/>'></script>
               <script src='<c:url value="/static/javascript/element-min.js"/>'></script>
@@ -80,14 +83,11 @@
               <script src='<c:url value="/static/javascript/postQuestionValidator.js"/>'></script>
 
               <!-- Needed for autocomplete plugin-->
-              <script src="<c:url value='/static/jsquery/jquery.js'/>"></script>
-              <script src='<c:url value="/static/javascript/tagsAutocomplete.js"/>'></script>
               <script src='<c:url value="/static/javascript/jquery.ui.core.js"/>'></script>
               <script src='<c:url value="/static/javascript/jquery.ui.position.js"/>'></script>
               <script src='<c:url value="/static/javascript/jquery.ui.widget.js"/>'></script>
-              <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-              <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-              <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>\
+              <script src='<c:url value="/static/javascript/jquery.ui.widget.js"/>'></script>
+              <script src="<c:url value='/static/javascript/tagsAutocomplete.js'/>"></script>
 
 
 

@@ -52,14 +52,7 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
         assertThat(questions.size(), is(24));
     }
 
-    /*                                                tags = new ArrayList<Tag>();
-        String[] tagArray = tagsAsString.split(",");
-        for (String tag : tagArray){
-            tags.add(new Tag(tag.trim()));
-        }
 
-     * TODO - continue here for writing tags to the database
-     */
     @Test
     public void shouldCreateQuestionWithNonExistingTags(){
         QuestionRepository questionRepository = new QuestionRepository(dataSource);

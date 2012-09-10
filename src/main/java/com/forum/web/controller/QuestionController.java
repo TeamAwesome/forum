@@ -3,6 +3,7 @@ package com.forum.web.controller;
 
 import com.forum.domain.Advice;
 import com.forum.domain.Question;
+import com.forum.domain.Tag;
 import com.forum.domain.User;
 import com.forum.service.QuestionService;
 import com.forum.service.UserService;
@@ -72,11 +73,14 @@ public class QuestionController {
         modelAndView.addObject("views", question.getViews());
         modelAndView.addObject("flags", question.getFlags());
         modelAndView.addObject("responses", question.getResponses());
-        if(question.getAdvices() != null){
+        modelAndView.addObject("questionTags",question.getTagsAsString());
+
+        if(question.getAdvices()!= null){
             modelAndView.addObject("advices", question.getAdvices());
         }
         Advice advice = new Advice(0, null, "");
         modelAndView.addObject("advice", advice);
+
         return modelAndView;
     }
 

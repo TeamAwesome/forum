@@ -190,4 +190,21 @@ public class QuestionControllerTest {
         this.questionController = new QuestionController(questionService, null);
     }
 
+    @Test
+    public void shouldReturnDetailedViewOfQuestionWithTags() {
+        QuestionService questionService = mock(QuestionService.class);
+        ModelAndView modelAndView;
+        User user = new User();
+        user.setName("Dummy User");
+        Date createdAt = new Date();
+        Question question = new Question(100, "model question title", "model question description", user, createdAt, 10, 10, 10);
+        question.setTagsAsString("Music, Awesome, Bangalore");
+        when(questionService.getById(100)).thenReturn(question);
+        this.questionController = new QuestionController(questionService,null);
+
+        modelAndView = questionController.viewQuestionDetail(100);
+        String questionTags = (String) modelAndView.getModel().get("questionTags");
+        assertThat(questionTags, is(question.getTagsAsString()));
+
+    }
 }
