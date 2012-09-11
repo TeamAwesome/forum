@@ -2,6 +2,7 @@ package com.forum.service.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.logging.Logger;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,15 +21,14 @@ public class NotQuestionWordsValidator implements ConstraintValidator<NotQuestio
 
     @Override
     public boolean isValid(String context, ConstraintValidatorContext constraintValidatorContext) {
-        String[] tagWords = context.split(" ");
-        for(String word: tagWords){
-            if(word.toUpperCase().equals("HOW")) { return false; }
-            if(word.toUpperCase().equals("WHY")) { return false; }
-            if(word.toUpperCase().equals("WHAT")){ return false; }
-            if(word.toUpperCase().equals("WHO")) { return false; }
-            if(word.toUpperCase().equals("WHERE")) { return false; }
-            if(word.toUpperCase().equals("WHEN")) { return false; }
-        }
+        String[] tagWords = context.split("[, ]");
+        for(String word: tagWords)
+            {
+                if(word.toUpperCase().equals("HOW")) { return false; }
+                if(word.toUpperCase().equals("WHY")) { return false; }
+                if(word.toUpperCase().equals("WHAT")){ return false; }
+                if(word.toUpperCase().equals("WHO")) { return false; }
+            }
         return true;
-  }
+    }
 }

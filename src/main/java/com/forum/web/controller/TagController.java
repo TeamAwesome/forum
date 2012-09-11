@@ -21,7 +21,7 @@ public class TagController {
     public TagController(TagService tagService) {
         this.tagService = tagService;
     }
-    @RequestMapping(value="/postQuestion/getTagsByTerm/{term}", method = RequestMethod.GET)
+    @RequestMapping(value="/tag/ByTerm/{term}", method = RequestMethod.GET)
     @ResponseBody
     public String getTagsByTerm(@PathVariable String term) {
 

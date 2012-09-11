@@ -1,9 +1,13 @@
+#topPanel{
+   margin: 0 auto;
+   width:100%;
+}
+
 
 #left
 {
     float:left;
     width:50%;
-    padding-left: 1%;
 }
 
 #right
@@ -11,8 +15,8 @@
     float:left;
     width:40%;
     position: relative;
-    padding-top : 5%;
-    padding-left: 5%;
+    padding-top : 10%;
+    padding-left: 3%;
     text-align:left;
     font-size:.9em;
 }
@@ -48,6 +52,11 @@
     background-color:#FFF0DB;
 }
 
+#responsePanel{
+      float:left;
+      width:80%;
+      padding-left:2%;
+}
 #response
 {
     padding: 5px 3px 2px 5px;

@@ -147,7 +147,7 @@ public class QuestionServiceTest {
         Question expected = questionService.getById(212);
 
 
-        assertThat(expected.getTagsAsString(),is("tags,test,display,"));
+        assertThat(expected.getTagsAsString(),is("tags,test,display"));
     }
 
     @Test
@@ -160,6 +160,6 @@ public class QuestionServiceTest {
         Question expected = questionService.getById(212);
 
 
-        assertThat(expected.getTagsAsString(),is(","));
+        assertThat(expected.getTagsAsString(),is(""));
     }
 }
