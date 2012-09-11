@@ -21,7 +21,8 @@ public class LoginHandler implements AuthenticationSuccessHandler {
         if(authority.equals("ROLE_ADMIN")){
             httpServletResponse.sendRedirect("adminDashboard");
         } else if (authority.equals("ROLE_USER")){
-            httpServletResponse.sendRedirect("");
+            String url = httpServletRequest.getParameter("url");
+            httpServletResponse.sendRedirect(url);
         }
     }
 }

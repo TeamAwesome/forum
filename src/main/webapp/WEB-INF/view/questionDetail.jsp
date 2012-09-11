@@ -79,7 +79,7 @@
                     <div id="response2">
                         </br>
                         <sec:authorize access="isAnonymous()">
-                            <button type="button" id="loginAndPost" onclick='javascript:window.location="/forum/login";'>Post advice</button>
+                            <button type="button" id="loginAndPost" onclick='javascript:window.location="/forum/login?url="+window.location.href;'>Post advice</button>
                         </sec:authorize>
                         <sec:authorize access="isAuthenticated()">
                             <form:form method="post" action="../../postAdvice" commandName="advice" id="adviceForm">

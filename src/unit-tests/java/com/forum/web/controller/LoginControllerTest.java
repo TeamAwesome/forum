@@ -20,7 +20,7 @@ public class LoginControllerTest {
 
     @Test
     public void shouldNavigateToLoginPage() {
-        ModelAndView activityModelAndView = loginController.loginView();
+        ModelAndView activityModelAndView = loginController.loginView(null);
 
         assertThat(activityModelAndView.getViewName(), is("login"));
     }

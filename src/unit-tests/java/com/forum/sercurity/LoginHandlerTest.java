@@ -51,7 +51,7 @@ public class LoginHandlerTest {
 
         loginHandler.onAuthenticationSuccess(httpServletRequest,httpServletResponse,authentication);
 
-        verify(httpServletResponse).sendRedirect("");
+        verify(httpServletResponse).sendRedirect(null);
     }
 
     private void setupAuthentication() {
