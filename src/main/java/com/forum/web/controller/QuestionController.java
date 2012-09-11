@@ -63,7 +63,7 @@ public class QuestionController {
         modelAndView.addObject("questionId", question.getId());
         modelAndView.addObject("questionTitle", question.getTitle());
         modelAndView.addObject("questionDescription", question.getDescription());
-        modelAndView.addObject("username", question.getUser().getName());
+        modelAndView.addObject("username", question.getUser().getUsername());
         modelAndView.addObject("dateCreatedAt", new SimpleDateFormat("MMMM dd, yyyy").format(question.getCreatedAt()));
         modelAndView.addObject("timeCreatedAt", new SimpleDateFormat("hh:mm:ss a").format(question.getCreatedAt()));
         modelAndView.addObject("likes", question.getLikes());

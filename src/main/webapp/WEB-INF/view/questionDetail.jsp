@@ -69,7 +69,7 @@
                     <br></br>
                     <div id="advice">
                         <c:forEach var="advice" items="${advices}">
-                            <strong>${advice.user.name} posted on ${advice.createdAt}:</strong>
+                            <strong>${advice.user.username} posted on ${advice.createdAt}:</strong>
                             <br>
                             ${advice.description}
                             <hr>
