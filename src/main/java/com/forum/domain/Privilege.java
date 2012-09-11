@@ -1,7 +1,7 @@
 package com.forum.domain;
 
 public enum Privilege {
-    ADMIN(), MODERATOR(), EXPERT(), USER(), BLOCKED_USER();
+    ADMIN, USER;
 
     public static Privilege getPrivilege(int value){
         switch(value){
