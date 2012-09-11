@@ -35,10 +35,8 @@
             <div style="color:red; text-align:center" id="messagetobedisplayed">
                 ${messageToBeDisplayed}
             </div>
-
-                        <table >
-                            <tr>
-                            <td>
+                 <table>
+                    <td>
                                  <div id="noticeMessage">
                                         <br> ${noticeMessage}
                                  </div>

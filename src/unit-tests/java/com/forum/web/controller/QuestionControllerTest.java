@@ -2,6 +2,7 @@ package com.forum.web.controller;
 
 
 import com.forum.domain.Question;
+import com.forum.domain.Tag;
 import com.forum.domain.User;
 import com.forum.service.QuestionService;
 import com.forum.service.UserService;
@@ -202,8 +203,9 @@ public class QuestionControllerTest {
         this.questionController = new QuestionController(questionService,null);
 
         modelAndView = questionController.viewQuestionDetail(100);
-        String questionTags = (String) modelAndView.getModel().get("questionTags");
-        assertThat(questionTags, is(question.getTagsAsString()));
+
+        //String questionTags = (String) modelAndView.getModel().get("questionTags");
+        assertThat((List<Tag>) modelAndView.getModel().get("questionTags"), is(question.getTags()));
 
     }
 }

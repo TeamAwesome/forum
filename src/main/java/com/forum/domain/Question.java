@@ -3,8 +3,6 @@ package com.forum.domain;
 import com.forum.service.validation.NoHTMLScript;
 import com.forum.service.validation.NotQuestionWords;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
@@ -167,7 +165,7 @@ public class Question implements Serializable {
     }
 
     public void setTagsAsString(String tagsAsString) {
-        this.tagsAsString += tagsAsString +  "," ;
+        this.tagsAsString = tagsAsString;
     }
 
     @Override

@@ -46,7 +46,9 @@
 
                     <div id ="tag">
                         <p><label class="questionDetail"> Tags:</label>
-                        ${questionTags}
+                        <c:forEach var="tag" items="${questionTags}">
+                        ${tag.value}
+                        </c:forEach>
                         </p>
                     </div>
 
