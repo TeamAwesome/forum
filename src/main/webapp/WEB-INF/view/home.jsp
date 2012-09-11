@@ -48,11 +48,8 @@
                       </td>
                       <td width=60%>
                       <a data-bind="attr:{href:url}"><b>
-<<<<<<< HEAD
+
                       <span class="questionTitle" data-bind="html: title" style='width: 350px; height: 1.3em;overflow: hidden; display: inline-block;'> </span></b>
-=======
-                      <span class="questionTitle" data-bind="html: title" style='width: 350px; height: 1.5em;overflow: hidden; display: inline-block;'> </span></b>
->>>>>>> [Ashwini-Pramod]:Aftre refactoring QuestionService and fixing tag display bugs
                        </a>
                       &nbsp;-&nbsp;
                       <br />
