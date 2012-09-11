@@ -119,8 +119,7 @@
     }
  table tr {
       border-bottom: 1px solid #9bf07b;
-      border-top:1px solid #9bf07b;
-    }
+   }
     table td {
 
       width:30%;
@@ -128,10 +127,6 @@
 
     }
 
-    table tr {
-      border-bottom: 1px solid #9bf07b;
-
-    }
 
  #registrationForm {
         font-size: .75em;
