@@ -65,7 +65,7 @@ public class UserAuthenticationProviderTest {
         userWithPrivilege.setPassword(password);
         when(mockAuthentication.getPrincipal()).thenReturn(username);
         when(mockAuthentication.getCredentials()).thenReturn(password);
-        when(mockUserService.getRole(user)).thenReturn(Privilege.EXPERT);
+        when(mockUserService.getRole(user)).thenReturn(Privilege.USER);
         Authentication authentication = userAuthenticationProvider.authenticate(mockAuthentication);
         Collection grantedAuthorities = authentication.getAuthorities();
         GrantedAuthority grantedAuthority = (GrantedAuthority) grantedAuthorities.toArray()[0];
