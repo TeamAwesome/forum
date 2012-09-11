@@ -48,7 +48,7 @@
                       </td>
                       <td width=60%>
                       <a data-bind="attr:{href:url}"><b>
-                      <span class="questionTitle" data-bind="html: title" style='width: 350px; height: 1em;overflow: hidden; display: inline-block;'> </span></b>
+                      <span class="questionTitle" data-bind="html: title" style='width: 350px; height: 1.3em;overflow: hidden; display: inline-block;'> </span></b>
                        </a>
                       &nbsp;-&nbsp;
                       <br />

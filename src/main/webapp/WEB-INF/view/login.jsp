@@ -36,7 +36,7 @@
                 ${messageToBeDisplayed}
             </div>
 
-                        <table style="margin-left:50">
+                        <table >
                             <tr>
                             <td>
                                  <div id="noticeMessage">

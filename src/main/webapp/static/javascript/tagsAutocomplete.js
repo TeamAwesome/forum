@@ -20,7 +20,7 @@
 				minLength: 2,
 				source: function( request, response ) {
 					// delegate back to autocomplete, but extract the last  term
-					$.getJSON("https://localhost:8443/forum/postQuestion/getTagsByTerm/"+extractLast($('#questionTags').val()), {}, response);
+					$.getJSON("https://localhost:8443/forum/tag/ByTerm/"+extractLast($('#questionTags').val()), {}, response);
                         },
 				focus: function() {
 					// prevent value inserted on focus
