@@ -51,17 +51,18 @@
                         </c:forEach>
                         </p>
                     </div>
-                <div id="right">
-                    <p><label class="questionDetail" id = "posted_by" name="user" > Posted by </label> ${username} </p>
-                    <p><label class="questionDetail" id = "posted_on" name="postedOn">On: </label>${dateCreatedAt} </p>
-                    <p><label class="questionDetail" id = "posted_at" name="postedAt">At: </label>${timeCreatedAt}</p>
-                    <p>
-                    <label id="likeCount" class="questionDetail" name="likes">  (${likes}) Likes </label><br>
-                    <label id="dislikeCount" class="questionDetail" name="dislikes">  (${dislikes}) Dislikes </label><br>
-                    <label id="flagCount" class="questionDetail" name="flags">  (${flags}) Flags </label>
-                    </p>
-                </div>
+
              </div>
+             <div id="right">
+                                 <p><label class="questionDetail" id = "posted_by" name="user" > Posted by </label> ${username} </p>
+                                 <p><label class="questionDetail" id = "posted_on" name="postedOn">On: </label>${dateCreatedAt} </p>
+                                 <p><label class="questionDetail" id = "posted_at" name="postedAt">At: </label>${timeCreatedAt}</p>
+                                 <p>
+                                 <label id="likeCount" class="questionDetail" name="likes">  (${likes}) Likes </label><br>
+                                 <label id="dislikeCount" class="questionDetail" name="dislikes">  (${dislikes}) Dislikes </label><br>
+                                 <label id="flagCount" class="questionDetail" name="flags">  (${flags}) Flags </label>
+                                 </p>
+            </div>
 
              <div id ="responsePanel">
                 <strong>Responses:</strong>
@@ -97,12 +98,12 @@
                 </div>
         </div>
 
-        <div id="rightPane">
-                <%@ include file="rightPane.jsp" %>
-        </div>
     </div>
 
 
+        <div id="rightPane">
+                <%@ include file="rightPane.jsp" %>
+        </div>
 </div>
 </body>
 
