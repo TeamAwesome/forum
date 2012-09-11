@@ -100,49 +100,39 @@ public class QuestionTest {
     }
 
     @Test
-    public void shouldRejectWho() {
-        Question question = new Question(
+    public void shouldRejectWhat() {
+        Question questionWhat = new Question(
+                123,"a title", "a description", new User(), new Date(), 12, 23, 34, "wHat"
+        );
+        Question questionWhy = new Question(
+                123,"a title", "a description", new User(), new Date(), 12, 23, 34, "why"
+        );
+        Question questionWho = new Question(
                 123,"a title", "a description", new User(), new Date(), 12, 23, 34, "Who"
         );
-
-        Set<ConstraintViolation<Question>> validationResult = validator.validateProperty(question, "tagsAsString");
-        assertThat(validationResult.size(), is(1));
-    }
-
-    @Test
-    public void shouldRejectHow() {
-        Question question = new Question(
+        Question questionHow = new Question(
                 123,"a title", "a description", new User(), new Date(), 12, 23, 34, "HOW"
         );
 
-        Set<ConstraintViolation<Question>> validationResult = validator.validateProperty(question, "tagsAsString");
-        assertThat(validationResult.size(), is(1));
+        Set<ConstraintViolation<Question>> validationResultWhat = validator.validateProperty(questionWhat, "tagsAsString");
+        Set<ConstraintViolation<Question>> validationResultWhy = validator.validateProperty(questionWhy, "tagsAsString");
+        Set<ConstraintViolation<Question>> validationResultWho = validator.validateProperty(questionWho, "tagsAsString");
+        Set<ConstraintViolation<Question>> validationResultHow = validator.validateProperty(questionHow, "tagsAsString");
+
+        assertThat(validationResultWhat.size(), is(1));
+        assertThat(validationResultWhy.size(), is(1));
+        assertThat(validationResultWho.size(), is(1));
+        assertThat(validationResultHow.size(), is(1));
     }
 
     @Test
-    public void shouldRejectWhat() {
+    public void shouldRejectHowAndWhenWithSpaceAndComma() {
         Question question = new Question(
-                123,"a title", "a description", new User(), new Date(), 12, 23, 34, "wHat"
+                123,"a title", "a description", new User(), new Date(), 12, 23, 34, "how when,"
         );
 
         Set<ConstraintViolation<Question>> validationResult = validator.validateProperty(question, "tagsAsString");
         assertThat(validationResult.size(), is(1));
-    }
-
-    @Test
-    public void shouldRejectWhyAndWhen() {
-        Question question = new Question(
-                123,"a title", "a description", new User(), new Date(), 12, 23, 34, "why"
-        );
-
-        Question question2 = new Question(
-                123,"a title", "a description", new User(), new Date(), 12, 23, 34, "when"
-        );
-
-        Set<ConstraintViolation<Question>> validationResultForWhy = validator.validateProperty(question, "tagsAsString");
-        Set<ConstraintViolation<Question>> validationResultForWhen = validator.validateProperty(question2, "tagsAsString");
-        assertThat(validationResultForWhy.size(), is(1));
-        assertThat(validationResultForWhen.size(), is(1));
     }
 
     @Test

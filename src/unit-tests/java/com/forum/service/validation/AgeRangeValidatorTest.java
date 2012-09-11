@@ -6,11 +6,14 @@ import org.junit.Test;
 
 import javax.validation.ConstraintValidatorContext;
 
+import java.util.logging.Logger;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class AgeRangeValidatorTest {
+    private static Logger logger = Logger.getLogger(NotQuestionWordsValidator.class.getName());
 
     private ConstraintValidatorContext constraintValidatorContext;
     private AgeRangeValidator ageRangeValidator;
