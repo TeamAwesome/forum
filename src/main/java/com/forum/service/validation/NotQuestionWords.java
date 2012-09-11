@@ -19,7 +19,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @ReportAsSingleViolation
 @NotNull
 public @interface NotQuestionWords {
-    String message() default "Who, What, How, Why Should not be used as tags";
+    String message() default "Who, What, How, Why should not be used as tags";
 
     Class<?>[] groups() default {};
 
