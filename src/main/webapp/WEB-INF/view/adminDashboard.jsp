@@ -2,17 +2,15 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href='<c:url value="/static/jsquery/jquery.jqplot.css" />' />
-    <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/style.css"/>">
+    <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>'>
+    <!--[if IE]><script type="text/javascript" src='<c:url value="/static/javascript/excanvas.js"/> '></script><![endif]-->
     <script language="javascript" type="text/javascript" src='<c:url value="/static/jsquery/jquery.js" />'></script>
     <script language="javascript" type="text/javascript" src='<c:url value="/static/jsquery/jquery.min.js" />'></script>
     <script language="javascript" type="text/javascript" src='<c:url value="/static/jsquery/jquery.jqplot.min.js" />'></script>
     <script language="javascript" type="text/javascript" src='<c:url value="/static/jsquery/jqplot.canvasAxisLabelRenderer.js" />'></script>
     <script language="javascript" type="text/javascript" src='<c:url value="/static/jsquery/jqplot.canvasTextRenderer.min.js" />'></script>
-    <script language="javascript" type="text/javascript" src='<c:url value="/static/javascript/graphsForAdminDashboard.js" />'></script>
     <script language="javascript" type="text/javascript" src='<c:url value="/static/jsquery/jqplot.highlighter.min.js" />'></script>
-    <script src='http://connect.facebook.net/en_US/all.js'></script>
-    <script src="<c:url value="/static/javascript/shareToSocialMedia.js"/>"></script>
-    <script src="<c:url value="/static/javascript/knockout-2.1.0.js"/>"></script>
+    <script language="javascript" type="text/javascript" src='<c:url value="/static/javascript/graphsForAdminDashboard.js" />'></script>
 </head>
 
 

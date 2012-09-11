@@ -9,7 +9,7 @@
         font-size: 1em;
         padding: 0px 20px 0px 20px;
         color: #3B3B3B;
-
+        text-align: center;
         }
 
 
@@ -18,7 +18,7 @@
         margin: 0 auto;
     	width: 894px;
     	display:block;
-    	height:
+    	text-align: left;
     }
 
     #content{
@@ -58,11 +58,11 @@
     }
 
     #rightPane{
-        margin-left: auto;
-        margin-right: auto;
+        margin-left: 0;
+        margin-right: 0;
         background:#FEE1B7;
          float: right;
-         width: 264px;
+         width: 244px;
          padding: 0 0;
          display: inline;
 
@@ -117,9 +117,7 @@
       padding:10px;
       width:560px;
     }
- table tr {
-      border-bottom: 1px solid #9bf07b;
-   }
+
     table td {
 
       width:30%;
@@ -127,6 +125,10 @@
 
     }
 
+    .userTable td {
+      border-bottom: 1px solid #9bf07b;
+      border-top:1px solid #9bf07b;
+    }
 
  #registrationForm {
         font-size: .75em;
