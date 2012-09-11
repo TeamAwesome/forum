@@ -35,15 +35,15 @@
                       <font size = 3 color="#599425">Statistics<br></font>
                        <span class="questionlikes" data-bind="text: likes"
                             style=' height: 1em; display: inline-block; font-size:.75em;'>
-                       </span> <font size = 1>Likes<br></font>
-                       <hr class="dottedLine"/><br>
+                       </span> <font size = 1>Likes<br /></font>
+                       <hr class="dottedLine"/><br />
                        <span class="questiondislikes" data-bind="text: dislikes"
                            style=' height: 1em; display: inline-block; font-size:.75em;'>
-                      </span><font size = 1> Dislikes<br></font>
-                       <hr class="dottedLine"/><br>
+                      </span><font size = 1> Dislikes<br /></font>
+                       <hr class="dottedLine"/><br />
                       <span class="questionflags" data-bind="text: flags"
                          style=' height: 1em; display: inline-block; font-size:.75em;'>
-                      </span><font size = 1> Flags<br></font>
+                      </span><font size = 1> Flags<br /></font>
 
                       </td>
                       <td width=60%>
@@ -56,7 +56,7 @@
                      <span class="questionDescription" data-bind="html: description"
                       style='width: 350px; height: 1em; overflow: hidden; display: inline-block; font-size:.8em;'>
                        </span>...
-                      <br><font color="#599425" size="2em">Created on:</font><br>
+                      <br /><font color="#599425" size="2em">Created on:</font><br />
                       <span class="questionCreatedAt" data-bind="text: createdAt" style="font-size:.7em;"> </span>
                       </td>
 

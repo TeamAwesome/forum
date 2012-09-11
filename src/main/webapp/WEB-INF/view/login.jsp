@@ -18,7 +18,7 @@
     <div id="container">
      <div id="header">
                 <div class="topButtons">
-                <ul>
+                <ul id="topButtons">
                 <li>
                     <div id="forumLinks">
                        <a href='<c:url value="/" />'> Home</a>

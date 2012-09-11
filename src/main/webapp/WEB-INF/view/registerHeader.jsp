@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>'>
 <div class="topButtons">
     <div name="forumLinks">
-        <ul>
+        <ul  id="topButtons">
             <li id="homeButton">
             <a href='<c:url value="/" />'> Home</a>
             </li>
@@ -27,9 +27,13 @@
                 <li id="logoutLink">
                     <a name="logout" id="logout" href="<c:url value='/forum_logout' />">Logout</a>
                 </li>
-                <li id="loggedUser">Welcome: <strong><sec:authentication property="principal" /></strong></li>
             </sec:authorize>
         </ul>
+        </div>
+        <div id="loggedUser">
+            <sec:authorize access="isAuthenticated()">
+                Welcome: <strong><sec:authentication property="principal" /></strong>
+            </sec:authorize>
         </div>
 
 </div>
