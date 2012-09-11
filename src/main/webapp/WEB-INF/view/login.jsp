@@ -18,7 +18,7 @@
     <div id="container">
      <div id="header">
                 <div class="topButtons">
-                <ul>
+                <ul id="topButtons">
                 <li>
                     <div id="forumLinks">
                        <a href='<c:url value="/" />'> Home</a>
@@ -35,8 +35,10 @@
             <div style="color:red; text-align:center" id="messagetobedisplayed">
                 ${messageToBeDisplayed}
             </div>
-                 <table>
-                    <td>
+
+                        <table>
+                            <tr>
+                            <td>
                                  <div id="noticeMessage">
                                         <br> ${noticeMessage}
                                  </div>

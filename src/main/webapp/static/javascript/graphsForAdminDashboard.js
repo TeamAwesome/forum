@@ -38,12 +38,12 @@ function PlotGraphs (){
                         label : "Number Of Questions Posted",
                         labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
                         min:'',
-                        max:this.maximumNumberOfQuestions+10,
+                        max:this.maximumNumberOfQuestions+10
                     }
                 },
                 highlighter: {
                  show: true,
-                 sizeAdjust: 7.5
+                 sizeAdjust: 7.5,
                  formatString: 'Days ago:%d, Questions:%d'
                 },
                 cursor: {
