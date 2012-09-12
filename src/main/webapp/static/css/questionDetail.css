@@ -78,6 +78,12 @@
     float: left;
 }
 
+#advice{
+    word-wrap: break-word;
+   overflow: auto;
+}
+
+
 #tag p{
 padding-left:0px;
 }
