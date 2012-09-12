@@ -41,7 +41,7 @@ public class Question implements Serializable {
     public Question() {
     }
 
-    private List<Tag> tags;
+    private List<Tag> tags = new ArrayList<Tag>();
 
     public Question(int id, String title, String description, User user, Date createdAt) {
         this.id = id;
@@ -145,19 +145,17 @@ public class Question implements Serializable {
     }
 
     public List<Tag> getTags() {
-        List<Tag> result = new ArrayList<Tag>();
-
         if (tagsAsString != null) {
             String[] tagArray = tagsAsString.split(",");
             for (String tag : tagArray){
                 if(tag.trim().isEmpty()){
                     continue;
                 }
-                result.add(new Tag(tag.trim()));
+                tags.add(new Tag(tag.trim()));
             }
         }
 
-        return result;
+        return tags;
     }
 
     public String getTagsAsString() {
@@ -188,5 +186,9 @@ public class Question implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }

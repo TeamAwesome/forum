@@ -97,47 +97,38 @@ public class QuestionControllerTest {
 
     @Test
     public void shouldReturnDetailedViewOfQuestion() {
-        ModelAndView modelAndView;
         User user = new User("username", "password", "name", "email@email.com", "1234567890", "China", "Female", 20, false);
-        Date createdAt = new Date();
-        Question question = new Question(42, "model question title", "model question description", user, createdAt);
+        Question question = new Question(42, "model question title", "model question description", user, new Date());
         when(questionService.getById(42)).thenReturn(question);
-        this.questionController = new QuestionController(questionService, null);
 
-        modelAndView = questionController.viewQuestionDetail(42);
-        String questionTitle = (String) modelAndView.getModel().get("questionTitle");
-        String questionDescription = (String) modelAndView.getModel().get("questionDescription");
+        this.questionController = new QuestionController(questionService, null);
+        ModelAndView modelAndView = questionController.viewQuestionDetail(42);
+
+        Question questionResult = (Question) modelAndView.getModel().get("question");
         String questionDate = (String) modelAndView.getModel().get("dateCreatedAt");
         String questionTime = (String) modelAndView.getModel().get("timeCreatedAt");
-        String questionUserName = (String) modelAndView.getModel().get("username");
 
-        assertThat(questionTitle, is("model question title"));
-        assertThat(questionDescription, is("model question description"));
-        assertThat(questionDate, is(new SimpleDateFormat("MMMM dd, yyyy").format(createdAt)));
-        assertThat(questionTime, is(new SimpleDateFormat("hh:mm:ss a").format(createdAt)));
-        assertThat(questionUserName, is(user.getUsername()));
+        assertThat(questionResult.getTitle(), is("model question title"));
+        assertThat(questionResult.getDescription(), is("model question description"));
+        assertThat(questionDate, is(new SimpleDateFormat("MMMM dd, yyyy").format(new Date())));
+        assertThat(questionTime, is(new SimpleDateFormat("hh:mm:ss a").format(new Date())));
+        assertThat(questionResult.getUser().getUsername(), is(user.getUsername()));
 
     }
 
     @Test
     public void shouldReturnDetailedViewOfQuestionWithLikesDisLikesAndFlags() {
         ModelAndView modelAndView;
-        User user = new User();
-        user.setName("Dummy User");
-        Date createdAt = new Date();
-        Question question = new Question(100, "model question title", "model question description", user, createdAt, 10, 10, 10);
+        Question question = new Question(100, "model question title", "model question description", new User(), new Date(), 10, 10, 10);
         when(questionService.getById(100)).thenReturn(question);
         this.questionController = new QuestionController(questionService, null);
 
         modelAndView = questionController.viewQuestionDetail(100);
-        Integer questionLikes = (Integer) modelAndView.getModel().get("likes");
-        Integer questionDisLikes = (Integer) modelAndView.getModel().get("dislikes");
-        Integer questionFlags = (Integer) modelAndView.getModel().get("flags");
+        Question questionResult = (Question)modelAndView.getModel().get("question");
 
-        assertThat(questionLikes, is(question.getLikes()));
-        assertThat(questionDisLikes, is(question.getDislikes()));
-        assertThat(questionFlags, is(question.getFlags()));
-
+        assertThat(questionResult.getLikes(), is(question.getLikes()));
+        assertThat(questionResult.getDislikes(), is(question.getDislikes()));
+        assertThat(questionResult.getFlags(), is(question.getFlags()));
     }
 
     @Test
@@ -193,19 +184,18 @@ public class QuestionControllerTest {
     @Test
     public void shouldReturnDetailedViewOfQuestionWithTags() {
         QuestionService questionService = mock(QuestionService.class);
-        ModelAndView modelAndView;
-        User user = new User();
-        user.setName("Dummy User");
-        Date createdAt = new Date();
-        Question question = new Question(100, "model question title", "model question description", user, createdAt, 10, 10, 10);
+        Question question = new Question(100, "model question title", "model question description", new User(), new Date(), 10, 10, 10);
         question.setTagsAsString("Music, Awesome, Bangalore");
         when(questionService.getById(100)).thenReturn(question);
+
         this.questionController = new QuestionController(questionService,null);
 
-        modelAndView = questionController.viewQuestionDetail(100);
+        ModelAndView modelAndView = questionController.viewQuestionDetail(100);
 
-        //String questionTags = (String) modelAndView.getModel().get("questionTags");
-        assertThat((List<Tag>) modelAndView.getModel().get("questionTags"), is(question.getTags()));
+        Question questionResult = (Question)modelAndView.getModel().get("question");
+        List<Tag> tagsResult = questionResult.getTags();
+
+        assertThat(tagsResult, is(question.getTags()));
 
     }
 }

@@ -2,8 +2,6 @@ package com.forum.repository;
 
 import com.forum.domain.Question;
 import com.forum.domain.Tag;
-import com.forum.domain.User;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -12,12 +10,13 @@ import javax.sql.DataSource;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Repository
-public class    QuestionRepository {
+public class QuestionRepository {
 
     private JdbcTemplate jdbcTemplate;
-    private static  Logger logger = Logger.getLogger(QuestionRepository.class.getName());
+    private static Logger logger = Logger.getLogger(QuestionRepository.class.getName());
 
 
     @Autowired
@@ -28,7 +27,7 @@ public class    QuestionRepository {
     public List<Question> getAllQuestions() {
         String query = "SELECT Q.ID AS QUESTION_ID, Q.TITLE, Q.DESCRIPTION," +
                 " Q.CREATED_AT,Q.*, U.* FROM QUESTION Q JOIN USER U WHERE Q.USER_ID=U.ID ORDER BY Q.ID ASC; ";
-        return jdbcTemplate.query(query,new QuestionRowMapper());
+        return jdbcTemplate.query(query, new QuestionRowMapper());
     }
 
     public Question getById(Integer questionId) {
@@ -42,33 +41,31 @@ public class    QuestionRepository {
 
     public int createQuestion(Question question) {
 
-        logger.info("question is " + question.toString());
-
-
-        int result =0;
-        Date createdDate = new Date();
+        int result = 0;
         result += jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
-                new Object[]{question.getTitle(), question.getDescription(), createdDate, question.getUser().getId()});
+                new Object[]{question.getTitle(), question.getDescription(), new Date(), question.getUser().getId()});
 
+        for (Tag tag : question.getTags()) {
 
+            if (getTagCheck(tag) == 0) {
+                result += getResultIfTagCheckIsNull(tag);
+            }
 
-        for (Tag tag : question.getTags()){
-           int tagCheck = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM TAG WHERE NAME = ?", tag.getValue());
-
-           if(tagCheck == 0){
-                result +=  jdbcTemplate.update("INSERT INTO TAG (NAME) VALUES (?)",
-                        tag.getValue());
-           }
-
-            int questionID = jdbcTemplate.queryForInt("SELECT ID FROM QUESTION WHERE TITLE = ? AND CREATED_AT = ? AND USER_ID = ?", question.getTitle(),createdDate,question.getUser().getId());
-               int tagID = jdbcTemplate.queryForInt("SELECT ID FROM TAG WHERE NAME = ?", tag.getValue());
-                result += jdbcTemplate.update("INSERT INTO QUESTION_TAG (QUESTION_ID,TAG_ID) VALUES (?,?)", questionID,tagID);
-
+            int questionID = jdbcTemplate.queryForInt("SELECT ID FROM QUESTION WHERE TITLE = ? AND CREATED_AT = ? AND USER_ID = ?", question.getTitle(), new Date(), question.getUser().getId());
+            int tagID = jdbcTemplate.queryForInt("SELECT ID FROM TAG WHERE NAME = ?", tag.getValue());
+            result += jdbcTemplate.update("INSERT INTO QUESTION_TAG (QUESTION_ID,TAG_ID) VALUES (?,?)", questionID, tagID);
         }
 
-
-
         return result;
+    }
+
+    private int getResultIfTagCheckIsNull(Tag tag) {
+        return jdbcTemplate.update("INSERT INTO TAG (NAME) VALUES (?)",
+                tag.getValue());
+    }
+
+    private int getTagCheck(Tag tag) {
+        return jdbcTemplate.queryForInt("SELECT COUNT(*) FROM TAG WHERE NAME = ?", tag.getValue());
     }
 
     public List<Question> latestQuestion(int pageNum, int pageSize) {
@@ -98,7 +95,8 @@ public class    QuestionRepository {
 
     public int addDisLikesById(Integer questionId) {
         String query = "UPDATE QUESTION SET DISLIKES=DISLIKES+1 WHERE ID=?";
-        return jdbcTemplate.update(query, new Object[]{questionId});    }
+        return jdbcTemplate.update(query, new Object[]{questionId});
+    }
 
     public int addFlagsById(Integer questionId) {
         String query = "UPDATE QUESTION SET FLAGS=FLAGS+1 WHERE ID=?";

@@ -140,7 +140,6 @@ public class QuestionTest {
         Question question = new Question(
                 123,"a title", "a description", new User(), new Date(), 12, 23, 34, "Foo, , Bar,  \t     , Baz, "
         );
-        logger.info(question.toString());
         List<Tag> tagList = question.getTags();
         assertThat(tagList.size(), is(3));
         assertTrue("should contain a tag 'Foo'", tagList.contains(new Tag("Foo")));
