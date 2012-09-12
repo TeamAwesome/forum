@@ -18,11 +18,10 @@ public class LoginHandler implements AuthenticationSuccessHandler {
         String authority = grantedAuthority.getAuthority();
 
 //        todo : should not leave user homepage redirection as a blank string. Should find a better defined path.
-        if(authority.equals("ROLE_ADMIN")){
+        String url = httpServletRequest.getParameter("url");
+        if(authority.equals("ROLE_ADMIN") && url.isEmpty())
             httpServletResponse.sendRedirect("adminDashboard");
-        } else if (authority.equals("ROLE_USER")){
-            String url = httpServletRequest.getParameter("url");
+        else
             httpServletResponse.sendRedirect(url);
-        }
     }
 }

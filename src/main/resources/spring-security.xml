@@ -9,9 +9,12 @@
         <intercept-url pattern="/postQuestion" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" requires-channel="https"/>
         <intercept-url pattern="/adminDashboard" access="hasRole('ROLE_ADMIN')" requires-channel="https"/>
         <intercept-url pattern="/**" access="permitAll" requires-channel="https"/>
-        <form-login login-page="/login?url=https://localhost:8443/forum/postQuestion" login-processing-url="/j_spring_security_check"
-                    always-use-default-target="true" default-target-url="/"
-                    authentication-success-handler-ref="loginSuccessHandler" authentication-failure-url="/errorLogin"/>
+
+        <form-login login-page="/login?url=https://localhost:8443/forum/postQuestion"
+                    login-processing-url="/j_spring_security_check"
+                    default-target-url="/"
+                    authentication-success-handler-ref="loginSuccessHandler"
+                    authentication-failure-url="/errorLogin"/>
 
         <logout logout-success-url = "/logout" logout-url="/forum_logout" invalidate-session="false"/>
         <access-denied-handler ref="errorHandlingFilter" />
