@@ -18,12 +18,14 @@ import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @Controller
 public class QuestionController {
 
     private QuestionService questionService;
     private UserService userService;
+    private static final Logger logger = Logger.getLogger(QuestionController.class.getName());
 
 
     @Autowired
@@ -102,9 +104,14 @@ public class QuestionController {
 
     @RequestMapping(value = "/question/search/tag/{value}", method = RequestMethod.POST)
     @ResponseBody
-    public String getQuestionsWithTagValue(@PathVariable String tagValue) {
-        List<Question> questions = questionService.getByTagValue(tagValue);
-
+    public String getQuestionsWithTagValue(@PathVariable String value) {
+        logger.info("Come into this function.");
+        List<Question> questions = questionService.getByTagValue(value);
         return new Gson().toJson(questions);
+    }
+
+    @RequestMapping(value = "/tags/{tagValue}", method = RequestMethod.GET)
+    public ModelAndView showResultsForTag(@PathVariable String tagValue) {
+            return new ModelAndView("questionWithTag").addObject("tagName", tagValue);
     }
 }

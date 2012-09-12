@@ -19,12 +19,13 @@ function QuestionsViewModel() {
     this.questions = ko.observableArray();
 
     var self = this;
-    var loadQuestions = function(url, resetPagination) {
+    var loadQuestions = function(url, resetPagination, identifier) {
         currentSearch = url;
         if (resetPagination) {
             page = 1;
             pageSize = 10;
         }
+        if(identifier === "home")
          $.post(url, {"pageNum": page.toString(), "pageSize": pageSize.toString()}, function(data) {
             $.each(data, function (index, question) {
                 self.questions.push(new Question(
@@ -39,22 +40,41 @@ function QuestionsViewModel() {
             });
             page +=1;
          },"json");
+         else{
+         $.post(url, function(data) {
+                     $.each(data, function (index, question) {
+                         self.questions.push(new Question(
+                             question.id,
+                             question.title,
+                             question.createdAt,
+                             stripHtmlSpaces(question.description),
+                             question.user.username,
+                             question.likes,
+                             question.dislikes,
+                             question.flags));
+                     });
+                     page +=1;
+                  },"json");
+         }
     }
 
     this.loadLatestQuestions = function() {
-        loadQuestions("./question/search/latest", true);
+        loadQuestions("/forum/question/search/latest", true,"home");
     }
     this.loadQuestionsByTag = function(tagValue) {
-        loadQuestions("./question/search/tag/" + tagValue, true);
+        loadQuestions("/forum/question/search/tag/" + tagValue, true,"tag");
     }
     this.loadMoreQuestion = function() {
-        loadQuestions(currentSearch, false);
+        loadQuestions(currentSearch, false, "home");
     }
 }
 
 var questions = new QuestionsViewModel();
 ko.applyBindings(questions);
-questions.loadLatestQuestions();
+if(window.location.href === "https://localhost:8443/forum/")
+    questions.loadLatestQuestions();
+else
+    questions.loadQuestionsByTag(document.getElementById("activityWallTitle").innerHTML.trim());
 
 function stripHtmlSpaces(html) {
     var space = /&nbsp;/g;
