@@ -17,7 +17,6 @@ public class LoginHandler implements AuthenticationSuccessHandler {
         GrantedAuthority grantedAuthority = (GrantedAuthority) grantedAuthorities.toArray()[0];
         String authority = grantedAuthority.getAuthority();
 
-//        todo : should not leave user homepage redirection as a blank string. Should find a better defined path.
         String url = httpServletRequest.getParameter("url");
         if(authority.equals("ROLE_ADMIN") && url.isEmpty())
             httpServletResponse.sendRedirect("adminDashboard");
