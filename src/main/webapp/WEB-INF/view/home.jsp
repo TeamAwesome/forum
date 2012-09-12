@@ -83,7 +83,8 @@
             </div>
         </div>
 
-        <%@ include file="rightPane.jsp" %>
+        <div id ="rightPane">
+         <%@ include file="rightPane.jsp" %>
         <p>
         <center>
          <a onclick='postToFeed(); return false;'><img style="cursor: pointer; cursor: hand"
@@ -93,6 +94,7 @@
           <img src="<c:url value='static/images/twitter.png'/>" alt="Twitter" style="border-style: none"></a>
           </center>
           </p>
+         </div>
 
     </div>
 
