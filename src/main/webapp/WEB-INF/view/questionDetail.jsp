@@ -77,11 +77,13 @@
                         </sec:authorize>
                         <sec:authorize access="isAuthenticated()">
                             <form:form method="post" action="../../postAdvice" commandName="advice" id="adviceForm">
-                                <div class="adviceDescription" >
-                                    <label class="formLabels"> Advice: </label></br>
-                                    <form:textarea path="description" id="descriptionEditor" name="adviceDescription" rows="20" cols="75" maxlength="500"></form:textarea>
+
+                            <div class="adviceDescription" >
+                                <label class="formLabels"> Advice: </label></br>
+                                <form:textarea path="description" id="descriptionEditor" name="adviceDescription" rows="20" cols="75" maxlength="1000" />
+                                <form:errors path="description" class="errorMsg" id="descriptionMsg" />
                                     <div class="validationMessage" id="descriptionValidationMessage">
-                                        <form:errors path="description" class="errorMsg" id="descriptionMsg" />
+
                                     </div>
                                     <form:hidden path="questionId" id="questionId" value="${question.id}" />
                                 </div>
