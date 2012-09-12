@@ -24,6 +24,10 @@ public class Question implements Serializable {
 
     private Date createdAt;
 
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
     private User user;
 
     private int likes;

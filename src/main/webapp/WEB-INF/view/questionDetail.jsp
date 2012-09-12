@@ -46,9 +46,8 @@
 
                     <div id ="tag">
                         <p><label class="questionDetail"> Tags:</label>
-                        ${question.tagsAsString}</br>
                         <c:forEach var="tag" items="${question.tags}">
-                        ${tag.value}
+                        <a href="<c:url value='/tag/${tag.value}'/>">${tag.value}</a>
                         </c:forEach>
                         </p>
                     </div>

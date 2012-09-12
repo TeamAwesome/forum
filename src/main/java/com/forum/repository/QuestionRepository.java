@@ -40,18 +40,17 @@ public class QuestionRepository {
     }
 
     public int createQuestion(Question question) {
-
+        question.setCreatedAt(new Date());
         int result = 0;
-        result += jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
-                new Object[]{question.getTitle(), question.getDescription(), new Date(), question.getUser().getId()});
+                result += jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
+                new Object[]{question.getTitle(), question.getDescription(), question.getCreatedAt(), question.getUser().getId()});
 
         for (Tag tag : question.getTags()) {
-
             if (getTagCheck(tag) == 0) {
                 result += getResultIfTagCheckIsNull(tag);
             }
 
-            int questionID = jdbcTemplate.queryForInt("SELECT ID FROM QUESTION WHERE TITLE = ? AND CREATED_AT = ? AND USER_ID = ?", question.getTitle(), new Date(), question.getUser().getId());
+            int questionID = jdbcTemplate.queryForInt("SELECT ID FROM QUESTION WHERE TITLE = ? AND CREATED_AT = ? AND USER_ID = ?", question.getTitle(), question.getCreatedAt(), question.getUser().getId());
             int tagID = jdbcTemplate.queryForInt("SELECT ID FROM TAG WHERE NAME = ?", tag.getValue());
             result += jdbcTemplate.update("INSERT INTO QUESTION_TAG (QUESTION_ID,TAG_ID) VALUES (?,?)", questionID, tagID);
         }
