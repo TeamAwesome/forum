@@ -42,7 +42,7 @@
         margin-left: auto;
         margin-right: auto;
         float: left;
-        width: 565px;
+        width: 575px;
         display: inline;
         padding: 0px 10px 0px 10px;
         background-color:#FFFFFF;
@@ -207,7 +207,7 @@
         border:#000 1px dotted;
         border-style: none none dashed;
         color:#fff;
-        width: 70px;
+        width: 100px;
         float:left;
         margin-bottom:0px;
     }
@@ -232,3 +232,9 @@
         padding-left: 0px;
         margin-left: 0px;
      }
+
+     ul#likes{
+             margin-left: 0px;
+             padding-left: 5px;
+          }
+

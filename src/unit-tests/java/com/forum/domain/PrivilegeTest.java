@@ -9,14 +9,16 @@ public class PrivilegeTest {
 
     @Test
     public void shouldReturnAdminPrivilege(){
-        Privilege privilege = Privilege.getPrivilege(1);
+        int valueForAdmin = 1;
+        Privilege privilege = Privilege.getPrivilege(valueForAdmin);
 
         assertThat(privilege, is(Privilege.ADMIN));
     }
 
     @Test
     public void shouldReturnUserPrivilege(){
-        Privilege privilege = Privilege.getPrivilege(13);
+        int valueForUser = 13;
+        Privilege privilege = Privilege.getPrivilege(valueForUser);
 
         assertThat(privilege, is(Privilege.USER));
     }

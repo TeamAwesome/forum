@@ -32,19 +32,24 @@
                       <table class = "userTable">
                       <tr>
                       <td width=10%>
-                      <font size = 3 color="#599425">Statistics<br></font>
-                       <span class="questionlikes" data-bind="text: likes"
-                            style=' height: 1em; display: inline-block; font-size:.75em;'>
-                       </span> <font size = 1>Likes<br /></font>
-                       <hr class="dottedLine"/><br />
-                       <span class="questiondislikes" data-bind="text: dislikes"
-                           style=' height: 1em; display: inline-block; font-size:.75em;'>
-                      </span><font size = 1> Dislikes<br /></font>
-                       <hr class="dottedLine"/><br />
-                      <span class="questionflags" data-bind="text: flags"
-                         style=' height: 1em; display: inline-block; font-size:.75em;'>
-                      </span><font size = 1> Flags<br /></font>
-
+                      <font size = 3 color="#599425">Statistics<br /></font>
+                      <ul id="likes">
+                          <li>
+                           <span class="questionlikes" data-bind="text: likes"
+                                style=' height: 1em;  font-size:.75em;'>
+                           </span><font size = 1em>&nbsp;Likes<br /></font>
+                          </li>
+                           <li>
+                           <span class="questiondislikes" data-bind="text: dislikes"
+                               style=' height: 1em;  font-size:.75em;'>
+                          </span><font size = 1>&nbsp;Dislikes<br /></font>
+                          </li>
+                          <li>
+                          <span class="questionflags" data-bind="text: flags"
+                             style=' height: 1em;  font-size:.75em;'>
+                          </span><font size = 1>&nbsp;Flags<br /></font>
+                          </li>
+                      </ul>
                       </td>
                       <td width=60%>
                       <a data-bind="attr:{href:url}"><b>

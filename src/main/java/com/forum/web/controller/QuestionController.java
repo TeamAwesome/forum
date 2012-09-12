@@ -39,8 +39,8 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/showPostedQuestion", method = RequestMethod.POST)
-    public String showPostedQuestion(@Valid Question question, BindingResult result, Map model, Principal principal){
-        if(result.hasErrors()) {
+    public String showPostedQuestion(@Valid Question question, BindingResult result, Map model, Principal principal) {
+        if (result.hasErrors()) {
             return "postQuestion";
         }
         String username = principal.getName();
@@ -48,8 +48,9 @@ public class QuestionController {
         question.setUser(user);
 
         questionService.createQuestion(question);
+
         List latestQuestionList = questionService.latestQuestions("1", "1");
-        Question latestQuestion = (Question)latestQuestionList.get(0);
+        Question latestQuestion = (Question) latestQuestionList.get(0);
         Integer questionId = latestQuestion.getId();
 
         return "redirect:/question/view/" + questionId;
@@ -59,24 +60,10 @@ public class QuestionController {
     public ModelAndView viewQuestionDetail(@PathVariable Integer questionId) {
         Question question = questionService.getById(questionId);
         ModelAndView modelAndView = new ModelAndView("questionDetail");
-        modelAndView.addObject("questionId", question.getId());
-        modelAndView.addObject("questionTitle", question.getTitle());
-        modelAndView.addObject("questionDescription", question.getDescription());
-        modelAndView.addObject("username", question.getUser().getUsername());
+        modelAndView.addObject("question", question);
         modelAndView.addObject("dateCreatedAt", new SimpleDateFormat("MMMM dd, yyyy").format(question.getCreatedAt()));
         modelAndView.addObject("timeCreatedAt", new SimpleDateFormat("hh:mm:ss a").format(question.getCreatedAt()));
-        modelAndView.addObject("likes", question.getLikes());
-        modelAndView.addObject("dislikes", question.getDislikes());
-        modelAndView.addObject("views", question.getViews());
-        modelAndView.addObject("flags", question.getFlags());
-        modelAndView.addObject("responses", question.getResponses());
-        modelAndView.addObject("questionTags",question.getTags());
-
-        if(question.getAdvices()!= null){
-            modelAndView.addObject("advices", question.getAdvices());
-        }
-        Advice advice = new Advice(0, null, "");
-        modelAndView.addObject("advice", advice);
+        modelAndView.addObject("advice", new Advice(0, null, ""));
         return modelAndView;
     }
 

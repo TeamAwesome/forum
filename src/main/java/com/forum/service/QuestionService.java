@@ -2,6 +2,7 @@ package com.forum.service;
 
 import com.forum.domain.Advice;
 import com.forum.domain.Question;
+import com.forum.domain.Tag;
 import com.forum.repository.AdviceRepository;
 import com.forum.repository.QuestionRepository;
 import com.forum.repository.TagRepository;
@@ -38,8 +39,8 @@ public class QuestionService {
 
     public Question getById(Integer questionId) {
         Question question =  questionRepository.getById(questionId);
-        logger.info("this is the question from repository\n" + question.toString());
-
+        List<Tag> tags = tagRepository.getTagByQuestionId(questionId);
+        question.setTags(tags);
         List<Advice> advices = adviceRepository.getByQuestionId(questionId);
         question.setAdvices(advices);
         return question;

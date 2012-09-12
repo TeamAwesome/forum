@@ -39,30 +39,33 @@ public class QuestionRepository {
 
     }
 
-    //TODO: this logic needs to be wrapped under one atomic transaction
     public int createQuestion(Question question) {
-        logger.info("question is " + question.toString());
 
         int result = 0;
-        Date createdDate = new Date();
         result += jdbcTemplate.update("INSERT INTO QUESTION (TITLE, DESCRIPTION, CREATED_AT, USER_ID) VALUES (?, ?, ?, ?)",
-                new Object[]{question.getTitle(), question.getDescription(), createdDate, question.getUser().getId()});
+                new Object[]{question.getTitle(), question.getDescription(), new Date(), question.getUser().getId()});
 
-        //todo: dealing with Tags is responsibility of the TagService/TagRepository
         for (Tag tag : question.getTags()) {
-            //todo: this is a duplication of what TagService.createTag is already doing
-            int tagCheck = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM TAG WHERE NAME = ?", tag.getValue());
 
-            if (tagCheck == 0) {
-                result += jdbcTemplate.update("INSERT INTO TAG (NAME) VALUES (?)",
-                        tag.getValue());
+            if (getTagCheck(tag) == 0) {
+                result += getResultIfTagCheckIsNull(tag);
             }
 
-            int questionID = jdbcTemplate.queryForInt("SELECT ID FROM QUESTION WHERE TITLE = ? AND CREATED_AT = ? AND USER_ID = ?", question.getTitle(), createdDate, question.getUser().getId());
+            int questionID = jdbcTemplate.queryForInt("SELECT ID FROM QUESTION WHERE TITLE = ? AND CREATED_AT = ? AND USER_ID = ?", question.getTitle(), new Date(), question.getUser().getId());
             int tagID = jdbcTemplate.queryForInt("SELECT ID FROM TAG WHERE NAME = ?", tag.getValue());
             result += jdbcTemplate.update("INSERT INTO QUESTION_TAG (QUESTION_ID,TAG_ID) VALUES (?,?)", questionID, tagID);
         }
+
         return result;
+    }
+
+    private int getResultIfTagCheckIsNull(Tag tag) {
+        return jdbcTemplate.update("INSERT INTO TAG (NAME) VALUES (?)",
+                tag.getValue());
+    }
+
+    private int getTagCheck(Tag tag) {
+        return jdbcTemplate.queryForInt("SELECT COUNT(*) FROM TAG WHERE NAME = ?", tag.getValue());
     }
 
     public List<Question> latestQuestion(int pageNum, int pageSize) {
@@ -75,10 +78,12 @@ public class QuestionRepository {
     }
 
     public int getNumberOfQuestionBetweenTimes(Timestamp beginningTime, Timestamp endingTime) {
+        int numberOfQuestionInADay = 0;
         QuestionRowMapper rowMapper = new QuestionRowMapper();
         String query = "SELECT COUNT(ID) FROM QUESTION where CREATED_AT >= ? AND CREATED_AT <= ?";
-        return jdbcTemplate.queryForInt(query,
+        numberOfQuestionInADay = jdbcTemplate.queryForInt(query,
                 new Object[]{beginningTime, endingTime});
+        return numberOfQuestionInADay;
 
     }
 
@@ -90,8 +95,7 @@ public class QuestionRepository {
 
     public int addDisLikesById(Integer questionId) {
         String query = "UPDATE QUESTION SET DISLIKES=DISLIKES+1 WHERE ID=?";
-        return jdbcTemplate.update(query, new Object[]{questionId});
-    }
+        return jdbcTemplate.update(query, new Object[]{questionId});    }
 
     public int addFlagsById(Integer questionId) {
         String query = "UPDATE QUESTION SET FLAGS=FLAGS+1 WHERE ID=?";

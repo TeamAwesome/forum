@@ -39,6 +39,7 @@ public class LoginHandlerTest {
         when(grantedAuthority.getAuthority()).thenReturn("ROLE_ADMIN");
         setupAuthentication();
 
+        when(httpServletRequest.getParameter("url")).thenReturn("");
         loginHandler.onAuthenticationSuccess(httpServletRequest,httpServletResponse,authentication);
 
         verify(httpServletResponse).sendRedirect("adminDashboard");
@@ -51,7 +52,7 @@ public class LoginHandlerTest {
 
         loginHandler.onAuthenticationSuccess(httpServletRequest,httpServletResponse,authentication);
 
-        verify(httpServletResponse).sendRedirect("");
+        verify(httpServletResponse).sendRedirect(null);
     }
 
     private void setupAuthentication() {

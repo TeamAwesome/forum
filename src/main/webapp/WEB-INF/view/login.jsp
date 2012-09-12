@@ -31,7 +31,7 @@
 
         <div id="content">
                 <div id ="leftPane" >
-        <form name="loginForm" action="${pageContext.request.contextPath}/j_spring_security_check" method = "POST" autocomplete="off">
+        <form name="loginForm" action="${pageContext.request.contextPath}/j_spring_security_check?url=${url}" method = "POST" autocomplete="off">
             <div style="color:red; text-align:center" id="messagetobedisplayed">
                 ${messageToBeDisplayed}
             </div>
