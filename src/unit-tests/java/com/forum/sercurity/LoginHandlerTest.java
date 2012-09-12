@@ -39,6 +39,7 @@ public class LoginHandlerTest {
         when(grantedAuthority.getAuthority()).thenReturn("ROLE_ADMIN");
         setupAuthentication();
 
+        when(httpServletRequest.getParameter("url")).thenReturn("");
         loginHandler.onAuthenticationSuccess(httpServletRequest,httpServletResponse,authentication);
 
         verify(httpServletResponse).sendRedirect("adminDashboard");

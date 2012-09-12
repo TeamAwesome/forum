@@ -124,7 +124,7 @@
             url: '<c:url value="/question/' + countType + '/${question.id}"/>',
             success: function(data){
                 $(countElement).html(data);
-            },
+            }
         }).done(function(){
             $(inputElement).attr("disabled", true);
         });
