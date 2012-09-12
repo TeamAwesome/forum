@@ -59,7 +59,7 @@
                       &nbsp;-&nbsp;
                       <br />
                      <span class="questionDescription" data-bind="html: description"
-                      style='width: 350px; height: 1em; overflow: hidden; display: inline-block; font-size:.8em;'>
+                      style='width: 350px; height: 1.2em; overflow: hidden; display: inline-block; font-size:.8em;'>
                        </span>...
                       <br /><font color="#599425" size="2em">Created on:</font><br />
                       <span class="questionCreatedAt" data-bind="text: createdAt" style="font-size:.7em;"> </span>

@@ -33,7 +33,7 @@
         overflow: auto;
         font-weight: bold;
         font-size:1.2em;
-        padding: 10px 3px 8px 5px;
+
 }
 
 #questionTitle h1{
@@ -59,7 +59,7 @@
 }
 #response
 {
-    padding: 5px 3px 2px 5px;
+    padding: 5px 3px 2px 0px;
 }
 
 #status
@@ -76,4 +76,8 @@
 {
     max-width: 130px;
     float: left;
+}
+
+#tag p{
+padding-left:0px;
 }
