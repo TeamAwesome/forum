@@ -16,7 +16,6 @@ public class Advice implements Serializable {
     private String description;
 
     public Advice() {
-
     }
 
     public Advice(int questionId, User user, String description) {
