@@ -4,7 +4,7 @@ var tagCloudConvert = function(tagObjects){
         words[i] = {
             text: tagObjects[i].value,
             weight: tagObjects[i].count,
-            link: "/forum/tag/" + tagObjects[i].value
+            link: "./question/search/tag/" + tagObjects[i].value
         };
     }
     return words;

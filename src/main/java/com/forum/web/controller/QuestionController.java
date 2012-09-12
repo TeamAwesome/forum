@@ -34,8 +34,7 @@ public class QuestionController {
 
     @RequestMapping(value = "/postQuestion", method = RequestMethod.GET)
     public String postQuestion(Map model) {
-        Question question = new Question();
-        model.put("question", question);
+        model.put("question", new Question());
         return "postQuestion";
     }
 
@@ -110,5 +109,13 @@ public class QuestionController {
     public String retrieveLatestQuestions(@RequestParam String pageNum, @RequestParam String pageSize) {
         List<Question> questionList = questionService.latestQuestions(pageNum, pageSize);
         return new Gson().toJson(questionList);
+    }
+
+    @RequestMapping(value = "/question/search/tag/{value}", method = RequestMethod.POST)
+    @ResponseBody
+    public String getQuestionsWithTagValue(@PathVariable String tagValue) {
+        List<Question> questions = questionService.getByTagValue(tagValue);
+
+        return new Gson().toJson(questions);
     }
 }

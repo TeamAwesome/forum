@@ -5,7 +5,6 @@ import com.forum.service.TagService;
 import com.google.gson.Gson;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,16 +57,5 @@ public class TagControllerTest {
                 "{\"id\":4,\"value\":\"java\",\"count\":2}" +
                 "]";
         assertThat(tagsAsJSON, is(testResult));
-    }
-
-    @Test
-    public void shouldShowQuestionsWithATagPage(){
-        String expectedTagName = "music";
-
-        ModelAndView questionWithTagModelView = tagController.showQuestionsWithThisTag(expectedTagName);
-        String actualTagName = questionWithTagModelView.getModel().get("tagName").toString();
-
-        assertThat(questionWithTagModelView.getViewName(), is("questionWithTag"));
-        assertThat(actualTagName, is(expectedTagName));
     }
 }

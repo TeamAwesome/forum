@@ -1,48 +1,54 @@
 
 function Question(id, title, createdAt, description, userName, likes, dislikes, flags) {
-    var self = this;
-    self.id = id;
-    self.title = title;
-    self.createdAt = createdAt;
-    self.description = description;
-    self.userName = userName;
-    self.likes = likes;
-    self.dislikes = dislikes;
-    self.flags = flags;
-    self.url = window.location.href + "question/view/"+id;
+    this.id = id;
+    this.title = title;
+    this.createdAt = createdAt;
+    this.description = description;
+    this.userName = userName;
+    this.likes = likes;
+    this.dislikes = dislikes;
+    this.flags = flags;
+    this.url = window.location.href + "question/view/"+id;
 }
 
 function QuestionsViewModel() {
-    var self = this;
     var page = 1;
     var pageSize = 10;
+    var currentSearch = "";
 
-    self.questions = ko.observableArray();
+    this.questions = ko.observableArray();
 
-    var resetPagination = function() {
-        page = 1;
-        pageSize = 10;
-    }
-
-    var loadQuestions = function(url) {
+    var self = this;
+    var loadQuestions = function(url, resetPagination) {
+        currentSearch = url;
+        if (resetPagination) {
+            page = 1;
+            pageSize = 10;
+        }
          $.post(url, {"pageNum": page.toString(), "pageSize": pageSize.toString()}, function(data) {
             $.each(data, function (index, question) {
-
-                self.questions.push(
-                     new Question(question.id, question.title, question.createdAt, stripHtmlSpaces(question.description), question.user.username, question.likes, question.dislikes, question.flags)
-                     );
+                self.questions.push(new Question(
+                    question.id,
+                    question.title,
+                    question.createdAt,
+                    stripHtmlSpaces(question.description),
+                    question.user.username,
+                    question.likes,
+                    question.dislikes,
+                    question.flags));
             });
             page +=1;
          },"json");
     }
 
-    self.loadLatestQuestions = function() {
-        self.currentSearch = "/question/search/latest";
-        resetPagination();
-        self.loadMoreQuestion();
+    this.loadLatestQuestions = function() {
+        loadQuestions("./question/search/latest", true);
     }
-    self.loadMoreQuestion = function() {
-        loadQuestions("." + self.currentSearch);
+    this.loadQuestionsByTag = function(tagValue) {
+        loadQuestions("./question/search/tag/" + tagValue, true);
+    }
+    this.loadMoreQuestion = function() {
+        loadQuestions(currentSearch, false);
     }
 }
 

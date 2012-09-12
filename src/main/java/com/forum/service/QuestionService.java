@@ -67,7 +67,11 @@ public class QuestionService {
         return questionRepository.addFlagsById(questionId);
     }
 
-    public List<Question> removeSpaces(List<Question> questionList) {
+    public List<Question> getByTagValue(String tagValue) {
+        return questionRepository.getByTag(tagValue);
+    }
+
+    List<Question> removeSpaces(List<Question> questionList) {
         for(Question question: questionList){
             question.setDescription(question.getDescription().trim());
         }

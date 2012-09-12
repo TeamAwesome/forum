@@ -3,4 +3,10 @@ $(document).ready(function() {
         var words = tagCloudConvert(jsonData);
         $("#wordcloud").jQCloud(words);
     });
+    $("#wordcloud a").click(function(event) {
+        event.preventDefault();
+        console.log($(this).text());
+    });
 });
+
+

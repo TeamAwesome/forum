@@ -8,6 +8,7 @@ import com.forum.service.QuestionService;
 import com.forum.service.UserService;
 import com.google.gson.Gson;
 import org.hamcrest.core.Is;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -19,8 +20,11 @@ import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static com.forum.test.builder.QuestionBuilder.givenAQuestion;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -34,9 +38,13 @@ public class QuestionControllerTest {
     @Mock
     private UserService userService;
 
+    @Before
+    public void createController() {
+        questionController = new QuestionController(questionService, userService);
+    }
+
     @Test
     public void shouldShowPostQuestionPage() {
-        this.questionController = new QuestionController(null, null);
         String questionView = questionController.postQuestion(new HashMap());
         assertThat(questionView, is("postQuestion"));
     }
@@ -70,7 +78,6 @@ public class QuestionControllerTest {
         when(questionService.getById(1)).thenReturn(question);
 
         questionService.createQuestion(question);
-        this.questionController = new QuestionController(questionService, userService);
 
         BindingResult result = mock(BindingResult.class);
         when(result.hasErrors()).thenReturn(false);
@@ -84,8 +91,6 @@ public class QuestionControllerTest {
     public void shouldReturnToPostQuestionWhenInvalid() {
         Date createdAt = new Date();
         Question question = new Question(1, "Question Title", "Question Description", new User(), createdAt);
-
-        this.questionController = new QuestionController(questionService, null);
 
         BindingResult result = mock(BindingResult.class);
         when(result.hasErrors()).thenReturn(true);
@@ -102,7 +107,6 @@ public class QuestionControllerTest {
         Date createdAt = new Date();
         Question question = new Question(42, "model question title", "model question description", user, createdAt);
         when(questionService.getById(42)).thenReturn(question);
-        this.questionController = new QuestionController(questionService, null);
 
         modelAndView = questionController.viewQuestionDetail(42);
         String questionTitle = (String) modelAndView.getModel().get("questionTitle");
@@ -127,7 +131,6 @@ public class QuestionControllerTest {
         Date createdAt = new Date();
         Question question = new Question(100, "model question title", "model question description", user, createdAt, 10, 10, 10);
         when(questionService.getById(100)).thenReturn(question);
-        this.questionController = new QuestionController(questionService, null);
 
         modelAndView = questionController.viewQuestionDetail(100);
         Integer questionLikes = (Integer) modelAndView.getModel().get("likes");
@@ -207,5 +210,32 @@ public class QuestionControllerTest {
         //String questionTags = (String) modelAndView.getModel().get("questionTags");
         assertThat((List<Tag>) modelAndView.getModel().get("questionTags"), is(question.getTags()));
 
+    }
+
+    public void shouldRetrieveQuestionsWithAGivenTag() {
+        Question question1 = givenAQuestion()
+                .withTitle("test.question1")
+                .withDescription("test.description1")
+                .build();
+        Question question2 = givenAQuestion()
+                .withTitle("test.question2")
+                .withDescription("test.description2")
+                .build();
+        given(questionService.getByTagValue("test.tag.value")).willReturn(Arrays.asList(
+                question1, question2
+        ));
+
+        String questionsAsJSON = questionController.getQuestionsWithTagValue("test.tag.value");
+
+        Gson gson = new Gson();
+        ArrayList questions = gson.fromJson(questionsAsJSON, ArrayList.class);
+        assertThat(questions.size(), equalTo(2));
+        verifyQuestion((Map) questions.get(0), "test.question1", "test.description1");
+        verifyQuestion((Map) questions.get(1), "test.question2", "test.description2");
+    }
+
+    private void verifyQuestion(Map question, String title, String description) {
+        assertThat((String) question.get("title"), equalTo(title));
+        assertThat((String) question.get("description"), equalTo(description));
     }
 }

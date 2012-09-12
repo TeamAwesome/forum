@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -105,12 +106,11 @@ public class QuestionServiceTest {
     }
     @Test
     public void shouldUpdateFlagsOfAQuestion(){
-        Question question = new Question(100,"Question Title", "Question Description", null, null,0,0,0);
         QuestionRepository mockQuestionRepository = mock(QuestionRepository.class);
         when(mockQuestionRepository.addFlagsById(100)).thenReturn(1);
         questionService = new QuestionService(mockQuestionRepository);
 
-        int numberOfRowsAffected = questionService.addFlagsByID(question.getId());
+        int numberOfRowsAffected = questionService.addFlagsByID(100);
 
         assertThat(numberOfRowsAffected, is(1));
     }
@@ -126,40 +126,51 @@ public class QuestionServiceTest {
         List<Question> questionResultList = questionService.removeSpaces(questionList);
         assertThat(questionResultList.get(0).getDescription(),is("Question Description"));
         assertThat(questionResultList.get(1).getDescription(),is("Question Description 1"));
+
     }
 
-    @Test
-    public void shouldReturnUsername(){
-        User user = new User("lu", "pass", "Tom Tom", "tom@tom.com", "1234567",
-                "Moon", "He doesn't know", 200, false);
-        userRepository = mock(UserRepository.class);
-        when(userRepository.getByUsername("lu")).thenReturn(user);
-        assertThat(user.getUsername(), is("lu"));
+        @Test
+        public void shouldRetrieveQuestions() {
+        List<Question> expectedQuestions = new ArrayList<Question>();
+        when(questionRepository.getByTag("food")).thenReturn(expectedQuestions);
+
+        List<Question> actualQuestions = questionService.getByTagValue("food");
+
+        assertThat(actualQuestions, sameInstance(expectedQuestions));
+        }
+
+        @Test
+        public void shouldReturnUsername(){
+            User user = new User("lu", "pass", "Tom Tom", "tom@tom.com", "1234567",
+                    "Moon", "He doesn't know", 200, false);
+            userRepository = mock(UserRepository.class);
+            when(userRepository.getByUsername("lu")).thenReturn(user);
+            assertThat(user.getUsername(), is("lu"));
+        }
+
+        @Test
+        public void shouldReturnTagAsString() {
+            Question question = new Question(212,"Test Data","Dont Consider me as a Data", new User(),new Date());
+            question.setTagsAsString("tags,test,display");
+            when(questionRepository.getById(212)).thenReturn(question);
+            when(adviceRepository.getByQuestionId(212)).thenReturn(new ArrayList<Advice>());
+            when(tagRepository.getTagByQuestionId(212)).thenReturn(new ArrayList<Tag>());
+            Question expected = questionService.getById(212);
+
+
+            assertThat(expected.getTagsAsString(),is("tags,test,display"));
+        }
+
+        @Test
+        public void shouldReturnEmptyTagsWhenPassedNull() {
+            Question question = new Question(212,"Test Data","Dont Consider me as a Data", new User(),new Date());
+            question.setTagsAsString("");
+            when(questionRepository.getById(212)).thenReturn(question);
+            when(adviceRepository.getByQuestionId(212)).thenReturn(new ArrayList<Advice>());
+            when(tagRepository.getTagByQuestionId(212)).thenReturn(new ArrayList<Tag>());
+            Question expected = questionService.getById(212);
+
+
+            assertThat(expected.getTagsAsString(),is(""));
+        }
     }
-
-    @Test
-    public void shouldReturnTagAsString() {
-        Question question = new Question(212,"Test Data","Dont Consider me as a Data", new User(),new Date());
-        question.setTagsAsString("tags,test,display");
-        when(questionRepository.getById(212)).thenReturn(question);
-        when(adviceRepository.getByQuestionId(212)).thenReturn(new ArrayList<Advice>());
-        when(tagRepository.getTagByQuestionId(212)).thenReturn(new ArrayList<Tag>());
-        Question expected = questionService.getById(212);
-
-
-        assertThat(expected.getTagsAsString(),is("tags,test,display"));
-    }
-
-    @Test
-    public void shouldReturnEmptyTagsWhenPassedNull() {
-        Question question = new Question(212,"Test Data","Dont Consider me as a Data", new User(),new Date());
-        question.setTagsAsString("");
-        when(questionRepository.getById(212)).thenReturn(question);
-        when(adviceRepository.getByQuestionId(212)).thenReturn(new ArrayList<Advice>());
-        when(tagRepository.getTagByQuestionId(212)).thenReturn(new ArrayList<Tag>());
-        Question expected = questionService.getById(212);
-
-
-        assertThat(expected.getTagsAsString(),is(""));
-    }
-}
