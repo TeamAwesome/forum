@@ -25,7 +25,7 @@ public class AdviceRowMapper implements RowMapper {
                 converter.toBoolean(resultSet.getInt("PRIVACY")));
                 user.setId(resultSet.getInt("USER_ID"));
         Advice advice = new Advice(resultSet.getInt("QUESTION_ID"),user,resultSet.getString("DESCRIPTION"));
-        advice.setCreatedAt(resultSet.getDate("CREATED_AT"));
+        advice.setCreatedAt(resultSet.getTimestamp("CREATED_AT"));
         advice.setId(resultSet.getInt("ID"));
       return advice;
     }
