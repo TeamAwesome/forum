@@ -59,7 +59,7 @@
                       &nbsp;-&nbsp;
                       <br />
                      <span class="questionDescription" data-bind="html: description"
-                      style='width: 350px; height: 1em; overflow: hidden; display: inline-block; font-size:.8em;'>
+                      style='width: 350px; height: 1.2em; overflow: hidden; display: inline-block; font-size:.8em;'>
                        </span>...
                       <br /><font color="#599425" size="2em">Created on:</font><br />
                       <span class="questionCreatedAt" data-bind="text: createdAt" style="font-size:.7em;"> </span>
@@ -83,7 +83,8 @@
             </div>
         </div>
 
-        <%@ include file="rightPane.jsp" %>
+        <div id ="rightPane">
+         <%@ include file="rightPane.jsp" %>
         <p>
         <center>
          <a onclick='postToFeed(); return false;'><img style="cursor: pointer; cursor: hand"
@@ -93,6 +94,7 @@
           <img src="<c:url value='static/images/twitter.png'/>" alt="Twitter" style="border-style: none"></a>
           </center>
           </p>
+         </div>
 
     </div>
 

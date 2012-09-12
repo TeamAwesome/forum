@@ -22,6 +22,7 @@ public class User implements Serializable {
     private Privilege privilege;
 
     @NotEmpty
+    @Size(max = 10)
     @UniqueUsername
     private String username;
 

@@ -12,9 +12,7 @@
         text-align: center;
         }
 
-#advice strong{
-    font-size: 1.3em;
-}
+
 
 #advice{
     font-size:1em;
@@ -49,6 +47,7 @@
         margin-right: auto;
         float: left;
         width: 575px;
+        min-height: 450px;
         display: inline;
         padding: 0px 10px 0px 10px;
         background-color:#FFFFFF;
@@ -61,6 +60,10 @@
             padding: 10px 10px 10px 10px;
             display: inline;
             background-color:#FFFFFF;
+    }
+
+    #responses{
+        font-size:1.2em;
     }
 
     #rightPane{
@@ -170,10 +173,18 @@
 
     }
 
+    #questionDescription p{
+        padding: 0px 0px 0px 0px;
+        margin-top: 0;
+        line-height: 100%;
+        text-align : justify;
+    }
+
 
     .questionTitle{
         word-wrap: break-all;
         color: #000000;
+
     }
 
     #advertisement{

@@ -52,11 +52,12 @@
                         </p>
                     </div>
 
-                    <strong>Responses:</strong>
+                    <strong><label id="responses">Responses:</label></strong>
                     <br></br>
                     <div id="advice">
                         <c:forEach var="advice" items="${question.advices}">
-                            <strong>${advice.user.username} </strong><font size=2>posted on
+                            <strong>${advice.user.username} </strong><br>
+                            <font size=2 color="#045801">posted on
                             <fmt:formatDate value="${advice.createdAt}" pattern="dd-MM-yyyy" />
                             at
                             <fmt:formatDate value="${advice.createdAt}" pattern="hh:mm:ss a" />
@@ -92,8 +93,8 @@
 
                 <div id="right">
                     <p><label class="questionDetail" id = "posted_by" name="user" > Posted by </label> ${question.user.username} </p>
-                    <p><label class="questionDetail" id = "posted_on" name="postedOn">On: </label>${dateCreatedAt} </p>
-                    <p><label class="questionDetail" id = "posted_at" name="postedAt">At: </label>${timeCreatedAt}</p>
+                    <p><font color="045801"><label class="questionDetail" id = "posted_on" name="postedOn">On: </label>${dateCreatedAt} </p>
+                    <p><label class="questionDetail" id = "posted_at" name="postedAt">At: </label>${timeCreatedAt}</font></p>
                     <p>
                     <label id="likeCount" class="questionDetail" name="likes">  (${question.likes}) Likes </label><br>
                     <label id="dislikeCount" class="questionDetail" name="dislikes">  (${question.dislikes}) Dislikes </label><br>

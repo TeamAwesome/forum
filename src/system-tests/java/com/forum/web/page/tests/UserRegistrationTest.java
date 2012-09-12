@@ -1,11 +1,13 @@
 package com.forum.web.page.tests;
 
+import com.forum.util.Encrypter;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import java.util.Random;
+import java.util.logging.Logger;
 
 
 import static org.hamcrest.core.Is.is;
@@ -15,8 +17,9 @@ import static org.junit.Assert.assertTrue;
 public class UserRegistrationTest extends FunctionalTestBase {
 
     private Random random = new Random();
-    int randomNumber = random.nextInt();
+    int randomNumber = random.nextInt(999999999);
 
+    private static Logger logger = Logger.getLogger(Encrypter.class.getName());
 
     @Test
     public void shouldGoToRegistrationPage() {
@@ -34,7 +37,7 @@ public class UserRegistrationTest extends FunctionalTestBase {
         assertTrue(browser.getCurrentUrl().contains("/join"));
 
         WebElement usernameField = browser.findElement(By.id("username"));
-        usernameField.sendKeys("Stephanie" + randomNumber);
+        usernameField.sendKeys("S" + Integer.toString(randomNumber%1000000000));
         WebElement passwordField = browser.findElement(By.id("password"));
         passwordField.sendKeys("saxophone");
         WebElement nameField = browser.findElement(By.id("name"));
