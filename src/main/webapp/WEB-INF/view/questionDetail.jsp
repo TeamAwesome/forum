@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
 
@@ -46,9 +46,8 @@
 
                     <div id ="tag">
                         <p><label class="questionDetail"> Tags:</label>
-                        ${question.tagsAsString}</br>
                         <c:forEach var="tag" items="${question.tags}">
-                        ${tag.value}
+                        <a href="<c:url value='/tag/${tag.value}'/>">${tag.value}</a>
                         </c:forEach>
                         </p>
                     </div>
@@ -57,8 +56,12 @@
                     <br></br>
                     <div id="advice">
                         <c:forEach var="advice" items="${question.advices}">
-                            <strong>${advice.user.username} posted on ${advice.createdAt}:</strong>
-                            <br>
+                            <strong>${advice.user.username} </strong><font size=2>posted on
+                            <fmt:formatDate value="${advice.createdAt}" pattern="dd-MM-yyyy" />
+                            at
+                            <fmt:formatDate value="${advice.createdAt}" pattern="hh:mm:ss a" />
+                            </font>
+                            <br><br>
                             ${advice.description}
                             <hr>
                         </c:forEach>

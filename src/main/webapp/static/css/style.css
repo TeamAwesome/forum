@@ -12,7 +12,13 @@
         text-align: center;
         }
 
+#advice strong{
+    font-size: 1.3em;
+}
 
+#advice{
+    font-size:1em;
+}
 
     #container{
         margin: 0 auto;
