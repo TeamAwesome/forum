@@ -40,6 +40,8 @@ public class QuestionController {
 
     @RequestMapping(value = "/showPostedQuestion", method = RequestMethod.POST)
     public String showPostedQuestion(@Valid Question question, BindingResult result, Map model, Principal principal) {
+        if(principal==null)
+            return "redirect: invalid";
         if (result.hasErrors()) {
             return "postQuestion";
         }

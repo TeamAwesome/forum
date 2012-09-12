@@ -19,6 +19,7 @@ import java.util.Map;
 public class AdviceController {
     public static final String USERNAME = "username";
     public static final String DESCRIPTION = "description";
+    public static final String INVALID_PAGE = "invalid";
     private AdviceService adviceService;
     public static final String SHOW_QUESTION_DETAILS = "question/view/";
     public static final String ERROR_PAGE = "500";
@@ -38,6 +39,7 @@ public class AdviceController {
 
     @RequestMapping(value = "/postAdvice", method = RequestMethod.POST)
     public String saveAdvice(@Valid Advice advice, BindingResult result, Map model, Principal principal)  {
+        if(principal == null) return "redirect: " + INVALID_PAGE;
         if (result.hasErrors()) {
             return "redirect:" + SHOW_QUESTION_DETAILS + advice.getQuestionId();
         } else {

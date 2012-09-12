@@ -20,11 +20,8 @@ import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static com.forum.test.builder.QuestionBuilder.givenAQuestion;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -32,6 +29,7 @@ import static org.mockito.Mockito.when;
 public class QuestionControllerTest {
 
     private QuestionController questionController;
+    @Mock
     private Principal principal;
     @Mock
     private QuestionService questionService;
@@ -98,6 +96,7 @@ public class QuestionControllerTest {
 
         BindingResult result = mock(BindingResult.class);
         when(result.hasErrors()).thenReturn(true);
+        when(principal.getName()).thenReturn("lu");
 
         String questionView = questionController.showPostedQuestion(question, result, new HashMap(), principal);
 
