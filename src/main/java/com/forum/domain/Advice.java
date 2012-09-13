@@ -1,6 +1,7 @@
 package com.forum.domain;
 
 import com.forum.service.validation.ContentLength;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
@@ -11,8 +12,9 @@ public class Advice implements Serializable {
     private int questionId;
     private Date createdAt;
     private User user;
-    @NotEmpty
-    @ContentLength
+
+    @NotBlank(message = "Advice cannot be blank.")
+    @ContentLength (message = "Advice cannot be more than 1000 characters.")
     private String description;
 
     public Advice() {

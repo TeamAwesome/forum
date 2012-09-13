@@ -24,7 +24,6 @@ import static com.forum.test.builder.QuestionBuilder.givenAQuestion;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -32,6 +31,7 @@ import static org.mockito.Mockito.when;
 public class QuestionControllerTest {
 
     private QuestionController questionController;
+    @Mock
     private Principal principal;
     @Mock
     private QuestionService questionService;
@@ -98,6 +98,7 @@ public class QuestionControllerTest {
 
         BindingResult result = mock(BindingResult.class);
         when(result.hasErrors()).thenReturn(true);
+        when(principal.getName()).thenReturn("lu");
 
         String questionView = questionController.showPostedQuestion(question, result, new HashMap(), principal);
 
@@ -206,5 +207,40 @@ public class QuestionControllerTest {
 
         assertThat(tagsResult, is(question.getTags()));
 
+    }
+
+    @Test
+    public void shouldRetrieveQuestionsWithAGivenTag() {
+        Question question1 = givenAQuestion()
+                .withTitle("test.question1")
+                .withDescription("test.description1")
+                .build();
+        Question question2 = givenAQuestion()
+                .withTitle("test.question2")
+                .withDescription("test.description2")
+                .build();
+        when(questionService.getByTagValue("test.tag.value")).thenReturn(Arrays.asList(
+                question1, question2
+        ));
+
+        String questionsAsJSON = questionController.getQuestionsWithTagValue("test.tag.value");
+
+        Gson gson = new Gson();
+        ArrayList questions = gson.fromJson(questionsAsJSON, ArrayList.class);
+        assertThat(questions.size(), equalTo(2));
+        verifyQuestion((Map) questions.get(0), "test.question1", "test.description1");
+        verifyQuestion((Map) questions.get(1), "test.question2", "test.description2");
+    }
+
+    private void verifyQuestion(Map question, String title, String description) {
+        assertThat((String) question.get("title"), equalTo(title));
+        assertThat((String) question.get("description"), equalTo(description));
+    }
+
+    @Test
+    public void shouldShowResultsPageForATag(){
+        ModelAndView viewForTagSearch = questionController.showResultsForTag("food");
+        assertThat(viewForTagSearch.getViewName(), Is.is("questionWithTag"));
+        assertThat(viewForTagSearch.getModelMap().get("tagName").toString(), is("food"));
     }
 }
