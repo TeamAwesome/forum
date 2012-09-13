@@ -19,11 +19,11 @@ public class Question implements Serializable {
 
     @NotBlank(message = "Title is empty.")
     @NoHTMLScript
-    @Size(max = 100)
+    @Size(max = 100, message = "Title must be within character limit.")
     private String title;
 
     @NotBlank(message = "Description is empty.")
-    @Size(max = 10000)
+    @Size(max = 10000, message = "Description must be within character limit.")
     private String description;
 
     private Date createdAt;
