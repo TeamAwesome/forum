@@ -19,7 +19,8 @@
         <div id ="leftPane" >
         <h1 class="activityWall">
             <div id="activityWallTitle">
-                ${tagName}
+        <label >Questions With Tag -
+                ${tagName}</label>
             </div>
         </h1>
                     <div id="activityQuestions" >

@@ -8,7 +8,7 @@ function Question(id, title, createdAt, description, userName, likes, dislikes, 
     this.likes = likes;
     this.dislikes = dislikes;
     this.flags = flags;
-    this.url = window.location.href + "question/view/"+id;
+    this.url = "/forum/question/view/"+id;
 }
 
 function QuestionsViewModel() {
@@ -71,11 +71,13 @@ function QuestionsViewModel() {
 
 var questions = new QuestionsViewModel();
 ko.applyBindings(questions);
-if(window.location.href === "https://localhost:8443/forum/")
+if(window.location.pathname === "/forum/")
     questions.loadLatestQuestions();
 else
-    questions.loadQuestionsByTag(document.getElementById("activityWallTitle").innerHTML.trim());
-
+{
+    var pathNameOfSearch = window.location.pathname.split('/');
+    questions.loadQuestionsByTag(pathNameOfSearch[pathNameOfSearch.length - 1]);
+}
 function stripHtmlSpaces(html) {
     var space = /&nbsp;/g;
     var text2 = html.replace(space,'');
