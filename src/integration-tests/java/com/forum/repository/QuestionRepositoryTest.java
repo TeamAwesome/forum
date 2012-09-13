@@ -82,7 +82,7 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
 
         question.setTagsAsString("Music, Food, Spice");
 
-        assertThat(questionRepository.createQuestion(question),is(4));
+        assertThat(questionRepository.createQuestion(question),is(6));
     }
 
     @Test

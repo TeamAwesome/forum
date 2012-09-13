@@ -16,7 +16,8 @@ public class TagRowMapper implements  RowMapper {
        Tag tag = new Tag(
                 resultSet.getInt("ID"),
                 resultSet.getString("NAME"),
-                1 //TODO ALTER THIS TO GET THE COUNT OF TAG USAGE
+                resultSet.getInt("COUNT")
+
         );
         return tag;
     }

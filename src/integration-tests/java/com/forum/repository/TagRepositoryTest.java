@@ -54,16 +54,16 @@ public class TagRepositoryTest extends IntegrationTestBase {
     @Test
     public void shouldReturnAllTheTags() {
         insertTags(Arrays.asList(
-                new Tag(1, "test.tag1", 123),
-                new Tag(2, "test.tag2", 456),
-                new Tag(3, "test.tag3", 789)
+                new Tag(23, "test.tag1", 123),
+                new Tag(34, "test.tag2", 456),
+                new Tag(56, "test.tag3", 789)
         ));
 
         List<Tag> tags = tagRepository.allTags();
         /*
-         * The tag table contains 10 tags as test data, hence expecting 13.
+         * The tag table contains 3 tags as test data, hence expecting 6.
          */
-        assertThat(tags.size(), is(13));
+        assertThat(tags.size(), is(6));
         assertThat(tags, hasItem(aTagWithValue("test.tag1")));
         assertThat(tags, hasItem(aTagWithValue("test.tag2")));
         assertThat(tags, hasItem(aTagWithValue("test.tag3")));
@@ -77,6 +77,8 @@ public class TagRepositoryTest extends IntegrationTestBase {
     private void insertTags(List<Tag> tags) {
         for (Tag tag : tags) {
             template.update("INSERT INTO TAG (NAME) VALUES('" + tag.getValue() + "')");
+            tag=tagRepository.getTagByName(tag.getValue()) ;
+            template.update("INSERT INTO QUESTION_TAG VALUES('1','" + tag.getId() + "')");
         }
     }
 
