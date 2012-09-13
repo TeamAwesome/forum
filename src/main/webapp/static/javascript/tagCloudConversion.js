@@ -3,7 +3,7 @@ var tagCloudConvert = function(tagObjects){
     for(var i = 0; i < tagObjects.length; i++){
         words[i] = {
             text: tagObjects[i].value,
-            weight: tagObjects[i].count,
+            weight: Math.random() % tagObjects.length,//tagObjects[i].count
             link: "/forum/tags/" + tagObjects[i].value
         };
     }

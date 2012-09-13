@@ -1,3 +1,4 @@
+
 /*!
  * jQCloud Plugin for jQuery
  *
@@ -22,7 +23,7 @@
       width: $this.width(),
       height: $this.height(),
       center: {
-        x: ((options && options.width) ? options.width : $this.width()) / 2.0,
+        x:  ((options && options.width) ? options.width :$this.width()) / 2.0,
         y: ((options && options.height) ? options.height : $this.height()) / 2.0
       },
       delayedMode: word_array.length > 50,
@@ -70,7 +71,7 @@
       // Sort word_array from the word with the highest weight to the one with the lowest
       word_array.sort(function(a, b) { if (a.weight < b.weight) {return 1;} else if (a.weight > b.weight) {return -1;} else {return 0;} });
 
-      var step = (options.shape === "rectangular") ? 18.0 : 2.0,
+      var step = (options.shape === "rectangle") ? 18.0 : 2.0,
           already_placed_words = [],
           aspect_ratio = options.width / options.height;
 
@@ -144,7 +145,7 @@
 
         // Save a reference to the style property, for better performance
         var word_style = word_span[0].style;
-        word_style.position = "absolute";
+        word_style.position = "relative";
         word_style.left = left + "px";
         word_style.top = top + "px";
 
