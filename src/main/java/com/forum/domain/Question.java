@@ -2,6 +2,7 @@ package com.forum.domain;
 
 import com.forum.service.validation.NoHTMLScript;
 import com.forum.service.validation.NotQuestionWords;
+import com.forum.service.validation.TagLength;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Pattern;
@@ -42,6 +43,7 @@ public class Question implements Serializable {
     @NotBlank(message = "A question must have at least one tag.")
     @Pattern(regexp = "^[" + Tag.REGEXP + ",]*$", message = "special characters should not be included.")
     @NotQuestionWords
+    @TagLength
     private String tagsAsString = "";
 
     private List<Advice> advices;

@@ -92,7 +92,7 @@ public class QuestionTest {
     public void shouldAcceptAlphanumericCharactersIncludingSpecialGermanCharacters() {
         Question question = new Question(
                 123,"a title", "a description", new User(), new Date(), 12, 23, 34,
-                "abcdefghijk lmnopqrstu, vwxyzABCD EFGHIJKLMNO, PQRSTUVWXYZ0 123456789äÄöÖüÜß"
+                "abcdefghijk lmnopq, vwxyzABCD EFGHMNO, PQ0 1789äÄöÖüÜß"
         );
 
         Set<ConstraintViolation<Question>> validationResult = validator.validateProperty(question, "tagsAsString");

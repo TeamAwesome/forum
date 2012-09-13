@@ -1,11 +1,7 @@
 package com.forum.domain;
 
 import com.forum.service.validation.ContentLength;
-<<<<<<< HEAD
-import org.hibernate.validator.constraints.NotEmpty;
-=======
 import org.hibernate.validator.constraints.NotBlank;
->>>>>>> [cece|fedalto] added additional server side validation.
 
 import javax.validation.constraints.Size;
 import java.io.Serializable;
