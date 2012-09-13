@@ -37,7 +37,7 @@ public class UserRegistrationTest extends FunctionalTestBase {
         assertTrue(browser.getCurrentUrl().contains("/join"));
 
         WebElement usernameField = browser.findElement(By.id("username"));
-        usernameField.sendKeys("S" + Integer.toString(randomNumber%1000000000));
+        usernameField.sendKeys("S" + Integer.toString(randomNumber%10000000));
         WebElement passwordField = browser.findElement(By.id("password"));
         passwordField.sendKeys("saxophone");
         WebElement nameField = browser.findElement(By.id("name"));

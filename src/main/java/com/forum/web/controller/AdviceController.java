@@ -37,6 +37,8 @@ public class AdviceController {
     }
 
 
+
+
     @RequestMapping(value = "/postAdvice", method = RequestMethod.POST)
     public String saveAdvice(@Valid Advice advice, BindingResult result, Map model, Principal principal)  {
         if(principal == null) return "redirect: " + INVALID_PAGE;
