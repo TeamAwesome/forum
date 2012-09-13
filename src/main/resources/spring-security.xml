@@ -7,16 +7,17 @@
                         http://www.springframework.org/schema/security/spring-security-3.1.xsd">
     <http auto-config="true" use-expressions="true">
         <intercept-url pattern="/postQuestion" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" requires-channel="https"/>
+        <intercept-url pattern="/question/viewAndPost/*" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" requires-channel="https"/>
         <intercept-url pattern="/adminDashboard" access="hasRole('ROLE_ADMIN')" requires-channel="https"/>
         <intercept-url pattern="/**" access="permitAll" requires-channel="https"/>
 
-        <form-login login-page="/login?url=/forum/postQuestion"
+        <form-login login-page="/login"
                     login-processing-url="/j_spring_security_check"
-                    default-target-url="/"
-                    authentication-success-handler-ref="loginSuccessHandler"
+                    default-target-url="/home"
                     authentication-failure-url="/errorLogin"/>
 
-        <logout logout-success-url = "/logout" logout-url="/forum_logout" invalidate-session="false"/>
+        <logout logout-success-url = "/logout" logout-url="/forum_logout" invalidate-session="false" delete-cookies="true"/>
+
         <access-denied-handler ref="errorHandlingFilter" />
         <port-mappings>
             <port-mapping http="8080" https="8443"/>
@@ -27,7 +28,6 @@
 
 
     <beans:bean id="errorHandlingFilter" class="com.forum.security.ErrorHandler" />
-    <beans:bean id="loginSuccessHandler" class="com.forum.security.LoginHandler" />
 
     <beans:bean id="userAuthProvider" class="com.forum.security.UserAuthenticationProvider"/>
 
@@ -35,19 +35,6 @@
 
 
     <authentication-manager>
-
-        <!--<authentication-provider>-->
-            <!--<user-service>-->
-                <!--<user name="maomao" password="spring" authorities="ROLE_USER" />-->
-            <!--</user-service>-->
-        <!--</authentication-provider>-->
         <authentication-provider ref="userAuthProvider"/>
-        <!--<authentication-provider>-->
-            <!--<user-service>-->
-                <!--<user password="password" name="chris" authorities="ROLE_USER" />-->
-                <!--<user password="password" name="lu.liu" authorities="ROLE_ADMIN" />-->
-                <!--<user password="Great!" name="Jules" authorities="ROLE_ADMIN" />-->
-            <!--</user-service>-->
-        <!--</authentication-provider>-->
     </authentication-manager>
 </beans:beans>

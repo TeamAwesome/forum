@@ -14,7 +14,7 @@
             </sec:authorize>
             <sec:authorize access="isAnonymous()">
                 <li id="loginLink">
-                    <a href='<c:url value="/login?url=" />'> Login</a>&nbsp;
+                    <a href='<c:url value="/login" />'> Login</a>&nbsp;
                 </li>
                 <li id="joinLink">
                     <a href='<c:url value="/join" />'> Join</a>&nbsp;

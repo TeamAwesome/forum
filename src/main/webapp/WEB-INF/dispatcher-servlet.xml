@@ -12,10 +12,6 @@
 
     <context:component-scan base-package="com.forum.web"/>
 
-    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"-->
-    <!--p:properties-ref="externalProperties"-->
-    <!--p:searchSystemEnvironment="true" />-->
-
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/view/"/>
@@ -27,14 +23,20 @@
         <property name="basename" value="/WEB-INF/messages">
     </property></bean>
 
-        <!--<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">-->
-    <!--<property name="templateLoaderPath" value="/WEB-INF/freemarker/"/>-->
-    <!--</bean>-->
+    <bean id="loginViewController" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+        <property name="viewName" value="login"/>
+    </bean>
+    <bean id="termsViewController" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+        <property name="viewName" value="terms"/>
+    </bean>
 
-    <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">-->
-    <!--<property name="cache" value="true"/>-->
-    <!--<property name="prefix" value=""/>-->
-    <!--<property name="suffix" value=".ftl"/>-->
-    <!--<property name="exposeSpringMacroHelpers" value="true"/>-->
-    <!--</bean>-->
+    <bean id="urlViewMappings" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/login">loginViewController</prop>
+                <prop key="/terms">termsViewController</prop>
+            </props>
+        </property>
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
 </beans>

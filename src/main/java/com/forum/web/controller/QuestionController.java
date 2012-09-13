@@ -60,6 +60,11 @@ public class QuestionController {
         return "redirect:/question/view/" + questionId;
     }
 
+    @RequestMapping(value = "/question/viewAndPost/{questionId}", method = RequestMethod.GET)
+    public ModelAndView viewQuestionAndPostDetail(@PathVariable Integer questionId) {
+        return viewQuestionDetail(questionId);
+    }
+
     @RequestMapping(value = "/question/view/{questionId}", method = RequestMethod.GET)
     public ModelAndView viewQuestionDetail(@PathVariable Integer questionId) {
         Question question = questionService.getById(questionId);

@@ -2,35 +2,22 @@ package com.forum.web.controller;
 
 import com.forum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @Controller
 public class LoginController {
-    public static final String USERNAME = "username";
-    public static final String PASSWORD = "password";
-    private UserService userService;
-
-
-    @Autowired
-    public LoginController(UserService userService) {
-        this.userService = userService;
-    }
-
-    @RequestMapping(value = "/login")
-    public ModelAndView loginView(@RequestParam String url) {
-        ModelAndView loginModelAndView = new ModelAndView("login");
-        loginModelAndView.addObject("url",url);
-        return loginModelAndView;
-    }
 
     @RequestMapping(value = "/errorLogin")
     public ModelAndView errorLoginView() {
         ModelAndView errorModelAndView = new ModelAndView("login");
-        errorModelAndView.addObject("noticeMessage","<span style=\"color:red;\" >Invalid Username or Password.</spam>");
+        errorModelAndView.addObject("noticeMessage","<span style=\"color:red;\" >Invalid Username or Password.</span>");
         return errorModelAndView;
     }
 
@@ -46,6 +33,14 @@ public class LoginController {
         ModelAndView invalidModelAndView = new ModelAndView("login");
         invalidModelAndView.addObject("noticeMessage", "Session invalid, please login again.");
         return invalidModelAndView;
+    }
+
+    @RequestMapping(value = "/home")
+    public String userHomeView(HttpServletRequest request) {
+        if(request.isUserInRole("ROLE_ADMIN")){
+            return "redirect: adminDashboard";
+        }
+        return "redirect:/";
     }
 }
 
