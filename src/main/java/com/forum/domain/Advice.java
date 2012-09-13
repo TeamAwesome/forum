@@ -2,7 +2,6 @@ package com.forum.domain;
 
 import com.forum.service.validation.ContentLength;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
 import java.util.Date;

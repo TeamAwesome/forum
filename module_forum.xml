@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_forum" default="compile.module.forum">
+  <dirname property="module.forum.basedir" file="${ant.file.module_forum}"/>
+  
+  <property name="module.jdk.home.forum" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.forum" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.forum" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.forum" value="${compiler.args}"/>
+  
+  <property name="forum.output.dir" value="${module.forum.basedir}/out/production/forum"/>
+  <property name="forum.testoutput.dir" value="${module.forum.basedir}/out/test/forum"/>
+  
+  <path id="forum.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="forum.module.production.classpath">
+    <path refid="${module.jdk.classpath.forum}"/>
+    <path refid="library.jar.classpath"/>
+    <path refid="library.jar1.classpath"/>
+    <path refid="library.jar2.classpath"/>
+  </path>
+  
+  <path id="forum.runtime.production.module.classpath">
+    <pathelement location="${forum.output.dir}"/>
+    <path refid="library.jar.classpath"/>
+    <path refid="library.jar1.classpath"/>
+    <path refid="library.jar2.classpath"/>
+  </path>
+  
+  <path id="forum.module.classpath">
+    <path refid="${module.jdk.classpath.forum}"/>
+    <pathelement location="${forum.output.dir}"/>
+    <path refid="library.jar.classpath"/>
+    <path refid="library.jar1.classpath"/>
+    <path refid="library.jar2.classpath"/>
+  </path>
+  
+  <path id="forum.runtime.module.classpath">
+    <pathelement location="${forum.testoutput.dir}"/>
+    <pathelement location="${forum.output.dir}"/>
+    <path refid="library.jar.classpath"/>
+    <path refid="library.jar1.classpath"/>
+    <path refid="library.jar2.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.forum">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.forum">
+    <patternset refid="excluded.from.module.forum"/>
+  </patternset>
+  
+  <path id="forum.module.sourcepath">
+    <dirset dir="${module.forum.basedir}">
+      <include name="src/integration-tests/java"/>
+      <include name="src/unit-tests/java"/>
+      <include name="src/main/java"/>
+      <include name="src/system-tests/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.forum" depends="compile.module.forum.production,compile.module.forum.tests" description="Compile module forum"/>
+  
+  <target name="compile.module.forum.production" depends="register.custom.compilers" description="Compile module forum; production classes">
+    <mkdir dir="${forum.output.dir}"/>
+    <javac2 destdir="${forum.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.forum}/javac">
+      <compilerarg line="${compiler.args.forum}"/>
+      <bootclasspath refid="forum.module.bootclasspath"/>
+      <classpath refid="forum.module.production.classpath"/>
+      <src refid="forum.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.forum"/>
+    </javac2>
+    
+    <copy todir="${forum.output.dir}">
+      <fileset dir="${module.forum.basedir}/src/integration-tests/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.forum.basedir}/src/unit-tests/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.forum.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.forum.basedir}/src/system-tests/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.forum.tests" depends="register.custom.compilers,compile.module.forum.production" description="compile module forum; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.forum" description="cleanup module">
+    <delete dir="${forum.output.dir}"/>
+    <delete dir="${forum.testoutput.dir}"/>
+  </target>
+</project>
