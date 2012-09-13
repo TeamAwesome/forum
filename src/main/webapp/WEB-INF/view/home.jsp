@@ -7,8 +7,10 @@
 
     <script src='<c:url value="/static/jsquery/jquery.js"/>'></script>
     <script src='<c:url value="/static/javascript/knockout-2.1.0.js"/>'></script>
-    <script src='https://connect.facebook.net/en_US/all.js'></script>
-    <script src='<c:url value="/static/javascript/shareToSocialMedia.js"/>'></script>
+    <c:if test="${empty title}">
+        <script src='https://connect.facebook.net/en_US/all.js'></script>
+        <script src='<c:url value="/static/javascript/shareToSocialMedia.js"/>'></script>
+    </c:if>
 
 </head>
 
@@ -90,11 +92,13 @@
          <%@ include file="rightPane.jsp" %>
         <p>
         <center>
-         <a onclick='postToFeed(); return false;'><img style="cursor: pointer; cursor: hand"
+          <c:if test="${empty title}">
+          <a onclick='postToFeed(); return false;'><img style="cursor: pointer; cursor: hand"
           src="<c:url value='static/images/facebook.png'/>" alt="Facebook" class="Facebook Icon"></a>
           <a href="https://twitter.com/share" data-url=window.location.href
           data-text="Need info on Bangalore?" data-size="large" data-count="none" target="_blank">
           <img src="<c:url value='static/images/twitter.png'/>" alt="Twitter" style="border-style: none"></a>
+          </c:if>
           </center>
           </p>
          </div>
