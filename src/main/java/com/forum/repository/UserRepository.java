@@ -78,7 +78,7 @@ public class UserRepository {
     public int createUser(User user) {
         int result = 0;
         BooleanToInteger converter = new BooleanToInteger();
-        logger.info(user.toString());
+//        logger.info(user.toString());
         result+=jdbcTemplate.update(
                 "INSERT INTO USER (PASSWORD,NAME,EMAIL_ADDRESS,PHONE_NUMBER,COUNTRY,GENDER,AGE_RANGE,USERNAME,PRIVACY,CREATED_AT) VALUES (?,?,?,?,?,?,?,?,?,?)",
                 user.getPassword(),

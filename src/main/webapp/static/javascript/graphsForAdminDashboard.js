@@ -5,7 +5,7 @@ function PlotGraphs (){
 
 	this.setQuestionsGraphFor90Days = function(numberOfQuestionsJson){
 	    this.lengthOfTime = numberOfQuestionsJson.length;
-        for(i=0;i<this.lengthOfTime-1;i++){
+        for(i=0;i<this.lengthOfTime;i++){
             this.numberOfQuestions.push(numberOfQuestionsJson[i]);
             if(this.maximumNumberOfQuestions < numberOfQuestionsJson[i]){
                 this.maximumNumberOfQuestions = (numberOfQuestionsJson[i]%10 +1)*10;

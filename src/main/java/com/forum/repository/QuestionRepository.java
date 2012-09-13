@@ -51,6 +51,7 @@ public class QuestionRepository {
             }
 
             int questionID = jdbcTemplate.queryForInt("SELECT ID FROM QUESTION WHERE TITLE = ? AND CREATED_AT = ? AND USER_ID = ?", question.getTitle(), question.getCreatedAt(), question.getUser().getId());
+            logger.info("The question ID"+questionID);
             int tagID = jdbcTemplate.queryForInt("SELECT ID FROM TAG WHERE NAME = ?", tag.getValue());
             result += jdbcTemplate.update("INSERT INTO QUESTION_TAG (QUESTION_ID,TAG_ID) VALUES (?,?)", questionID, tagID);
         }
@@ -100,14 +101,24 @@ public class QuestionRepository {
         String query = "UPDATE QUESTION SET FLAGS=FLAGS+1 WHERE ID=?";
         return jdbcTemplate.update(query, new Object[]{questionId});
     }
-
+//
+//     public List<Question> getByTag(String tagName) {
+//        return null;
+//    }
+//
     public List<Question> getByTag(String tagValue) {
         //WIP - this is just to return some questions to the front-end.
         //actual logic not implemented yet
-        String query = "SELECT Q.ID AS QUESTION_ID, Q.TITLE, Q.DESCRIPTION, "
-                + "Q.CREATED_AT,Q.*, U.* FROM QUESTION Q JOIN USER U WHERE Q.USER_ID=U.ID "
-                + "ORDER BY Q.CREATED_AT ASC LIMIT ?,?";
+
+
+        Tag tag = (Tag) jdbcTemplate.queryForObject("SELECT * FROM TAG WHERE NAME=?", new Object[]{tagValue}, new TagRowMapper());
+        int tagId = tag.getId();
+        String query = "SELECT * FROM (SELECT Q.ID AS Q_ID, U.ID AS U_ID, Q.TITLE, Q.DESCRIPTION, Q.CREATED_AT, " +
+                "Q.LIKES, Q.DISLIKES, Q.FLAGS, U.USERNAME, U.PASSWORD, U.NAME, U.EMAIL_ADDRESS, U.PHONE_NUMBER, " +
+                "U.COUNTRY, U.GENDER, U.AGE_RANGE, U.PRIVACY FROM QUESTION Q, USER U WHERE Q.USER_ID=U.ID) Q_USER," +
+                "QUESTION_TAG QT WHERE Q_USER.Q_ID=QT.QUESTION_ID AND QT.TAG_ID=? ORDER BY Q_USER.CREATED_AT ASC LIMIT ?,?";
         return jdbcTemplate.query(query,
-                new Object[]{0, 10}, new QuestionRowMapper());
+                new Object[]{tagId, 0, 10}, new QuestionRowMapper());
     }
+
 }

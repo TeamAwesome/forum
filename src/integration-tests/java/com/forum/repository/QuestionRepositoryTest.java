@@ -4,6 +4,7 @@ package com.forum.repository;
 import com.forum.domain.Question;
 import com.forum.domain.User;
 import org.hamcrest.CoreMatchers;
+import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -22,6 +25,7 @@ import static org.mockito.Mockito.when;
 
 public class QuestionRepositoryTest extends IntegrationTestBase {
 
+    Logger logger = Logger.getLogger(Question.class.getName());
     private QuestionRepository questionRepository;
     @Autowired
     private DataSource dataSource;
@@ -144,6 +148,47 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
         when(jdbcTemplate.update(query,new Object[] {questionID})).thenReturn(1);
         QuestionRepository questionRepository = new QuestionRepository(dataSource);
         assertThat(questionRepository.addFlagsById(questionID), is(1));
+    }
+
+    @Test
+    public void shouldGetQuestionsByTagName(){
+
+        //Given
+        String tagAsString = "AwesomeSauce";
+        User user = new User("Henry", "HenryMum", "Henry", "henry@henry.henry", "1234567890", "India", "Male", 1, false);
+        Date date =  new Date();
+        Timestamp timestamp = new Timestamp(date.getTime());
+        Question testQuestion1 = new Question(100, "test Question", "test description", user, timestamp, 0, 0, 0, tagAsString);
+        Question testQuestion2 = new Question(200, "test Question1", "test description1", user, timestamp, 0, 0, 0, tagAsString);
+        Question testQuestion3 = new Question(300, "test Question2", "test description2", user, timestamp, 0, 0, 0, "Actually no");
+
+
+        UserRepository userRepository = new UserRepository(dataSource);
+        userRepository.createUser(user);
+        user.setId(userRepository.getUserId(user.getUsername()));
+
+
+        questionRepository.createQuestion(testQuestion1);
+        questionRepository.createQuestion(testQuestion2);
+        questionRepository.createQuestion(testQuestion3);
+
+        List<Question> expectedQuestions = new ArrayList<Question>();
+
+        //When
+        List<Question> questions = questionRepository.getByTag(tagAsString);
+        assertThat(questions.size(), is(2));
+
+        //Then
+
+        assertThat(questions.get(0).getTitle(), is("test Question1"));
+        assertThat(questions.get(0).getDescription(), is("test description1"));
+
+        assertThat(questions.get(1).getTitle(), is("test Question"));
+        assertThat(questions.get(1).getDescription(), is("test description"));
+
+
+
+
     }
 
 }

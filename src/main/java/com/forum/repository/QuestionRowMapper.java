@@ -31,6 +31,7 @@ public class QuestionRowMapper implements RowMapper {
                 resultSet.getInt("LIKES"),
                 resultSet.getInt("DISLIKES"),
                 resultSet.getInt("FLAGS"));
+
         return question;
     }
 }
