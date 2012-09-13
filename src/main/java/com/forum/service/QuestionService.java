@@ -68,8 +68,8 @@ public class QuestionService {
         return questionRepository.addFlagsById(questionId);
     }
 
-    public List<Question> getByTagValue(String tagValue) {
-        return questionRepository.getByTag(tagValue);
+    public List<Question> getByTagValue(String tagValue, int pageNum, int pageSize) {
+        return questionRepository.getByTag(tagValue,pageNum,pageSize);
     }
 
     List<Question> removeSpaces(List<Question> questionList) {

@@ -41,7 +41,7 @@ function QuestionsViewModel() {
             page +=1;
          },"json");
          else{
-         $.post(url, function(data) {
+         $.post(url,{"pageNum": page.toString(), "pageSize": pageSize.toString()}, function(data) {
                      $.each(data, function (index, question) {
                          self.questions.push(new Question(
                              question.id,

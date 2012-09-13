@@ -4,7 +4,6 @@ package com.forum.repository;
 import com.forum.domain.Question;
 import com.forum.domain.User;
 import org.hamcrest.CoreMatchers;
-import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -175,7 +174,7 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
         List<Question> expectedQuestions = new ArrayList<Question>();
 
         //When
-        List<Question> questions = questionRepository.getByTag(tagAsString);
+        List<Question> questions = questionRepository.getByTag(tagAsString, 1,10);
         assertThat(questions.size(), is(2));
 
         //Then

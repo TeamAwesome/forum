@@ -106,19 +106,19 @@ public class QuestionRepository {
 //        return null;
 //    }
 //
-    public List<Question> getByTag(String tagValue) {
+    public List<Question> getByTag(String tagValue, int pageNum, int pageSize) {
         //WIP - this is just to return some questions to the front-end.
         //actual logic not implemented yet
 
-
-        Tag tag = (Tag) jdbcTemplate.queryForObject("SELECT * FROM TAG WHERE NAME=?", new Object[]{tagValue}, new TagRowMapper());
+        int pageStart = (pageNum - 1) * pageSize;
+        Tag tag = (Tag) jdbcTemplate.queryForObject("SELECT *, 1 as count FROM TAG WHERE NAME=?", new Object[]{tagValue}, new TagRowMapper());
         int tagId = tag.getId();
         String query = "SELECT * FROM (SELECT Q.ID AS Q_ID, U.ID AS U_ID, Q.TITLE, Q.DESCRIPTION, Q.CREATED_AT, " +
                 "Q.LIKES, Q.DISLIKES, Q.FLAGS, U.USERNAME, U.PASSWORD, U.NAME, U.EMAIL_ADDRESS, U.PHONE_NUMBER, " +
                 "U.COUNTRY, U.GENDER, U.AGE_RANGE, U.PRIVACY FROM QUESTION Q, USER U WHERE Q.USER_ID=U.ID) Q_USER," +
-                "QUESTION_TAG QT WHERE Q_USER.Q_ID=QT.QUESTION_ID AND QT.TAG_ID=? ORDER BY Q_USER.CREATED_AT ASC LIMIT ?,?";
+                "QUESTION_TAG QT WHERE Q_USER.Q_ID=QT.QUESTION_ID AND QT.TAG_ID=? ORDER BY Q_USER.CREATED_AT DESC LIMIT ?,?";
         return jdbcTemplate.query(query,
-                new Object[]{tagId, 0, 10}, new QuestionRowMapper());
+                new Object[]{tagId, pageStart, pageSize}, new QuestionRowMapper());
     }
 
 }

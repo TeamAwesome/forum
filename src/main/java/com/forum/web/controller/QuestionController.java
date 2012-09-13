@@ -109,9 +109,9 @@ public class QuestionController {
 
     @RequestMapping(value = "/question/search/tag/{value}", method = RequestMethod.POST)
     @ResponseBody
-    public String getQuestionsWithTagValue(@PathVariable String value) {
+    public String getQuestionsWithTagValue(@PathVariable String value,@RequestParam String pageNum,@RequestParam String pageSize) {
         logger.info("Come into this function.");
-        List<Question> questions = questionService.getByTagValue(value);
+        List<Question> questions = questionService.getByTagValue(value,Integer.parseInt(pageNum),Integer.parseInt(pageSize));
         return new Gson().toJson(questions);
     }
 
