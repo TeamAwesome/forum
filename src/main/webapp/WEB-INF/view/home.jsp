@@ -3,14 +3,12 @@
 <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>'/>
 
 <head>
-    <title>Welcome</title>
+    <title>${title}</title>
 
     <script src='<c:url value="/static/jsquery/jquery.js"/>'></script>
     <script src='<c:url value="/static/javascript/knockout-2.1.0.js"/>'></script>
     <script src='https://connect.facebook.net/en_US/all.js'></script>
-    <script src="<c:url value="/static/javascript/shareToSocialMedia.js"/>"></script>
-
-
+    <script src='<c:url value="/static/javascript/shareToSocialMedia.js"/>'></script>
 
 </head>
 
@@ -24,7 +22,12 @@
     <div id="content">
         <div id ="leftPane" >
             <div id="activityWallTitle">
+            <c:if test="${empty tagName}">
                 <h1 class="activityWall">Activity Wall</h1>
+            </c:if>
+            <c:if test="${not empty tagName}">
+                <h1 class="activityWall">Questions with tag ${tagName}</h1>
+            </c:if>
             </div>
 
             <div id="activityQuestions" >

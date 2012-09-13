@@ -117,6 +117,9 @@ public class QuestionController {
 
     @RequestMapping(value = "/tags/{tagValue}", method = RequestMethod.GET)
     public ModelAndView showResultsForTag(@PathVariable String tagValue) {
-            return new ModelAndView("questionWithTag").addObject("tagName", tagValue);
+        ModelAndView modelAndView = new ModelAndView("home");
+        modelAndView.addObject("tagName", tagValue);
+        modelAndView.addObject("title", tagValue);
+        return modelAndView;
     }
 }

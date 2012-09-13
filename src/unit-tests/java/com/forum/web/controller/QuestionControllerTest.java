@@ -240,7 +240,7 @@ public class QuestionControllerTest {
     @Test
     public void shouldShowResultsPageForATag(){
         ModelAndView viewForTagSearch = questionController.showResultsForTag("food");
-        assertThat(viewForTagSearch.getViewName(), Is.is("questionWithTag"));
+        assertThat(viewForTagSearch.getViewName(), Is.is("home"));
         assertThat(viewForTagSearch.getModelMap().get("tagName").toString(), is("food"));
     }
 }
