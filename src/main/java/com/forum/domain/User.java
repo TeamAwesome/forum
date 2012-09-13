@@ -30,12 +30,14 @@ public class User implements Serializable {
     private String password;
 
     @NotEmpty
+    @Size(max = 40)
     private String name;
 
     @UniqueEmail
     @Pattern(regexp =
             "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)+$",
             message = "Please enter a valid email address.")
+    @Size(max = 100, message = "Email address must be less than 100 characters.")
     private String email;
 
     @PhoneNumber
@@ -45,6 +47,7 @@ public class User implements Serializable {
     private String country;
 
     @NotEmpty
+    @Pattern(regexp = "^[MF]$")
     private String gender;
 
     @Age
