@@ -16,7 +16,6 @@ public class Tag {
         this.id = id;
         this.value = value.toLowerCase();
         this.count = count;
-
     }
 
     public Tag(String value) {

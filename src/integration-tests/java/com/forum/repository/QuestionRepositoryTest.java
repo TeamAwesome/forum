@@ -61,7 +61,9 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
         user.setId(42);
         Date date = new Date();
         Question question =new Question(12,"where","where are you",user,date);
+
         question.setTagsAsString("Foo, Bar, Baz");
+
         assertThat(questionRepository.createQuestion(question),is(7));
     }
 
@@ -73,7 +75,9 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
         user.setId(42);
         Date date = new Date();
         Question question =new Question(12,"where","where are you",user,date);
+
         question.setTagsAsString("Music, Food, Spice");
+
         assertThat(questionRepository.createQuestion(question),is(4));
     }
 
@@ -116,7 +120,9 @@ public class QuestionRepositoryTest extends IntegrationTestBase {
         String query = "UPDATE QUESTION SET LIKES=LIKES+1 WHERE ID=?";
         Integer questionID = new Integer(23);
         when(jdbcTemplate.update(query,new Object[] {questionID})).thenReturn(1);
+
         QuestionRepository questionRepository = new QuestionRepository(dataSource);
+
         assertThat(questionRepository.addLikesById(questionID), is(1));
     }
 

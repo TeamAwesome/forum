@@ -1,7 +1,6 @@
 package com.forum.repository;
 
 import com.forum.domain.Tag;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import static com.forum.test.matchers.TagMatcher.aTagWithValue;
-
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -62,7 +60,6 @@ public class TagRepositoryTest extends IntegrationTestBase {
         ));
 
         List<Tag> tags = tagRepository.allTags();
-
         /*
          * The tag table contains 10 tags as test data, hence expecting 13.
          */

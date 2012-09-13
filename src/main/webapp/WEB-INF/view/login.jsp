@@ -11,78 +11,78 @@
     <script src="<c:url value="/static/javascript/shareToSocialMedia.js"/>"></script>
 
 
-
 </head>
 
-<body onload='document.loginForm.Username.focus();'>
-    <div id="container">
-     <div id="header">
-                <div class="topButtons">
-                <ul id="topButtons">
+<body>
+<div id="container">
+    <div id="header">
+        <div class="topButtons">
+            <ul id="topButtons">
                 <li>
                     <div id="forumLinks">
-                       <a href='<c:url value="/" />'> Home</a>
+                        <a href='<c:url value="/" />'> Home</a>
                     </div>
                 </li>
-                </ul>
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="content">
+        <div id="leftPane">
+            <form name="loginForm" action="${pageContext.request.contextPath}/j_spring_security_check?url=${url}"
+                  method="POST" autocomplete="off">
+                <div style="color:red; text-align:center" id="messagetobedisplayed">
+                    ${messageToBeDisplayed}
                 </div>
 
-            </div>
+                <table>
+                    <tr>
+                        <td>
+                            <div id="noticeMessage">
+                                <br> ${noticeMessage}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Username:
+                        </td>
+                    </tr>
 
-        <div id="content">
-                <div id ="leftPane" >
-        <form name="loginForm" action="${pageContext.request.contextPath}/j_spring_security_check?url=${url}" method = "POST" autocomplete="off">
-            <div style="color:red; text-align:center" id="messagetobedisplayed">
-                ${messageToBeDisplayed}
-            </div>
+                    <tr>
+                        <td><input path="username" type="text" name="j_username" autocomplete="off" autofocus="on"/></td>
+                        <div style="color:red; text-align:center" id="usernameError">
+                            ${usernameError}
+                        </div>
+                        </td>
 
-                        <table>
-                            <tr>
-                            <td>
-                                 <div id="noticeMessage">
-                                        <br> ${noticeMessage}
-                                 </div>
-                                 </td>
-                            </tr>
-                            <tr>
-                                  <td>Username:<FONT color="red">
-                                  </td>
-                            </tr>
+                    </tr>
 
-                            <tr>
-                                <td><input path="username" type = "text" name="j_username" autocomplete="off" /></td>
-                                    <div style="color:red; text-align:center" id="usernameError">
-                                        ${usernameError}
-                                    </div>
-                                </td>
-
-                            </tr>
-
-                            <tr>
-                                <td>Password:<FONT color="red">
-                                <div style="color:red; text-align:center" id="passwordError">
-                                   ${passwordError}
-                                </div>
-                            </tr>
-                            <tr>
-                                <td><input path="password" type ="password" name = "j_password" /></td>
-                            </tr>
-                            <tr>
-                                <td><input type="submit" value="Submit" name = "submit"/></td>
-                            </tr>
+                    <tr>
+                        <td>Password:
+                            <div style="color:red; text-align:center" id="passwordError">
+                                ${passwordError}
+                            </div>
+                    </tr>
+                    <tr>
+                        <td><input path="password" type="password" name="j_password"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Submit" name="submit"/></td>
+                    </tr>
 
 
-                <tr>
-                    <td>
-                        <br>Not a registered user? <a href='<c:url value="/join" />'> Join us!</a>
-                    </td>
-                </tr>
-            </table>
-        </form>
+                    <tr>
+                        <td>
+                            <br>Not a registered user? <a href='<c:url value="/join" />'> Join us!</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <%@ include file="rightPane.jsp" %>
     </div>
-
-    <%@ include file="rightPane.jsp" %>
-    </div>
-    </div>
+</div>
 </body>
 </html>
