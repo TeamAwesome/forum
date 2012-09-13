@@ -20,6 +20,8 @@ import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static com.forum.test.builder.QuestionBuilder.givenAQuestion;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
