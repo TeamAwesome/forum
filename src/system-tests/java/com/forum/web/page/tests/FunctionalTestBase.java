@@ -9,6 +9,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+import java.util.logging.Logger;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -16,10 +21,30 @@ import static org.junit.Assert.assertTrue;
 public class FunctionalTestBase {
     public Browser browser;
 
+    private Properties properties;
+    private static Logger logger = Logger.getLogger(FunctionalTestBase.class.getName());
+
     @Before
-    public void initializeWebDriver() {
-        browser = new Browser("http://localhost:8080/forum", true);
+    public void initializeWebDriver() throws IOException {
+
+        properties = new Properties();
+        properties.load(this.getClass().getClassLoader().getResourceAsStream("system-tests.properties"));
+        logger.info("properties = " + properties.toString());
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("http://");
+        builder.append(properties.getProperty("forum.host"));
+        builder.append(":");
+        builder.append(properties.getProperty("forum.port"));
+        builder.append("/forum");
+
+        String address = builder.toString();
+        logger.info("address = " + address);
+
+        browser = new Browser(address, true);
         browser.open("/");
+
+        browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("activityWallTitle")));
     }
 
     @After

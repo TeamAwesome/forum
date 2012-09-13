@@ -1,19 +1,22 @@
 package com.forum.web.page.tests;
 
+import com.forum.util.TestHelper;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 public class QuestionDetailedTest extends FunctionalTestBase {
+
+    private static Logger logger = Logger.getLogger(QuestionDetailedTest.class.getName());
+
     @Test
     public void shouldGoToDetailedView() {
         List<WebElement> questions = browser.findElements(By.cssSelector("#activityQuestions a"));
@@ -31,16 +34,39 @@ public class QuestionDetailedTest extends FunctionalTestBase {
 
     @Test
     public void shouldLikeQuestion() {
+        TestHelper testHelper = new TestHelper();
+
         WebElement goToDetailedView = browser.findElement(By.className("questionTitle"));
         goToDetailedView.click();
         browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("likeInput")));
-        WebElement likeStatistic1 = browser.findElement(By.id("likeCount"));
-        likeStatistic1.getText();
+
+        // getting the like count before increasing it
+        //
+        WebElement likeCountOne = browser.findElement(By.id("likeCount"));
+        int likeCountOneValue = testHelper.getLikeCountValue(likeCountOne.getText());
+
+        assertTrue(likeCountOneValue >= 0);
+
+        // increasing the like count
+        //
         WebElement likeButton = browser.findElement(By.id("likeInput"));
         likeButton.click();
-        browser.waitFor(ExpectedConditions.visibilityOfElementLocated(By.id("likeCount")));
-        WebElement likeStatistic2 = browser.findElement(By.id("likeCount"));
-        likeStatistic2.getText();
-        assertFalse((likeStatistic1.getText()).matches(likeStatistic2.getText()));
+
+        // wait until the content of link count has changed
+        //
+        browser.waitFor(
+                ExpectedConditions.textToBePresentInElement(
+                        By.id("likeCount"),
+                        "(" + (likeCountOneValue + 1) + ") Likes"
+                )
+        );
+
+        // getting the updated like count
+        //
+        WebElement likeCountTwo = browser.findElement(By.id("likeCount"));
+        int likeCountTwoValue = testHelper.getLikeCountValue(likeCountTwo.getText());
+
+        assertEquals(likeCountOneValue + 1, likeCountTwoValue);
     }
+
 }

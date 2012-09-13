@@ -83,4 +83,10 @@ public class Browser {
         WebDriverWait wait = new WebDriverWait(driver, 5);
         return wait.until(expectedCondition);
     }
+
+    public Boolean waitFor(ExpectedCondition<Boolean> expectedCondition) {
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        return wait.until(expectedCondition);
+    }
+
 }
