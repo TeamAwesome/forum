@@ -5,6 +5,7 @@ import com.forum.service.validation.NotQuestionWords;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,14 +13,16 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class Question implements Serializable {
-    private  static Logger logger = Logger.getLogger(Question.class.getName());
+    private static Logger logger = Logger.getLogger(Question.class.getName());
     private int id;
 
     @NotBlank(message = "Title is empty.")
     @NoHTMLScript
+    @Size(max = 100)
     private String title;
 
     @NotBlank(message = "Description is empty.")
+    @Size(max = 10000)
     private String description;
 
     private Date createdAt;
@@ -37,11 +40,12 @@ public class Question implements Serializable {
     private int views;
 
     @NotBlank(message = "A question must have at least one tag.")
-    @Pattern(regexp = "^[" + Tag.REGEXP + ",]*$" , message = "special characters should not be included.")
+    @Pattern(regexp = "^[" + Tag.REGEXP + ",]*$", message = "special characters should not be included.")
     @NotQuestionWords
-    private String tagsAsString="";
+    private String tagsAsString = "";
 
     private List<Advice> advices;
+
     public Question() {
     }
 
@@ -79,7 +83,7 @@ public class Question implements Serializable {
         logger.fine("a question with stats has been created");
     }
 
-    public Question(int id, String title, String description, User user, Date createdAt, int likes, int disLikes, int flags , String tagsAsString) {
+    public Question(int id, String title, String description, User user, Date createdAt, int likes, int disLikes, int flags, String tagsAsString) {
         this.id = id;
         this.title = title;
         this.user = user;
@@ -99,6 +103,7 @@ public class Question implements Serializable {
     public Date getCreatedAt() {
         return createdAt;
     }
+
     public String getDescription() {
         return description;
     }
@@ -151,8 +156,8 @@ public class Question implements Serializable {
     public List<Tag> getTags() {
         if (tagsAsString != null) {
             String[] tagArray = tagsAsString.split(",");
-            for (String tag : tagArray){
-                if(tag.trim().isEmpty()){
+            for (String tag : tagArray) {
+                if (tag.trim().isEmpty()) {
                     continue;
                 }
                 tags.add(new Tag(tag.trim()));
@@ -163,7 +168,7 @@ public class Question implements Serializable {
     }
 
     public String getTagsAsString() {
-       return tagsAsString;
+        return tagsAsString;
     }
 
     public void setTagsAsString(String tagsAsString) {

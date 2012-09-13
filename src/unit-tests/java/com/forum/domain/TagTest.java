@@ -37,7 +37,7 @@ public class TagTest {
     @Test
     public void shouldAcceptAlphanumericCharactersIncludingSpecialGermanCharacters() {
         Tag tag = new Tag(
-                "abcdefghijklmnopq rstuvwxyzABCD EFGHIJKLMNOPQRSTUVW XYZ0123456789äÄöÖüÜß"
+                "defghi XZ89äÄöÖüÜß"
         );
 
         Set<ConstraintViolation<Tag>> constraintViolations = localValidatorFactory.validate(tag);
