@@ -5,12 +5,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-
 import javax.validation.ConstraintViolation;
 import java.util.Set;
 import java.util.logging.Logger;
+
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 public class TagTest {
 
@@ -37,7 +38,7 @@ public class TagTest {
     @Test
     public void shouldAcceptAlphanumericCharactersIncludingSpecialGermanCharacters() {
         Tag tag = new Tag(
-                "defghi XZ89äÄöÖüÜß"
+                "XZ89äÄöÖüÜß"
         );
 
         Set<ConstraintViolation<Tag>> constraintViolations = localValidatorFactory.validate(tag);
@@ -52,6 +53,27 @@ public class TagTest {
         logger.info("constraintViolations = " + constraintViolations.toString());
 
         assertThat(constraintViolations.size(),is(1));
+    }
+
+    @Test
+    public void shouldRejectOverlyLongTags(){
+        Tag tag = new Tag(
+                "shouldbelongenough 21"
+        );
+        Set<ConstraintViolation<Tag>> constraintViolations = localValidatorFactory.validate(tag);
+        logger.info("constraintViolations = " + constraintViolations.toString());
+        assertThat(constraintViolations.size(), is(1));
+        assertThat(constraintViolations.toString(),containsString("size must be between 0 and 20"));
+    }
+
+    @Test
+    public void shouldValidateForTagOf20Characters(){
+        Tag tag = new Tag(
+                "shouldbelongenough20"
+        );
+
+        Set<ConstraintViolation<Tag>> constraintViolations = localValidatorFactory.validate(tag);
+        assertThat(constraintViolations.size(),is(0));
     }
 
 }
