@@ -19,7 +19,7 @@ public class TagRepository {
     }
 
     public List<Tag> getTagsByTerm(String term) {
-        return retrieveTags("SELECT * , 1 as count FROM TAG WHERE NAME LIKE ?", "%"+term+"%");
+        return retrieveTags("SELECT * , 1 AS COUNT FROM TAG WHERE NAME LIKE ?", "%"+term+"%");
     }
 
     public Integer createTag(Tag tag) {
@@ -28,14 +28,14 @@ public class TagRepository {
     }
 
     public Tag getTagByName(String tag) {
-        String query = "SELECT *, 1 as count FROM TAG WHERE NAME=?" ;
+        String query = "SELECT *, 1 AS COUNT FROM TAG WHERE NAME=?" ;
 
         return (Tag)jdbcTemplate.queryForObject(query,
                 new Object[]{tag}, new TagRowMapper());
     }
 
     public List<Tag> allTags() {
-        return retrieveTags("select id,name, count(*) as count from tag,question_tag where tag_id=id group by id");
+        return retrieveTags("SELECT ID,NAME, COUNT(*) AS COUNT FROM TAG,QUESTION_TAG WHERE TAG_ID=ID GROUP BY ID");
     }
 
     @SuppressWarnings("unchecked")
@@ -44,7 +44,7 @@ public class TagRepository {
     }
 
     public List<Tag> getTagByQuestionId(Integer questionId) {
-        return jdbcTemplate.query("SELECT ID, NAME ,1 as count FROM QUESTION_TAG, TAG WHERE QUESTION_TAG.TAG_ID=TAG.ID AND QUESTION_TAG.QUESTION_ID=?",
+        return jdbcTemplate.query("SELECT ID, NAME ,1 AS COUNT FROM QUESTION_TAG, TAG WHERE QUESTION_TAG.TAG_ID=TAG.ID AND QUESTION_TAG.QUESTION_ID=?",
                 new Object[]{questionId},new TagRowMapper());
     }
 
