@@ -10,6 +10,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -165,6 +166,10 @@ public class Question implements Serializable {
                 tags.add(new Tag(tag.trim()));
             }
         }
+        HashSet hs = new HashSet();
+        hs.addAll(tags);
+        tags.clear();
+        tags.addAll(hs);
 
         return tags;
     }
